@@ -5,8 +5,7 @@
 
 .canvas_count {
   position: absolute;
-  top:0;
-  left:0;
-  background: rgba(245, 240, 215, 0.5);
-  
+  top: 0;
+  left: 0;
+  background-color: transparent;
 }

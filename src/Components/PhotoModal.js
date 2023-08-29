@@ -1,30 +1,28 @@
 import React, { useState, useRef, useEffect } from "react";
 import styles from "./PhotoModal.module.css";
-import { getWebcam,Style1,Style2,Style3 } from "../Utility/Camera";
+import { getWebcam, Style1, Style2, Style3 } from "../Utility/Camera";
 import { db } from "../Firebase/firebase";
 
-/* ì‚¬ì§„ì„ ì°ì„ ë•Œ ë‚˜íƒ€ë‚˜ëŠ” ëª¨ë‹¬
-ì‚¬ìš©ìëŠ” (ê°€ë¡œë¡œ ê¸´/ ì„¸ë¡œë¡œ ê¸´ / ì •ë°©í˜• ì‚¬ì§„) ê·œê²©ì„ ê³ ë¥¼ ìˆ˜ ìˆê³ ,
-ì‚¬ì§„ í…Œë‘ë¦¬ ìŠ¤í‚¨ì„ ê³ ë¥¼ ìˆ˜ ìˆë‹¤. (ì„ íƒì§€ 3ê°œ ì •ë„, ë¬´ì§€ í¬í•¨)
-ëª¨ë‹¬ì—” 2ê°œ ë²„íŠ¼ (ì´¬ì˜, ì·¨ì†Œ)ì´ ì¡´ì¬í•˜ë©°, ì´¬ì˜ë²„íŠ¼ì€ 3ì´ˆ íƒ€ì´ë¨¸ í›„ ì‚¬ì§„ì´ ì´¬ì˜ë¨.
-ì´¬ì˜ í›„ ë¯¸ë¦¬ë³´ê¸°ê°€ ì£¼ì–´ì§€ë©° ì¬ì´¬ì˜/ ë“±ë¡ ì„ íƒì§€ê°€ ì£¼ì–´ì§„ë‹¤. (ì¬ì´¬ì˜ ì œí•œì€ ì—†ìŒ)
-ëª¨ë‹¬ ë°–ì„ í´ë¦­í•´ì„œ ë‚˜ê°€ì§€ë©´ ì•ˆë˜ê³  ì·¨ì†Œ ë²„íŠ¼ìœ¼ë¡œë§Œ ë©”ì¸ ë‚˜ê°€ì§€ë„ë¡.*/
+/* »çÁøÀ» ÂïÀ» ¶§ ³ªÅ¸³ª´Â ¸ğ´Ş
+»ç¿ëÀÚ´Â (°¡·Î·Î ±ä/ ¼¼·Î·Î ±ä / Á¤¹æÇü »çÁø) ±Ô°İÀ» °í¸¦ ¼ö ÀÖ°í,
+»çÁø Å×µÎ¸® ½ºÅ²À» °í¸¦ ¼ö ÀÖ´Ù. (¼±ÅÃÁö 3°³ Á¤µµ, ¹«Áö Æ÷ÇÔ)
+¸ğ´Ş¿£ 2°³ ¹öÆ° (ÃÔ¿µ, Ãë¼Ò)ÀÌ Á¸ÀçÇÏ¸ç, ÃÔ¿µ¹öÆ°Àº 3ÃÊ Å¸ÀÌ¸Ó ÈÄ »çÁøÀÌ ÃÔ¿µµÊ.
+ÃÔ¿µ ÈÄ ¹Ì¸®º¸±â°¡ ÁÖ¾îÁö¸ç ÀçÃÔ¿µ/ µî·Ï ¼±ÅÃÁö°¡ ÁÖ¾îÁø´Ù. (ÀçÃÔ¿µ Á¦ÇÑÀº ¾øÀ½)
+¸ğ´Ş ¹ÛÀ» Å¬¸¯ÇØ¼­ ³ª°¡Áö¸é ¾ÈµÇ°í Ãë¼Ò ¹öÆ°À¸·Î¸¸ ¸ŞÀÎ ³ª°¡Áöµµ·Ï.*/
 
 const PhotoModal = () => {
-  //ì´ë¯¸ì§€ ì €ì¥ì„ ìœ„í•œ State
-  const [imgurl,setImgurl] = useState("");
-  const [imgfile,setImgfile] = useState(null);
+  //ÀÌ¹ÌÁö ÀúÀåÀ» À§ÇÑ State
+  const [imgurl, setImgurl] = useState("");
+  const [imgfile, setImgfile] = useState(null);
   
-  //ë¹„ë””ì˜¤ ë…¹í™”ë¥¼ ìœ„í•œ State/refs
+  //ºñµğ¿À ³ìÈ­¸¦ À§ÇÑ State/refs
   const [recording, setRecording] = useState(false);
   const [drawIntervalID, setDrawIntervalID] = useState(null);
   const videoRef = useRef();
   const canvasRef = useRef();
   const canvas_container_ref = useRef();
-  //ì´¬ì˜ ì‹œ ì ìš©ë  ë¹„ë””ì˜¤ê·œê²©
-  const [vidConfig,setVidConfig] = useState(Style1);
-  //drawing context
-
+  //ÃÔ¿µ ½Ã Àû¿ëµÉ ºñµğ¿À±Ô°İ
+  const [vidConfig, setVidConfig] = useState(Style1);
 
   const CameraHandling = async () => {
     try {
@@ -78,55 +76,68 @@ const PhotoModal = () => {
     }
   };
   const takePhoto = (time) => {
-    let remainingTime = time;
     if (videoRef.current && canvasRef.current) {
       // Capture canvas image as base64 data URL
-      //5ì´ˆ íƒ€ì´ë¨¸ í›„ ì‚¬ì§„ì´¬ì˜
-      let time=5;
-      const timer = setInterval(()=>{
-        const existingBlankCanvas = canvas_container_ref.current.querySelector(`.${styles.canvas_count}`);
-        if (existingBlankCanvas) {
-          canvas_container_ref.current.removeChild(existingBlankCanvas);
-        }
-        const blankcanvas = document.createElement('canvas');
-        blankcanvas.classList.add(`${styles.canvas_count}`);
-        canvas_container_ref.current.appendChild(blankcanvas);
-        blankcanvas.style.width=`${vidConfig.Video.width}`;
-        blankcanvas.style.height=`${vidConfig.Video.height}`;
-        //drawing context
-        const context = blankcanvas.getContext("2d");
-        context.font = "normal bolder 400 sans-serif";
-        context.fillText(`${time}`,100,100);
-        time--;
-        if(time===-1){
-          const existingBlankCanvas = canvas_container_ref.current.querySelector(`.${styles.canvas_count}`);
-          canvas_container_ref.current.removeChild(existingBlankCanvas);
+      //5ÃÊ Å¸ÀÌ¸Ó ÈÄ »çÁøÃÔ¿µ
+      let count = 5;
+      let imageData;
+      const blankcanvas = document.createElement("canvas");
+      blankcanvas.classList.add(`${styles.canvas_count}`);
+      canvas_container_ref.current.appendChild(blankcanvas);
+      blankcanvas.style.width = `${vidConfig.Video.width}`;
+      blankcanvas.style.height = `${vidConfig.Video.height}`;
+
+      const context = blankcanvas.getContext("2d");
+      context.font = "48px Arial";
+      context.textAlign = "center";
+      context.textBaseline = "middle";
+
+      const timer = setInterval(() => {
+        if (count <= 0) {
           clearInterval(timer);
+          imageData = canvasRef.current.toDataURL("image/png");
+          console.log(imageData);
         }
-        // const imageData = canvasRef.current.toDataURL("image/png");
-      },1000);
-      // console.log(imageData);
-      //ì´í›„ ì‚¬ì§„ ì²˜ë¦¬
+        context.clearRect(0, 0, blankcanvas.width, blankcanvas.height);
+        context.fillText(
+          count.toString(),
+          blankcanvas.width / 2,
+          blankcanvas.height / 2
+        );
+        console.log(count);
+        count--;
+      }, 1000);
+      //   ÀÌÈÄ »çÁø Ã³¸®
+      //   console.log(imageData);
     }
   };
   return (
     <div>
       {recording && (
         <div className={styles.container}>
-          <video ref={videoRef} autoPlay style={vidConfig.Video}/>
+          <video ref={videoRef} autoPlay style={vidConfig.Video} />
 
-          <div className={styles.canvas_container} 
-          ref={canvas_container_ref} 
-          style={{width:vidConfig.Video.width, height:vidConfig.Video.height, position:'relative'}}>
+          <div
+            className={styles.canvas_container}
+            ref={canvas_container_ref}
+            style={{
+              width: vidConfig.Video.width,
+              height: vidConfig.Video.height,
+              position: "relative",
+            }}
+          >
             <canvas ref={canvasRef} style={vidConfig.Video} />
           </div>
-          
-          <button onClick={takePhoto}>ì°°ì¹µ</button>
+
+          <button onClick={takePhoto}>ÂûÄ¬</button>
         </div>
       )}
-      <button onClick={CameraHandling}>{recording ? 'ë„ê¸°':'ì¸ìƒë„¤ì»· ì°ê¸°'}</button>
+      <button onClick={CameraHandling}>
+        {recording ? "²ô±â" : "ÀÎ»ı³×ÄÆ Âï±â"}
+      </button>
     </div>
   );
 };
 
 export default PhotoModal;
+//
