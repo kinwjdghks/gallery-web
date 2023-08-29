@@ -14,7 +14,7 @@ const PhotoModal = () => {
   //이미지 저장을 위한 State
   const [imgurl,setImgurl] = useState("");
   const [imgfile,setImgfile] = useState(null);
-
+  
   //비디오 녹화를 위한 State/refs
   const [recording, setRecording] = useState(false);
   const [drawIntervalID, setDrawIntervalID] = useState(null);
@@ -23,6 +23,8 @@ const PhotoModal = () => {
   const canvas_container_ref = useRef();
   //촬영 시 적용될 비디오규격
   const [vidConfig,setVidConfig] = useState(Style1);
+  //drawing context
+
 
   const CameraHandling = async () => {
     try {
@@ -76,20 +78,33 @@ const PhotoModal = () => {
     }
   };
   const takePhoto = (time) => {
+    let remainingTime = time;
     if (videoRef.current && canvasRef.current) {
       // Capture canvas image as base64 data URL
       //5초 타이머 후 사진촬영
-      let cnt=0;
-      // const timer = setInterval(()=>{
+      let time=5;
+      const timer = setInterval(()=>{
+        const existingBlankCanvas = canvas_container_ref.current.querySelector(`.${styles.canvas_count}`);
+        if (existingBlankCanvas) {
+          canvas_container_ref.current.removeChild(existingBlankCanvas);
+        }
         const blankcanvas = document.createElement('canvas');
         blankcanvas.classList.add(`${styles.canvas_count}`);
         canvas_container_ref.current.appendChild(blankcanvas);
         blankcanvas.style.width=`${vidConfig.Video.width}`;
         blankcanvas.style.height=`${vidConfig.Video.height}`;
-
-
+        //drawing context
+        const context = blankcanvas.getContext("2d");
+        context.font = "normal bolder 400 sans-serif";
+        context.fillText(`${time}`,100,100);
+        time--;
+        if(time===-1){
+          const existingBlankCanvas = canvas_container_ref.current.querySelector(`.${styles.canvas_count}`);
+          canvas_container_ref.current.removeChild(existingBlankCanvas);
+          clearInterval(timer);
+        }
         // const imageData = canvasRef.current.toDataURL("image/png");
-      // },500);
+      },1000);
       // console.log(imageData);
       //이후 사진 처리
     }
