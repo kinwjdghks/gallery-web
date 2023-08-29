@@ -13,7 +13,7 @@ export const getWebcam = (callback) => {
   };
 
 export const Style1 = {
-    Video: { width: "900px", height: "1600px", background: 'rgba(245, 240, 215, 0.5)' },
+    Video: { width: "56.25%", height: "100%", background: 'rgba(245, 240, 215, 0.5)' },
     None: { display: 'none' }
   };
 export const Style2 = {
