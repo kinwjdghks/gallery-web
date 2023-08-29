@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import styles from "./PhotoModal.module.css";
-import { getWebcam,Style1,Style2,Style3 } from "../Utility/Camera";
+import { getWebcam, Style1, Style2, Style3 } from "../Utility/Camera";
 import { db } from "../Firebase/firebase";
 
 /* 사진을 찍을 때 나타나는 모달
@@ -12,8 +12,8 @@ import { db } from "../Firebase/firebase";
 
 const PhotoModal = () => {
   //이미지 저장을 위한 State
-  const [imgurl,setImgurl] = useState("");
-  const [imgfile,setImgfile] = useState(null);
+  const [imgurl, setImgurl] = useState("");
+  const [imgfile, setImgfile] = useState(null);
 
   //비디오 녹화를 위한 State/refs
   const [recording, setRecording] = useState(false);
@@ -22,7 +22,7 @@ const PhotoModal = () => {
   const canvasRef = useRef();
   const canvas_container_ref = useRef();
   //촬영 시 적용될 비디오규격
-  const [vidConfig,setVidConfig] = useState(Style1);
+  const [vidConfig, setVidConfig] = useState(Style1);
 
   const CameraHandling = async () => {
     try {
@@ -79,39 +79,66 @@ const PhotoModal = () => {
     if (videoRef.current && canvasRef.current) {
       // Capture canvas image as base64 data URL
       //5초 타이머 후 사진촬영
-      let cnt=0;
-      // const timer = setInterval(()=>{
-        const blankcanvas = document.createElement('canvas');
-        blankcanvas.classList.add(`${styles.canvas_count}`);
-        canvas_container_ref.current.appendChild(blankcanvas);
-        blankcanvas.style.width=`${vidConfig.Video.width}`;
-        blankcanvas.style.height=`${vidConfig.Video.height}`;
+      let count = 5;
+      let imageData;
+      const blankcanvas = document.createElement("canvas");
+      blankcanvas.classList.add(`${styles.canvas_count}`);
+      canvas_container_ref.current.appendChild(blankcanvas);
+      blankcanvas.style.width = `${vidConfig.Video.width}`;
+      blankcanvas.style.height = `${vidConfig.Video.height}`;
 
+      const context = blankcanvas.getContext("2d");
+      context.font = "48px Arial";
+      context.textAlign = "center";
+      context.textBaseline = "middle";
 
-        // const imageData = canvasRef.current.toDataURL("image/png");
-      // },500);
-      // console.log(imageData);
-      //이후 사진 처리
+      const timer = setInterval(() => {
+        if (count <= 0) {
+          clearInterval(timer);
+          imageData = canvasRef.current.toDataURL("image/png");
+          console.log(imageData);
+        }
+
+        context.clearRect(0, 0, blankcanvas.width, blankcanvas.height);
+        context.fillText(
+          count.toString(),
+          blankcanvas.width / 2,
+          blankcanvas.height / 2
+        );
+        console.log(count);
+        count--;
+      }, 1000);
+      //   이후 사진 처리
+      //   console.log(imageData);
     }
   };
   return (
     <div>
       {recording && (
         <div className={styles.container}>
-          <video ref={videoRef} autoPlay style={vidConfig.Video}/>
+          <video ref={videoRef} autoPlay style={vidConfig.Video} />
 
-          <div className={styles.canvas_container} 
-          ref={canvas_container_ref} 
-          style={{width:vidConfig.Video.width, height:vidConfig.Video.height, position:'relative'}}>
+          <div
+            className={styles.canvas_container}
+            ref={canvas_container_ref}
+            style={{
+              width: vidConfig.Video.width,
+              height: vidConfig.Video.height,
+              position: "relative",
+            }}
+          >
             <canvas ref={canvasRef} style={vidConfig.Video} />
           </div>
-          
+
           <button onClick={takePhoto}>찰칵</button>
         </div>
       )}
-      <button onClick={CameraHandling}>{recording ? '끄기':'인생네컷 찍기'}</button>
+      <button onClick={CameraHandling}>
+        {recording ? "끄기" : "인생네컷 찍기"}
+      </button>
     </div>
   );
 };
 
 export default PhotoModal;
+//
