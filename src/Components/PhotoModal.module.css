@@ -1,0 +1,12 @@
+.container {
+  width: 100%;
+  height: 100%;
+}
+.video {
+  display: none;
+}
+.canvas {
+  width: 40%;
+  height: 40%;
+  background: rgba(245, 240, 215, 0.5);
+}
