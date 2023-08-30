@@ -19,18 +19,39 @@ const PhotoModal = () => {
   
   //비디오 녹화를 위한 State/refs
   const [recording, setRecording] = useState(true);
-  const [drawIntervalID, setDrawIntervalID] = useState(null);
   const webcamRef = useRef(null);
   
   //촬영 시 적용될 비디오규격
   
   const vidConfigList = [
-    {width:1000, height:1000},{width:1200, height:900},{width:900, height:1200}
+    {width:800, height:800},{width:675, height:900},{width:900, height:675}
   ];
-  const [vidConfig,setVidConfig] = useState(vidConfigList[0]);
-  const switchVidConfig = (num) => setVidConfig(vidConfigList[num]);
+  const [vidConfigIdx,setVidConfigIdx] = useState(0);
+  //비디오 규격 맞추기 위한 mask xml
+  const [mask, setMask] = useState();
+  useEffect(()=>{
+    switch (vidConfigIdx) {
+      case 0:
+        setMask(<>
+        <div className={`${styles.mask_square} ${styles.left}`}></div>
+        <div className={`${styles.mask_square} ${styles.right}`}></div>
+        </>)
+        break;
+      case 1:
+        setMask(<>
+          <div className={`${styles.mask_rectangle} ${styles.left}`}></div>
+          <div className={`${styles.mask_rectangle} ${styles.right}`}></div>
+          </>)
+        break;
+      case 2:
+        setMask(null);
+        break;
+    }
+  },[vidConfigIdx]);
   //throttling 위한 timer
   const [throttle, setThrottle] = useState(null);
+  
+
 
   // const imageFileHandler = (e) => {
   //   e.preventDefault();
@@ -47,32 +68,32 @@ const PhotoModal = () => {
   // }
 
   // const videoConstraints ={facingMode:'user'};
+  
   return (
     <div>
       {recording && (
         <div className={styles.container}>
 
-          <div className={styles.cam_container} 
-          style={{...vidConfig, position:'relative', backgroundColor:'green'}}>
-          
-          {/* <Webcam
-            audio={false}
-            width={100+'%'} 
-            height={100+'%'} 
+          <div className={styles.cam_container}>
+          <Webcam
+            className={`${styles.webcam} ${vidConfigIdx===0 ? styles.square : vidConfigIdx===1 ? styles.rectangle : styles.horizontal}`}
+            audio={false} 
+            height={vidConfigList[vidConfigIdx].height}
             ref={webcamRef}
             screenshotFormat="image/jpeg"
-            mirrored={true}/> */}
+            mirrored={true}/>
+          {mask}
+          <div className={styles.countdown}></div>
           </div>
           
-          <div className={styles.countdown}></div>
 
           <button onClick={()=>{}}>찰칵</button>
         </div>
       )}
       <button onClick={()=>setRecording((prev)=>!prev)}>{recording ? '끄기':'인생네컷 찍기'}</button>
-      <button onClick={()=>switchVidConfig(0)}>정방형</button>
-      <button onClick={()=>switchVidConfig(1)}>4:3</button>
-      <button onClick={()=>switchVidConfig(2)}>3:4</button>
+      <button onClick={()=>setVidConfigIdx(0)}>정방형</button>
+      <button onClick={()=>setVidConfigIdx(1)}>3:4</button>
+      <button onClick={()=>setVidConfigIdx(2)}>4:3</button>
     </div>
   );
 };
