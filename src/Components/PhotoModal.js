@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import styles from "./PhotoModal.module.css";
 import { getWebcam,Style1,Style2,Style3 } from "../Utility/Camera";
+import Webcam from "react-webcam";
 // import {saveToFirebaseStorage}
 import { db } from "../Utility/firebase";
 
@@ -17,14 +18,19 @@ const PhotoModal = () => {
   const [imgfile,setImgfile] = useState(null);
   
   //비디오 녹화를 위한 State/refs
-  const [recording, setRecording] = useState(false);
+  const [recording, setRecording] = useState(true);
   const [drawIntervalID, setDrawIntervalID] = useState(null);
-  const videoRef = useRef();
-  const canvasRef = useRef();
-  const canvas_container_ref = useRef();
+  const webcamRef = useRef(null);
+  
   //촬영 시 적용될 비디오규격
-  const [vidConfig,setVidConfig] = useState(Style1);
-  //drawing context
+  
+  const vidConfigList = [
+    {width:1000, height:1000},{width:1200, height:900},{width:900, height:1200}
+  ];
+  const [vidConfig,setVidConfig] = useState(vidConfigList[0]);
+  const switchVidConfig = (num) => setVidConfig(vidConfigList[num]);
+  //throttling 위한 timer
+  const [throttle, setThrottle] = useState(null);
 
   // const imageFileHandler = (e) => {
   //   e.preventDefault();
@@ -40,110 +46,33 @@ const PhotoModal = () => {
   //   setImgfile(file);
   // }
 
-  const CameraHandling = async () => {
-    try {
-      if (recording) {
-        const s = videoRef.current.srcObject;
-        s.getTracks().forEach((track) => {
-          track.stop();
-        });
-        setRecording(!recording);
-        clearInterval(drawIntervalID);
-      } else {
-        getWebcam((stream) => {
-          setRecording(true);
-          videoRef.current.srcObject = stream;
-        });
-        setRecording(!recording);
-        const drawID = setInterval(() => CanvasDrawing(), 50);
-        setDrawIntervalID(drawID);
-      }
-    } catch (error) {
-      console.error("Error accessing webcam:", error);
-    }
-  };
-  const CanvasDrawing = () => {
-    try {
-      const video = videoRef.current;
-      const canvas = canvasRef.current;
-
-      // Set canvas size to match video
-      canvas.width = video.videoWidth;
-      canvas.height = video.videoHeight;
-
-      const context = canvas.getContext("2d");
-      if (context && context !== null) {
-        if (videoRef.current) {
-          context.translate(canvasRef.current.width, 0);
-
-          context.scale(-1, 1);
-          context.drawImage(
-            videoRef.current,
-            0,
-            0,
-            canvasRef.current.width,
-            canvasRef.current.height
-          );
-          context.setTransform(1, 0, 0, 1, 0, 0);
-        }
-      }
-    } catch (err) {
-      console.log(err);
-    }
-  };
-  const takePhoto = (time) => {
-    
-    if (videoRef.current && canvasRef.current) {
-      // Capture canvas image as base64 data URL
-      //5초 타이머 후 사진 촬영
-      let count = 5;
-      let imageData;
-      const blankcanvas = document.createElement("canvas");
-      blankcanvas.classList.add(`${styles.canvas_count}`);
-      canvas_container_ref.current.appendChild(blankcanvas);
-      blankcanvas.style.width=`${vidConfig.Video.width}`;
-      blankcanvas.style.height=`${vidConfig.Video.height}`;
-      //drawing context
-      const context = blankcanvas.getContext("2d");
-      context.font = "48px Arial";
-      context.textAlign = "center";
-      context.textBaseline = "middle";
-
-      const timer = setInterval(() => {
-        if (count <= 0) {
-          clearInterval(timer);
-          canvas_container_ref.current.removeChild(blankcanvas);
-          // imageData = canvasRef.current.toDataURL("image/png");
-          // console.log(imageData);
-        }
-        context.clearRect(0, 0, blankcanvas.width, blankcanvas.height);
-        context.fillText(
-          count.toString(),
-          blankcanvas.width / 2,
-          blankcanvas.height / 2
-        );
-        console.log(count);
-        count--;
-      }, 1000);
-      //   이후 사진 처리코드
-    }
-  };
+  // const videoConstraints ={facingMode:'user'};
   return (
     <div>
       {recording && (
         <div className={styles.container}>
-          <video ref={videoRef} autoPlay style={vidConfig.Video}/>
 
-          <div className={styles.canvas_container} 
-          ref={canvas_container_ref} 
-          style={{width:vidConfig.Video.width, height:vidConfig.Video.height, position:'relative'}}>
-            <canvas ref={canvasRef} style={vidConfig.Video} />
+          <div className={styles.cam_container} 
+          style={{...vidConfig, position:'relative', backgroundColor:'green'}}>
+          
+          {/* <Webcam
+            audio={false}
+            width={100+'%'} 
+            height={100+'%'} 
+            ref={webcamRef}
+            screenshotFormat="image/jpeg"
+            mirrored={true}/> */}
           </div>
           
-          <button onClick={()=>takePhoto(5)}>찰칵</button>
+          <div className={styles.countdown}></div>
+
+          <button onClick={()=>{}}>찰칵</button>
         </div>
       )}
-      <button onClick={CameraHandling}>{recording ? '끄기':'인생네컷 찍기'}</button>
+      <button onClick={()=>setRecording((prev)=>!prev)}>{recording ? '끄기':'인생네컷 찍기'}</button>
+      <button onClick={()=>switchVidConfig(0)}>정방형</button>
+      <button onClick={()=>switchVidConfig(1)}>4:3</button>
+      <button onClick={()=>switchVidConfig(2)}>3:4</button>
     </div>
   );
 };
