@@ -1,8 +1,7 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, useCallback } from "react";
 import styles from "./PhotoModal.module.css";
-import { getWebcam,Style1,Style2,Style3 } from "../Utility/Camera";
 import Webcam from "react-webcam";
-// import {saveToFirebaseStorage}
+import {getStorage, ref as sRef, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
 import { db } from "../Utility/firebase";
 
 /* 사진을 찍을 때 나타나는 모달
@@ -16,6 +15,7 @@ const PhotoModal = () => {
   //이미지 저장을 위한 State
   const [imgurl,setImgurl] = useState("");
   const [imgfile,setImgfile] = useState(null);
+  const [imgpreview,setImgpreview] = useState(null);
   
   //비디오 녹화를 위한 State/refs
   const [recording, setRecording] = useState(true);
@@ -68,7 +68,52 @@ const PhotoModal = () => {
   // }
 
   // const videoConstraints ={facingMode:'user'};
-  
+  const saveToFirebaseStorage = file => {
+    const uniqueKey = new Date().getTime();
+    const newName = file.name
+      .replace(/[~`!#$%^&*+=\-[\]\\';,/{}()|\\":<>?]/g, "")
+      .split(" ")
+      .join("");
+
+    const metaData = {
+      contentType: file.type
+    };
+
+    const storageRef = sRef(storage, "Images/" + newName + uniqueKey);
+    const UploadTask = uploadBytesResumable(storageRef, file, metaData);
+    UploadTask.on(
+      "state_changed",
+      snapshot => {
+        const progress =
+          (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+        console.log(`Upload is ${progress}% done`);
+      },
+      error => {
+        alert(`error: image upload error ${JSON.stringify(error)}`);
+      },
+      () => {
+        getDownloadURL(UploadTask.snapshot.ref).then(downloadUrl => {
+          console.log(`완료 url: ${downloadUrl}`);
+        });
+      }
+    );
+  };
+
+
+  const storage = getStorage();
+  const takePhoto = useCallback((e)=>{
+    e.preventDefault();
+    const imageSrc = webcamRef.current.getScreenshot();
+    const reader = new FileReader();
+
+    reader.onloadend = () =>{
+      setImgfile(imageSrc);
+      setImgurl(reader.result);
+      saveToFirebaseStorage(imageSrc);
+    };
+    if(imageSrc) reader.readAsDataURL(imageSrc);
+  },[webcamRef]);
+
   return (
     <div>
       {recording && (
@@ -87,7 +132,7 @@ const PhotoModal = () => {
           </div>
           
 
-          <button onClick={()=>{}}>찰칵</button>
+          <button onClick={takePhoto}>찰칵</button>
         </div>
       )}
       <button onClick={()=>setRecording((prev)=>!prev)}>{recording ? '끄기':'인생네컷 찍기'}</button>
