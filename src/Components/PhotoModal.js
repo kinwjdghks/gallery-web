@@ -131,14 +131,24 @@ const PhotoModal = () => {
           <div className={styles.countdown}></div>
           </div>
           
+          <div className={styles.actions}>
+            <div className={styles.frameOptions}>
+              <button className={`${styles.btn} ${styles.square}`} onClick={()=>setVidConfigIdx(0)}>정방형</button>
+              <button className={`${styles.btn} ${styles.vertical}`} onClick={()=>setVidConfigIdx(1)}>3:4</button>
+              <button className={`${styles.btn} ${styles.horizontal}`} onClick={()=>setVidConfigIdx(2)}>4:3</button>
+            </div>
+            <div className={styles.skinOptions}>
+              <button className={`${styles.btn} ${styles.skin1}`} onClick={()=>{}}>스킨1</button>
+              <button className={`${styles.btn} ${styles.skin2}`} onClick={()=>{}}>스킨2</button>
+              <button className={`${styles.btn} ${styles.skin3}`} onClick={()=>{}}>스킨3</button>
+            
 
-          <button onClick={takePhoto}>찰칵</button>
+            </div>
+              <button className={`${styles.btn} ${styles.photo}`} onClick={takePhoto}>찰칵</button>
+        </div>
         </div>
       )}
-      <button onClick={()=>setRecording((prev)=>!prev)}>{recording ? '끄기':'인생네컷 찍기'}</button>
-      <button onClick={()=>setVidConfigIdx(0)}>정방형</button>
-      <button onClick={()=>setVidConfigIdx(1)}>3:4</button>
-      <button onClick={()=>setVidConfigIdx(2)}>4:3</button>
+      <button className={`${styles.btn} ${styles.record}`} onClick={()=>setRecording((prev)=>!prev)}>{recording ? '끄기':'인생네컷 찍기'}</button>
     </div>
   );
 };
