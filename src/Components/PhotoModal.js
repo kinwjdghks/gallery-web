@@ -1,8 +1,15 @@
 import React, { useState, useRef, useEffect, useCallback } from "react";
 import styles from "./PhotoModal.module.css";
 import Webcam from "react-webcam";
-import {getStorage, ref as sRef, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
+import {
+  getStorage,
+  ref as sRef,
+  getDownloadURL,
+  uploadString,
+} from "firebase/storage";
 import { db } from "../Utility/firebase";
+import { async } from "@firebase/util";
+import { collection, setDoc, doc, serverTimestamp } from "firebase/firestore/lite";
 
 /* 사진을 찍을 때 나타나는 모달
 사용자는 (가로로 긴/ 세로로 긴 / 정방형 사진) 규격을 고를 수 있고,
@@ -12,125 +19,155 @@ import { db } from "../Utility/firebase";
 모달 밖을 클릭해서 나가지면 안되고 취소 버튼으로만 메인 나가지도록.*/
 
 const PhotoModal = () => {
+  //총 찍은 사진 개수
+  const [imgcnt,setImgcnt] = useState(0);
+  //이미지 저장 중 loading State
+  const [isLoading, setIsLoading] = useState(false);
   //이미지 저장을 위한 State
-  const [imgurl,setImgurl] = useState("");
-  const [imgfile,setImgfile] = useState(null);
-  const [imgpreview,setImgpreview] = useState(null);
-  
+  const [imgurl, setImgurl] = useState("");
+  const [imgfile, setImgfile] = useState(null);
+  const [imgpreview, setImgpreview] = useState(null);
+  useEffect(() => {
+    console.log("photo taken");
+    if (imgfile) {
+      setImgpreview(
+        <img className={styles.imgpreview} src={imgfile} alt="preview" />
+      );
+    } else {
+      setImgpreview(null);
+    }
+  }, [imgfile]);
+
   //비디오 녹화를 위한 State/refs
   const [recording, setRecording] = useState(true);
   const webcamRef = useRef(null);
-  
+
   //촬영 시 적용될 비디오규격
-  
   const vidConfigList = [
-    {width:800, height:800},{width:675, height:900},{width:900, height:675}
+    { width: 800, height: 800 },
+    { width: 675, height: 900 },
+    { width: 900, height: 675 },
   ];
-  const [vidConfigIdx,setVidConfigIdx] = useState(0);
+  const [vidConfigIdx,setVidConfigIdx] = useState(0); 
 
   //throttling 위한 timer
   const [throttle, setThrottle] = useState(null);
-  
 
-
-  // const imageFileHandler = (e) => {
-  //   e.preventDefault();
-  //   const file = e.target.files[0];
-  //   //file type = MIME
-  //   const reader = new FileReader();
-    
-  //   reader.onloadend = () =>{
-  //       setImgurl(file);
-  //       setImagePreview(reader.result);
-  //       saveToFirebaseStorage(file);
-  //   }
-  //   setImgfile(file);
-  // }
-
-  // const videoConstraints ={facingMode:'user'};
-  const saveToFirebaseStorage = file => {
-    const uniqueKey = new Date().getTime();
-    const newName = file.name
-      .replace(/[~`!#$%^&*+=\-[\]\\';,/{}()|\\":<>?]/g, "")
-      .split(" ")
-      .join("");
-
-    const metaData = {
-      contentType: file.type
+  const saveToFirebaseStorage = async (file) => {
+    const id = new Date().getTime();
+    const metaData={
+      contentType: 'image/jpeg'
     };
-
-    const storageRef = sRef(storage, "Images/" + newName + uniqueKey);
-    const UploadTask = uploadBytesResumable(storageRef, file, metaData);
-    UploadTask.on(
-      "state_changed",
-      snapshot => {
-        const progress =
-          (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-        console.log(`Upload is ${progress}% done`);
-      },
-      error => {
-        alert(`error: image upload error ${JSON.stringify(error)}`);
-      },
-      () => {
-        getDownloadURL(UploadTask.snapshot.ref).then(downloadUrl => {
-          console.log(`완료 url: ${downloadUrl}`);
-        });
-      }
-    );
+    const storageRef = sRef(storage, "Images/" + id);
+    try {
+      setIsLoading(true);
+      const upload = await uploadString(storageRef, file,'data_url'); //storage에 이미지 저장하고
+      // console.log(upload)
+      const geturl = await getDownloadURL(sRef(storage,storageRef)); //저장 경로 받아오기
+      // console.log(geturl);
+      setImgurl(geturl.toString());
+    } catch (error) {
+      console.log(error);
+    }
+    // console.log(imgurl);
+    setIsLoading(false);
   };
 
+  const saveToFireStore = async ()=>{
+    const id = new Date().getTime();
+    const timestamp = serverTimestamp();
+    const newPhoto = {
+      url: imgurl,
+      timestamp: timestamp,
+      vidConfig: vidConfigIdx //사진 규격 저장
+    }
+    try{
+      console.log("flag");
+      const photos = collection(db,'Photos');
+      const response = await setDoc(doc(photos,`${id}`),newPhoto);
+    }
+    catch(error){
+      console.log(error);
+      return;
+    }
+    
+      setImgcnt((prev)=>  prev+1);
+      console.log('saved');
+    
+  };
 
   const storage = getStorage();
-  const takePhoto = useCallback((e)=>{
-    e.preventDefault();
-    const imageSrc = webcamRef.current.getScreenshot();
-    const reader = new FileReader();
-
-    reader.onloadend = () =>{
+  const takePhoto = useCallback(
+    (e) => {
+      e.preventDefault();
+      const imageSrc = webcamRef.current.getScreenshot();
       setImgfile(imageSrc);
-      setImgurl(reader.result);
-      saveToFirebaseStorage(imageSrc);
-    };
-    if(imageSrc) reader.readAsDataURL(imageSrc);
-  },[webcamRef]);
-
-  const classNameByConfig = vidConfigIdx===0 ? styles.square : (vidConfigIdx===1 ? styles.vertical : styles.horizontal);
+      saveToFirebaseStorage(imageSrc); //image -> Storage, need throttling
+      saveToFireStore();
+    },
+    [webcamRef]
+  );
+  const classNameByConfig =
+  vidConfigIdx === 0
+    ? styles.square
+    : vidConfigIdx === 1
+    ? styles.vertical
+    : styles.horizontal;
+ 
   return (
     <div>
       {recording && (
         <div className={styles.container}>
-
           <div className={styles.cam_container}>
             <div className={`${styles.cam_mask} ${classNameByConfig}`}>
-          <Webcam
-            className={`${styles.webcam} ${classNameByConfig}`}
-            audio={false} 
-            height={vidConfigList[vidConfigIdx].height}
-            ref={webcamRef}
-            screenshotFormat="image/jpeg"
-            mirrored={true}/>
+              {imgpreview}
+              <Webcam
+                className={`${styles.webcam} ${classNameByConfig}`}
+                audio={false}
+                height={vidConfigList[vidConfigIdx].height}
+                ref={webcamRef}
+                screenshotFormat="image/jpeg"
+                mirrored={true}
+              />
+            </div>
+            <div className={styles.countdown}></div>
           </div>
-          <div className={styles.countdown}></div>
-          </div>
-          
+
           <div className={styles.actions}>
             <div className={styles.frameOptions}>
-              <button className={`${styles.btn} ${styles.square}`} onClick={()=>setVidConfigIdx(0)}>정방형</button>
-              <button className={`${styles.btn} ${styles.vertical}`} onClick={()=>setVidConfigIdx(1)}>3:4</button>
-              <button className={`${styles.btn} ${styles.horizontal}`} onClick={()=>setVidConfigIdx(2)}>4:3</button>
+              <button className={`${styles.btn} ${styles.square}`} onClick={() => setVidConfigIdx(0)}> 정방형 </button>
+              <button className={`${styles.btn} ${styles.vertical}`} onClick={() => setVidConfigIdx(1)}>3:4 </button>
+              <button className={`${styles.btn} ${styles.horizontal}`} onClick={() => setVidConfigIdx(2)}>4:3</button>
             </div>
             <div className={styles.skinOptions}>
-              <button className={`${styles.btn} ${styles.skin1}`} onClick={()=>{}}>스킨1</button>
-              <button className={`${styles.btn} ${styles.skin2}`} onClick={()=>{}}>스킨2</button>
-              <button className={`${styles.btn} ${styles.skin3}`} onClick={()=>{}}>스킨3</button>
-            
-
+              <button
+                className={`${styles.btn} ${styles.skin1}`}
+                onClick={() => {}}
+              >
+                스킨1
+              </button>
+              <button
+                className={`${styles.btn} ${styles.skin2}`}
+                onClick={() => {}}
+              >
+                스킨2
+              </button>
+              <button
+                className={`${styles.btn} ${styles.skin3}`}
+                onClick={() => {}}
+              >
+                스킨3
+              </button>
             </div>
-              <button className={`${styles.btn} ${styles.photo}`} onClick={takePhoto}>찰칵</button>
-        </div>
+            {!isLoading && !imgfile && (<button className={`${styles.btn} ${styles.photo}`} onClick={takePhoto}> 찰칵</button>)}
+            {imgfile && <button className={`${styles.btn} ${styles.retake}`} onClick={()=>setImgfile(null)}> 다시찍기</button>}
+          </div>
         </div>
       )}
-      <button className={`${styles.btn} ${styles.record}`} onClick={()=>setRecording((prev)=>!prev)}>{recording ? '끄기':'인생네컷 찍기'}</button>
+      <button className={`${styles.btn} ${styles.record}`}
+        onClick={() => setRecording((prev) => !prev)}>
+        {recording ? "끄기" : "인생네컷 찍기"}
+      </button>
     </div>
   );
 };
