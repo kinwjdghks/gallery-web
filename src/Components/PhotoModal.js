@@ -27,27 +27,7 @@ const PhotoModal = () => {
     {width:800, height:800},{width:675, height:900},{width:900, height:675}
   ];
   const [vidConfigIdx,setVidConfigIdx] = useState(0);
-  //비디오 규격 맞추기 위한 mask xml
-  const [mask, setMask] = useState();
-  useEffect(()=>{
-    switch (vidConfigIdx) {
-      case 0:
-        setMask(<>
-        <div className={`${styles.mask_square} ${styles.left}`}></div>
-        <div className={`${styles.mask_square} ${styles.right}`}></div>
-        </>)
-        break;
-      case 1:
-        setMask(<>
-          <div className={`${styles.mask_rectangle} ${styles.left}`}></div>
-          <div className={`${styles.mask_rectangle} ${styles.right}`}></div>
-          </>)
-        break;
-      case 2:
-        setMask(null);
-        break;
-    }
-  },[vidConfigIdx]);
+
   //throttling 위한 timer
   const [throttle, setThrottle] = useState(null);
   
@@ -130,7 +110,6 @@ const PhotoModal = () => {
             screenshotFormat="image/jpeg"
             mirrored={true}/>
           </div>
-          {/* {mask} */}
           <div className={styles.countdown}></div>
           </div>
           
