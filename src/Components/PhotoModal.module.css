@@ -8,63 +8,25 @@
   border-radius: 30px;
 }
 
-.mask_square{
-  position: absolute;
-  background-color: white;
-  z-index: 10;
-  width: 50px;
-  height: 900px;
-  top:0;
-}
-.mask_square.left{
-  left:0;
-}
-.mask_square.right{
-  right:0;
-}
-
-
-.mask_rectangle{
-  position: absolute;
-  background-color: white;
-  z-index: 10;
-  width: 122.5px;
-  height: 900px;
-  top:0;
-}
-.mask_rectangle.left{
-  left:0;
-}
-.mask_rectangle.right{
-  right:0;
-}
-
-
-
 .cam_container{
   position: relative;
   width:900px;
   height:900px;
-  /* background-color:green; */
+  background-color:green;
   display: flex;
   justify-content: center;
-  overflow: hidden;
   margin-left: 30px;
   margin-right: 70px;
 }
 .webcam{
   position: absolute;
+  
 }
 .webcam.square{
-  top:50px;
 }
-.webcam.horizontal{
-  top: 112.5px;
+.webcam.horizontal{ 
 }
 
-.countdown{
-
-}
 
 .actions{
   display: flex;
@@ -86,4 +48,24 @@
   border: 3px solid black;
   border-radius: 20px;
   font-size: 2rem;
+}
+.cam_mask{
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+}
+.cam_mask.square{
+  margin-top: 50px;
+  width: 800px;
+  height: 800px;
+}
+.cam_mask.vertical{
+  width: 675px;
+  height: 900px;
+}
+.cam_mask.horizontal{
+ margin-top: 112.5px;
+ width: 900px;
+ height: 675px;
 }

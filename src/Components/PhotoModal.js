@@ -114,20 +114,23 @@ const PhotoModal = () => {
     if(imageSrc) reader.readAsDataURL(imageSrc);
   },[webcamRef]);
 
+  const classNameByConfig = vidConfigIdx===0 ? styles.square : (vidConfigIdx===1 ? styles.vertical : styles.horizontal);
   return (
     <div>
       {recording && (
         <div className={styles.container}>
 
           <div className={styles.cam_container}>
+            <div className={`${styles.cam_mask} ${classNameByConfig}`}>
           <Webcam
-            className={`${styles.webcam} ${vidConfigIdx===0 ? styles.square : vidConfigIdx===1 ? styles.rectangle : styles.horizontal}`}
+            className={`${styles.webcam} ${classNameByConfig}`}
             audio={false} 
             height={vidConfigList[vidConfigIdx].height}
             ref={webcamRef}
             screenshotFormat="image/jpeg"
             mirrored={true}/>
-          {mask}
+          </div>
+          {/* {mask} */}
           <div className={styles.countdown}></div>
           </div>
           
