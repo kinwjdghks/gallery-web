@@ -113,11 +113,13 @@ const PhotoModal = () => {
       e.preventDefault();
       const imageSrc = webcamRef.current.getScreenshot();
       setImgfile(imageSrc);
-      saveToFirebaseStorage(imageSrc); //image -> Storage, need throttling
-      saveToFireStore();
     },
     [webcamRef]
   );
+  const savePhoto = () => {
+    saveToFirebaseStorage(imgfile); //image -> Storage, need throttling
+    saveToFireStore();
+  };
   const classNameByConfig =
     vidConfigIdx === 0
       ? styles.square
@@ -205,6 +207,16 @@ const PhotoModal = () => {
               >
                 {" "}
                 다시찍기
+              </button>
+            )}
+
+            {imgfile && (
+              <button
+                className={`${styles.btn} ${styles.save}`}
+                onClick={savePhoto}
+              >
+                {" "}
+                저장
               </button>
             )}
           </div>
