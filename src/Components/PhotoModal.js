@@ -62,10 +62,30 @@ const PhotoModal = () => {
     { width: 900, height: 675 },
   ];
   const [vidConfigIdx, setVidConfigIdx] = useState(0);
+  const curWidth= vidConfigList[vidConfigIdx].width;
+  const curHeight = vidConfigList[vidConfigIdx].height;
 
-  //throttling 위한 timer
-  const [throttle, setThrottle] = useState(null);
+  const [photoAnimation,setPhotoAnimation] = useState(null);
 
+  const animation = useCallback((time) => {
+    let cnt = time;
+    const timer = setInterval(()=>{
+      if(cnt>0){
+        setPhotoAnimation(<div className={`${styles.animation} ${styles.counting}`}
+        style={{ height: curHeight, width: curWidth }}>
+          {cnt}</div>);
+        cnt--;
+      }
+      else{
+        setPhotoAnimation(<div className={`${styles.animation} ${styles.shooting}`}
+        style={{ height: curHeight, width: curWidth}}></div>)
+        clearInterval(timer);
+      }
+    },1000);
+  },[vidConfigIdx,vidConfigList]);
+
+  
+ /* database 관련 함수들*/
   const saveToFirebaseStorage = async (file) => {
     const id = new Date().getTime();
     const metaData = {
@@ -108,18 +128,26 @@ const PhotoModal = () => {
   };
 
   const storage = getStorage();
+
+ /* 사진촬영 관련 함수들 */
   const takePhoto = useCallback(
     (e) => {
       e.preventDefault();
-      const imageSrc = webcamRef.current.getScreenshot();
-      setImgfile(imageSrc);
+      animation(5);
+      setTimeout(()=>{
+        const imageSrc = webcamRef.current.getScreenshot();
+        setImgfile(imageSrc);
+      },6000);
     },
-    [webcamRef]
+    [webcamRef,animation]
   );
   const savePhoto = () => {
     saveToFirebaseStorage(imgfile); //image -> Storage, need throttling
     saveToFireStore();
   };
+
+
+
   const classNameByConfig =
     vidConfigIdx === 0
       ? styles.square
@@ -133,11 +161,12 @@ const PhotoModal = () => {
         <div className={styles.container}>
           <div className={styles.cam_container}>
             <div className={`${styles.cam_mask} ${classNameByConfig}`}>
+              {photoAnimation}
               {imgpreview}
               <Webcam
                 className={`${styles.webcam} ${classNameByConfig}`}
                 audio={false}
-                height={vidConfigList[vidConfigIdx].height}
+                height={curHeight}
                 ref={webcamRef}
                 screenshotFormat="image/jpeg"
                 mirrored={true}

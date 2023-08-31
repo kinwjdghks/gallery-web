@@ -12,7 +12,7 @@
   position: relative;
   width: 900px;
   height: 900px;
-  background-color: green;
+  /* background-color: green; */
   display: flex;
   justify-content: center;
   margin-left: 30px;
@@ -64,10 +64,34 @@
 
 .imgpreview {
   position: absolute;
-  z-index: 100;
+  z-index: 99;
 }
 .cam_mask.horizontal {
   margin-top: 112.5px;
   width: 900px;
   height: 675px;
+}
+
+/* animation */
+.animation{
+  position: absolute;
+  z-index: 100;
+}
+.animation.counting{
+  font-size: 30rem;
+  color: white;
+  font-weight: 200;
+  text-align: center;
+}
+.animation.shooting{
+  background-color: black;
+  animation: flash 2s forwards;
+}
+@keyframes flash {
+  from{
+    opacity: 1;
+  }
+  to{
+    opacity: 0;
+  }
 }

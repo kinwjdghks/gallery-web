@@ -20,7 +20,9 @@ const Gallery = () =>{
         const AlbumList = dataList.map((data)=><Album data={data}/>)
     }
     getPhotos();
-    return <div>지호바보</div>;
+    return <div>
+        
+    </div>;
 }
 
 export default Gallery;
