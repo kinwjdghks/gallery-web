@@ -9,7 +9,12 @@ import {
 } from "firebase/storage";
 import { db } from "../Utility/firebase";
 import { async } from "@firebase/util";
-import { collection, setDoc, doc, serverTimestamp } from "firebase/firestore/lite";
+import {
+  collection,
+  setDoc,
+  doc,
+  serverTimestamp,
+} from "firebase/firestore/lite";
 
 /* 사진을 찍을 때 나타나는 모달
 사용자는 (가로로 긴/ 세로로 긴 / 정방형 사진) 규격을 고를 수 있고,
@@ -20,7 +25,7 @@ import { collection, setDoc, doc, serverTimestamp } from "firebase/firestore/lit
 
 const PhotoModal = () => {
   //총 찍은 사진 개수
-  const [imgcnt,setImgcnt] = useState(0);
+  const [imgcnt, setImgcnt] = useState(0);
   //이미지 저장 중 loading State
   const [isLoading, setIsLoading] = useState(false);
   //이미지 저장을 위한 State
@@ -28,11 +33,19 @@ const PhotoModal = () => {
   const [imgfile, setImgfile] = useState(null);
   const [imgpreview, setImgpreview] = useState(null);
   useEffect(() => {
-    console.log("photo taken");
     if (imgfile) {
       setImgpreview(
-        <img className={styles.imgpreview} src={imgfile} alt="preview" />
+        <img
+          className={styles.imgpreview}
+          style={{
+            height: vidConfigList[vidConfigIdx].height,
+            apsectRatio: 3 / 4,
+          }}
+          src={imgfile}
+          alt="preview"
+        />
       );
+      console.log("photo taken");
     } else {
       setImgpreview(null);
     }
@@ -48,22 +61,22 @@ const PhotoModal = () => {
     { width: 675, height: 900 },
     { width: 900, height: 675 },
   ];
-  const [vidConfigIdx,setVidConfigIdx] = useState(0); 
+  const [vidConfigIdx, setVidConfigIdx] = useState(0);
 
   //throttling 위한 timer
   const [throttle, setThrottle] = useState(null);
 
   const saveToFirebaseStorage = async (file) => {
     const id = new Date().getTime();
-    const metaData={
-      contentType: 'image/jpeg'
+    const metaData = {
+      contentType: "image/jpeg",
     };
     const storageRef = sRef(storage, "Images/" + id);
     try {
       setIsLoading(true);
-      const upload = await uploadString(storageRef, file,'data_url'); //storage에 이미지 저장하고
+      const upload = await uploadString(storageRef, file, "data_url"); //storage에 이미지 저장하고
       // console.log(upload)
-      const geturl = await getDownloadURL(sRef(storage,storageRef)); //저장 경로 받아오기
+      const geturl = await getDownloadURL(sRef(storage, storageRef)); //저장 경로 받아오기
       // console.log(geturl);
       setImgurl(geturl.toString());
     } catch (error) {
@@ -73,27 +86,25 @@ const PhotoModal = () => {
     setIsLoading(false);
   };
 
-  const saveToFireStore = async ()=>{
+  const saveToFireStore = async () => {
     const id = new Date().getTime();
     const timestamp = serverTimestamp();
     const newPhoto = {
       url: imgurl,
       timestamp: timestamp,
-      vidConfig: vidConfigIdx //사진 규격 저장
-    }
-    try{
+      vidConfig: vidConfigIdx, //사진 규격 저장
+    };
+    try {
       console.log("flag");
-      const photos = collection(db,'Photos');
-      const response = await setDoc(doc(photos,`${id}`),newPhoto);
-    }
-    catch(error){
+      const photos = collection(db, "Photos");
+      const response = await setDoc(doc(photos, `${id}`), newPhoto);
+    } catch (error) {
       console.log(error);
       return;
     }
-    
-      setImgcnt((prev)=>  prev+1);
-      console.log('saved');
-    
+
+    setImgcnt((prev) => prev + 1);
+    console.log("saved");
   };
 
   const storage = getStorage();
@@ -108,12 +119,12 @@ const PhotoModal = () => {
     [webcamRef]
   );
   const classNameByConfig =
-  vidConfigIdx === 0
-    ? styles.square
-    : vidConfigIdx === 1
-    ? styles.vertical
-    : styles.horizontal;
- 
+    vidConfigIdx === 0
+      ? styles.square
+      : vidConfigIdx === 1
+      ? styles.vertical
+      : styles.horizontal;
+
   return (
     <div>
       {recording && (
@@ -135,10 +146,27 @@ const PhotoModal = () => {
 
           <div className={styles.actions}>
             <div className={styles.frameOptions}>
-              <button className={`${styles.btn} ${styles.square}`} onClick={() => setVidConfigIdx(0)}> 정방형 </button>
-              <button className={`${styles.btn} ${styles.vertical}`} onClick={() => setVidConfigIdx(1)}>3:4 </button>
-              <button className={`${styles.btn} ${styles.horizontal}`} onClick={() => setVidConfigIdx(2)}>4:3</button>
+              <button
+                className={`${styles.btn} ${styles.square}`}
+                onClick={() => setVidConfigIdx(0)}
+              >
+                {" "}
+                정방형{" "}
+              </button>
+              <button
+                className={`${styles.btn} ${styles.vertical}`}
+                onClick={() => setVidConfigIdx(1)}
+              >
+                3:4{" "}
+              </button>
+              <button
+                className={`${styles.btn} ${styles.horizontal}`}
+                onClick={() => setVidConfigIdx(2)}
+              >
+                4:3
+              </button>
             </div>
+
             <div className={styles.skinOptions}>
               <button
                 className={`${styles.btn} ${styles.skin1}`}
@@ -159,13 +187,33 @@ const PhotoModal = () => {
                 스킨3
               </button>
             </div>
-            {!isLoading && !imgfile && (<button className={`${styles.btn} ${styles.photo}`} onClick={takePhoto}> 찰칵</button>)}
-            {imgfile && <button className={`${styles.btn} ${styles.retake}`} onClick={()=>setImgfile(null)}> 다시찍기</button>}
+
+            {!isLoading && !imgfile && (
+              <button
+                className={`${styles.btn} ${styles.photo}`}
+                onClick={takePhoto}
+              >
+                {" "}
+                찰칵
+              </button>
+            )}
+
+            {imgfile && (
+              <button
+                className={`${styles.btn} ${styles.retake}`}
+                onClick={() => setImgfile(null)}
+              >
+                {" "}
+                다시찍기
+              </button>
+            )}
           </div>
         </div>
       )}
-      <button className={`${styles.btn} ${styles.record}`}
-        onClick={() => setRecording((prev) => !prev)}>
+      <button
+        className={`${styles.btn} ${styles.record}`}
+        onClick={() => setRecording((prev) => !prev)}
+      >
         {recording ? "끄기" : "인생네컷 찍기"}
       </button>
     </div>

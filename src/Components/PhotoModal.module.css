@@ -8,41 +8,32 @@
   border-radius: 30px;
 }
 
-.cam_container{
+.cam_container {
   position: relative;
-  width:900px;
-  height:900px;
-  background-color:green;
+  width: 900px;
+  height: 900px;
+  background-color: green;
   display: flex;
   justify-content: center;
   margin-left: 30px;
   margin-right: 70px;
 }
-.webcam{
-  position: absolute;
-  
-}
-.webcam.square{
-}
-.webcam.horizontal{ 
-}
 
-
-.actions{
+.actions {
   display: flex;
   flex-direction: column;
   row-gap: 50px;
 }
-.frameOptions{
+.frameOptions {
   display: flex;
   column-gap: 20px;
 }
-.skinOptions{
+.skinOptions {
   display: flex;
   column-gap: 20px;
 }
 
-.btn{
+.btn {
   width: 120px;
   height: 70px;
   border: 3px solid black;
@@ -50,31 +41,33 @@
   font-size: 2rem;
   cursor: pointer;
 }
-.cam_mask{
+.cam_mask {
   position: relative;
   overflow: hidden;
   display: flex;
   justify-content: center;
 }
-.cam_mask.square{
+.cam_mask.square {
   margin-top: 50px;
   width: 800px;
   height: 800px;
 }
-.cam_mask.vertical{
+.cam_mask.vertical {
   width: 675px;
   height: 900px;
 }
-.cam_mask.horizontal{
- margin-top: 112.5px;
- width: 900px;
- height: 675px;
+.cam_mask.horizontal {
+  margin-top: 112.5px;
+  width: 900px;
+  height: 675px;
 }
-.imgpreview{
+
+.imgpreview {
   position: absolute;
-  width: inherit;
-  height: inherit;
-  top:0;
-  left:0;
   z-index: 100;
+}
+.cam_mask.horizontal {
+  margin-top: 112.5px;
+  width: 900px;
+  height: 675px;
 }
