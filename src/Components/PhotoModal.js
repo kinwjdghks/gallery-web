@@ -52,7 +52,7 @@ const PhotoModal = () => {
   }, [imgfile]);
 
   //비디오 녹화를 위한 State/refs
-  const [recording, setRecording] = useState(true);
+  const [recording, setRecording] = useState(false);
   const webcamRef = useRef(null);
 
   //촬영 시 적용될 비디오규격

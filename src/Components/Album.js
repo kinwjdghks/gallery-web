@@ -5,8 +5,22 @@ import styles from "./Album.module.css";
 한 그리드를 사진이 꽉 채우는 것이 아니고 패딩처럼 사진과 그리드 사이에 여백이 존재하는데, 그 사이에
 (너무 화려하지 않은) 디자인이 살짝씩 들어가는 느낌.*/
 
-const Album = () => {
-  return;
+const Album = (props) => {
+  const imageurl = props.data.imageurl;
+  const vidConfig = props.data.vidConfig;
+  // console.log(vidConfig);
+  const classNameByConfig =
+    vidConfig === 0
+      ? styles.square
+      : vidConfig === 1
+      ? styles.vertical
+      : styles.horizontal;
+      
+    return <div className={styles.container}>    
+    <div className={`${styles.mask} ${classNameByConfig}`}>
+      {/* <img src={imageurl} alt="img"/> */}
+    </div>
+  </div>;
 };
 
 export default Album;

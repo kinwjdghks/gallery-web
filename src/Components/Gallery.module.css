@@ -1,0 +1,16 @@
+.background{
+    width: 100vw;
+    position: relative;
+    display: flex;
+    justify-content: center;
+}
+.albumContainer{
+    display: flex;
+    justify-content: space-between;
+    /* grid-template-columns: 1fr 1fr 1fr 1fr; */
+    /* row-gap: 60px; */
+    width: 1500px;
+    flex-wrap: wrap;
+     /*그리드 한개: 500px */
+    /* background-color: orange; */
+}
