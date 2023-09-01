@@ -184,22 +184,15 @@ const Modal = ({photoList, onClick}) => {
             <div className={styles.frameOptions}>
               <button
                 className={`${styles.btn} ${styles.square}`}
-                onClick={() => setVidConfigIdx(0)}
-              >
-                {" "}
-                정방형{" "}
+                onClick={() => setVidConfigIdx(0)}>{" "}정방형{" "}
               </button>
               <button
                 className={`${styles.btn} ${styles.vertical}`}
-                onClick={() => setVidConfigIdx(1)}
-              >
-                3:4{" "}
+                onClick={() => setVidConfigIdx(1)}>3:4{" "}
               </button>
               <button
                 className={`${styles.btn} ${styles.horizontal}`}
-                onClick={() => setVidConfigIdx(2)}
-              >
-                4:3
+                onClick={() => setVidConfigIdx(2)}>4:3
               </button>
             </div>
 
@@ -248,12 +241,7 @@ const Modal = ({photoList, onClick}) => {
               <button
                 className={`${styles.btn} ${styles.save}`}
                 onClick={savePhoto}
-              >
-                {" "}
-                저장
-              </button>
-            )}
-          </div>
+                >{" "}저장</button>)}</div>
         </div>
       <button
         className={`${styles.btn} ${styles.record}`}

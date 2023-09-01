@@ -4,9 +4,7 @@ import Album from './Album';
 import { useState, useEffect } from 'react';
 import { db } from '../Utility/firebase';
 import { collection, getDocs } from 'firebase/firestore/lite';
-import takephotobtn from '../Images/Button.svg';
 import logo from '../Images/Logo.svg';
-import photoBooth from '../Images/photoBooth.svg';
 
 /* 사람들이 촬영한 사진들이 실시간으로 무제한 나열되는 메인페이지.
 사진들의 규격이 3가지 (가로:세로가 1:1, 3:4, 4:3) 있으므로 이를 어떻게 효율적/미적으로 배치할 지 논의 필요
@@ -55,8 +53,8 @@ const Gallery = () =>{
                 <p className={styles.comit}>COMIT</p>
                 <p className={styles.photobooth}>Photo Booth</p>
             </div>
-            <img  className={styles.logo}/>
-            <button className={styles.btn} onClick={toggleModal}>Take a Picture</button>
+            <img width='60' src={logo} className={styles.logo}/>
+            <button className={styles.btn} onClick={toggleModal}>TAKE A PICTURE</button>
         </div>
         <div className={styles.background}>
             <div className={styles.albumContainer}>

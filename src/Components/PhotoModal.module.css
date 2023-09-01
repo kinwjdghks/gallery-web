@@ -2,7 +2,7 @@
   position: fixed;
   width: 100vw;
   height: 100vh;
-  z-index: 10;
+  z-index: 31;
   background: rgba(0, 0, 0, 0.75);
 }
 
@@ -10,8 +10,11 @@
   position: fixed;
   width: 90vw;
   height: 90vh;
-  z-index:11;
-  background-color: #E0E0E0;
+  z-index:32;
+  background-color: white;
+  border-radius: 50px;
+  top: 5vh;
+  left: 5vw;
 }
 
 .container {
