@@ -78,7 +78,7 @@ const Gallery = ({takePhoto,onClick}) =>{
             <div className={styles.albumContainer}>
             {photos.map((data,index)=>
             {if(!data.imageurl){
-                return <BlankAlbum version={ Math.floor(Math.random()*3)+1} key={index}/>
+                return <BlankAlbum key={index}/>
             }
             else{
                 return <Album key={index} data={data}/>}

@@ -3,14 +3,14 @@
   width: 350px;
   height: 350px;
   border-radius: 30px;
-  background-color: #c9b3ef;
+  background-color: white;
 
   display: inline-block;
 
   position: relative;
 }
 .mask {
-  background-color: bisque;
+  background-color: #e0e0e0;
   margin: 25px;
   border-radius: 20px;
 

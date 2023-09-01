@@ -45,7 +45,7 @@
   align-items: center;
 }
 .cam_mask {
-  margin: 75px;
+  margin: 66.67px;
   border-radius: 50px;
   overflow: hidden;
 
@@ -60,13 +60,14 @@
   align-items: center;
 }
 .cam_mask.vertical {
+  position: absolute;
   left: 0;
   top: 0;
   width: 600px;
   height: 800px;
 }
 .cam_mask.horizontal {
-  margin-top: 75px;
+  position: absolute;
   width: 800px;
   height: 600px;
   left: 0;

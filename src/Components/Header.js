@@ -1,18 +1,40 @@
 import styles from "./Header.module.css";
 import logo from "../Images/Logo.svg";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
+import {useThrottle as throttle} from "@uidotdev/usehooks";
 const Header = ({ onClick }) => {
   const [fixHeader, setFixHeader] = useState(true);
   const [position, setPosition] = useState(window.pageYOffset);
+  const [throttle,setThrottle] = useState(false);
+//   const handleScroll = useCallback(
+//     (e) =>{
+//     console.log(e);
+    // const diff = e.target.documentElement.scrollTop - position;
+    // if(diff>0){ //내려가는 중
+    //     console.log("내려가는 중");
+    // }
+    // else{ //올라가는 중
+    //     console.log("올라가는 중");
+    // }
+    // setPosition(e.target.documentElement.scrollTop);
+//   },[position]);
 
-  // const handleScroll = () =>{
-  //     const scrollTop = document.getElementById('app').scrollTop;
+  const scrollDetectHandler = (e)=>{
+    let timer;
+    return ()=>{
+        if(!timer){
+        timer = setTimeout(()=>{
+            timer(null);
+            console.log(e.target.documentElement.scrollTop);
+        },300);
+    }
+    }
+    };
 
-  // }
-  // useEffect(()=>{
-  //     window.addEventListener('scroll',handleScroll,{capture:true});
-  //     return ()=>window.removeEventListener('scroll',handleScroll);
-  // },[]);
+  useEffect(()=>{
+      window.addEventListener('scroll',scrollDetectHandler,{capture:true});
+      return ()=>window.removeEventListener('scroll',scrollDetectHandler);
+  },[]);
 
   return (
     <div className={`${styles.header} ${fixHeader && styles.fixed}`}>

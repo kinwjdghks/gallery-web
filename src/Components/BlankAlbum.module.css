@@ -1,12 +1,34 @@
 .container{
     width: 350px;
     height: 350px;
-    display: inline-block;
+    display: flex;
 }
 .design{
     font-family: 'cocogoose';
-    font-size: 40px;
+    font-size: 35px;
+    width: 50%;
+    height: fit-content;
+    color: #603EBB;
+    font-weight: 500;
+    word-break: keep-all;
 }
+.container.ur{
+    flex-direction: row-reverse;
+}
+.container.ul{
+    flex-direction: column;
+}
+.container.dr{
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: flex-end;
+
+}
+.container.dl{
+    flex-direction: column-reverse;
+}
+
+
 .design.kor{
     font-family: 'gangwonedu';
 }
