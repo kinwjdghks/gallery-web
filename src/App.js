@@ -6,7 +6,7 @@ import PhotoModal from './Components/PhotoModal';
 
 function App() {
   const [takePhoto,setTakePhoto] = useState(false);
-  const toggleModal = () => setTakePhoto((prev)=>!prev); //Modal ²ô°í Å°±â
+  const toggleModal = () => setTakePhoto((prev)=>!prev); //Modal í‚¤ê³  ë„ê¸°
 
   return (
   <>

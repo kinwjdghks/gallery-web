@@ -7,3 +7,10 @@
     font-family: 'cocogoose';
     src: url('../Font/Cocogoose.ttf');
 }
+
+@font-face{
+    font-family: 'gangwonedu';
+    src: url('../Font/GangwonEdu.otf');
+    src: url('../Font/GangwonEdu.ttf');
+    src: url('../Font/GangwonEdu.woff')
+}

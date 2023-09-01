@@ -1,0 +1,12 @@
+.container{
+    width: 350px;
+    height: 350px;
+    display: inline-block;
+}
+.design{
+    font-family: 'cocogoose';
+    font-size: 40px;
+}
+.design.kor{
+    font-family: 'gangwonedu';
+}
