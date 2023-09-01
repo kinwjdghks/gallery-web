@@ -58,8 +58,8 @@ const Modal = ({ photoList, onClick }) => {
 
   const vidConfigList = [
     { width: 800, height: 800 },
-    { width: 675, height: 900 },
-    { width: 900, height: 675 },
+    { width: 600, height: 800 },
+    { width: 800, height: 600 },
   ];
   const [vidConfigIdx, setVidConfigIdx] = useState(0);
   const curWidth = vidConfigList[vidConfigIdx].width;
@@ -165,31 +165,19 @@ const Modal = ({ photoList, onClick }) => {
   return (
     <div className={styles.container}>
       <div className={styles.cam_container}>
-        <div
-          className={`${styles.cam_mask} ${
-            vidConfigIdx === 0
-              ? styles.square
-              : vidConfigIdx === 1
-              ? styles.vertical
-              : styles.horizontal
-          }`}
-        >
-          {photoAnimation}
-          {imgpreview}
-          <Webcam
-            className={`${styles.webcam} ${
-              vidConfigIdx === 0
-                ? styles.square
-                : vidConfigIdx === 1
-                ? styles.vertical
-                : styles.horizontal
-            }`}
-            audio={false}
-            height={curHeight}
-            ref={webcamRef}
-            screenshotFormat="image/jpeg"
-            mirrored={true}
-          />
+        <div className={`${styles.cam_container__Frame} ${classNameByConfig}`}>
+          <div className={`${styles.cam_mask} ${classNameByConfig}`}>
+            {photoAnimation}
+            {imgpreview}
+            <Webcam
+              className={`${styles.webcam} ${classNameByConfig}`}
+              audio={false}
+              height={curHeight}
+              ref={webcamRef}
+              screenshotFormat="image/jpeg"
+              mirrored={true}
+            />
+          </div>
         </div>
       </div>
 
@@ -213,7 +201,7 @@ const Modal = ({ photoList, onClick }) => {
             onClick={savePhoto}
           >
             {" "}
-            사진 저장
+            again
           </button>
         )}
         <button className={`${styles.btn} ${styles.record}`} onClick={onClick}>
