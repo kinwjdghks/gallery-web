@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect, useCallback } from "react";
+import ReactDOM from "react-dom";
 import styles from "./PhotoModal.module.css";
 import Webcam from "react-webcam";
 import {
@@ -23,7 +24,11 @@ import {
 촬영 후 미리보기가 주어지며 재촬영/ 등록 선택지가 주어진다. (재촬영 제한은 없음)
 모달 밖을 클릭해서 나가지면 안되고 취소 버튼으로만 메인 나가지도록.*/
 
-const PhotoModal = () => {
+const BackDrop = () =>{
+  return <div className={styles.backdrop}></div>
+};
+
+const Modal = ({photoList, onClick}) => {
   //총 찍은 사진 개수
   const [imgcnt, setImgcnt] = useState(0);
   //이미지 저장 중 loading State
@@ -52,7 +57,7 @@ const PhotoModal = () => {
   }, [imgfile]);
 
   //비디오 녹화를 위한 State/refs
-  const [recording, setRecording] = useState(false);
+
   const webcamRef = useRef(null);
 
   //촬영 시 적용될 비디오규격
@@ -156,8 +161,8 @@ const PhotoModal = () => {
       : styles.horizontal;
 
   return (
-    <div>
-      {recording && (
+    <div className={styles.background}>
+      
         <div className={styles.container}>
           <div className={styles.cam_container}>
             <div className={`${styles.cam_mask} ${classNameByConfig}`}>
@@ -250,15 +255,22 @@ const PhotoModal = () => {
             )}
           </div>
         </div>
-      )}
       <button
         className={`${styles.btn} ${styles.record}`}
-        onClick={() => setRecording((prev) => !prev)}
+        onClick={onClick}
       >
-        {recording ? "끄기" : "인생네컷 찍기"}
+      닫기
       </button>
     </div>
   );
 };
+
+const PhotoModal = ({photoList, onClick}) =>{
+  return<>
+  {ReactDOM.createPortal(<BackDrop/>,document.getElementById('backdrop-root'))}
+  {ReactDOM.createPortal(<Modal photoList={photoList} onClick={onClick}/>,document.getElementById('PhotoModal-root'))}
+  </>
+
+}
 
 export default PhotoModal;

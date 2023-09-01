@@ -1,16 +1,43 @@
 .background{
     width: 100vw;
+    height: 200vh;
     position: relative;
     display: flex;
     justify-content: center;
+    z-index: 0;
+    background-color: #E0E0E0;
 }
 .albumContainer{
-    display: flex;
-    justify-content: space-between;
-    /* grid-template-columns: 1fr 1fr 1fr 1fr; */
-    /* row-gap: 60px; */
-    width: 1500px;
-    flex-wrap: wrap;
-     /*그리드 한개: 500px */
-    /* background-color: orange; */
+    /* display: flex;
+    flex-wrap: wrap; */
+    /* justify-content: space-between; */
+    display: grid;
+    margin-top: 350px;
+    grid-template-columns:1fr 1fr 1fr 1fr;
+    grid-template-rows:min-content;
+    row-gap: 30px;
+    column-gap: 25px;
+    width: 1475px;
+    /* border: 2px solid black; */
+
+    
 }
+
+.btn {
+    width: 200px;
+    height: 120px;
+    border: 3px solid black;
+    border-radius: 20px;
+    font-size: 2rem;
+    cursor: pointer;
+  }
+
+  .header{
+    position: fixed;
+    top:0;
+    left:0;
+    height: 200px;
+    width: 100vw;
+    z-index: 30;
+
+  }

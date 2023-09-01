@@ -4,6 +4,10 @@ import Album from './Album';
 import { useState, useEffect } from 'react';
 import { db } from '../Utility/firebase';
 import { collection, getDocs } from 'firebase/firestore/lite';
+import takephotobtn from '../Images/Button.svg';
+import logo from '../Images/Logo.svg';
+import photoBooth from '../Images/photoBooth.svg';
+
 /* 사람들이 촬영한 사진들이 실시간으로 무제한 나열되는 메인페이지.
 사진들의 규격이 3가지 (가로:세로가 1:1, 3:4, 4:3) 있으므로 이를 어떻게 효율적/미적으로 배치할 지 논의 필요
 사진들 사이에는 틈틈이 빈 그리드가 존재해야 하고, 몇 개의 빈 그리드에는 코밋 로고 등 코밋 관련한 이미지 또는 문구가 들어갔으면 함
@@ -12,6 +16,8 @@ import { collection, getDocs } from 'firebase/firestore/lite';
 
 
 const Gallery = () =>{
+    const [takePhoto,setTakePhoto] = useState(false);
+    const toggleModal = () => setTakePhoto((prev)=>!prev); //Modal 끄고 키기
     const [photos,setPhotos] = useState([{
         imageurl:"",
         vidConfig:0
@@ -41,13 +47,22 @@ const Gallery = () =>{
     //     setPhotos(dataList);
     // }
     // useEffect(()=>getPhotos(),[]);
-    return <div className={styles.background}>
-        <div className={styles.albumContainer}>
-        {photos.map((data,index)=><Album key={index} data={data}/>)}
 
+    return(<> 
+        {takePhoto && <PhotoModal photoList={photos} onClick={toggleModal}/>}
+        <div className={styles.header}>
+            <div className={styles.comitPhoto}>
+                <p className={styles.comit}>COMIT</p>
+                <p className={styles.photobooth}>Photo Booth</p>
+            </div>
+            <img  className={styles.logo}/>
+            <button className={styles.btn} onClick={toggleModal}>Take a Picture</button>
         </div>
-        
-    </div>;
+        <div className={styles.background}>
+            <div className={styles.albumContainer}>
+            {photos.map((data,index)=><Album key={index} data={data}/>)}
+            </div>
+        </div></>);
 }
 
 export default Gallery;

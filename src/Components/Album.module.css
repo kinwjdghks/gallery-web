@@ -5,6 +5,7 @@
     background-color: #C9B3EF;
     border-radius: 30px;
     position: relative;
+    box-sizing: border-box;
 }
 .mask{
     position: relative;
