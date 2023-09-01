@@ -5,7 +5,14 @@ const Header = ({onClick}) =>{
     const [fixHeader,setFixHeader] = useState(true);
     const [position, setPosition] = useState(window.pageYOffset);
 
+    // const handleScroll = () =>{
+    //     const scrollTop = document.getElementById('app').scrollTop;
 
+    // }
+    // useEffect(()=>{
+    //     window.addEventListener('scroll',handleScroll,{capture:true});
+    //     return ()=>window.removeEventListener('scroll',handleScroll);
+    // },[]);
 
 
     return (

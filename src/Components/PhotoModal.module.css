@@ -2,7 +2,7 @@
   position: fixed;
   width: 100vw;
   height: 100vh;
-  z-index: 31;
+  z-index: 2;
   background: rgba(0, 0, 0, 0.75);
 }
 
@@ -23,12 +23,12 @@
   height: 95vh;
   border: 5px solid black;
   border-radius: 30px;
-  /* background-color: white; */
+  background-color: white;
 
-  position: relative;
+  position: fixed;
   left: 5vw;
   top: 2.5vh;
-  z-index: 31;
+  z-index: 32;
 
   display: flex;
   justify-content: center;
