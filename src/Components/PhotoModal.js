@@ -28,12 +28,10 @@ const BackDrop = () => {
   return <div className={styles.backdrop}></div>;
 };
 
-const Modal = ({ photoList, onClick }) => {
+const Modal = ({photoList, onClick}) => {
   //총 찍은 사진 개수
   const [imgcnt, setImgcnt] = useState(0);
-  //이미지 저장 중 loading State
   const [isLoading, setIsLoading] = useState(false);
-  //이미지 저장을 위한 State
   const [imgurl, setImgurl] = useState("");
   const [imgfile, setImgfile] = useState(null);
   const [imgpreview, setImgpreview] = useState(null);
@@ -60,7 +58,6 @@ const Modal = ({ photoList, onClick }) => {
 
   const webcamRef = useRef(null);
 
-  //촬영 시 적용될 비디오규격
   const vidConfigList = [
     { width: 800, height: 800 },
     { width: 675, height: 900 },
@@ -100,7 +97,6 @@ const Modal = ({ photoList, onClick }) => {
     [vidConfigIdx, vidConfigList]
   );
 
-  /* database 관련 함수들*/
   const saveToFirebaseStorage = async (file) => {
     const id = new Date().getTime();
     const metaData = {
@@ -109,9 +105,7 @@ const Modal = ({ photoList, onClick }) => {
     const storageRef = sRef(storage, "Images/" + id);
     try {
       setIsLoading(true);
-      const upload = await uploadString(storageRef, file, "data_url"); //storage에 이미지 저장하고
       // console.log(upload)
-      const geturl = await getDownloadURL(sRef(storage, storageRef)); //저장 경로 받아오기
       // console.log(geturl);
       setImgurl(geturl.toString());
     } catch (error) {
@@ -127,7 +121,6 @@ const Modal = ({ photoList, onClick }) => {
     const newPhoto = {
       url: imgurl,
       timestamp: timestamp,
-      vidConfig: vidConfigIdx, //사진 규격 저장
     };
     try {
       console.log("flag");
@@ -144,7 +137,6 @@ const Modal = ({ photoList, onClick }) => {
 
   const storage = getStorage();
 
-  /* 사진촬영 관련 함수들 */
   const takePhoto = useCallback(
     (e) => {
       e.preventDefault();
@@ -241,25 +233,22 @@ const Modal = ({ photoList, onClick }) => {
             </button>
           )}
 
-          {imgfile && (
-            <button
-              className={`${styles.btn} ${styles.retake}`}
-              onClick={() => setImgfile(null)}
-            >
-              {" "}
-              다시찍기
-            </button>
-          )}
 
-          {imgfile && (
-            <button
-              className={`${styles.btn} ${styles.save}`}
-              onClick={savePhoto}
-            >
-              {" "}
-              저장
-            </button>
-          )}
+            {imgfile && (
+              <button
+                className={`${styles.btn} ${styles.save}`}
+                onClick={savePhoto}
+              >
+                {" "}
+                저장
+              </button>
+            )}
+          </div>
+            {imgfile && (
+              <button
+                className={`${styles.btn} ${styles.save}`}
+                onClick={savePhoto}
+                >{" "}저장</button>)}</div>
         </div>
       </div>
       {/* <button className={`${styles.btn} ${styles.record}`} onClick={onClick}>

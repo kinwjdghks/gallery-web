@@ -1,21 +1,19 @@
-import styles from "./Gallery.module.css";
-import PhotoModal from "./PhotoModal";
-import Album from "./Album";
-import { useState, useEffect } from "react";
-import { db } from "../Utility/firebase";
-import { collection, getDocs } from "firebase/firestore/lite";
-import takephotobtn from "../Images/Button.svg";
-import logo from "../Images/Logo.svg";
-import photoBooth from "../Images/photoBooth.svg";
+import styles from './Gallery.module.css';
+import PhotoModal from './PhotoModal';
+import Album from './Album';
+import { useState, useEffect } from 'react';
+import { db } from '../Utility/firebase';
+import { collection, getDocs } from 'firebase/firestore/lite';
+import logo from '../Images/Logo.svg';
 
-/* ì‚¬ëŒë“¤ì´ ì´¬ì˜í•œ ì‚¬ì§„ë“¤ì´ ì‹¤ì‹œê°„ìœ¼ë¡œ ë¬´ì œí•œ ë‚˜ì—´ë˜ëŠ” ë©”ì¸í˜ì´ì§€.
-ì‚¬ì§„ë“¤ì˜ ê·œê²©ì´ 3ê°€ì§€ (ê°€ë¡œ:ì„¸ë¡œê°€ 1:1, 3:4, 4:3) ìˆìœ¼ë¯€ë¡œ ì´ë¥¼ ì–´ë–»ê²Œ íš¨ìœ¨ì /ë¯¸ì ìœ¼ë¡œ ë°°ì¹˜í•  ì§€ ë…¼ì˜ í•„ìš”
-ì‚¬ì§„ë“¤ ì‚¬ì´ì—ëŠ” í‹ˆí‹ˆì´ ë¹ˆ ê·¸ë¦¬ë“œê°€ ì¡´ì¬í•´ì•¼ í•˜ê³ , ëª‡ ê°œì˜ ë¹ˆ ê·¸ë¦¬ë“œì—ëŠ” ì½”ë°‹ ë¡œê³  ë“± ì½”ë°‹ ê´€ë ¨í•œ ì´ë¯¸ì§€ ë˜ëŠ” ë¬¸êµ¬ê°€ ë“¤ì–´ê°”ìœ¼ë©´ í•¨
-í•˜ë‚˜ì˜ ì‚¬ì§„ì—ëŠ” í•˜ë‚˜ì˜ Album ì»´í¬ë„ŒíŠ¸ê°€ ëŒ€ì‘í•œë‹¤. ë”°ë¼ì„œ ì´ë¯¸ì§€ë“¤ì´ ì „ë¶€ <Album> ìœ¼ë¡œ map ë˜ë„ë¡. */
+/* »ç¶÷µéÀÌ ÃÔ¿µÇÑ »çÁøµéÀÌ ½Ç½Ã°£À¸·Î ¹«Á¦ÇÑ ³ª¿­µÇ´Â ¸ŞÀÎÆäÀÌÁö.
+»çÁøµéÀÇ ±Ô°İÀÌ 3°¡Áö (°¡·Î:¼¼·Î°¡ 1:1, 3:4, 4:3) ÀÖÀ¸¹Ç·Î ÀÌ¸¦ ¾î¶»°Ô È¿À²Àû/¹ÌÀûÀ¸·Î ¹èÄ¡ÇÒ Áö ³íÀÇ ÇÊ¿ä
+»çÁøµé »çÀÌ¿¡´Â Æ´Æ´ÀÌ ºó ±×¸®µå°¡ Á¸ÀçÇØ¾ß ÇÏ°í, ¸î °³ÀÇ ºó ±×¸®µå¿¡´Â ÄÚ¹Ô ·Î°í µî ÄÚ¹Ô °ü·ÃÇÑ ÀÌ¹ÌÁö ¶Ç´Â ¹®±¸°¡ µé¾î°¬À¸¸é ÇÔ
+ÇÏ³ªÀÇ »çÁø¿¡´Â ÇÏ³ªÀÇ Album ÄÄÆ÷³ÍÆ®°¡ ´ëÀÀÇÑ´Ù. µû¶ó¼­ ÀÌ¹ÌÁöµéÀÌ ÀüºÎ <Album> À¸·Î map µÇµµ·Ï. */
 
 const Gallery = () => {
   const [takePhoto, setTakePhoto] = useState(false);
-  const toggleModal = () => setTakePhoto((prev) => !prev); //Modal ë„ê³  í‚¤ê¸°
+  const toggleModal = () => setTakePhoto((prev) => !prev); //Modal ²ô°í Å°±â
   const [photos, setPhotos] = useState([
     {
       imageurl: "",
@@ -37,36 +35,25 @@ const Gallery = () => {
       imageurl: "",
       vidConfig: 2,
     },
-  ]); //dbì—ì„œ ë°›ì•„ì˜¨ ì‚¬ì§„ë“¤
 
-  // const getPhotos =  async () =>{
-  //     const dataSnapShot = await getDocs(collection(db,'Photos'));
-  //     const dataList = dataSnapShot.docs.map(doc=> doc.data());
-  //     setPhotos(dataList);
-  // }
-  // useEffect(()=>getPhotos(),[]);
-  return (
-    <>
-      {takePhoto && <PhotoModal photoList={photos} onClick={toggleModal} />}
-      <div className={styles.header}>
-        <div className={styles.comitPhoto}>
-          <p className={styles.comit}>COMIT</p>
-          <p className={styles.photobooth}>Photo Booth</p>
+    ]); //db¿¡¼­ ¹Ş¾Æ¿Â »çÁøµé
+
+    // const getPhotos =  async () =>{
+    //     const dataSnapShot = await getDocs(collection(db,'Photos'));
+    //     const dataList = dataSnapShot.docs.map(doc=> doc.data());
+    //     setPhotos(dataList);
+    // }
+    // useEffect(()=>getPhotos(),[]);
+
+    return(<> 
+        {takePhoto && <PhotoModal photoList={photos} onClick={toggleModal}/>}
+        <div className={styles.header}>
+            <div className={styles.comitPhoto}>
+                <p className={styles.comit}>COMIT</p>
+                <p className={styles.photobooth}>Photo Booth</p>
+            </div>
+            <img width='60' src={logo} className={styles.logo}/>
+            <button className={styles.btn} onClick={toggleModal}>TAKE A PICTURE</button>
         </div>
-        <img className={styles.logo} />
-        <button className={styles.btn} onClick={toggleModal}>
-          Take a Picture
-        </button>
-      </div>
-      <div className={styles.background}>
-        <div className={styles.albumContainer}>
-          {photos.map((data, index) => (
-            <Album key={index} data={data} />
-          ))}
-        </div>
-      </div>
-    </>
-  );
-};
 
 export default Gallery;

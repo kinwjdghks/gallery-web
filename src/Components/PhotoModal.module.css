@@ -9,17 +9,17 @@
 .background {
   width: 90vw;
   height: 90vh;
-  z-index: 11;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  z-index:32;
+  background-color: white;
+  border-radius: 50px;
+  top: 5vh;
+  left: 5vw;
 }
 
 .container {
   width: 95vw;
   height: 95vh;
   position: relative;
-  z-index: 31;
   display: flex;
   align-items: center;
   border: 2px solid black;
