@@ -1,10 +1,11 @@
-.container {
-  width: 350px;
-  height: 350px;
-  display: inline-block;
-  background-color: #c9b3ef;
-  border-radius: 30px;
-  position: relative;
+.container{
+    width: 350px;
+    height: 350px;
+    display: inline-block;
+    background-color: #C9B3EF;
+    border-radius: 30px;
+    position: relative;
+    box-sizing: border-box;
 }
 .mask {
   position: relative;

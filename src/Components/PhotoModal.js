@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect, useCallback } from "react";
+import ReactDOM from "react-dom";
 import styles from "./PhotoModal.module.css";
 import Webcam from "react-webcam";
 import {
@@ -16,19 +17,23 @@ import {
   serverTimestamp,
 } from "firebase/firestore/lite";
 
-/* ÏÇ¨ÏßÑÏùÑ Ï∞çÏùÑ Îïå ÎÇòÌÉÄÎÇòÎäî Î™®Îã¨
-ÏÇ¨Ïö©ÏûêÎäî (Í∞ÄÎ°úÎ°ú Í∏¥/ ÏÑ∏Î°úÎ°ú Í∏¥ / Ï†ïÎ∞©Ìòï ÏÇ¨ÏßÑ) Í∑úÍ≤©ÏùÑ Í≥†Î•º Ïàò ÏûàÍ≥†,
-ÏÇ¨ÏßÑ ÌÖåÎëêÎ¶¨ Ïä§ÌÇ®ÏùÑ Í≥†Î•º Ïàò ÏûàÎã§. (ÏÑ†ÌÉùÏßÄ 3Í∞ú Ï†ïÎèÑ, Î¨¥ÏßÄ Ìè¨Ìï®)
-Î™®Îã¨Ïóî 2Í∞ú Î≤ÑÌäº (Ï¥¨ÏòÅ, Ï∑®ÏÜå)Ïù¥ Ï°¥Ïû¨ÌïòÎ©∞, Ï¥¨ÏòÅÎ≤ÑÌäºÏùÄ 3Ï¥à ÌÉÄÏù¥Î®∏ ÌõÑ ÏÇ¨ÏßÑÏù¥ Ï¥¨ÏòÅÎê®.
-Ï¥¨ÏòÅ ÌõÑ ÎØ∏Î¶¨Î≥¥Í∏∞Í∞Ä Ï£ºÏñ¥ÏßÄÎ©∞ Ïû¨Ï¥¨ÏòÅ/ Îì±Î°ù ÏÑ†ÌÉùÏßÄÍ∞Ä Ï£ºÏñ¥ÏßÑÎã§. (Ïû¨Ï¥¨ÏòÅ Ï†úÌïúÏùÄ ÏóÜÏùå)
-Î™®Îã¨ Î∞ñÏùÑ ÌÅ¥Î¶≠Ìï¥ÏÑú ÎÇòÍ∞ÄÏßÄÎ©¥ ÏïàÎêòÍ≥† Ï∑®ÏÜå Î≤ÑÌäºÏúºÎ°úÎßå Î©îÏù∏ ÎÇòÍ∞ÄÏßÄÎèÑÎ°ù.*/
+/* ªÁ¡¯¿ª ¬Ô¿ª ∂ß ≥™≈∏≥™¥¬ ∏¥ﬁ
+ªÁøÎ¿⁄¥¬ (∞°∑Œ∑Œ ±‰/ ºº∑Œ∑Œ ±‰ / ¡§πÊ«¸ ªÁ¡¯) ±‘∞›¿ª ∞Ì∏¶ ºˆ ¿÷∞Ì,
+ªÁ¡¯ ≈◊µŒ∏Æ Ω∫≈≤¿ª ∞Ì∏¶ ºˆ ¿÷¥Ÿ. (º±≈√¡ˆ 3∞≥ ¡§µµ, π´¡ˆ ∆˜«‘)
+∏¥ﬁø£ 2∞≥ πˆ∆∞ (√‘øµ, √Îº“)¿Ã ¡∏¿Á«œ∏Á, √‘øµπˆ∆∞¿∫ 3√  ≈∏¿Ã∏” »ƒ ªÁ¡¯¿Ã √‘øµµ .
+√‘øµ »ƒ πÃ∏Æ∫∏±‚∞° ¡÷æÓ¡ˆ∏Á ¿Á√‘øµ/ µÓ∑œ º±≈√¡ˆ∞° ¡÷æÓ¡¯¥Ÿ. (¿Á√‘øµ ¡¶«—¿∫ æ¯¿Ω)
+∏¥ﬁ π€¿ª ≈¨∏Ø«ÿº≠ ≥™∞°¡ˆ∏È æ»µ«∞Ì √Îº“ πˆ∆∞¿∏∑Œ∏∏ ∏ﬁ¿Œ ≥™∞°¡ˆµµ∑œ.*/
 
-const PhotoModal = () => {
-  //Ï¥ù Ï∞çÏùÄ ÏÇ¨ÏßÑ Í∞úÏàò
+const BackDrop = () =>{
+  return <div className={styles.backdrop}></div>
+};
+
+const Modal = ({photoList, onClick}) => {
+  //√— ¬Ô¿∫ ªÁ¡¯ ∞≥ºˆ
   const [imgcnt, setImgcnt] = useState(0);
-  //Ïù¥ÎØ∏ÏßÄ Ï†ÄÏû• Ï§ë loading State
+  //¿ÃπÃ¡ˆ ¿˙¿Â ¡ﬂ loading State
   const [isLoading, setIsLoading] = useState(false);
-  //Ïù¥ÎØ∏ÏßÄ Ï†ÄÏû•ÏùÑ ÏúÑÌïú State
+  //¿ÃπÃ¡ˆ ¿˙¿Â¿ª ¿ß«— State
   const [imgurl, setImgurl] = useState("");
   const [imgfile, setImgfile] = useState(null);
   const [imgpreview, setImgpreview] = useState(null);
@@ -51,11 +56,11 @@ const PhotoModal = () => {
     }
   }, [imgfile]);
 
-  //ÎπÑÎîîÏò§ ÎÖπÌôîÎ•º ÏúÑÌïú State/refs
-  const [recording, setRecording] = useState(false);
+  //∫Òµø¿ ≥Ï»≠∏¶ ¿ß«— State/refs
+
   const webcamRef = useRef(null);
 
-  //Ï¥¨ÏòÅ Ïãú Ï†ÅÏö©Îê† ÎπÑÎîîÏò§Í∑úÍ≤©
+  //√‘øµ Ω√ ¿˚øÎµ… ∫Òµø¿±‘∞›
   const vidConfigList = [
     { width: 800, height: 800 },
     { width: 675, height: 900 },
@@ -67,35 +72,24 @@ const PhotoModal = () => {
 
   const [photoAnimation, setPhotoAnimation] = useState(null);
 
-  const animation = useCallback(
-    (time) => {
-      let cnt = time;
-      const timer = setInterval(() => {
-        if (cnt > 0) {
-          setPhotoAnimation(
-            <div
-              className={`${styles.animation} ${styles.counting}`}
-              style={{ height: curHeight, width: curWidth }}
-            >
-              {cnt}
-            </div>
-          );
-          cnt--;
-        } else {
-          setPhotoAnimation(
-            <div
-              className={`${styles.animation} ${styles.shooting}`}
-              style={{ height: curHeight, width: curWidth }}
-            ></div>
-          );
-          clearInterval(timer);
-        }
-      }, 1000);
-    },
-    [vidConfigIdx, vidConfigList]
-  );
+  const animation = useCallback((time) => {
+    let cnt = time;
+    const timer = setInterval(()=>{
+      if(cnt>0){
+        setPhotoAnimation(<div className={`${styles.animation} ${styles.counting}`}
+        style={{ height: curHeight, width: curWidth }}>
+          {cnt}</div>);
+        cnt--;
+      }
+      else{
+        setPhotoAnimation(<div className={`${styles.animation} ${styles.shooting}`}
+        style={{ height: curHeight, width: curWidth}}></div>)
+        clearInterval(timer);
+      }
+    },1000);
+  },[vidConfigIdx,vidConfigList]);
 
-  /* database Í¥ÄÎ†® Ìï®ÏàòÎì§*/
+  /* database ∞¸∑√ «‘ºˆµÈ*/
   const saveToFirebaseStorage = async (file) => {
     const id = new Date().getTime();
     const metaData = {
@@ -104,9 +98,9 @@ const PhotoModal = () => {
     const storageRef = sRef(storage, "Images/" + id);
     try {
       setIsLoading(true);
-      const upload = await uploadString(storageRef, file, "data_url"); //storageÏóê Ïù¥ÎØ∏ÏßÄ Ï†ÄÏû•ÌïòÍ≥†
+      const upload = await uploadString(storageRef, file, "data_url"); //storageø° ¿ÃπÃ¡ˆ ¿˙¿Â«œ∞Ì
       // console.log(upload)
-      const geturl = await getDownloadURL(sRef(storage, storageRef)); //Ï†ÄÏû• Í≤ΩÎ°ú Î∞õÏïÑÏò§Í∏∞
+      const geturl = await getDownloadURL(sRef(storage, storageRef)); //¿˙¿Â ∞Ê∑Œ πﬁæ∆ø¿±‚
       // console.log(geturl);
       setImgurl(geturl.toString());
     } catch (error) {
@@ -122,7 +116,7 @@ const PhotoModal = () => {
     const newPhoto = {
       url: imgurl,
       timestamp: timestamp,
-      vidConfig: vidConfigIdx, //ÏÇ¨ÏßÑ Í∑úÍ≤© Ï†ÄÏû•
+      vidConfig: vidConfigIdx, //ªÁ¡¯ ±‘∞› ¿˙¿Â
     };
     try {
       console.log("flag");
@@ -139,7 +133,7 @@ const PhotoModal = () => {
 
   const storage = getStorage();
 
-  /* ÏÇ¨ÏßÑÏ¥¨ÏòÅ Í¥ÄÎ†® Ìï®ÏàòÎì§ */
+  /* ªÁ¡¯√‘øµ ∞¸∑√ «‘ºˆµÈ */
   const takePhoto = useCallback(
     (e) => {
       e.preventDefault();
@@ -164,8 +158,8 @@ const PhotoModal = () => {
       : styles.horizontal;
 
   return (
-    <div>
-      {recording && (
+    <div className={styles.background}>
+      
         <div className={styles.container}>
           <div className={styles.cam_container}>
             <div className={`${styles.cam_mask} ${classNameByConfig}`}>
@@ -190,7 +184,7 @@ const PhotoModal = () => {
                 onClick={() => setVidConfigIdx(0)}
               >
                 {" "}
-                Ï†ïÎ∞©Ìòï{" "}
+                ¡§πÊ«¸{" "}
               </button>
               <button
                 className={`${styles.btn} ${styles.vertical}`}
@@ -211,19 +205,19 @@ const PhotoModal = () => {
                 className={`${styles.btn} ${styles.skin1}`}
                 onClick={() => {}}
               >
-                Ïä§ÌÇ®1
+                Ω∫≈≤1
               </button>
               <button
                 className={`${styles.btn} ${styles.skin2}`}
                 onClick={() => {}}
               >
-                Ïä§ÌÇ®2
+                Ω∫≈≤2
               </button>
               <button
                 className={`${styles.btn} ${styles.skin3}`}
                 onClick={() => {}}
               >
-                Ïä§ÌÇ®3
+                Ω∫≈≤3
               </button>
             </div>
 
@@ -233,7 +227,7 @@ const PhotoModal = () => {
                 onClick={takePhoto}
               >
                 {" "}
-                Ï∞∞Ïπµ
+                ¬˚ƒ¨
               </button>
             )}
 
@@ -243,7 +237,7 @@ const PhotoModal = () => {
                 onClick={() => setImgfile(null)}
               >
                 {" "}
-                Îã§ÏãúÏ∞çÍ∏∞
+                ¥ŸΩ√¬Ô±‚
               </button>
             )}
 
@@ -253,20 +247,27 @@ const PhotoModal = () => {
                 onClick={savePhoto}
               >
                 {" "}
-                Ï†ÄÏû•
+                ¿˙¿Â
               </button>
             )}
           </div>
         </div>
-      )}
       <button
         className={`${styles.btn} ${styles.record}`}
-        onClick={() => setRecording((prev) => !prev)}
+        onClick={onClick}
       >
-        {recording ? "X" : "Take a Picture"}
+      ¥›±‚
       </button>
     </div>
   );
 };
+
+const PhotoModal = ({photoList, onClick}) =>{
+  return<>
+  {ReactDOM.createPortal(<BackDrop/>,document.getElementById('backdrop-root'))}
+  {ReactDOM.createPortal(<Modal photoList={photoList} onClick={onClick}/>,document.getElementById('PhotoModal-root'))}
+  </>
+
+}
 
 export default PhotoModal;

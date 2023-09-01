@@ -4,10 +4,7 @@ import PhotoModal from "./Components/PhotoModal";
 
 function App() {
   return (
-    <>
-      <PhotoModal />
-      <Gallery />
-    </>
+    <Gallery/>
   );
 }
 
