@@ -16,6 +16,26 @@ const Gallery = ({takePhoto,onClick}) =>{
       vidConfig: 1,
     },
     {
+        imageurl: "",
+        vidConfig: 0,
+      },
+      {
+        imageurl: "",
+        vidConfig: 0,
+      },
+      {
+        imageurl: "",
+        vidConfig: 1,
+      },
+      {
+        imageurl: "",
+        vidConfig: 2,
+      },
+      {
+        imageurl: "",
+        vidConfig: 2,
+      },
+    {
       imageurl: "",
       vidConfig: 2,
     },

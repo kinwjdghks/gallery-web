@@ -11,7 +11,7 @@
     display: grid;
     margin-top: 240px;
     grid-template-columns:1fr 1fr 1fr 1fr;
-    grid-template-rows:min-content;
+    grid-auto-rows: 350px;
     row-gap: 30px;
     column-gap: 25px;
     width: 1475px;

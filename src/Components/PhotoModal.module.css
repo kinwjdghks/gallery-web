@@ -6,17 +6,6 @@
   background: rgba(0, 0, 0, 0.75);
 }
 
-/* .background {
-  width: 95vw;
-  height: 95vh;
-  background-color: white;
-  border-radius: 50px;
-
-  position: inherit;
-  top: 5vh;
-  left: 5vw;
-  z-index: 32;
-} */
 
 .container {
   width: 90vw;
