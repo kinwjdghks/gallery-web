@@ -1,17 +1,7 @@
-.headerContainer{
-    height: calc(100vh + 330px);
-    width: 100vw;
-    position: fixed;
-    top: -165px;
-    left:0;
-    z-index:29;
-    overflow: scroll;
-}
-
 .header{
     height: 165px;
     width: 100vw;
-    z-index: 30;
+    z-index: 1;
     background-color: #E0E0E0;
 }
 .header.fixed{

@@ -22,19 +22,12 @@ import {
 //Components
 import FrameButtons from "../common/FrameButtons";
 
-/* 사진을 찍을 때 나타나는 모달
-사용자는 (가로로 긴/ 세로로 긴 / 정방형 사진) 규격을 고를 수 있고,
-사진 테두리 스킨을 고를 수 있다. (선택지 3개 정도, 무지 포함)
-모달엔 2개 버튼 (촬영, 취소)이 존재하며, 촬영버튼은 3초 타이머 후 사진이 촬영됨.
-촬영 후 미리보기가 주어지며 재촬영/ 등록 선택지가 주어진다. (재촬영 제한은 없음)
-모달 밖을 클릭해서 나가지면 안되고 취소 버튼으로만 메인 나가지도록.*/
-
 const BackDrop = () => {
   return <div className={styles.backdrop}></div>;
 };
 
 const Modal = ({ photoList, onClick }) => {
-  //총 찍은 사진 개수
+  //占쏙옙 占쏙옙占쏙옙 占쏙옙占쏙옙 占쏙옙占쏙옙
   const [imgcnt, setImgcnt] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
   const [imgurl, setImgurl] = useState("");
@@ -59,7 +52,7 @@ const Modal = ({ photoList, onClick }) => {
     }
   }, [imgfile]);
 
-  //비디오 녹화를 위한 State/refs
+  //占쏙옙占쏙옙 占쏙옙화占쏙옙 占쏙옙占쏙옙 State/refs
 
   const webcamRef = useRef(null);
 
@@ -130,7 +123,6 @@ const Modal = ({ photoList, onClick }) => {
       timestamp: timestamp,
     };
     try {
-      console.log("flag");
       const photos = collection(db, "Photos");
       const response = await setDoc(doc(photos, `${id}`), newPhoto);
     } catch (error) {
@@ -222,7 +214,7 @@ const Modal = ({ photoList, onClick }) => {
             onClick={savePhoto}
           >
             {" "}
-            저장
+            占쏙옙占쏙옙
           </button>
         )}
         <button className={`${styles.btn} ${styles.record}`} onClick={onClick}>
