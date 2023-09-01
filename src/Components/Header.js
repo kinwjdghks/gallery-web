@@ -1,5 +1,5 @@
 import styles from "./Header.module.css";
-import logo from "../Images/Logo.svg";
+import logo from "../assets/Images/Logo.svg";
 import { useState, useEffect } from "react";
 const Header = ({ onClick }) => {
   const [fixHeader, setFixHeader] = useState(true);
