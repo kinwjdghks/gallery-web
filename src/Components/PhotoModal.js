@@ -62,30 +62,40 @@ const PhotoModal = () => {
     { width: 900, height: 675 },
   ];
   const [vidConfigIdx, setVidConfigIdx] = useState(0);
-  const curWidth= vidConfigList[vidConfigIdx].width;
+  const curWidth = vidConfigList[vidConfigIdx].width;
   const curHeight = vidConfigList[vidConfigIdx].height;
 
-  const [photoAnimation,setPhotoAnimation] = useState(null);
+  const [photoAnimation, setPhotoAnimation] = useState(null);
 
-  const animation = useCallback((time) => {
-    let cnt = time;
-    const timer = setInterval(()=>{
-      if(cnt>0){
-        setPhotoAnimation(<div className={`${styles.animation} ${styles.counting}`}
-        style={{ height: curHeight, width: curWidth }}>
-          {cnt}</div>);
-        cnt--;
-      }
-      else{
-        setPhotoAnimation(<div className={`${styles.animation} ${styles.shooting}`}
-        style={{ height: curHeight, width: curWidth}}></div>)
-        clearInterval(timer);
-      }
-    },1000);
-  },[vidConfigIdx,vidConfigList]);
+  const animation = useCallback(
+    (time) => {
+      let cnt = time;
+      const timer = setInterval(() => {
+        if (cnt > 0) {
+          setPhotoAnimation(
+            <div
+              className={`${styles.animation} ${styles.counting}`}
+              style={{ height: curHeight, width: curWidth }}
+            >
+              {cnt}
+            </div>
+          );
+          cnt--;
+        } else {
+          setPhotoAnimation(
+            <div
+              className={`${styles.animation} ${styles.shooting}`}
+              style={{ height: curHeight, width: curWidth }}
+            ></div>
+          );
+          clearInterval(timer);
+        }
+      }, 1000);
+    },
+    [vidConfigIdx, vidConfigList]
+  );
 
-  
- /* database 관련 함수들*/
+  /* database 관련 함수들*/
   const saveToFirebaseStorage = async (file) => {
     const id = new Date().getTime();
     const metaData = {
@@ -129,24 +139,22 @@ const PhotoModal = () => {
 
   const storage = getStorage();
 
- /* 사진촬영 관련 함수들 */
+  /* 사진촬영 관련 함수들 */
   const takePhoto = useCallback(
     (e) => {
       e.preventDefault();
       animation(5);
-      setTimeout(()=>{
+      setTimeout(() => {
         const imageSrc = webcamRef.current.getScreenshot();
         setImgfile(imageSrc);
-      },6000);
+      }, 6000);
     },
-    [webcamRef,animation]
+    [webcamRef, animation]
   );
   const savePhoto = () => {
     saveToFirebaseStorage(imgfile); //image -> Storage, need throttling
     saveToFireStore();
   };
-
-
 
   const classNameByConfig =
     vidConfigIdx === 0
@@ -255,7 +263,7 @@ const PhotoModal = () => {
         className={`${styles.btn} ${styles.record}`}
         onClick={() => setRecording((prev) => !prev)}
       >
-        {recording ? "끄기" : "인생네컷 찍기"}
+        {recording ? "X" : "Take a Picture"}
       </button>
     </div>
   );

@@ -15,12 +15,14 @@ const Album = (props) => {
       : vidConfig === 1
       ? styles.vertical
       : styles.horizontal;
-      
-    return <div className={styles.container}>    
-    <div className={`${styles.mask} ${classNameByConfig}`}>
-      {/* <img src={imageurl} alt="img"/> */}
+
+  return (
+    <div className={styles.container}>
+      <div className={`${styles.mask} ${classNameByConfig}`}>
+        <img src={imageurl} alt="img" />
+      </div>
     </div>
-  </div>;
+  );
 };
 
 export default Album;
