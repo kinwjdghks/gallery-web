@@ -1,7 +1,10 @@
 import React, { useState, useRef, useEffect, useCallback } from "react";
 import ReactDOM from "react-dom";
+//css
 import styles from "./PhotoModal.module.css";
+//framework
 import Webcam from "react-webcam";
+//firebase
 import {
   getStorage,
   ref as sRef,
@@ -16,6 +19,7 @@ import {
   doc,
   serverTimestamp,
 } from "firebase/firestore/lite";
+//Components
 import FrameButtons from "../common/FrameButtons";
 
 /* 사진을 찍을 때 나타나는 모달
@@ -170,11 +174,25 @@ const Modal = ({ photoList, onClick }) => {
     // <div className={styles.background}>
     <div className={styles.container}>
       <div className={styles.cam_container}>
-        <div className={`${styles.cam_mask} ${classNameByConfig}`}>
+        <div
+          className={`${styles.cam_mask} ${
+            vidConfigIdx === 0
+              ? styles.square
+              : vidConfigIdx === 1
+              ? styles.vertical
+              : styles.horizontal
+          }`}
+        >
           {photoAnimation}
           {imgpreview}
           <Webcam
-            className={`${styles.webcam} ${classNameByConfig}`}
+            className={`${styles.webcam} ${
+              vidConfigIdx === 0
+                ? styles.square
+                : vidConfigIdx === 1
+                ? styles.vertical
+                : styles.horizontal
+            }`}
             audio={false}
             height={curHeight}
             ref={webcamRef}
@@ -241,10 +259,10 @@ const Modal = ({ photoList, onClick }) => {
 const PhotoModal = ({ photoList, onClick }) => {
   return (
     <>
-      {/* {ReactDOM.createPortal(
+      {ReactDOM.createPortal(
         <BackDrop />,
         document.getElementById("backdrop-root")
-      )} */}
+      )}
       {ReactDOM.createPortal(
         <Modal photoList={photoList} onClick={onClick} />,
         document.getElementById("PhotoModal-root")
