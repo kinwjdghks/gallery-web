@@ -16,6 +16,7 @@ import {
   doc,
   serverTimestamp,
 } from "firebase/firestore/lite";
+import FrameButtons from "../common/FrameButtons";
 
 /* 사진을 찍을 때 나타나는 모달
 사용자는 (가로로 긴/ 세로로 긴 / 정방형 사진) 규격을 고를 수 있고,
@@ -28,7 +29,7 @@ const BackDrop = () => {
   return <div className={styles.backdrop}></div>;
 };
 
-const Modal = ({photoList, onClick}) => {
+const Modal = ({ photoList, onClick }) => {
   //총 찍은 사진 개수
   const [imgcnt, setImgcnt] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
@@ -105,7 +106,9 @@ const Modal = ({photoList, onClick}) => {
     const storageRef = sRef(storage, "Images/" + id);
     try {
       setIsLoading(true);
+      const upload = await uploadString(storageRef, file, "data_url");
       // console.log(upload)
+      const geturl = await getDownloadURL(sRef(storage, storageRef));
       // console.log(geturl);
       setImgurl(geturl.toString());
     } catch (error) {
@@ -160,49 +163,56 @@ const Modal = ({photoList, onClick}) => {
       ? styles.vertical
       : styles.horizontal;
 
+  const clickHandler = (index) => {
+    setVidConfigIdx(index);
+  };
   return (
-    <div className={styles.background}>
-      <div className={styles.container}>
-        <div className={styles.cam_container}>
-          <div className={`${styles.cam_mask} ${classNameByConfig}`}>
-            {photoAnimation}
-            {imgpreview}
-            <Webcam
-              className={`${styles.webcam} ${classNameByConfig}`}
-              audio={false}
-              height={curHeight}
-              ref={webcamRef}
-              screenshotFormat="image/jpeg"
-              mirrored={true}
-            />
-          </div>
-          <div className={styles.countdown}></div>
+    // <div className={styles.background}>
+    <div className={styles.container}>
+      <div className={styles.cam_container}>
+        <div className={`${styles.cam_mask} ${classNameByConfig}`}>
+          {photoAnimation}
+          {imgpreview}
+          <Webcam
+            className={`${styles.webcam} ${classNameByConfig}`}
+            audio={false}
+            height={curHeight}
+            ref={webcamRef}
+            screenshotFormat="image/jpeg"
+            mirrored={true}
+          />
+        </div>
+      </div>
+
+      <div className={styles.actions}>
+        <div className={styles.frameOptions}>
+          <FrameButtons clicked={clickHandler} />
         </div>
 
-        <div className={styles.actions}>
-          <div className={styles.frameOptions}>
-            <button
-              className={`${styles.btn} ${styles.square}`}
-              onClick={() => setVidConfigIdx(0)}
-            >
-              {" "}
-              1:1{" "}
-            </button>
-            <button
-              className={`${styles.btn} ${styles.vertical}`}
-              onClick={() => setVidConfigIdx(1)}
-            >
-              3:4{" "}
-            </button>
-            <button
-              className={`${styles.btn} ${styles.horizontal}`}
-              onClick={() => setVidConfigIdx(2)}
-            >
-              4:3
-            </button>
-          </div>
+        {!isLoading && !imgfile && (
+          <button
+            className={`${styles.btn} ${styles.photo}`}
+            onClick={takePhoto}
+          >
+            {" "}
+            Take Picture
+          </button>
+        )}
+        {imgfile && (
+          <button
+            className={`${styles.btn} ${styles.save}`}
+            onClick={savePhoto}
+          >
+            {" "}
+            저장
+          </button>
+        )}
+        <button className={`${styles.btn} ${styles.record}`} onClick={onClick}>
+          X
+        </button>
+      </div>
 
-          {/* <div className={styles.skinOptions}>
+      {/* <div className={styles.skinOptions}>
             <button
               className={`${styles.btn} ${styles.skin1}`}
               onClick={() => {}}
@@ -222,49 +232,19 @@ const Modal = ({photoList, onClick}) => {
               C
             </button>
           </div> */}
-
-          {!isLoading && !imgfile && (
-            <button
-              className={`${styles.btn} ${styles.photo}`}
-              onClick={takePhoto}
-            >
-              {" "}
-              Take Picture
-            </button>
-          )}
-
-
-            {imgfile && (
-              <button
-                className={`${styles.btn} ${styles.save}`}
-                onClick={savePhoto}
-              >
-                {" "}
-                저장
-              </button>
-            )}
-          </div>
-            {imgfile && (
-              <button
-                className={`${styles.btn} ${styles.save}`}
-                onClick={savePhoto}
-                >{" "}저장</button>)}</div>
-        </div>
-      </div>
-      {/* <button className={`${styles.btn} ${styles.record}`} onClick={onClick}>
-        X
-      </button> */}
     </div>
+
+    // </div>
   );
 };
 
 const PhotoModal = ({ photoList, onClick }) => {
   return (
     <>
-      {ReactDOM.createPortal(
+      {/* {ReactDOM.createPortal(
         <BackDrop />,
         document.getElementById("backdrop-root")
-      )}
+      )} */}
       {ReactDOM.createPortal(
         <Modal photoList={photoList} onClick={onClick} />,
         document.getElementById("PhotoModal-root")

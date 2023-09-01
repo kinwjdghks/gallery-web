@@ -2,39 +2,45 @@
   position: fixed;
   width: 100vw;
   height: 100vh;
-  z-index: 10;
+  z-index: 31;
   background: rgba(0, 0, 0, 0.75);
 }
 
-.background {
-  width: 90vw;
-  height: 90vh;
-  z-index:32;
-  background-color: white;
-  border-radius: 50px;
-  top: 5vh;
-  left: 5vw;
-}
-
-.container {
+/* .background {
   width: 95vw;
   height: 95vh;
-  position: relative;
-  display: flex;
-  align-items: center;
-  border: 2px solid black;
+  background-color: white;
+  border-radius: 50px;
+
+  position: inherit;
+  top: 5vh;
+  left: 5vw;
+  z-index: 32;
+} */
+
+.container {
+  width: 90vw;
+  height: 95vh;
+  border: 5px solid black;
   border-radius: 30px;
+
+  position: relative;
+  left: 5vw;
+  top: 2.5vh;
+  z-index: 31;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .cam_container {
-  position: relative;
   width: 900px;
   height: 900px;
-  /* background-color: green; */
-  display: flex;
-  justify-content: center;
   margin-left: 30px;
   margin-right: 70px;
+
+  position: relative;
 }
 
 .actions {
@@ -59,9 +65,15 @@
   font-size: 2rem;
   cursor: pointer;
 }
+.btn.record {
+  position: absolute;
+  right: 1px;
+  top: 1px;
+}
 .cam_mask {
-  position: relative;
+  position: absolute;
   overflow: hidden;
+
   display: flex;
   justify-content: center;
 }

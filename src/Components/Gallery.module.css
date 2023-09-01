@@ -1,65 +1,18 @@
-.background{
-    width: 100vw;
-    height: 200vh;
-    position: relative;
-    display: flex;
-    justify-content: center;
-    z-index: 0;
-    background-color: #E0E0E0;
+.background {
+  width: 100vw;
+  height: 200vh;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  z-index: 0;
+  background-color: #e0e0e0;
 }
-.albumContainer{
-    display: grid;
-    margin-top: 350px;
-    grid-template-columns:1fr 1fr 1fr 1fr;
-    grid-template-rows:min-content;
-    row-gap: 30px;
-    column-gap: 25px;
-    width: 1475px;
-}
-.logo{
-    float:right;
-    margin-top: 10px;
-    margin-right: calc(50vw - 737.5px);
-}
-
-.btn {
-    float:right;
-    border-radius: 10px;
-    padding: 10px 40px;
-    font-family: 'cocogoose';
-    font-size: 30px;
-    cursor: pointer;
-    background-color: #603EBB;
-    color: white;
-    margin-top: calc(165px - 74px - 10px);
-    margin-right: -70px;
-  }
-
-  .header{
-    position: fixed;
-    top:0;
-    left:0;
-    height: 165px;
-    width: 100vw;
-    z-index: 30;
-    background-color: #E0E0E0;
-}
-.comitPhoto{
-      font-family: 'cocogoose';
-      font-size: 70px;
-      line-height: normal;
-      display: inline-block;
-      margin-left:calc(50% - 737.5px);
-  }
-.comitPhoto p{
-    height: min-content;
-}
-.comit{
-    margin: 0;
-color: #603EBB;
-}
-.photobooth{
-    margin-top:-10px;
-    margin-bottom: 0px;
-    font-size: 60px;
+.albumContainer {
+  display: grid;
+  margin-top: 240px;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-rows: min-content;
+  row-gap: 30px;
+  column-gap: 25px;
+  width: 1475px;
 }
