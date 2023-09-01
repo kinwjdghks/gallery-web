@@ -1,0 +1,60 @@
+.headerContainer{
+    height: calc(100vh + 330px);
+    width: 100vw;
+    position: fixed;
+    top: -165px;
+    left:0;
+    z-index:29;
+    overflow: scroll;
+}
+
+.header{
+    height: 165px;
+    width: 100vw;
+    z-index: 30;
+    background-color: #E0E0E0;
+}
+.header.fixed{
+    position: fixed;
+    top:0;
+    left:0;
+}
+
+.logo{
+    float:right;
+    margin-top: 10px;
+    margin-right: calc(50vw - 737.5px);
+}
+
+.btn {
+    float:right;
+    border-radius: 10px;
+    padding: 10px 40px;
+    font-family: 'cocogoose';
+    font-size: 30px;
+    cursor: pointer;
+    background-color: #603EBB;
+    color: white;
+    margin-top: calc(165px - 74px - 10px);
+    margin-right: -70px;
+  }
+
+.comitPhoto{
+      font-family: 'cocogoose';
+      font-size: 70px;
+      line-height: normal;
+      display: inline-block;
+      margin-left:calc(50% - 737.5px);
+  }
+.comitPhoto p{
+    height: min-content;
+}
+.comit{
+    margin: 0;
+color: #603EBB;
+}
+.photobooth{
+    margin-top:-10px;
+    margin-bottom: 0px;
+    font-size: 60px;
+}

@@ -7,12 +7,12 @@
   z-index: 0;
   background-color: #e0e0e0;
 }
-.albumContainer {
-  display: grid;
-  margin-top: 240px;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  grid-template-rows: min-content;
-  row-gap: 30px;
-  column-gap: 25px;
-  width: 1475px;
+.albumContainer{
+    display: grid;
+    margin-top: 240px;
+    grid-template-columns:1fr 1fr 1fr 1fr;
+    grid-template-rows:min-content;
+    row-gap: 30px;
+    column-gap: 25px;
+    width: 1475px;
 }
