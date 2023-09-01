@@ -174,25 +174,11 @@ const Modal = ({ photoList, onClick }) => {
     // <div className={styles.background}>
     <div className={styles.container}>
       <div className={styles.cam_container}>
-        <div
-          className={`${styles.cam_mask} ${
-            vidConfigIdx === 0
-              ? styles.square
-              : vidConfigIdx === 1
-              ? styles.vertical
-              : styles.horizontal
-          }`}
-        >
+        <div className={`${styles.cam_mask} ${classNameByConfig}`}>
           {photoAnimation}
           {imgpreview}
           <Webcam
-            className={`${styles.webcam} ${
-              vidConfigIdx === 0
-                ? styles.square
-                : vidConfigIdx === 1
-                ? styles.vertical
-                : styles.horizontal
-            }`}
+            className={`${styles.webcam} ${classNameByConfig}`}
             audio={false}
             height={curHeight}
             ref={webcamRef}
