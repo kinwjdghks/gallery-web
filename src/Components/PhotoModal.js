@@ -163,7 +163,6 @@ const Modal = ({ photoList, onClick }) => {
     setVidConfigIdx(index);
   };
   return (
-    // <div className={styles.background}>
     <div className={styles.container}>
       <div className={styles.cam_container}>
         <div className={`${styles.cam_mask} ${classNameByConfig}`}>
@@ -200,7 +199,7 @@ const Modal = ({ photoList, onClick }) => {
             onClick={savePhoto}
           >
             {" "}
-            ����
+            사진 저장
           </button>
         )}
         <button className={`${styles.btn} ${styles.record}`} onClick={onClick}>
@@ -229,8 +228,6 @@ const Modal = ({ photoList, onClick }) => {
             </button>
           </div> */}
     </div>
-
-    // </div>
   );
 };
 
