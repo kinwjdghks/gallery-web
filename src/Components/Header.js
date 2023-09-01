@@ -1,29 +1,31 @@
-import styles from './Header.module.css';
-import logo from '../Images/Logo.svg';
-import { useState,useEffect } from 'react';
-const Header = ({onClick}) =>{
-    const [fixHeader,setFixHeader] = useState(true);
-    const [position, setPosition] = useState(window.pageYOffset);
+import styles from "./Header.module.css";
+import logo from "../Images/Logo.svg";
+import { useState, useEffect } from "react";
+const Header = ({ onClick }) => {
+  const [fixHeader, setFixHeader] = useState(true);
+  const [position, setPosition] = useState(window.pageYOffset);
 
-    // const handleScroll = () =>{
-    //     const scrollTop = document.getElementById('app').scrollTop;
+  // const handleScroll = () =>{
+  //     const scrollTop = document.getElementById('app').scrollTop;
 
-    // }
-    // useEffect(()=>{
-    //     window.addEventListener('scroll',handleScroll,{capture:true});
-    //     return ()=>window.removeEventListener('scroll',handleScroll);
-    // },[]);
+  // }
+  // useEffect(()=>{
+  //     window.addEventListener('scroll',handleScroll,{capture:true});
+  //     return ()=>window.removeEventListener('scroll',handleScroll);
+  // },[]);
 
-
-    return (
-        <div className={`${styles.header} ${fixHeader && styles.fixed}`}>
-            <div className={styles.comitPhoto}>
-                <p className={styles.comit}>COMIT</p>
-                <p className={styles.photobooth}>Photo Booth</p>
-            </div>
-            <img width='60' src={logo} className={styles.logo}/>
-            <button className={styles.btn} onClick={onClick}>TAKE A PICTURE</button>
-        </div>);
-}
+  return (
+    <div className={`${styles.header} ${fixHeader && styles.fixed}`}>
+      <div className={styles.comitPhoto}>
+        <p className={styles.comit}>COMIT</p>
+        <p className={styles.photobooth}>Photo Booth</p>
+      </div>
+      <img width="60" src={logo} className={styles.logo} />
+      <button className={styles.btn} onClick={onClick}>
+        TAKE A PICTURE
+      </button>
+    </div>
+  );
+};
 
 export default Header;
