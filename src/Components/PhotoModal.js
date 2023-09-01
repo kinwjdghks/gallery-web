@@ -24,11 +24,11 @@ import {
 촬영 후 미리보기가 주어지며 재촬영/ 등록 선택지가 주어진다. (재촬영 제한은 없음)
 모달 밖을 클릭해서 나가지면 안되고 취소 버튼으로만 메인 나가지도록.*/
 
-const BackDrop = () =>{
-  return <div className={styles.backdrop}></div>
+const BackDrop = () => {
+  return <div className={styles.backdrop}></div>;
 };
 
-const Modal = ({photoList, onClick}) => {
+const Modal = ({ photoList, onClick }) => {
   //총 찍은 사진 개수
   const [imgcnt, setImgcnt] = useState(0);
   //이미지 저장 중 loading State
@@ -72,22 +72,33 @@ const Modal = ({photoList, onClick}) => {
 
   const [photoAnimation, setPhotoAnimation] = useState(null);
 
-  const animation = useCallback((time) => {
-    let cnt = time;
-    const timer = setInterval(()=>{
-      if(cnt>0){
-        setPhotoAnimation(<div className={`${styles.animation} ${styles.counting}`}
-        style={{ height: curHeight, width: curWidth }}>
-          {cnt}</div>);
-        cnt--;
-      }
-      else{
-        setPhotoAnimation(<div className={`${styles.animation} ${styles.shooting}`}
-        style={{ height: curHeight, width: curWidth}}></div>)
-        clearInterval(timer);
-      }
-    },1000);
-  },[vidConfigIdx,vidConfigList]);
+  const animation = useCallback(
+    (time) => {
+      let cnt = time;
+      const timer = setInterval(() => {
+        if (cnt > 0) {
+          setPhotoAnimation(
+            <div
+              className={`${styles.animation} ${styles.counting}`}
+              style={{ height: curHeight, width: curWidth }}
+            >
+              {cnt}
+            </div>
+          );
+          cnt--;
+        } else {
+          setPhotoAnimation(
+            <div
+              className={`${styles.animation} ${styles.shooting}`}
+              style={{ height: curHeight, width: curWidth }}
+            ></div>
+          );
+          clearInterval(timer);
+        }
+      }, 1000);
+    },
+    [vidConfigIdx, vidConfigList]
+  );
 
   /* database 관련 함수들*/
   const saveToFirebaseStorage = async (file) => {
@@ -159,115 +170,118 @@ const Modal = ({photoList, onClick}) => {
 
   return (
     <div className={styles.background}>
-      
-        <div className={styles.container}>
-          <div className={styles.cam_container}>
-            <div className={`${styles.cam_mask} ${classNameByConfig}`}>
-              {photoAnimation}
-              {imgpreview}
-              <Webcam
-                className={`${styles.webcam} ${classNameByConfig}`}
-                audio={false}
-                height={curHeight}
-                ref={webcamRef}
-                screenshotFormat="image/jpeg"
-                mirrored={true}
-              />
-            </div>
-            <div className={styles.countdown}></div>
+      <div className={styles.container}>
+        <div className={styles.cam_container}>
+          <div className={`${styles.cam_mask} ${classNameByConfig}`}>
+            {photoAnimation}
+            {imgpreview}
+            <Webcam
+              className={`${styles.webcam} ${classNameByConfig}`}
+              audio={false}
+              height={curHeight}
+              ref={webcamRef}
+              screenshotFormat="image/jpeg"
+              mirrored={true}
+            />
           </div>
-
-          <div className={styles.actions}>
-            <div className={styles.frameOptions}>
-              <button
-                className={`${styles.btn} ${styles.square}`}
-                onClick={() => setVidConfigIdx(0)}
-              >
-                {" "}
-                정방형{" "}
-              </button>
-              <button
-                className={`${styles.btn} ${styles.vertical}`}
-                onClick={() => setVidConfigIdx(1)}
-              >
-                3:4{" "}
-              </button>
-              <button
-                className={`${styles.btn} ${styles.horizontal}`}
-                onClick={() => setVidConfigIdx(2)}
-              >
-                4:3
-              </button>
-            </div>
-
-            <div className={styles.skinOptions}>
-              <button
-                className={`${styles.btn} ${styles.skin1}`}
-                onClick={() => {}}
-              >
-                스킨1
-              </button>
-              <button
-                className={`${styles.btn} ${styles.skin2}`}
-                onClick={() => {}}
-              >
-                스킨2
-              </button>
-              <button
-                className={`${styles.btn} ${styles.skin3}`}
-                onClick={() => {}}
-              >
-                스킨3
-              </button>
-            </div>
-
-            {!isLoading && !imgfile && (
-              <button
-                className={`${styles.btn} ${styles.photo}`}
-                onClick={takePhoto}
-              >
-                {" "}
-                찰칵
-              </button>
-            )}
-
-            {imgfile && (
-              <button
-                className={`${styles.btn} ${styles.retake}`}
-                onClick={() => setImgfile(null)}
-              >
-                {" "}
-                다시찍기
-              </button>
-            )}
-
-            {imgfile && (
-              <button
-                className={`${styles.btn} ${styles.save}`}
-                onClick={savePhoto}
-              >
-                {" "}
-                저장
-              </button>
-            )}
-          </div>
+          <div className={styles.countdown}></div>
         </div>
-      <button
-        className={`${styles.btn} ${styles.record}`}
-        onClick={onClick}
-      >
-      닫기
-      </button>
+
+        <div className={styles.actions}>
+          <div className={styles.frameOptions}>
+            <button
+              className={`${styles.btn} ${styles.square}`}
+              onClick={() => setVidConfigIdx(0)}
+            >
+              {" "}
+              1:1{" "}
+            </button>
+            <button
+              className={`${styles.btn} ${styles.vertical}`}
+              onClick={() => setVidConfigIdx(1)}
+            >
+              3:4{" "}
+            </button>
+            <button
+              className={`${styles.btn} ${styles.horizontal}`}
+              onClick={() => setVidConfigIdx(2)}
+            >
+              4:3
+            </button>
+          </div>
+
+          {/* <div className={styles.skinOptions}>
+            <button
+              className={`${styles.btn} ${styles.skin1}`}
+              onClick={() => {}}
+            >
+              A
+            </button>
+            <button
+              className={`${styles.btn} ${styles.skin2}`}
+              onClick={() => {}}
+            >
+              B
+            </button>
+            <button
+              className={`${styles.btn} ${styles.skin3}`}
+              onClick={() => {}}
+            >
+              C
+            </button>
+          </div> */}
+
+          {!isLoading && !imgfile && (
+            <button
+              className={`${styles.btn} ${styles.photo}`}
+              onClick={takePhoto}
+            >
+              {" "}
+              Take Picture
+            </button>
+          )}
+
+          {imgfile && (
+            <button
+              className={`${styles.btn} ${styles.retake}`}
+              onClick={() => setImgfile(null)}
+            >
+              {" "}
+              다시찍기
+            </button>
+          )}
+
+          {imgfile && (
+            <button
+              className={`${styles.btn} ${styles.save}`}
+              onClick={savePhoto}
+            >
+              {" "}
+              저장
+            </button>
+          )}
+        </div>
+      </div>
+      {/* <button className={`${styles.btn} ${styles.record}`} onClick={onClick}>
+        X
+      </button> */}
     </div>
   );
 };
 
-const PhotoModal = ({photoList, onClick}) =>{
-  return<>
-  {ReactDOM.createPortal(<BackDrop/>,document.getElementById('backdrop-root'))}
-  {ReactDOM.createPortal(<Modal photoList={photoList} onClick={onClick}/>,document.getElementById('PhotoModal-root'))}
-  </>
-
-}
+const PhotoModal = ({ photoList, onClick }) => {
+  return (
+    <>
+      {ReactDOM.createPortal(
+        <BackDrop />,
+        document.getElementById("backdrop-root")
+      )}
+      {ReactDOM.createPortal(
+        <Modal photoList={photoList} onClick={onClick} />,
+        document.getElementById("PhotoModal-root")
+      )}
+    </>
+  );
+};
 
 export default PhotoModal;

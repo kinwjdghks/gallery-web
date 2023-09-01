@@ -1,4 +1,4 @@
-.backdrop{
+.backdrop {
   position: fixed;
   width: 100vw;
   height: 100vh;
@@ -6,18 +6,20 @@
   background: rgba(0, 0, 0, 0.75);
 }
 
-.background{
-  position: fixed;
+.background {
   width: 90vw;
   height: 90vh;
-  z-index:11;
-  background-color: #E0E0E0;
+  z-index: 11;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .container {
   width: 95vw;
   height: 95vh;
   position: relative;
+  z-index: 31;
   display: flex;
   align-items: center;
   border: 2px solid black;
@@ -89,25 +91,25 @@
 }
 
 /* animation */
-.animation{
+.animation {
   position: absolute;
   z-index: 100;
 }
-.animation.counting{
+.animation.counting {
   font-size: 30rem;
   color: white;
   font-weight: 200;
   text-align: center;
 }
-.animation.shooting{
+.animation.shooting {
   background-color: black;
   animation: flash 2s forwards;
 }
 @keyframes flash {
-  from{
+  from {
     opacity: 1;
   }
-  to{
+  to {
     opacity: 0;
   }
 }
