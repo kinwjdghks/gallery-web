@@ -1,7 +1,6 @@
 import styles from "./Header.module.css";
-import logo from "../Images/Logo.svg";
+import logo from "../assets/Images/Logo.svg";
 import { useState, useEffect, useCallback } from "react";
-import {useThrottle as throttle} from "@uidotdev/usehooks";
 const Header = ({ onClick }) => {
   const [fixHeader, setFixHeader] = useState(true);
   const [position, setPosition] = useState(window.pageYOffset);
@@ -20,15 +19,7 @@ const Header = ({ onClick }) => {
 //   },[position]);
 
   const scrollDetectHandler = (e)=>{
-    let timer;
-    return ()=>{
-        if(!timer){
-        timer = setTimeout(()=>{
-            timer(null);
-            console.log(e.target.documentElement.scrollTop);
-        },300);
-    }
-    }
+//    console.log(e.target.documentElement.scrollTop);
     };
 
   useEffect(()=>{
