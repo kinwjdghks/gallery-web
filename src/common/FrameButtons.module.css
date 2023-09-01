@@ -1,8 +1,101 @@
-.btn {
-  width: 200px;
-  height: 120px;
+.container {
+  height: 933.33px;
+  margin: 73.342px 0;
+
+  display: grid;
+  grid-template-columns: 50% 50%;
+  column-gap: 20px;
+  align-items: center;
+  justify-items: center;
+
+  position: relative;
+  left: -30px;
+}
+.container.frame {
+  grid-template-rows: 15vh 25vh 25vh 13vh;
+  grid-template-areas:
+    "header header"
+    "square square"
+    "vertical horizontal"
+    "next next";
+}
+.container.skin {
+  grid-template-rows: 15vh 25vh 25vh 13vh;
+  grid-template-areas:
+    "header header"
+    "skin1 skin2"
+    "skin3 skin4"
+    "next next";
+}
+.container.done {
+  grid-template-rows: 15vh 50vh 13vh;
+  grid-template-areas:
+    "header header"
+    "img img"
+    "next next";
+}
+
+.text {
+  width: 100%;
+  font-family: "cocogoose";
+  font-size: 70px;
+  grid-area: header;
+}
+.text p {
+  text-align: center;
+  margin: 0;
+}
+.comit {
+  color: #603ebb;
+}
+.photobooth {
+  margin-top: 20px;
+}
+
+.framebtn {
+  width: 380px;
+  height: 250px;
   border: 3px solid black;
-  border-radius: 20px;
+  border-radius: 50px;
   font-size: 2rem;
+
   cursor: pointer;
+}
+.framebtn.square {
+  grid-area: square;
+  position: relative;
+  bottom: -20px;
+}
+.framebtn.vertical {
+  grid-area: vertical;
+}
+.framebtn.horizontal {
+  grid-area: horizontal;
+}
+
+.framebtn.close {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  right: -50px;
+  top: -50px;
+}
+
+.skinbtn {
+  width: 380px;
+  height: 270px;
+
+  border: 3px solid black;
+  border-radius: 50px;
+  font-size: 2rem;
+
+  cursor: pointer;
+}
+
+.framebtn.next {
+  width: 800px;
+  height: 100%;
+  grid-area: next;
+  border-radius: 40px;
 }

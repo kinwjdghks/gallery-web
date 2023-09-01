@@ -21,6 +21,9 @@ import {
 } from "firebase/firestore/lite";
 //Components
 import FrameButtons from "../common/FrameButtons";
+//sound
+import EffectSound from "../common/EffectSound";
+import effect from "../assets/sounds/button-sound.mp3";
 
 const BackDrop = () => {
   return <div className={styles.backdrop}></div>;
@@ -33,6 +36,11 @@ const Modal = ({ photoList, onClick }) => {
   const [imgurl, setImgurl] = useState("");
   const [imgfile, setImgfile] = useState(null);
   const [imgpreview, setImgpreview] = useState(null);
+  //sound
+  const es = EffectSound(effect, 1);
+  const playES = () => {
+    es.play();
+  };
   useEffect(() => {
     if (imgfile) {
       setImgpreview(
@@ -143,6 +151,7 @@ const Modal = ({ photoList, onClick }) => {
       setTimeout(() => {
         const imageSrc = webcamRef.current.getScreenshot();
         setImgfile(imageSrc);
+        playES();
       }, 6000);
     },
     [webcamRef, animation]
@@ -165,7 +174,7 @@ const Modal = ({ photoList, onClick }) => {
   return (
     <div className={styles.container}>
       <div className={styles.cam_container}>
-        <div className={`${styles.cam_container__Frame} ${classNameByConfig}`}>
+        <div className={styles.cam_container__Frame}>
           <div className={`${styles.cam_mask} ${classNameByConfig}`}>
             {photoAnimation}
             {imgpreview}
@@ -182,53 +191,15 @@ const Modal = ({ photoList, onClick }) => {
       </div>
 
       <div className={styles.actions}>
-        <div className={styles.frameOptions}>
-          <FrameButtons clicked={clickHandler} />
-        </div>
-
-        {!isLoading && !imgfile && (
-          <button
-            className={`${styles.btn} ${styles.photo}`}
-            onClick={takePhoto}
-          >
-            {" "}
-            Take Picture
-          </button>
-        )}
-        {imgfile && (
-          <button
-            className={`${styles.btn} ${styles.save}`}
-            onClick={savePhoto}
-          >
-            {" "}
-            again
-          </button>
-        )}
-        <button className={`${styles.btn} ${styles.record}`} onClick={onClick}>
-          X
-        </button>
+        <FrameButtons
+          clicked={clickHandler}
+          isLoading={isLoading}
+          imgfile={imgfile}
+          onTakePhoto={takePhoto}
+          onSavePhoto={savePhoto}
+          onClick={onClick}
+        />
       </div>
-
-      {/* <div className={styles.skinOptions}>
-            <button
-              className={`${styles.btn} ${styles.skin1}`}
-              onClick={() => {}}
-            >
-              A
-            </button>
-            <button
-              className={`${styles.btn} ${styles.skin2}`}
-              onClick={() => {}}
-            >
-              B
-            </button>
-            <button
-              className={`${styles.btn} ${styles.skin3}`}
-              onClick={() => {}}
-            >
-              C
-            </button>
-          </div> */}
     </div>
   );
 };
