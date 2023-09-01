@@ -9,8 +9,8 @@ function App() {
   const toggleModal = () => setTakePhoto((prev) => !prev);
   return (
     <>
-      <Header takePhoto={takePhoto} onClick={toggleModal} />
-      <Gallery onClick={toggleModal} />
+      <Header onClick={toggleModal} />
+      <Gallery takePhoto={takePhoto} onClick={toggleModal} />
     </>
   );
 }

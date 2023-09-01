@@ -6,7 +6,6 @@
   background: rgba(0, 0, 0, 0.75);
 }
 
-
 .container {
   width: 90vw;
   height: 95vh;
@@ -33,6 +32,46 @@
   position: relative;
 }
 
+.cam_container__Frame {
+  width: 933.33px;
+  height: 933.33px;
+  background-color: #c9b3ef;
+  border-radius: 10%;
+
+  position: relative;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.cam_mask {
+  margin: 75px;
+  border-radius: 50px;
+  overflow: hidden;
+
+  position: relative;
+}
+
+.cam_mask.square {
+  width: 800px;
+  height: 800px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.cam_mask.vertical {
+  left: 0;
+  top: 0;
+  width: 600px;
+  height: 800px;
+}
+.cam_mask.horizontal {
+  margin-top: 75px;
+  width: 800px;
+  height: 600px;
+  left: 0;
+  top: 0;
+}
 .actions {
   display: flex;
   flex-direction: column;
@@ -57,39 +96,16 @@
 }
 .btn.record {
   position: absolute;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
   right: 1px;
   top: 1px;
-}
-.cam_mask {
-  position: absolute;
-  overflow: hidden;
-
-  display: flex;
-  justify-content: center;
-}
-.cam_mask.square {
-  margin-top: 50px;
-  width: 800px;
-  height: 800px;
-}
-.cam_mask.vertical {
-  width: 675px;
-  height: 900px;
-}
-.cam_mask.horizontal {
-  margin-top: 112.5px;
-  width: 900px;
-  height: 675px;
 }
 
 .imgpreview {
   position: absolute;
   z-index: 99;
-}
-.cam_mask.horizontal {
-  margin-top: 112.5px;
-  width: 900px;
-  height: 675px;
 }
 
 /* animation */
