@@ -5,7 +5,6 @@ import Album from "./Album";
 import ScrollDown from "../common/ScrollDown";
 import { useState, useEffect, useRef, useCallback } from "react";
 
-import { useDebouncedCallback } from 'use-debounce';
 import { db } from "../Utility/firebase";
 import {
   collection,
@@ -17,7 +16,7 @@ import {
 
 const Gallery = ({ takePhoto, onClick }) => {
   //이 Timestamp 이전의 사진들은 모두 로드됨.
-  const [curTimeStamp, setCurTimeStamp] = useState(0);
+  const [curTimeStamp, setCurTimeStamp] = useState(new Date().getTime());
   //더 이상 불러올 데이터가 없는지
   const [endOfData, setEndOfData] = useState(false);
   //데이터 로딩중
@@ -48,9 +47,9 @@ const Gallery = ({ takePhoto, onClick }) => {
   const pageEnd = useRef(null);
   //가장 아래에 닿으면 데이터를 10개씩 더 가져온다.
 
-  useEffect(()=>{
-      if(pageEnd.current) observer.observe(pageEnd.current);
-    },[]);
+    useEffect(()=>{
+        if(pageEnd.current) observer.observe(pageEnd.current);
+        },[]);
     
     const onIntersect = async ([entry], observer) => {
         if (entry.isIntersecting) {
@@ -166,34 +165,35 @@ const Gallery = ({ takePhoto, onClick }) => {
     console.log("getmorePhotos");
     const queryTemp = query(
       collection(db, "Photos"),
-      where("id", ">", curTimeStamp),
+      where("id", "<", curTimeStamp),
       limit(10)
     );
     setIsLoading(true);
     const dataSnapShot = await getDocs(queryTemp);
     console.log('사진 불러오기');
-    const length = dataSnapShot.length;
-    const dataList = dataSnapShot.docs.map((doc) => doc.data());
+    const unsortedDataList = dataSnapShot.docs.map((doc) => doc.data());
+    const length = unsortedDataList.length;
+    const dataList = unsortedDataList.sort((a,b)=>{return b.id-a.id}); //역시간순 정렬
+    console.log(length);
     if (length) {
       setCurTimeStamp(dataList[length - 1].id); //가져온 마지막 데이터의 TimeStamp를 저장
-      setPhotos((prev) => [...prev, ...dataList]);
+      setPhotos((prev) => [ ...dataList,...prev]);
     } else {
       setEndOfData(true);
     }
     setIsLoading(false);
     setPhotos(dataList);
   },[curTimeStamp,photos]);
-const debouncedGetMorePhotos = useDebouncedCallback(
-    ()=>console.log('사진 가져오기'),100
-);
-// const getMorePhotos = () => console.log('사진 가져오기');
 
-  //처음 실행 시 사진 가져오기
-  // useEffect(()=>{
-  //     console.log('처음 사진 가져오기');
-  //     getMorePhotos();
-  //     }
-  // ,[]);
+
+
+//   처음 실행 시 사진 가져오기
+  useEffect(()=>{
+      console.log('처음 사진 가져오기');
+      getMorePhotos();
+      console.log(endOfData);
+      }
+  ,[]);
 
 
 
