@@ -24,6 +24,7 @@ import FrameButtons from "../common/FrameButtons";
 //sounds
 import EffectSound from "../common/EffectSound";
 import effect from "../assets/sounds/camera-shutter.wav";
+import { reload } from "firebase/auth";
 
 const BackDrop = () => {
   return <div className={styles.backdrop}></div>;
@@ -31,7 +32,6 @@ const BackDrop = () => {
 
 const Modal = ({ photoList, onClick }) => {
   const [isLoading, setIsLoading] = useState(false);
-  const [imgurl, setImgurl] = useState("");
   const [imgfile, setImgfile] = useState(null);
   const [imgpreview, setImgpreview] = useState(null);
   const [photoTaken, setPhotoTaken] = useState(false);
@@ -42,12 +42,13 @@ const Modal = ({ photoList, onClick }) => {
     es.play();
   };
   const createBlankAlbum = useCallback(async () => {
-    const id = new Date().getTime() / 100000000;
+    const id = new Date().getTime() % 100000000;
     const timestamp = serverTimestamp();
     const newPhoto = {
       id: id,
       url: "blank",
       timestamp: timestamp,
+      vidConfig: vidConfigIdx,
     };
     try {
       const photos = collection(db, "Photos");
@@ -137,8 +138,8 @@ const Modal = ({ photoList, onClick }) => {
       // console.log(upload)
       const geturl = await getDownloadURL(sRef(storage, storageRef));
       saveToFireStore(geturl);
+      console.log("geturl");
       console.log(geturl);
-      setImgurl(geturl); //미리보기용
     } catch (error) {
       console.log(error);
     }
@@ -146,7 +147,7 @@ const Modal = ({ photoList, onClick }) => {
   };
 
   const saveToFireStore = async (imgurl) => {
-    let id = new Date().getTime();
+    let id = new Date().getTime() % 100000000;
     const timestamp = serverTimestamp();
     const newPhoto = {
       id: +id,
@@ -171,21 +172,22 @@ const Modal = ({ photoList, onClick }) => {
     (e) => {
       setPhotoTaken(true);
       e.preventDefault();
-      animation(2);
+      animation(5);
       const timer = setTimeout(() => {
         const imageSrc = webcamRef.current.getScreenshot();
         setImgfile(imageSrc);
         playES();
-      }, 2000);
+      }, 6000);
       return () => clearTimeout(timer);
     },
     [webcamRef, animation]
   );
-  const savePhoto = () => {
+  const savePhoto = async () => {
     console.log("savePhoto executed");
-    saveToFirebaseStorage(imgfile, saveToFireStore);
-    setBlankBuffer((prev) => prev--);
+    await saveToFirebaseStorage(imgfile, saveToFireStore);
+    setBlankBuffer((prev) => prev - 1);
     onClick();
+    window.location.reload();
   };
 
   const deletePhoto = () => {
