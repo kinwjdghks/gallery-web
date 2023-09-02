@@ -82,7 +82,6 @@ const Modal = ({ photoList, onClick }) => {
       const timer = setInterval(() => {
         console.log(cnt);
         if (cnt > 0) {
-          console.log("count exectued");
           setPhotoAnimation(
             <div
               className={`${styles.animation} ${styles.counting}`}
@@ -93,7 +92,6 @@ const Modal = ({ photoList, onClick }) => {
           );
           cnt--;
         } else {
-          console.log("flash exectued");
           setPhotoAnimation(
             <div
               className={`${styles.animation} ${styles.shooting}`}
@@ -113,12 +111,13 @@ const Modal = ({ photoList, onClick }) => {
       contentType: "image/jpeg",
     };
     const storageRef = sRef(storage, "Images/" + id);
+    console.log("Executed");
     try {
       setIsLoading(true);
       const upload = await uploadString(storageRef, file, "data_url");
       // console.log(upload)
       const geturl = await getDownloadURL(sRef(storage, storageRef));
-      // console.log(geturl);
+      console.log("geturl");
       setImgurl(geturl.toString());
     } catch (error) {
       console.log(error);
@@ -128,6 +127,8 @@ const Modal = ({ photoList, onClick }) => {
   };
 
   const saveToFireStore = async () => {
+    console.log("FirstStore Saving");
+    console.log(imgurl);
     const id = new Date().getTime();
     const timestamp = serverTimestamp();
     const newPhoto = {
@@ -184,19 +185,17 @@ const Modal = ({ photoList, onClick }) => {
   return (
     <div className={styles.container}>
       <div className={styles.cam_container}>
-        <div className={styles.cam_container__Frame}>
-          <div className={`${styles.cam_mask} ${classNameByConfig}`}>
-            {photoAnimation}
-            {imgpreview}
-            <Webcam
-              className={`${styles.webcam} ${classNameByConfig}`}
-              audio={false}
-              height={curHeight}
-              ref={webcamRef}
-              screenshotFormat="image/jpeg"
-              mirrored={true}
-            />
-          </div>
+        <div className={`${styles.cam_mask} ${classNameByConfig}`}>
+          {photoAnimation}
+          {imgpreview}
+          <Webcam
+            className={`${styles.webcam} ${classNameByConfig}`}
+            audio={false}
+            height={curHeight}
+            ref={webcamRef}
+            screenshotFormat="image/jpeg"
+            mirrored={true}
+          />
         </div>
       </div>
 
