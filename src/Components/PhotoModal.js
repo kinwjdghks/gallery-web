@@ -23,7 +23,7 @@ import {
 import FrameButtons from "../common/FrameButtons";
 //sound
 import EffectSound from "../common/EffectSound";
-import effect from "../assets/sounds/button-sound.mp3";
+import effect from "../assets/sounds/camera-shutter.wav";
 
 const BackDrop = () => {
   return <div className={styles.backdrop}></div>;

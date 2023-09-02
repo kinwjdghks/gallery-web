@@ -14,6 +14,7 @@ const FrameButtons = ({
 }) => {
   const [frameSelected, SetFrameSelected] = useState(false);
   const [skinSelected, SetSkinSelected] = useState(false);
+  const [PhotoTaken, SetPhotoTaken] = useState(false);
 
   const clickHandler = () => {
     if (!frameSelected) {
@@ -40,26 +41,20 @@ const FrameButtons = ({
         <button
           className={`${styles.framebtn} ${styles.square}`}
           onClick={() => clicked(0)}
-        >
-          1:1
-        </button>
+        />
       )}
 
       {!frameSelected && (
         <button
           className={`${styles.framebtn} ${styles.vertical}`}
           onClick={() => clicked(1)}
-        >
-          3:4
-        </button>
+        />
       )}
       {!frameSelected && (
         <button
           className={`${styles.framebtn} ${styles.horizontal}`}
           onClick={() => clicked(2)}
-        >
-          4:3
-        </button>
+        />
       )}
 
       {frameSelected && !skinSelected && (
@@ -75,22 +70,20 @@ const FrameButtons = ({
         <button className={`${styles.skinbtn} ${styles.skin4}`}>D</button>
       )}
 
+      {/* Next */}
       {!frameSelected || !skinSelected ? (
         <button
-          className={`${styles.framebtn} ${styles.next}`}
+          className={`${styles.movebtn} ${styles.nextbtn}`}
           onClick={clickHandler}
-        >
-          Next
-        </button>
+        />
       ) : (
+        /*Take Photo*/
         !isLoading &&
         !imgfile && (
           <button
-            className={`${styles.framebtn} ${styles.next}`}
+            className={`${styles.movebtn} ${styles.takePhoto}`}
             onClick={onTakePhoto}
-          >
-            Take Picture
-          </button>
+          />
         )
       )}
 
