@@ -43,10 +43,10 @@ const Modal = ({ photoList, onClick }) => {
   };
   //�������� ��� ���� �� �� image��ü ������
   const createBlankAlbum = useCallback(async () => {
-    const id = new Date().getTime();
+    const id = new Date().getTime()%100000000;
     const timestamp = serverTimestamp();
     const newPhoto = {
-      id: id % 100000000,
+      id: id,
       url: "blank",
       timestamp: timestamp,
     };
@@ -149,13 +149,13 @@ const Modal = ({ photoList, onClick }) => {
   };
 
   const saveToFireStore = async (imgurl) => {
-    let id = new Date().getTime();
+    let id = new Date().getTime()%100000000;
     const timestamp = serverTimestamp();
     const newPhoto = {
-      id: +id,
+      id: id,
       url: imgurl,
       timestamp: timestamp,
-      vidconfig: vidConfigIdx
+      vidConfig: vidConfigIdx
     };
     try {
       const photos = collection(db, "Photos");
@@ -174,12 +174,12 @@ const Modal = ({ photoList, onClick }) => {
     (e) => {
       setPhotoTaken(true);
       e.preventDefault();
-      animation(5);
+      animation(1);
       const timer = setTimeout(() => {
         const imageSrc = webcamRef.current.getScreenshot();
         setImgfile(imageSrc);
         playES();
-      }, 6000);
+      }, 2000);
       return () => clearTimeout(timer);
     },
     [webcamRef, animation]
