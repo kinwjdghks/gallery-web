@@ -1,6 +1,6 @@
 .background {
   width: 100vw;
-  height: 200vh;
+  height: auto;
   position: relative;
   display: flex;
   justify-content: center;
@@ -15,4 +15,11 @@
     row-gap: 30px;
     column-gap: 25px;
     width: 1475px;
+    padding-bottom: 300px;
+}
+
+.pageEnd{
+  width: 100vw;
+  height: 5px;
+  background-color: red;
 }
