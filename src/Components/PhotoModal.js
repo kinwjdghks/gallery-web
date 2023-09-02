@@ -1,10 +1,7 @@
 import React, { useState, useRef, useEffect, useCallback } from "react";
 import ReactDOM from "react-dom";
-//css
 import styles from "./PhotoModal.module.css";
-//framework
 import Webcam from "react-webcam";
-//firebase
 import {
   getStorage,
   ref as sRef,
@@ -21,7 +18,7 @@ import {
 } from "firebase/firestore/lite";
 //Components
 import FrameButtons from "../common/FrameButtons";
-//sound
+//sounds
 import EffectSound from "../common/EffectSound";
 import effect from "../assets/sounds/camera-shutter.wav";
 
@@ -42,7 +39,7 @@ const Modal = ({ photoList, onClick }) => {
     es.play();
   };
   //랜덤정수 모두 차감 시 빈 image객체 보내기
-  const createBlankAlbum = async () =>{
+  const createBlankAlbum = useCallback(async () =>{
     const id = new Date().getTime();
     const timestamp = serverTimestamp();
     const newPhoto = {
@@ -56,12 +53,13 @@ const Modal = ({ photoList, onClick }) => {
       console.log(error);
       return;
     }
-  }
+    console.log("Blank Album 만들어짐");
+  },[]);
+
   useEffect(()=>{
     if(blankBuffer===0){
       createBlankAlbum();
       setBlankBuffer(Math.floor(Math.random()*4));
-    console.log("saved");
     }
   },[blankBuffer]);
 
@@ -138,22 +136,19 @@ const Modal = ({ photoList, onClick }) => {
       const upload = await uploadString(storageRef, file, "data_url");
       // console.log(upload)
       const geturl = await getDownloadURL(sRef(storage, storageRef));
-      // console.log(geturl);
-      setImgurl(geturl.toString());
+      console.log(geturl);
+      setImgurl(geturl);
     } catch (error) {
       console.log(error);
     }
-    // console.log(imgurl);
     setIsLoading(false);
   };
 
   const saveToFireStore = async () => {
-    
     let id = new Date().getTime();
-    id = (+id)%100; //int 
     const timestamp = serverTimestamp();
     const newPhoto = {
-      id:id,
+      id:+id,
       url: imgurl,
       timestamp: timestamp,
     };
@@ -165,7 +160,7 @@ const Modal = ({ photoList, onClick }) => {
       return;
     }
 
-    console.log("saved");
+    console.log("사진 firebase에 전송됨");
   };
 
   const storage = getStorage();
@@ -185,7 +180,8 @@ const Modal = ({ photoList, onClick }) => {
     [webcamRef, animation]
   );
   const savePhoto = () => {
-    saveToFirebaseStorage(imgfile); //image -> Storage, need throttling
+    console.log('savePhoto 실행됨');
+    saveToFirebaseStorage(imgfile);
     saveToFireStore();
     setBlankBuffer((prev)=>prev--);
   };

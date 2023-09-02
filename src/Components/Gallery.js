@@ -19,7 +19,7 @@ const Gallery = ({takePhoto,onClick}) =>{
     const [arrows,setArrows] = useState([<ScrollDown top_={900}/>]);
 
     const background = useRef(null);
-    useEffect(()=>console.log(backgroundHeight),[backgroundHeight]);
+    // useEffect(()=>console.log(backgroundHeight),[backgroundHeight]);
     //새로 데이터가 로딩될때마다 background 높이 업데이트하기
     useEffect(()=>{
         if(background.current){
