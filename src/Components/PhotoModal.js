@@ -30,7 +30,7 @@ const BackDrop = () => {
 };
 
 const Modal = ({ photoList, onClick }) => {
-  const [blankBuffer, setBlankBuffer] = useState(Math.floor(Math.random()*4)); //랜덤 정수마다 BlankAlbum 생성하기
+  const [blankBuffer, setBlankBuffer] = useState(Math.floor(Math.random() * 4)); //랜덤 정수마다 BlankAlbum 생성하기
   const [isLoading, setIsLoading] = useState(false);
   const [imgurl, setImgurl] = useState("");
   const [imgfile, setImgfile] = useState(null);
@@ -42,11 +42,11 @@ const Modal = ({ photoList, onClick }) => {
     es.play();
   };
   //랜덤정수 모두 차감 시 빈 image객체 보내기
-  const createBlankAlbum = useCallback(async () =>{
+  const createBlankAlbum = useCallback(async () => {
     const id = new Date().getTime();
     const timestamp = serverTimestamp();
     const newPhoto = {
-      url: 'blank',
+      url: "blank",
       timestamp: timestamp,
     };
     try {
@@ -57,19 +57,20 @@ const Modal = ({ photoList, onClick }) => {
       return;
     }
     console.log("Blank Album 만들어짐");
-  },[]);
+  }, []);
 
-  useEffect(()=>{
-    if(blankBuffer===0){
+  useEffect(() => {
+    if (blankBuffer === 0) {
       createBlankAlbum();
-      setBlankBuffer(Math.floor(Math.random()*4));
+      setBlankBuffer(Math.floor(Math.random() * 4));
     }
-  },[blankBuffer]);
+  }, [blankBuffer]);
 
   //사진 촬영 후 preview 이미지 띄우기
-  useEffect(() => { 
+  useEffect(() => {
     if (imgfile) {
-      setImgpreview(<img
+      setImgpreview(
+        <img
           className={styles.imgpreview}
           style={{
             height: vidConfigList[vidConfigIdx].height,
@@ -84,7 +85,6 @@ const Modal = ({ photoList, onClick }) => {
       setImgpreview(null);
     }
   }, [imgfile]);
-
 
   const webcamRef = useRef(null);
 
@@ -109,7 +109,8 @@ const Modal = ({ photoList, onClick }) => {
           setPhotoAnimation(
             <div
               className={`${styles.animation} ${styles.counting}`}
-              style={{ height: curHeight, width: curWidth }}>
+              style={{ height: curHeight, width: curWidth }}
+            >
               {cnt}
             </div>
           );
@@ -118,7 +119,8 @@ const Modal = ({ photoList, onClick }) => {
           setPhotoAnimation(
             <div
               className={`${styles.animation} ${styles.shooting}`}
-              style={{ height: curHeight, width: curWidth }}></div>
+              style={{ height: curHeight, width: curWidth }}
+            ></div>
           );
           clearInterval(timer);
         }
@@ -151,7 +153,7 @@ const Modal = ({ photoList, onClick }) => {
     let id = new Date().getTime();
     const timestamp = serverTimestamp();
     const newPhoto = {
-      id:+id,
+      id: +id,
       url: imgurl,
       timestamp: timestamp,
     };
@@ -163,7 +165,7 @@ const Modal = ({ photoList, onClick }) => {
       return;
     }
 
-    console.log("사진 firebase에 전송됨");
+    console.log("image firebase sent");
   };
 
   const storage = getStorage();
@@ -183,13 +185,14 @@ const Modal = ({ photoList, onClick }) => {
     [webcamRef, animation]
   );
   const savePhoto = () => {
-    console.log('savePhoto 실행됨');
+    console.log("savePhoto executed");
     saveToFirebaseStorage(imgfile);
     saveToFireStore();
-    setBlankBuffer((prev)=>prev--);
+    setBlankBuffer((prev) => prev--);
+    onClick();
   };
 
-  const deletePhoto = ()=>{
+  const deletePhoto = () => {
     setPhotoTaken(false);
     setImgfile(null);
   };
