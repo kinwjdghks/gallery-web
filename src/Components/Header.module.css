@@ -35,6 +35,12 @@
     color: white;
     margin-top: calc(175px - 80px);
     margin-right: -70px;
+    
+  }
+  .btn:hover{
+    background-color: white;
+    color: #603EBB;
+    border: none;
   }
 
 .comitPhoto{

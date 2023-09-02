@@ -30,7 +30,7 @@ const BackDrop = () => {
 };
 
 const Modal = ({ photoList, onClick }) => {
-  const [blankBuffer, setBlankBuffer] = useState(Math.floor(Math.random() * 4)); //·£´ý Á¤¼ö¸¶´Ù BlankAlbum »ý¼ºÇÏ±â
+  const [blankBuffer, setBlankBuffer] = useState(Math.floor(Math.random() * 4)); //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ BlankAlbum ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ï¿½
   const [isLoading, setIsLoading] = useState(false);
   const [imgurl, setImgurl] = useState("");
   const [imgfile, setImgfile] = useState(null);
@@ -41,7 +41,7 @@ const Modal = ({ photoList, onClick }) => {
   const playES = () => {
     es.play();
   };
-  //·£´ýÁ¤¼ö ¸ðµÎ Â÷°¨ ½Ã ºó image°´Ã¼ º¸³»±â
+  //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ imageï¿½ï¿½Ã¼ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
   const createBlankAlbum = useCallback(async () => {
     const id = new Date().getTime();
     const timestamp = serverTimestamp();
@@ -56,7 +56,7 @@ const Modal = ({ photoList, onClick }) => {
       console.log(error);
       return;
     }
-    console.log("Blank Album ¸¸µé¾îÁü");
+    console.log("Blank Album ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
   }, []);
 
   useEffect(() => {
@@ -66,7 +66,7 @@ const Modal = ({ photoList, onClick }) => {
     }
   }, [blankBuffer]);
 
-  //»çÁø ÃÔ¿µ ÈÄ preview ÀÌ¹ÌÁö ¶ç¿ì±â
+  //ï¿½ï¿½ï¿½ï¿½ ï¿½Ô¿ï¿½ ï¿½ï¿½ preview ï¿½Ì¹ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
   useEffect(() => {
     if (imgfile) {
       setImgpreview(
@@ -129,33 +129,32 @@ const Modal = ({ photoList, onClick }) => {
     [vidConfigIdx, vidConfigList]
   );
 
-  const saveToFirebaseStorage = async (file) => {
+  const saveToFirebaseStorage = async (file,saveToFireStore) => {
     const id = new Date().getTime();
-    const metaData = {
-      contentType: "image/jpeg",
-    };
     const storageRef = sRef(storage, "Images/" + id);
-    console.log("Executed");
+    console.log("saved to fireStorage");
     try {
       setIsLoading(true);
       const upload = await uploadString(storageRef, file, "data_url");
       // console.log(upload)
       const geturl = await getDownloadURL(sRef(storage, storageRef));
+      saveToFireStore(geturl);
       console.log(geturl);
-      setImgurl(geturl);
+      setImgurl(geturl); //ë¯¸ë¦¬ë³´ê¸°ìš©
     } catch (error) {
       console.log(error);
     }
     setIsLoading(false);
   };
 
-  const saveToFireStore = async () => {
+  const saveToFireStore = async (imgurl) => {
     let id = new Date().getTime();
     const timestamp = serverTimestamp();
     const newPhoto = {
       id: +id,
       url: imgurl,
       timestamp: timestamp,
+      vidconfig: vidConfigIdx
     };
     try {
       const photos = collection(db, "Photos");
@@ -186,8 +185,7 @@ const Modal = ({ photoList, onClick }) => {
   );
   const savePhoto = () => {
     console.log("savePhoto executed");
-    saveToFirebaseStorage(imgfile);
-    saveToFireStore();
+    saveToFirebaseStorage(imgfile,saveToFireStore);
     setBlankBuffer((prev) => prev--);
     onClick();
   };
