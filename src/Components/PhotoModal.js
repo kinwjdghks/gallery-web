@@ -30,7 +30,6 @@ const BackDrop = () => {
 };
 
 const Modal = ({ photoList, onClick }) => {
-  const [blankBuffer, setBlankBuffer] = useState(Math.floor(Math.random() * 4)); //랜덤 정수마다 BlankAlbum 생성하기
   const [isLoading, setIsLoading] = useState(false);
   const [imgurl, setImgurl] = useState("");
   const [imgfile, setImgfile] = useState(null);
@@ -41,7 +40,6 @@ const Modal = ({ photoList, onClick }) => {
   const playES = () => {
     es.play();
   };
-  //랜덤정수 모두 차감 시 빈 image객체 보내기
   const createBlankAlbum = useCallback(async () => {
     const id = new Date().getTime();
     const timestamp = serverTimestamp();
@@ -56,7 +54,6 @@ const Modal = ({ photoList, onClick }) => {
       console.log(error);
       return;
     }
-    console.log("Blank Album 만들어짐");
   }, []);
 
   useEffect(() => {
@@ -66,7 +63,6 @@ const Modal = ({ photoList, onClick }) => {
     }
   }, [blankBuffer]);
 
-  //사진 촬영 후 preview 이미지 띄우기
   useEffect(() => {
     if (imgfile) {
       setImgpreview(
@@ -86,13 +82,6 @@ const Modal = ({ photoList, onClick }) => {
     }
   }, [imgfile]);
 
-  useEffect(() => {
-    console.log("useEffect Outside Executed");
-    if (imgurl != "") {
-      console.log("useEffect Inside Executed");
-      saveToFireStore();
-    }
-  }, [imgurl]);
   const webcamRef = useRef(null);
 
   const vidConfigList = [
@@ -136,16 +125,16 @@ const Modal = ({ photoList, onClick }) => {
     [vidConfigIdx, vidConfigList]
   );
 
-  const saveToFirebaseStorage = async (file, callback) => {
+  const saveToFirebaseStorage = async (file,saveToFireStore) => {
     const id = new Date().getTime();
     const storageRef = sRef(storage, "Images/" + id);
-    console.log("Executed");
+    console.log("saved to fireStorage");
     try {
       setIsLoading(true);
       const upload = await uploadString(storageRef, file, "data_url");
       // console.log(upload)
       const geturl = await getDownloadURL(sRef(storage, storageRef));
-      callback(geturl);
+      saveToFireStore(geturl);
       console.log(geturl);
       setImgurl(geturl); //미리보기용
     } catch (error) {
@@ -161,8 +150,8 @@ const Modal = ({ photoList, onClick }) => {
       id: +id,
       url: imgurl,
       timestamp: timestamp,
+      vidconfig: vidConfigIdx
     };
-    console.log(newPhoto);
     try {
       const photos = collection(db, "Photos");
       const response = await setDoc(doc(photos, `${id}`), newPhoto);
@@ -192,7 +181,7 @@ const Modal = ({ photoList, onClick }) => {
   );
   const savePhoto = () => {
     console.log("savePhoto executed");
-    saveToFirebaseStorage(imgfile, saveToFireStore);
+    saveToFirebaseStorage(imgfile,saveToFireStore);
     setBlankBuffer((prev) => prev--);
     onClick();
   };

@@ -6,9 +6,8 @@ import styles from "./Album.module.css";
 (너무 화려하지 않은) 디자인이 살짝씩 들어가는 느낌.*/
 
 const Album = (props) => {
-  const imageurl = props.data.imageurl;
+  const imageurl = props.data.url;
   const vidConfig = props.data.vidConfig;
-  // console.log(vidConfig);
   const classNameByConfig =
     vidConfig === 0
       ? styles.square

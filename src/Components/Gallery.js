@@ -3,7 +3,9 @@ import PhotoModal from "./PhotoModal";
 import BlankAlbum from "./BlankAlbum";
 import Album from "./Album";
 import ScrollDown from "../common/ScrollDown";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
+
+import { useDebouncedCallback } from 'use-debounce';
 import { db } from "../Utility/firebase";
 import {
   collection,
@@ -22,7 +24,7 @@ const Gallery = ({ takePhoto, onClick }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [backgroundHeight, setBackgroundHeight] = useState(0);
   // <ScrollDown/> 개수
-  const [arrows, setArrows] = useState([<ScrollDown top_={900} />]);
+  const [arrows, setArrows] = useState([<ScrollDown key={0} top_={900} />]);
 
   const background = useRef(null);
   // useEffect(()=>console.log(backgroundHeight),[backgroundHeight]);
@@ -37,28 +39,28 @@ const Gallery = ({ takePhoto, onClick }) => {
     if (background.current) {
       const cnt = arrows.length;
       if (280 + (cnt + 1) * 700 < backgroundHeight) {
-        arrows.push(<ScrollDown top_={cnt * 700 + 700} />);
+        const newArr = [...arrows,<ScrollDown key={cnt+1} top_={cnt * 700 + 700} />];
+        setArrows(newArr);
       }
     }
   }, [backgroundHeight]);
 
   const pageEnd = useRef(null);
   //가장 아래에 닿으면 데이터를 10개씩 더 가져온다.
-  useEffect(() => {
-    let observer;
-    if (pageEnd.current && !endOfData) {
-      const onIntersect = async ([entry], observer) => {
+
+  useEffect(()=>{
+      if(pageEnd.current) observer.observe(pageEnd.current);
+    },[]);
+    
+    const onIntersect = async ([entry], observer) => {
         if (entry.isIntersecting) {
-          observer.unobserve(entry.target);
-          getMorePhotos();
-          observer.observe(entry.target);
+            console.log('intersect');
+            observer.unobserve(entry.target);
+            const response = await getMorePhotos();
+            observer.observe(entry.target);
         }
-      };
-      observer = new IntersectionObserver(onIntersect, { threshold: 1 });
-      observer.observe(pageEnd.current);
-    }
-    return () => observer && observer.disconnect();
-  }, [pageEnd]);
+    };
+    const observer = new IntersectionObserver(onIntersect, { threshold: 1 });
 
   const [photos, setPhotos] = useState([
     {
@@ -158,8 +160,10 @@ const Gallery = ({ takePhoto, onClick }) => {
   //     vidConfig: 0,
   //   },
   // ]);
-  const getMorePhotos = async () => {
+
+  const getMorePhotos = useCallback(async () => {
     //10개씩 사진 가져오기.
+    console.log("getmorePhotos");
     const queryTemp = query(
       collection(db, "Photos"),
       where("id", ">", curTimeStamp),
@@ -167,6 +171,7 @@ const Gallery = ({ takePhoto, onClick }) => {
     );
     setIsLoading(true);
     const dataSnapShot = await getDocs(queryTemp);
+    console.log('사진 불러오기');
     const length = dataSnapShot.length;
     const dataList = dataSnapShot.docs.map((doc) => doc.data());
     if (length) {
@@ -177,7 +182,12 @@ const Gallery = ({ takePhoto, onClick }) => {
     }
     setIsLoading(false);
     setPhotos(dataList);
-  };
+  },[curTimeStamp,photos]);
+const debouncedGetMorePhotos = useDebouncedCallback(
+    ()=>console.log('사진 가져오기'),100
+);
+// const getMorePhotos = () => console.log('사진 가져오기');
+
   //처음 실행 시 사진 가져오기
   // useEffect(()=>{
   //     console.log('처음 사진 가져오기');
@@ -185,20 +195,8 @@ const Gallery = ({ takePhoto, onClick }) => {
   //     }
   // ,[]);
 
-  //모두 가져오는 버전
-  // const getPhotos =  async () =>{
-  //     const dataSnapShot = await getDocs(collection(db,'Photos'));
-  //     const dataList = dataSnapShot.docs.map(doc=> doc.data());
-  //     setPhotos(dataList);
-  // }
-  // //모달 열리고 닫힐때만 사진 가져오기
-  // useEffect(()=>{
-  //     console.log('사진 가져오기');
-  //     getPhotos();
-  // }
-  // ,[takePhoto]);
 
-  useEffect(() => {}, []);
+
 
   return (
     <>
