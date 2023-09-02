@@ -15,40 +15,37 @@ import {
 } from "firebase/firestore/lite";
 
 const Gallery = ({ takePhoto, onClick }) => {
-  //ì´ Timestamp ì´ì „ì˜ ì‚¬ì§„ë“¤ì€ ëª¨ë‘ ë¡œë“œë¨.
-  const [curTimeStamp, setCurTimeStamp] = useState(0);
-  //ë” ì´ìƒ ë¶ˆëŸ¬ì˜¬ ë°ì´í„°ê°€ ì—†ëŠ”ì§€
+  //ÀÌ Timestamp ÀÌÀüÀÇ »çÁøµéÀº ¸ğµÎ ·ÎµåµÊ.
+  const [curTimeStamp, setCurTimeStamp] = useState(new Date().getTime());
+  //´õ ÀÌ»ó ºÒ·¯¿Ã µ¥ÀÌÅÍ°¡ ¾ø´ÂÁö
   const [endOfData, setEndOfData] = useState(false);
-  //ë°ì´í„° ë¡œë”©ì¤‘
+  //µ¥ÀÌÅÍ ·ÎµùÁß
   const [isLoading, setIsLoading] = useState(false);
   const [backgroundHeight, setBackgroundHeight] = useState(0);
-  // <ScrollDown/> ê°œìˆ˜
+  // <ScrollDown/> °³¼ö
   const [arrows, setArrows] = useState([<ScrollDown key={0} top_={900} />]);
 
   const background = useRef(null);
   // useEffect(()=>console.log(backgroundHeight),[backgroundHeight]);
-  //ìƒˆë¡œ ë°ì´í„°ê°€ ë¡œë”©ë ë•Œë§ˆë‹¤ background ë†’ì´ ì—…ë°ì´íŠ¸í•˜ê¸°
+  //»õ·Î µ¥ÀÌÅÍ°¡ ·ÎµùµÉ¶§¸¶´Ù background ³ôÀÌ ¾÷µ¥ÀÌÆ®ÇÏ±â
   useEffect(() => {
     if (background.current) {
       setBackgroundHeight(background.current.getBoundingClientRect().height);
     }
   }, [isLoading]);
-  //ì¼ì • ë†’ì´ì— ë„ë‹¬í•  ë•Œë§ˆë‹¤ <ScrollDown /> ì¶”ê°€í•˜ê¸°
+  //ÀÏÁ¤ ³ôÀÌ¿¡ µµ´ŞÇÒ ¶§¸¶´Ù <ScrollDown /> Ãß°¡ÇÏ±â
   useEffect(() => {
     if (background.current) {
       const cnt = arrows.length;
       if (280 + (cnt + 1) * 700 < backgroundHeight) {
-        const newArr = [
-          ...arrows,
-          <ScrollDown key={cnt + 1} top_={cnt * 700 + 700} />,
-        ];
+        const newArr = [...arrows,<ScrollDown key={cnt+1} top_={cnt * 700 + 700} />];
         setArrows(newArr);
       }
     }
   }, [backgroundHeight]);
 
   const pageEnd = useRef(null);
-  //ê°€ì¥ ì•„ë˜ì— ë‹¿ìœ¼ë©´ ë°ì´í„°ë¥¼ 10ê°œì”© ë” ê°€ì ¸ì˜¨ë‹¤.
+  //°¡Àå ¾Æ·¡¿¡ ´êÀ¸¸é µ¥ÀÌÅÍ¸¦ 10°³¾¿ ´õ °¡Á®¿Â´Ù.
 
   useEffect(() => {
     if (pageEnd.current) {
@@ -167,36 +164,39 @@ const Gallery = ({ takePhoto, onClick }) => {
   // ]);
 
   const getMorePhotos = useCallback(async () => {
-    //10ê°œì”© ì‚¬ì§„ ê°€ì ¸ì˜¤ê¸°.
+    //10°³¾¿ »çÁø °¡Á®¿À±â.
     console.log("getmorePhotos");
     const queryTemp = query(
       collection(db, "Photos"),
-      where("id", ">", curTimeStamp),
+      where("id", "<", curTimeStamp),
       limit(10)
     );
     setIsLoading(true);
     const dataSnapShot = await getDocs(queryTemp);
-    console.log("ì‚¬ì§„ ë¶ˆëŸ¬ì˜¤ê¸°");
-    const length = dataSnapShot.length;
-    const dataList = dataSnapShot.docs.map((doc) => doc.data());
+    console.log("»çÁø ºÒ·¯¿À±â");
+    const unsortedDataList = dataSnapShot.docs.map((doc) => doc.data());
+    const length = unsortedDataList.length;
+    const dataList = unsortedDataList.sort((a,b)=>{return b.id-a.id}); //¿ª½Ã°£¼ø Á¤·Ä
+    console.log(length);
     if (length) {
-      setCurTimeStamp(dataList[length - 1].id); //ê°€ì ¸ì˜¨ ë§ˆì§€ë§‰ ë°ì´í„°ì˜ TimeStampë¥¼ ì €ì¥
-      setPhotos((prev) => [...prev, ...dataList]);
+      setCurTimeStamp(dataList[length - 1].id); //°¡Á®¿Â ¸¶Áö¸· µ¥ÀÌÅÍÀÇ TimeStamp¸¦ ÀúÀå
+      setPhotos((prev) => [ ...dataList,...prev]);
     } else {
       setEndOfData(true);
     }
     setIsLoading(false);
     setPhotos(dataList);
-  }, [curTimeStamp, photos]);
+  },[curTimeStamp,photos]);
 
-  // const getMorePhotos = () => console.log('ì‚¬ì§„ ê°€ì ¸ì˜¤ê¸°');
 
-  //ì²˜ìŒ ì‹¤í–‰ ì‹œ ì‚¬ì§„ ê°€ì ¸ì˜¤ê¸°
-  // useEffect(()=>{
-  //     console.log('ì²˜ìŒ ì‚¬ì§„ ê°€ì ¸ì˜¤ê¸°');
-  //     getMorePhotos();
-  //     }
-  // ,[]);
+
+//   Ã³À½ ½ÇÇà ½Ã »çÁø °¡Á®¿À±â
+  useEffect(()=>{
+      console.log('Ã³À½ »çÁø °¡Á®¿À±â');
+      getMorePhotos();
+      console.log(endOfData);
+      }
+  ,[]);
 
   return (
     <>
