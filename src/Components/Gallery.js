@@ -12,11 +12,12 @@ import {
   query,
   where,
   limit,
+  orderBy
 } from "firebase/firestore/lite";
 
 const Gallery = ({ takePhoto, onClick }) => {
   //이 Timestamp 이전의 사진들은 모두 로드됨.
-  const [curTimeStamp, setCurTimeStamp] = useState(new Date().getTime());
+  const [curTimeStamp, setCurTimeStamp] = useState(new Date().getTime()%100000000);
   //더 이상 불러올 데이터가 없는지
   const [endOfData, setEndOfData] = useState(false);
   //데이터 로딩중
@@ -61,104 +62,8 @@ const Gallery = ({ takePhoto, onClick }) => {
     };
     const observer = new IntersectionObserver(onIntersect, { threshold: 1 });
 
-  const [photos, setPhotos] = useState([
-    {
-      imageurl: "a",
-      vidConfig: 0,
-    },
-    {
-      imageurl: "a",
-      vidConfig: 1,
-    },
-    {
-      imageurl: "blank",
-      vidConfig: 0,
-    },
-    {
-      imageurl: "a",
-      vidConfig: 0,
-    },
-    {
-      imageurl: "blank",
-      vidConfig: 1,
-    },
-    {
-      imageurl: "a",
-      vidConfig: 2,
-    },
-    {
-      imageurl: "a",
-      vidConfig: 2,
-    },
-    {
-      imageurl: "a",
-      vidConfig: 2,
-    },
-    {
-      imageurl: "blank",
-      vidConfig: 2,
-    },
-    {
-      imageurl: "a",
-      vidConfig: 2,
-    },
-    {
-      imageurl: "blank",
-      vidConfig: 0,
-    },
-    {
-      imageurl: "a",
-      vidConfig: 1,
-    },
-    {
-      imageurl: "blank",
-      vidConfig: 0,
-    },
-    {
-      imageurl: "blank",
-      vidConfig: 1,
-    },
-    {
-      imageurl: "a",
-      vidConfig: 2,
-    },
-    {
-      imageurl: "blank",
-      vidConfig: 2,
-    },
-    {
-      imageurl: "a",
-      vidConfig: 0,
-    },
-  ]);
+  const [photos, setPhotos] = useState([]);
 
-  //   const [photos,setPhotos] = useState([{
-  //     imageurl:"a",
-  //     vidConfig:0
-  // },
-  // {
-  //   imageurl: "a",
-  //   vidConfig: 1,
-  // },
-  // {
-  //     imageurl: 'blank',
-  //     vidConfig: 0,
-  //   },
-  //   {
-  //     imageurl: "a",
-  //     vidConfig: 0,
-  //   },
-
-  //   {
-  //     imageurl: "a",
-  //     vidConfig: 1,
-  //   },
-
-  //   {
-  //     imageurl: 'a',
-  //     vidConfig: 0,
-  //   },
-  // ]);
 
   const getMorePhotos = useCallback(async () => {
     //10개씩 사진 가져오기.
@@ -166,6 +71,7 @@ const Gallery = ({ takePhoto, onClick }) => {
     const queryTemp = query(
       collection(db, "Photos"),
       where("id", "<", curTimeStamp),
+      orderBy("id","desc"),
       limit(10)
     );
     setIsLoading(true);
@@ -174,9 +80,10 @@ const Gallery = ({ takePhoto, onClick }) => {
     const unsortedDataList = dataSnapShot.docs.map((doc) => doc.data());
     const length = unsortedDataList.length;
     const dataList = unsortedDataList.sort((a,b)=>{return b.id-a.id}); //역시간순 정렬
-    console.log(length);
+    console.log(unsortedDataList);
+    // console.log(length);
     if (length) {
-      setCurTimeStamp(dataList[length - 1].id); //가져온 마지막 데이터의 TimeStamp를 저장
+      setCurTimeStamp(dataList[length-1].id); //가져온 마지막 데이터의 TimeStamp를 저장
       setPhotos((prev) => [ ...dataList,...prev]);
     } else {
       setEndOfData(true);
@@ -191,10 +98,11 @@ const Gallery = ({ takePhoto, onClick }) => {
   useEffect(()=>{
       console.log('처음 사진 가져오기');
       getMorePhotos();
-      console.log(endOfData);
       }
   ,[]);
-
+      useEffect(()=>{
+        console.log(curTimeStamp);
+      },[curTimeStamp]);
 
 
 
@@ -204,7 +112,7 @@ const Gallery = ({ takePhoto, onClick }) => {
       <div className={styles.background} ref={background}>
         <div className={styles.albumContainer}>
           {photos.map((data, index) => {
-            if (data.imageurl === "blank") {
+            if (data.url === "blank") {
               return <BlankAlbum key={index} />;
             } else {
               return <Album key={index} data={data} />;

@@ -46,6 +46,7 @@ const Modal = ({ photoList, onClick }) => {
     const id = new Date().getTime();
     const timestamp = serverTimestamp();
     const newPhoto = {
+      id: id % 100000000,
       url: "blank",
       timestamp: timestamp,
     };
