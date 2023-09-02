@@ -96,7 +96,7 @@
 }
 .animation.shooting {
   background-color: black;
-  animation: flash 2s forwards;
+  animation: 2s flash forwards;
 }
 @keyframes flash {
   from {

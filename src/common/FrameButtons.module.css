@@ -27,14 +27,20 @@
     "skin3 skin4"
     "move move";
 }
-.container.done {
+.container.beforePhoto {
   grid-template-rows: 15vh 48vh 15vh;
   grid-template-areas:
     "header header"
     "img img"
     "move move";
 }
-
+.container.afterPhoto {
+  grid-template-rows: 15vh 48vh 15vh;
+  grid-template-areas:
+    "header header"
+    "img img"
+    "again save";
+}
 .text {
   width: 100%;
   font-family: "cocogoose";
@@ -143,4 +149,20 @@
   border-radius: 50%;
   right: -50px;
   top: -50px;
+}
+
+.lastbtn {
+  width: 360px;
+  height: 160px;
+  padding: 0;
+
+  justify-self: center;
+  align-self: center;
+  cursor: pointer;
+}
+.lastbtn.again {
+  grid-area: again;
+}
+.lastbtn.save {
+  grid-area: save;
 }

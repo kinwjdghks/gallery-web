@@ -8,27 +8,34 @@ const FrameButtons = ({
   clicked,
   isLoading,
   imgfile,
+  photoTaken,
   onTakePhoto,
   onSavePhoto,
+  onDeletePhoto,
   onClick,
 }) => {
-  const [frameSelected, SetFrameSelected] = useState(false);
-  const [skinSelected, SetSkinSelected] = useState(false);
-  const [PhotoTaken, SetPhotoTaken] = useState(false);
+  const [frameSelected, setFrameSelected] = useState(false);
+  const [skinSelected, setSkinSelected] = useState(false);
 
   const clickHandler = () => {
     if (!frameSelected) {
-      SetFrameSelected(true);
+      setFrameSelected(true);
     } else {
-      SetSkinSelected(true);
+      setSkinSelected(true);
     }
   };
-
+  const againHandler = () => {
+    setFrameSelected(false);
+    setSkinSelected(false);
+    onDeletePhoto();
+  };
   const classNameByConfig = !frameSelected
     ? styles.frame
     : !skinSelected
     ? styles.skin
-    : styles.done;
+    : !photoTaken
+    ? styles.beforePhoto
+    : styles.afterPhoto;
 
   return (
     <div className={`${styles.container} ${classNameByConfig}`}>
@@ -56,7 +63,7 @@ const FrameButtons = ({
           onClick={() => clicked(2)}
         />
       )}
-
+      {/* skin */}
       {frameSelected && !skinSelected && (
         <button className={`${styles.skinbtn} ${styles.skin1}`}>A</button>
       )}
@@ -78,14 +85,37 @@ const FrameButtons = ({
         />
       ) : (
         /*Take Photo*/
-        !isLoading &&
-        !imgfile && (
+        !(photoTaken || imgfile) && (
           <button
             className={`${styles.movebtn} ${styles.takePhoto}`}
             onClick={onTakePhoto}
           />
         )
       )}
+      {skinSelected && imgfile && (
+        <button
+          className={`${styles.lastbtn} ${styles.again}`}
+          onClick={againHandler}
+        >
+          again
+        </button>
+      )}
+      {skinSelected && imgfile && (
+        <button
+          className={`${styles.lastbtn} ${styles.save}`}
+          onClick={onSavePhoto}
+        >
+          save
+        </button>
+      )}
+
+      {/* !isLoading &&
+        !imgfile && (
+          <button
+            className={`${styles.movebtn} ${styles.takePhoto}`}
+            onClick={onTakePhoto}
+          />
+        ) */}
 
       {/* {!isLoading && !imgfile && (
         <button
@@ -96,16 +126,7 @@ const FrameButtons = ({
           Take Picture
         </button>
       )} */}
-      {imgfile && (
-        <button
-          className={`${styles.framebtn} ${styles.next}`}
-          // onClick={onSavePhoto}
-          onClick={onClick}
-        >
-          {" "}
-          처음으로
-        </button>
-      )}
+
       <button
         className={`${styles.framebtn} ${styles.close}`}
         onClick={onClick}
