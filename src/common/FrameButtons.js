@@ -3,31 +3,40 @@ import { React, useState } from "react";
 
 //css
 import styles from "./FrameButtons.module.css";
+import ThumbImage from "../assets/Images/thumb.png";
 
 const FrameButtons = ({
   clicked,
   isLoading,
   imgfile,
+  photoTaken,
   onTakePhoto,
   onSavePhoto,
+  onDeletePhoto,
   onClick,
 }) => {
-  const [frameSelected, SetFrameSelected] = useState(false);
-  const [skinSelected, SetSkinSelected] = useState(false);
+  const [frameSelected, setFrameSelected] = useState(false);
+  const [skinSelected, setSkinSelected] = useState(false);
 
   const clickHandler = () => {
     if (!frameSelected) {
-      SetFrameSelected(true);
+      setFrameSelected(true);
     } else {
-      SetSkinSelected(true);
+      setSkinSelected(true);
     }
   };
-
+  const againHandler = () => {
+    setFrameSelected(false);
+    setSkinSelected(false);
+    onDeletePhoto();
+  };
   const classNameByConfig = !frameSelected
     ? styles.frame
     : !skinSelected
     ? styles.skin
-    : styles.done;
+    : !photoTaken
+    ? styles.beforePhoto
+    : styles.afterPhoto;
 
   return (
     <div className={`${styles.container} ${classNameByConfig}`}>
@@ -40,28 +49,22 @@ const FrameButtons = ({
         <button
           className={`${styles.framebtn} ${styles.square}`}
           onClick={() => clicked(0)}
-        >
-          1:1
-        </button>
+        />
       )}
 
       {!frameSelected && (
         <button
           className={`${styles.framebtn} ${styles.vertical}`}
           onClick={() => clicked(1)}
-        >
-          3:4
-        </button>
+        />
       )}
       {!frameSelected && (
         <button
           className={`${styles.framebtn} ${styles.horizontal}`}
           onClick={() => clicked(2)}
-        >
-          4:3
-        </button>
+        />
       )}
-
+      {/* skin */}
       {frameSelected && !skinSelected && (
         <button className={`${styles.skinbtn} ${styles.skin1}`}>A</button>
       )}
@@ -74,25 +77,56 @@ const FrameButtons = ({
       {frameSelected && !skinSelected && (
         <button className={`${styles.skinbtn} ${styles.skin4}`}>D</button>
       )}
-
+      {frameSelected && skinSelected && (
+        <img
+          src={ThumbImage}
+          alt="ThumbImage"
+          style={{
+            gridArea: "img",
+            justifySelf: "center",
+            alignSelf: "center",
+          }}
+        />
+      )}
+      {/* Next */}
       {!frameSelected || !skinSelected ? (
         <button
-          className={`${styles.framebtn} ${styles.next}`}
+          className={`${styles.movebtn} ${styles.nextbtn}`}
           onClick={clickHandler}
-        >
-          Next
-        </button>
+        />
       ) : (
-        !isLoading &&
-        !imgfile && (
+        /*Take Photo*/
+        !(photoTaken || imgfile) && (
           <button
-            className={`${styles.framebtn} ${styles.next}`}
+            className={`${styles.movebtn} ${styles.takePhoto}`}
             onClick={onTakePhoto}
-          >
-            Take Picture
-          </button>
+          />
         )
       )}
+      {skinSelected && imgfile && (
+        <button
+          className={`${styles.lastbtn} ${styles.again}`}
+          onClick={againHandler}
+        >
+          again
+        </button>
+      )}
+      {skinSelected && imgfile && (
+        <button
+          className={`${styles.lastbtn} ${styles.save}`}
+          onClick={onSavePhoto}
+        >
+          save
+        </button>
+      )}
+
+      {/* !isLoading &&
+        !imgfile && (
+          <button
+            className={`${styles.movebtn} ${styles.takePhoto}`}
+            onClick={onTakePhoto}
+          />
+        ) */}
 
       {/* {!isLoading && !imgfile && (
         <button
@@ -103,16 +137,7 @@ const FrameButtons = ({
           Take Picture
         </button>
       )} */}
-      {imgfile && (
-        <button
-          className={`${styles.framebtn} ${styles.next}`}
-          // onClick={onSavePhoto}
-          onClick={onClick}
-        >
-          {" "}
-          처음으로
-        </button>
-      )}
+
       <button
         className={`${styles.framebtn} ${styles.close}`}
         onClick={onClick}

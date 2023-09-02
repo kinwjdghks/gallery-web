@@ -23,7 +23,7 @@ import {
 import FrameButtons from "../common/FrameButtons";
 //sound
 import EffectSound from "../common/EffectSound";
-import effect from "../assets/sounds/button-sound.mp3";
+import effect from "../assets/sounds/camera-shutter.wav";
 
 const BackDrop = () => {
   return <div className={styles.backdrop}></div>;
@@ -35,6 +35,7 @@ const Modal = ({ photoList, onClick }) => {
   const [imgurl, setImgurl] = useState("");
   const [imgfile, setImgfile] = useState(null);
   const [imgpreview, setImgpreview] = useState(null);
+  const [photoTaken, setPhotoTaken] = useState(false);
   //sound
   const es = EffectSound(effect, 1);
   const playES = () => {
@@ -101,7 +102,9 @@ const Modal = ({ photoList, onClick }) => {
     (time) => {
       let cnt = time;
       const timer = setInterval(() => {
+        console.log(cnt);
         if (cnt > 0) {
+          console.log("count exectued");
           setPhotoAnimation(
             <div
               className={`${styles.animation} ${styles.counting}`}
@@ -111,6 +114,7 @@ const Modal = ({ photoList, onClick }) => {
           );
           cnt--;
         } else {
+          console.log("flash exectued");
           setPhotoAnimation(
             <div
               className={`${styles.animation} ${styles.shooting}`}
@@ -168,13 +172,15 @@ const Modal = ({ photoList, onClick }) => {
 
   const takePhoto = useCallback(
     (e) => {
+      setPhotoTaken(true);
       e.preventDefault();
       animation(5);
-      setTimeout(() => {
+      const timer = setTimeout(() => {
         const imageSrc = webcamRef.current.getScreenshot();
         setImgfile(imageSrc);
         playES();
       }, 6000);
+      return () => clearTimeout(timer);
     },
     [webcamRef, animation]
   );
@@ -218,8 +224,10 @@ const Modal = ({ photoList, onClick }) => {
           clicked={clickHandler}
           isLoading={isLoading}
           imgfile={imgfile}
+          photoTaken={photoTaken}
           onTakePhoto={takePhoto}
           onSavePhoto={savePhoto}
+          onDeletePhoto={deletePhoto}
           onClick={onClick}
         />
       </div>
