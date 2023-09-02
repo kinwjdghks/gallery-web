@@ -86,6 +86,13 @@ const Modal = ({ photoList, onClick }) => {
     }
   }, [imgfile]);
 
+  useEffect(() => {
+    console.log("useEffect Outside Executed");
+    if (imgurl != "") {
+      console.log("useEffect Inside Executed");
+      saveToFireStore();
+    }
+  }, [imgurl]);
   const webcamRef = useRef(null);
 
   const vidConfigList = [
@@ -129,11 +136,8 @@ const Modal = ({ photoList, onClick }) => {
     [vidConfigIdx, vidConfigList]
   );
 
-  const saveToFirebaseStorage = async (file) => {
+  const saveToFirebaseStorage = async (file, callback) => {
     const id = new Date().getTime();
-    const metaData = {
-      contentType: "image/jpeg",
-    };
     const storageRef = sRef(storage, "Images/" + id);
     console.log("Executed");
     try {
@@ -141,15 +145,16 @@ const Modal = ({ photoList, onClick }) => {
       const upload = await uploadString(storageRef, file, "data_url");
       // console.log(upload)
       const geturl = await getDownloadURL(sRef(storage, storageRef));
+      callback(geturl);
       console.log(geturl);
-      setImgurl(geturl);
+      setImgurl(geturl); //미리보기용
     } catch (error) {
       console.log(error);
     }
     setIsLoading(false);
   };
 
-  const saveToFireStore = async () => {
+  const saveToFireStore = async (imgurl) => {
     let id = new Date().getTime();
     const timestamp = serverTimestamp();
     const newPhoto = {
@@ -157,6 +162,7 @@ const Modal = ({ photoList, onClick }) => {
       url: imgurl,
       timestamp: timestamp,
     };
+    console.log(newPhoto);
     try {
       const photos = collection(db, "Photos");
       const response = await setDoc(doc(photos, `${id}`), newPhoto);
@@ -186,8 +192,7 @@ const Modal = ({ photoList, onClick }) => {
   );
   const savePhoto = () => {
     console.log("savePhoto executed");
-    saveToFirebaseStorage(imgfile);
-    saveToFireStore();
+    saveToFirebaseStorage(imgfile, saveToFireStore);
     setBlankBuffer((prev) => prev--);
     onClick();
   };
