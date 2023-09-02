@@ -1,14 +1,21 @@
-.header {
-  height: 165px;
+/* .headerContainer{
+  height: calc(165px+ 165px);
+  top:-165px;
   width: 100vw;
-  z-index: 1;
-  background-color: #e0e0e0;
-}
-.header.fixed {
   position: fixed;
-  top: 0;
-  left: 0;
+  left:0;
+  z-index:1;
+} */
+.header {
+  height: 175px;
+  width: 100vw;
+  z-index: 2;
+  background-color: #e0e0e0;
+  position: fixed;
+  left:0;
+  top: 0px;
 }
+
 
 .logo {
   float: right;
@@ -26,14 +33,14 @@
     cursor: pointer;
     background-color: #603EBB;
     color: white;
-    margin-top: calc(165px - 74px - 10px);
+    margin-top: calc(175px - 80px);
     margin-right: -70px;
   }
 
 .comitPhoto{
       font-family: 'cocogoose';
       font-weight: 900;
-      font-size: 70px;
+      font-size: 80px;
       line-height: normal;
       display: inline-block;
       margin-left:calc(50% - 737.5px);

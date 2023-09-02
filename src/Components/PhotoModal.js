@@ -21,7 +21,7 @@ import {
 } from "firebase/firestore/lite";
 //Components
 import FrameButtons from "../common/FrameButtons";
-//sound
+//sounds
 import EffectSound from "../common/EffectSound";
 import effect from "../assets/sounds/camera-shutter.wav";
 
@@ -30,8 +30,7 @@ const BackDrop = () => {
 };
 
 const Modal = ({ photoList, onClick }) => {
-  //ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
-  const [imgcnt, setImgcnt] = useState(0);
+  const [blankBuffer, setBlankBuffer] = useState(Math.floor(Math.random()*4)); //·£´ý Á¤¼ö¸¶´Ù BlankAlbum »ý¼ºÇÏ±â
   const [isLoading, setIsLoading] = useState(false);
   const [imgurl, setImgurl] = useState("");
   const [imgfile, setImgfile] = useState(null);
@@ -42,10 +41,35 @@ const Modal = ({ photoList, onClick }) => {
   const playES = () => {
     es.play();
   };
-  useEffect(() => {
+  //·£´ýÁ¤¼ö ¸ðµÎ Â÷°¨ ½Ã ºó image°´Ã¼ º¸³»±â
+  const createBlankAlbum = useCallback(async () =>{
+    const id = new Date().getTime();
+    const timestamp = serverTimestamp();
+    const newPhoto = {
+      url: 'blank',
+      timestamp: timestamp,
+    };
+    try {
+      const photos = collection(db, "Photos");
+      const response = await setDoc(doc(photos, `${id}`), newPhoto);
+    } catch (error) {
+      console.log(error);
+      return;
+    }
+    console.log("Blank Album ¸¸µé¾îÁü");
+  },[]);
+
+  useEffect(()=>{
+    if(blankBuffer===0){
+      createBlankAlbum();
+      setBlankBuffer(Math.floor(Math.random()*4));
+    }
+  },[blankBuffer]);
+
+  //»çÁø ÃÔ¿µ ÈÄ preview ÀÌ¹ÌÁö ¶ç¿ì±â
+  useEffect(() => { 
     if (imgfile) {
-      setImgpreview(
-        <img
+      setImgpreview(<img
           className={styles.imgpreview}
           style={{
             height: vidConfigList[vidConfigIdx].height,
@@ -61,7 +85,6 @@ const Modal = ({ photoList, onClick }) => {
     }
   }, [imgfile]);
 
-  //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È­ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ State/refs
 
   const webcamRef = useRef(null);
 
@@ -82,11 +105,11 @@ const Modal = ({ photoList, onClick }) => {
       const timer = setInterval(() => {
         console.log(cnt);
         if (cnt > 0) {
+          console.log("count executed");
           setPhotoAnimation(
             <div
               className={`${styles.animation} ${styles.counting}`}
-              style={{ height: curHeight, width: curWidth }}
-            >
+              style={{ height: curHeight, width: curWidth }}>
               {cnt}
             </div>
           );
@@ -95,8 +118,7 @@ const Modal = ({ photoList, onClick }) => {
           setPhotoAnimation(
             <div
               className={`${styles.animation} ${styles.shooting}`}
-              style={{ height: curHeight, width: curWidth }}
-            ></div>
+              style={{ height: curHeight, width: curWidth }}></div>
           );
           clearInterval(timer);
         }
@@ -117,21 +139,19 @@ const Modal = ({ photoList, onClick }) => {
       const upload = await uploadString(storageRef, file, "data_url");
       // console.log(upload)
       const geturl = await getDownloadURL(sRef(storage, storageRef));
-      console.log("geturl");
-      setImgurl(geturl.toString());
+      console.log(geturl);
+      setImgurl(geturl);
     } catch (error) {
       console.log(error);
     }
-    // console.log(imgurl);
     setIsLoading(false);
   };
 
   const saveToFireStore = async () => {
-    console.log("FirstStore Saving");
-    console.log(imgurl);
-    const id = new Date().getTime();
+    let id = new Date().getTime();
     const timestamp = serverTimestamp();
     const newPhoto = {
+      id:+id,
       url: imgurl,
       timestamp: timestamp,
     };
@@ -143,7 +163,7 @@ const Modal = ({ photoList, onClick }) => {
       return;
     }
 
-    setImgcnt((prev) => prev + 1);
+    console.log("»çÁø firebase¿¡ Àü¼ÛµÊ");
   };
 
   const storage = getStorage();
@@ -163,11 +183,13 @@ const Modal = ({ photoList, onClick }) => {
     [webcamRef, animation]
   );
   const savePhoto = () => {
-    saveToFirebaseStorage(imgfile); //image -> Storage, need throttling
+    console.log('savePhoto ½ÇÇàµÊ');
+    saveToFirebaseStorage(imgfile);
     saveToFireStore();
-    onClick();
+    setBlankBuffer((prev)=>prev--);
   };
-  const deletePhoto = () => {
+
+  const deletePhoto = ()=>{
     setPhotoTaken(false);
     setImgfile(null);
   };

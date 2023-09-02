@@ -44,6 +44,7 @@
 .text {
   width: 100%;
   font-family: "cocogoose";
+  font-weight: 900;
   font-size: 70px;
   grid-area: header;
   font-weight: 900;
