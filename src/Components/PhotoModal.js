@@ -42,9 +42,10 @@ const Modal = ({ photoList, onClick }) => {
     es.play();
   };
   const createBlankAlbum = useCallback(async () => {
-    const id = new Date().getTime();
+    const id = new Date().getTime() / 100000000;
     const timestamp = serverTimestamp();
     const newPhoto = {
+      id: id,
       url: "blank",
       timestamp: timestamp,
     };

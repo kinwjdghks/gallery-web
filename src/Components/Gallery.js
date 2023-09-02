@@ -12,40 +12,46 @@ import {
   query,
   where,
   limit,
+  orderBy,
 } from "firebase/firestore/lite";
 
 const Gallery = ({ takePhoto, onClick }) => {
-  //ÀÌ Timestamp ÀÌÀüÀÇ »çÁøµéÀº ¸ğµÎ ·ÎµåµÊ.
-  const [curTimeStamp, setCurTimeStamp] = useState(new Date().getTime());
-  //´õ ÀÌ»ó ºÒ·¯¿Ã µ¥ÀÌÅÍ°¡ ¾ø´ÂÁö
+  //ì´ Timestamp ì´ì „ì˜ ì‚¬ì§„ë“¤ì€ ëª¨ë‘ ë¡œë“œë¨.
+  const [curTimeStamp, setCurTimeStamp] = useState(
+    new Date().getTime() / 100000000
+  );
+  //ë” ì´ìƒ ë¶ˆëŸ¬ì˜¬ ë°ì´í„°ê°€ ì—†ëŠ”ì§€
   const [endOfData, setEndOfData] = useState(false);
-  //µ¥ÀÌÅÍ ·ÎµùÁß
+  //ë°ì´í„° ë¡œë”©ì¤‘
   const [isLoading, setIsLoading] = useState(false);
   const [backgroundHeight, setBackgroundHeight] = useState(0);
-  // <ScrollDown/> °³¼ö
+  // <ScrollDown/> ê°œìˆ˜
   const [arrows, setArrows] = useState([<ScrollDown key={0} top_={900} />]);
 
   const background = useRef(null);
   // useEffect(()=>console.log(backgroundHeight),[backgroundHeight]);
-  //»õ·Î µ¥ÀÌÅÍ°¡ ·ÎµùµÉ¶§¸¶´Ù background ³ôÀÌ ¾÷µ¥ÀÌÆ®ÇÏ±â
+  //ìƒˆë¡œ ë°ì´í„°ê°€ ë¡œë”©ë ë•Œë§ˆë‹¤ background ë†’ì´ ì—…ë°ì´íŠ¸í•˜ê¸°
   useEffect(() => {
     if (background.current) {
       setBackgroundHeight(background.current.getBoundingClientRect().height);
     }
   }, [isLoading]);
-  //ÀÏÁ¤ ³ôÀÌ¿¡ µµ´ŞÇÒ ¶§¸¶´Ù <ScrollDown /> Ãß°¡ÇÏ±â
+  //ì¼ì • ë†’ì´ì— ë„ë‹¬í•  ë•Œë§ˆë‹¤ <ScrollDown /> ì¶”ê°€í•˜ê¸°
   useEffect(() => {
     if (background.current) {
       const cnt = arrows.length;
       if (280 + (cnt + 1) * 700 < backgroundHeight) {
-        const newArr = [...arrows,<ScrollDown key={cnt+1} top_={cnt * 700 + 700} />];
+        const newArr = [
+          ...arrows,
+          <ScrollDown key={cnt + 1} top_={cnt * 700 + 700} />,
+        ];
         setArrows(newArr);
       }
     }
   }, [backgroundHeight]);
 
   const pageEnd = useRef(null);
-  //°¡Àå ¾Æ·¡¿¡ ´êÀ¸¸é µ¥ÀÌÅÍ¸¦ 10°³¾¿ ´õ °¡Á®¿Â´Ù.
+  //ê°€ì¥ ì•„ë˜ì— ë‹¿ìœ¼ë©´ ë°ì´í„°ë¥¼ 10ê°œì”© ë” ê°€ì ¸ì˜¨ë‹¤.
 
   useEffect(() => {
     if (pageEnd.current) {
@@ -164,39 +170,44 @@ const Gallery = ({ takePhoto, onClick }) => {
   // ]);
 
   const getMorePhotos = useCallback(async () => {
-    //10°³¾¿ »çÁø °¡Á®¿À±â.
+    //10ê°œì”© ì‚¬ì§„ ê°€ì ¸ì˜¤ê¸°.
     console.log("getmorePhotos");
     const queryTemp = query(
       collection(db, "Photos"),
+      orderBy("id", "desc"),
       where("id", "<", curTimeStamp),
       limit(10)
     );
     setIsLoading(true);
     const dataSnapShot = await getDocs(queryTemp);
-    console.log("»çÁø ºÒ·¯¿À±â");
+    console.log("ì‚¬ì§„ ë¶ˆëŸ¬ì˜¤ê¸°");
     const unsortedDataList = dataSnapShot.docs.map((doc) => doc.data());
     const length = unsortedDataList.length;
-    const dataList = unsortedDataList.sort((a,b)=>{return b.id-a.id}); //¿ª½Ã°£¼ø Á¤·Ä
-    console.log(length);
+    const dataList = unsortedDataList.sort((a, b) => {
+      return b.id - a.id;
+    }); //ì—­ì‹œê°„ìˆœ ì •ë ¬
+    console.log(unsortedDataList);
+    console.log(dataList);
+    // console.log(length);
     if (length) {
-      setCurTimeStamp(dataList[length - 1].id); //°¡Á®¿Â ¸¶Áö¸· µ¥ÀÌÅÍÀÇ TimeStamp¸¦ ÀúÀå
-      setPhotos((prev) => [ ...dataList,...prev]);
+      setCurTimeStamp(dataList[length - 1].id); //ê°€ì ¸ì˜¨ ë§ˆì§€ë§‰ ë°ì´í„°ì˜ TimeStampë¥¼ ì €ì¥
+      setPhotos((prev) => [...dataList, ...prev]);
     } else {
       setEndOfData(true);
     }
     setIsLoading(false);
     setPhotos(dataList);
-  },[curTimeStamp,photos]);
+  }, [curTimeStamp, photos]);
 
-
-
-//   Ã³À½ ½ÇÇà ½Ã »çÁø °¡Á®¿À±â
-  useEffect(()=>{
-      console.log('Ã³À½ »çÁø °¡Á®¿À±â');
-      getMorePhotos();
-      console.log(endOfData);
-      }
-  ,[]);
+  //   ì²˜ìŒ ì‹¤í–‰ ì‹œ ì‚¬ì§„ ê°€ì ¸ì˜¤ê¸°
+  useEffect(() => {
+    console.log("ì²˜ìŒ ì‚¬ì§„ ê°€ì ¸ì˜¤ê¸°");
+    getMorePhotos();
+    console.log(endOfData);
+  }, []);
+  useEffect(() => {
+    console.log("CurTimeStamp :" + curTimeStamp);
+  }, [curTimeStamp]);
 
   return (
     <>
@@ -204,7 +215,7 @@ const Gallery = ({ takePhoto, onClick }) => {
       <div className={styles.background} ref={background}>
         <div className={styles.albumContainer}>
           {photos.map((data, index) => {
-            if (data.imageurl === "blank") {
+            if (data.url === "blank") {
               return <BlankAlbum key={index} />;
             } else {
               return <Album key={index} data={data} />;
