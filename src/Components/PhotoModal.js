@@ -29,10 +29,9 @@ const BackDrop = () => {
   return <div className={styles.backdrop}></div>;
 };
 
-const Modal = ({ photoList, onClick }) => {
+const Modal = ({ onClick }) => {
   const [blankBuffer, setBlankBuffer] = useState(Math.floor(Math.random() * 4)); //���� �������� BlankAlbum �����ϱ�
   const [isLoading, setIsLoading] = useState(false);
-  const [imgurl, setImgurl] = useState("");
   const [imgfile, setImgfile] = useState(null);
   const [imgpreview, setImgpreview] = useState(null);
   const [photoTaken, setPhotoTaken] = useState(false);
@@ -46,7 +45,7 @@ const Modal = ({ photoList, onClick }) => {
     const id = new Date().getTime()%100000000;
     const timestamp = serverTimestamp();
     const newPhoto = {
-      id: id,
+      id: +id,
       url: "blank",
       timestamp: timestamp,
     };
@@ -141,7 +140,6 @@ const Modal = ({ photoList, onClick }) => {
       const geturl = await getDownloadURL(sRef(storage, storageRef));
       saveToFireStore(geturl);
       console.log(geturl);
-      setImgurl(geturl); //미리보기용
     } catch (error) {
       console.log(error);
     }
@@ -152,7 +150,7 @@ const Modal = ({ photoList, onClick }) => {
     let id = new Date().getTime()%100000000;
     const timestamp = serverTimestamp();
     const newPhoto = {
-      id: id,
+      id: +id,
       url: imgurl,
       timestamp: timestamp,
       vidConfig: vidConfigIdx
@@ -184,10 +182,10 @@ const Modal = ({ photoList, onClick }) => {
     },
     [webcamRef, animation]
   );
-  const savePhoto = () => {
+  const savePhoto = async() => {
     console.log("savePhoto executed");
-    saveToFirebaseStorage(imgfile,saveToFireStore);
-    setBlankBuffer((prev) => prev--);
+    await saveToFirebaseStorage(imgfile,saveToFireStore);
+    setBlankBuffer((prev) => prev-1);
     onClick();
   };
 
@@ -239,7 +237,7 @@ const Modal = ({ photoList, onClick }) => {
   );
 };
 
-const PhotoModal = ({ photoList, onClick }) => {
+const PhotoModal = ({onClick }) => {
   return (
     <>
       {ReactDOM.createPortal(
@@ -247,7 +245,7 @@ const PhotoModal = ({ photoList, onClick }) => {
         document.getElementById("backdrop-root")
       )}
       {ReactDOM.createPortal(
-        <Modal photoList={photoList} onClick={onClick} />,
+        <Modal onClick={onClick} />,
         document.getElementById("PhotoModal-root")
       )}
     </>

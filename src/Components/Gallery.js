@@ -3,7 +3,7 @@ import PhotoModal from "./PhotoModal";
 import BlankAlbum from "./BlankAlbum";
 import Album from "./Album";
 import ScrollDown from "../common/ScrollDown";
-import { useState, useEffect, useRef, useCallback } from "react";
+import { useState, useEffect, useRef } from "react";
 
 import { db } from "../Utility/firebase";
 import {
@@ -16,9 +16,9 @@ import {
 } from "firebase/firestore/lite";
 
 const Gallery = ({ takePhoto, onClick }) => {
-    const [photos, setPhotos] = useState([]);
+  const [photos, setPhotos] = useState([]);
   //이 Timestamp 이전의 사진들은 모두 로드됨.
-  const [curTimeStamp, setCurTimeStamp] = useState(null);
+  let timeStamp = useRef(null);
   //더 이상 불러올 데이터가 없는지
   const [endOfData, setEndOfData] = useState(false);
   //데이터 로딩중
@@ -38,8 +38,8 @@ const Gallery = ({ takePhoto, onClick }) => {
   useEffect(() => {
     if (background.current) {
       const cnt = arrows.length;
-      if (280 + (cnt + 1) * 800 < backgroundHeight) {
-        const newArr = [...arrows,<ScrollDown key={cnt+1} top_={cnt * 800 + 700} />];
+      if ((cnt + 1) * 1000 < backgroundHeight) {
+        const newArr = [...arrows,<ScrollDown key={cnt+1} top_={cnt * 1000 + 700} />];
         setArrows(newArr);
       }
     }
@@ -56,24 +56,36 @@ const Gallery = ({ takePhoto, onClick }) => {
         if (entry.isIntersecting) {
             console.log('intersect');
             observer.unobserve(entry.target);
-            const response = await getMorePhotos();
+            const response = await getMorePhotos(updatePage);
             observer.observe(entry.target);
         }
     };
     const observer = new IntersectionObserver(onIntersect, { threshold: 0 });
 
   
+  const updatePage = (dataSnapShot, dataList) =>{
+      const length = dataList.length;
+      if (length) {
+        
+        timeStamp = dataSnapShot.docs[length-1];
+        setPhotos((prev) => [ ...prev,...dataList]);
+      } else {
+        setEndOfData(true);
+      }
+      setIsLoading(false);
+    };
 
-
-  const getMorePhotos = async () => {
+  const getMorePhotos = async (updatePage) => {
     //10개씩 사진 가져오기.
     console.log("사진 가져오기");
+    
     let queryTemp;
-    if(curTimeStamp){
+    console.log('timeStamp: '+timeStamp);
+    if(timeStamp){
         queryTemp = query(
           collection(db, "Photos"),
           orderBy("id","desc"),
-          startAfter(curTimeStamp),
+          startAfter(timeStamp),
           limit(10));
     }
     else{ //first query
@@ -86,38 +98,31 @@ const Gallery = ({ takePhoto, onClick }) => {
     setIsLoading(true);
     const dataSnapShot = await getDocs(queryTemp);
     const dataList = dataSnapShot.docs.map((doc) => doc.data());
-    const length = dataList.length;
-    // console.log(dataList);
-    console.log(dataSnapShot.docs[length-1].data());
-    if (length) {
-      const lastTimeStamp  = dataSnapShot.docs[length-1];
-      console.log('last: '+lastTimeStamp);
-      setCurTimeStamp(lastTimeStamp); //가져온 마지막 데이터의 TimeStamp를 저장
-      setPhotos((prev) => [ ...prev,...dataList]);
-    } else {
-      setEndOfData(true);
-    }
-    setIsLoading(false);
+
+    updatePage(dataSnapShot,dataList);
   };
+    
 
 
 
 //   처음 실행 시 사진 가져오기
   useEffect(()=>{
-      console.log('처음 사진 가져오기');
-      getMorePhotos();
-      window.scrollTo(0,0);
+      // console.log('처음 사진 가져오기');
+      window.scroll({
+        top: 0,
+        behavior: "instant",
+      });
+      getMorePhotos(updatePage);
     }
   ,[]);
-    // useEffect(()=>{
-    // console.log('curTimeStamp: '+curTimeStamp);
-    // },[curTimeStamp]);
-
-
+// 사진 찍고나면 갤러리 초기화하기
+    useEffect(()=>{
+      window.location.reload();
+    },[]);
 
   return (
     <>
-      {takePhoto && <PhotoModal photoList={photos} onClick={onClick} />}
+      {takePhoto && <PhotoModal onClick={onClick} />}
       <div className={styles.background} ref={background}>
         <div className={styles.albumContainer}>
           {photos.map((data, index) => {
