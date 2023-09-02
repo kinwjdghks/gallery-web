@@ -24,7 +24,6 @@ import FrameButtons from "../common/FrameButtons";
 //sounds
 import EffectSound from "../common/EffectSound";
 import effect from "../assets/sounds/camera-shutter.wav";
-import { reload } from "firebase/auth";
 
 const BackDrop = () => {
   return <div className={styles.backdrop}></div>;
@@ -153,7 +152,7 @@ const Modal = ({ photoList, onClick }) => {
       id: +id,
       url: imgurl,
       timestamp: timestamp,
-      vidconfig: vidConfigIdx,
+      vidConfig: vidConfigIdx
     };
     try {
       const photos = collection(db, "Photos");

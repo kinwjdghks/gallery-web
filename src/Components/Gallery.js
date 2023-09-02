@@ -9,26 +9,24 @@ import {
   collection,
   getDocs,
   query,
-  where,
   limit,
   orderBy,
-  startAfter,
+  startAfter
 } from "firebase/firestore/lite";
 
 const Gallery = ({ takePhoto, onClick }) => {
   let tempTimeStamp = useRef(null);
-  //이 Timestamp 이전의 사진들은 모두 로드됨.
+  //?? Timestamp ?????? ???????? ???? ?ε???.
   // const [curTimeStamp, setCurTimeStamp] = useState(null);
-  //더 이상 불러올 데이터가 없는지
+  //?? ??? ????? ??????? ??????
   const [endOfData, setEndOfData] = useState(false);
-  //데이터 로딩중
+  //?????? ?ε???
   const [isLoading, setIsLoading] = useState(false);
   const [backgroundHeight, setBackgroundHeight] = useState(0);
   // <ScrollDown/> 개수
   const [arrows, setArrows] = useState([<ScrollDown key={0} top_={900} />]);
 
   const background = useRef(null);
-  // useEffect(()=>console.log(backgroundHeight),[backgroundHeight]);
   //새로 데이터가 로딩될때마다 background 높이 업데이트하기
   useEffect(() => {
     if (background.current) {
@@ -39,25 +37,15 @@ const Gallery = ({ takePhoto, onClick }) => {
   useEffect(() => {
     if (background.current) {
       const cnt = arrows.length;
-      if (280 + (cnt + 1) * 700 < backgroundHeight) {
-        const newArr = [
-          ...arrows,
-          <ScrollDown key={cnt + 1} top_={cnt * 700 + 700} />,
-        ];
+      if (280 + (cnt + 1) * 800 < backgroundHeight) {
+        const newArr = [...arrows,<ScrollDown key={cnt+1} top_={cnt * 800 + 700} />];
         setArrows(newArr);
       }
     }
   }, [backgroundHeight]);
 
-  const pageEnd = useRef(null);
   //가장 아래에 닿으면 데이터를 10개씩 더 가져온다.
-
-  useEffect(() => {
-    if (pageEnd.current) {
-      console.log("executed");
-      observer.observe(pageEnd.current);
-    }
-  }, []);
+  const pageEnd = useRef(null);
 
   const onIntersect = async ([entry], observer) => {
     console.log("intersect");
@@ -72,7 +60,7 @@ const Gallery = ({ takePhoto, onClick }) => {
   const [photos, setPhotos] = useState([]);
 
   const getMorePhotos = async () => {
-    //10개씩 사진 가져오기.
+    //10???? ???? ????????.
     console.log("getmorePhotos");
     console.log("curTimeStamp");
     // console.log(curTimeStamp);
@@ -99,15 +87,10 @@ const Gallery = ({ takePhoto, onClick }) => {
     const dataSnapShot = await getDocs(queryTemp);
     const dataList = dataSnapShot.docs.map((doc) => doc.data());
     const length = dataList.length;
-    // console.log('unsorted: '+unsortedDataList);
-    // console.log(length);
-    console.log("dataList:");
-    console.log(dataList);
-    console.log(dataSnapShot.docs[length - 1].data());
     if (length) {
       console.log("Here");
       console.log(dataSnapShot.docs[length - 1].data().timestamp);
-      // setCurTimeStamp(dataSnapShot.docs[length - 1]); //가져온 마지막 데이터의 TimeStamp를 저장
+      // setCurTimeStamp(dataSnapShot.docs[length - 1]); //?????? ?????? ???????? TimeStamp?? ????
       tempTimeStamp = dataSnapShot.docs[length - 1];
 
       setPhotos((prev) => [...prev, ...dataList]);
@@ -115,9 +98,8 @@ const Gallery = ({ takePhoto, onClick }) => {
       setEndOfData(true);
     }
     setIsLoading(false);
-  };
 
-  //   처음 실행 시 사진 가져오기
+  //   o?? ???? ?? ???? ????????
   useEffect(() => {
     window.scroll({
       top: 0,
