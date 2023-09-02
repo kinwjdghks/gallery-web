@@ -2,11 +2,11 @@ import Gallery from "./Components/Gallery";
 import Header from "./Components/Header";
 import "./App.css";
 import PhotoModal from "./Components/PhotoModal";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 
 function App() {
   const [takePhoto, setTakePhoto] = useState(false);
-  const toggleModal = () => setTakePhoto((prev) => !prev);
+  const toggleModal = useCallback(() => setTakePhoto((prev) => !prev),[]);
   return (
     <>
       <Header onClick={toggleModal} />

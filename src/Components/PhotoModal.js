@@ -104,7 +104,7 @@ const Modal = ({ photoList, onClick }) => {
       const timer = setInterval(() => {
         console.log(cnt);
         if (cnt > 0) {
-          console.log("count exectued");
+          console.log("count executed");
           setPhotoAnimation(
             <div
               className={`${styles.animation} ${styles.counting}`}
@@ -114,7 +114,7 @@ const Modal = ({ photoList, onClick }) => {
           );
           cnt--;
         } else {
-          console.log("flash exectued");
+          console.log("flash executed");
           setPhotoAnimation(
             <div
               className={`${styles.animation} ${styles.shooting}`}
@@ -188,6 +188,11 @@ const Modal = ({ photoList, onClick }) => {
     saveToFirebaseStorage(imgfile); //image -> Storage, need throttling
     saveToFireStore();
     setBlankBuffer((prev)=>prev--);
+  };
+
+  const deletePhoto = ()=>{
+    setPhotoTaken(false);
+    setImgfile(null);
   };
 
   const classNameByConfig =
