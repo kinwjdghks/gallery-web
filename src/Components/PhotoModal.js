@@ -35,6 +35,7 @@ const Modal = ({ photoList, onClick }) => {
   const [imgfile, setImgfile] = useState(null);
   const [imgpreview, setImgpreview] = useState(null);
   const [photoTaken, setPhotoTaken] = useState(false);
+  const [blankBuffer, setBlankBuffer] = useState(Math.floor(Math.random() * 4));
   //sound
   const es = EffectSound(effect, 1);
   const playES = () => {
@@ -125,7 +126,7 @@ const Modal = ({ photoList, onClick }) => {
     [vidConfigIdx, vidConfigList]
   );
 
-  const saveToFirebaseStorage = async (file,saveToFireStore) => {
+  const saveToFirebaseStorage = async (file, saveToFireStore) => {
     const id = new Date().getTime();
     const storageRef = sRef(storage, "Images/" + id);
     console.log("saved to fireStorage");
@@ -150,7 +151,7 @@ const Modal = ({ photoList, onClick }) => {
       id: +id,
       url: imgurl,
       timestamp: timestamp,
-      vidconfig: vidConfigIdx
+      vidconfig: vidConfigIdx,
     };
     try {
       const photos = collection(db, "Photos");
@@ -169,19 +170,19 @@ const Modal = ({ photoList, onClick }) => {
     (e) => {
       setPhotoTaken(true);
       e.preventDefault();
-      animation(5);
+      animation(2);
       const timer = setTimeout(() => {
         const imageSrc = webcamRef.current.getScreenshot();
         setImgfile(imageSrc);
         playES();
-      }, 6000);
+      }, 2000);
       return () => clearTimeout(timer);
     },
     [webcamRef, animation]
   );
   const savePhoto = () => {
     console.log("savePhoto executed");
-    saveToFirebaseStorage(imgfile,saveToFireStore);
+    saveToFirebaseStorage(imgfile, saveToFireStore);
     setBlankBuffer((prev) => prev--);
     onClick();
   };
