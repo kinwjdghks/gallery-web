@@ -3,6 +3,7 @@ import { React, useState } from "react";
 
 //css
 import styles from "./FrameButtons.module.css";
+import ThumbImage from "../assets/Images/thumb.png";
 
 const FrameButtons = ({
   clicked,
@@ -76,7 +77,17 @@ const FrameButtons = ({
       {frameSelected && !skinSelected && (
         <button className={`${styles.skinbtn} ${styles.skin4}`}>D</button>
       )}
-
+      {frameSelected && skinSelected && (
+        <img
+          src={ThumbImage}
+          alt="ThumbImage"
+          style={{
+            gridArea: "img",
+            justifySelf: "center",
+            alignSelf: "center",
+          }}
+        />
+      )}
       {/* Next */}
       {!frameSelected || !skinSelected ? (
         <button

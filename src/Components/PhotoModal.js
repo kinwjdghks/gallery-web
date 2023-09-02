@@ -143,7 +143,6 @@ const Modal = ({ photoList, onClick }) => {
     }
 
     setImgcnt((prev) => prev + 1);
-    console.log("saved");
   };
 
   const storage = getStorage();
@@ -153,7 +152,6 @@ const Modal = ({ photoList, onClick }) => {
       setPhotoTaken(true);
       e.preventDefault();
       animation(5);
-      console.log("Exectued");
       const timer = setTimeout(() => {
         const imageSrc = webcamRef.current.getScreenshot();
         setImgfile(imageSrc);

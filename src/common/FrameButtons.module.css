@@ -142,27 +142,35 @@
   background: url("../assets/buttons/takePhoto-button.png") center
     center/contain no-repeat;
 }
-.framebtn.close {
+.close {
   position: absolute;
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  right: -50px;
-  top: -50px;
+  width: 60px;
+  height: 60px;
+  right: -35px;
+  top: -60px;
+
+  cursor: pointer;
+  background: url("../assets/buttons/close-modal.png") center center/contain
+    no-repeat;
 }
 
 .lastbtn {
-  width: 360px;
-  height: 160px;
+  width: 380px;
+  height: 180px;
   padding: 0;
 
-  justify-self: center;
   align-self: center;
   cursor: pointer;
+
+  position: relative;
 }
 .lastbtn.again {
   grid-area: again;
+  justify-self: end;
+  right: 10px;
 }
 .lastbtn.save {
   grid-area: save;
+  justify-self: start;
+  left: 10px;
 }
