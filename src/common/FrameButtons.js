@@ -107,17 +107,13 @@ const FrameButtons = ({
         <button
           className={`${styles.lastbtn} ${styles.again}`}
           onClick={againHandler}
-        >
-          again
-        </button>
+        />
       )}
       {skinSelected && imgfile && (
         <button
           className={`${styles.lastbtn} ${styles.save}`}
           onClick={onSavePhoto}
-        >
-          save
-        </button>
+        />
       )}
 
       {/* !isLoading &&
@@ -138,10 +134,7 @@ const FrameButtons = ({
         </button>
       )} */}
 
-      <button
-        className={`${styles.framebtn} ${styles.close}`}
-        onClick={onClick}
-      >
+      <button className={styles.close} onClick={onClick}>
         X
       </button>
     </div>

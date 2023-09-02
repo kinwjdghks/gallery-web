@@ -149,7 +149,7 @@
   height: 60px;
   right: -35px;
   top: -60px;
-
+  border: none;
   cursor: pointer;
   background: url("../assets/buttons/close-modal.png") center center/contain
     no-repeat;
@@ -159,7 +159,7 @@
   width: 380px;
   height: 180px;
   padding: 0;
-
+  border: none;
   align-self: center;
   cursor: pointer;
 
@@ -169,9 +169,13 @@
   grid-area: again;
   justify-self: end;
   right: 10px;
+  background: url("../assets/buttons/re-button.png") center center/contain
+    no-repeat;
 }
 .lastbtn.save {
   grid-area: save;
   justify-self: start;
   left: 10px;
+  background: url("../assets/buttons/save-button.png") center center/contain
+    no-repeat;
 }
