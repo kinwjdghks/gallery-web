@@ -34,6 +34,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  overflow: hidden;
 }
 .cam_container.opt1 {
   background: linear-gradient(#1f1f61 0%, #755d98 60%, #e0a6b2 100%);
@@ -45,8 +46,7 @@
   background-color: #044b2d;
 }
 .cam_container.opt4 {
-  /* 임시 */
-  background-color: white;
+  background-color: rgb(211, 211, 211);
 }
 .cam_mask {
   margin: 66.67px;
@@ -118,4 +118,26 @@
   top: 0;
   left: 0;
   z-index: 20;
+}
+.skinElement.design3.square{
+  top: 70px;
+}
+.skinElement.design3.vertical{
+  top: 389px;
+}
+.skinElement.design3.vertical{
+  top: 389px;
+}
+.skinElement.design3.horizontal{
+  top: 265px;
+  left: 37px;
+}
+.borderText p{
+  font-family: 'gangwonedu';
+  font-size: 30px;
+  position: absolute;
+}
+.up{
+  top:0;
+  left:400px;
 }
