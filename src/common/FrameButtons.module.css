@@ -105,13 +105,23 @@
 
 .skinbtn {
   width: 287px;
-  height: 287px;
+  height: 240px;
 
   justify-self: center;
   align-self: center;
 
   position: relative;
   cursor: pointer;
+
+  border-radius: 30px;
+  /* border: 10px solid #603EBB; */
+  border: none;
+  background-color: rgb(244, 244, 244);
+  font-family: 'maplestory';
+  font-weight: 900;
+  font-size: 120px;
+  -webkit-text-stroke: 10px #303030;
+  -webkit-text-fill-color: white;
 }
 .skinbtn.skin1 {
   justify-self: end;
