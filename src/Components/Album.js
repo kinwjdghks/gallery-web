@@ -10,6 +10,8 @@ import design2_vertical from "../assets/skins/design2_vertical.svg";
 import design3_square from "../assets/skins/design3_square.svg";
 import design3_vertical from "../assets/skins/design3_vertical.svg";
 import design3_horizontal from "../assets/skins/design3_horizontal.svg";
+import triangle from "../assets/Images/triangle.svg";
+import camera from "../assets/Images/camera.png";
 
 const Album = ({ data }) => {
   // const [skinElement,setSkinElement] = useState(null);
@@ -92,20 +94,29 @@ const Album = ({ data }) => {
       </>
     );
   } else if (skinNum === 4) {
-    // if (vidConfig === 0) {
-    //   setSkinElement();
-    // } else if (vidConfig === 1) {
-    //   setSkinElement();
-    // } else {
-    //   setSkinElement();
-    // }
+    skinElement = (
+      <> 
+          <div className={styles.borderText}>
+            <p className={styles.up}>COMIT FILM</p>
+            <p className={`${styles.right} ${classNameByConfig}`}>TAKE YOUR MEMORY</p>
+            <div className={styles.left}>
+              <p style={{display:'inline'}}>11</p>
+              <img width='20' src={triangle} />
+            </div>
+            <p className={`${styles.down} ${classNameByConfig}`}>29</p>
+            {vidConfig !== 0 &&
+            <img className={`${styles.camera} ${classNameByConfig}`} src={camera} width='75'/>}
+          </div>
+
+      </>
+    );
   }
 
   return (
     <div className={`${styles.container} ${classNameBySkin}`}>
       {skinElement}
       <div className={`${styles.mask} ${classNameByConfig}`}>
-        <img src={imageurl} alt="img" />
+        <img src={imageurl} alt="img"/>
       </div>
     </div>
   );
