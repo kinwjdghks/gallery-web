@@ -17,23 +17,22 @@ import {
 
 const Gallery = ({ takePhoto, onToggleModalHandler }) => {
   const [photos, setPhotos] = useState([]);
-  //?? Timestamp ?????? ???????? ??? ?ε??.
+ 
   let timeStamp = useRef(null);
-  //?? ??? ????? ??????? ??????
+
   const [endOfData, setEndOfData] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [backgroundHeight, setBackgroundHeight] = useState(0);
-  // <ScrollDown/> ?迭
+  // <ScrollDown/> ?占쏙옙
   const [arrows, setArrows] = useState([<ScrollDown key={0} top_={900} />]);
 
   const background = useRef(null);
-  //??????? ??????????? backgroundHeight?? ??????????.
   useEffect(() => {
     if (background.current) {
       setBackgroundHeight(background.current.getBoundingClientRect().height);
     }
   }, [isLoading]);
-  //????? ???? ???? ?????? ?????? <ScrollDown />?? ??????.
+
   useEffect(() => {
     if (background.current) {
       const cnt = arrows.length;
@@ -47,7 +46,7 @@ const Gallery = ({ takePhoto, onToggleModalHandler }) => {
     }
   }, [backgroundHeight]);
 
-  //???????? ???????? ?????? ??????? ?? ?ε???? ???????? ???.
+  //???????? ???????? ?????? ??????? ?? ?占쏙옙???? ???????? ???.
   const pageEnd = useRef(null);
 
   useEffect(() => {
@@ -58,8 +57,7 @@ const Gallery = ({ takePhoto, onToggleModalHandler }) => {
     if (entry.isIntersecting) {
       console.log("intersect");
       observer.unobserve(entry.target);
-      const response = await getMorePhotos();
-      //???? ?????? ?ε????? ?ð? ?????? ?? ?д?.
+      await getMorePhotos();
       setTimeout(() => {
         observer.observe(entry.target);
       }, 800);
@@ -69,10 +67,9 @@ const Gallery = ({ takePhoto, onToggleModalHandler }) => {
 
   //10???? ???? ????????.
   const getMorePhotos = async () => {
-    console.log("???? ????????");
+    console.log("photo request");
 
     let queryTemp;
-    console.log("timeStamp: " + timeStamp);
     if (!timeStamp) {
       //first query
       queryTemp = query(
@@ -105,28 +102,28 @@ const Gallery = ({ takePhoto, onToggleModalHandler }) => {
       timeStamp = dataSnapShot.docs[length - 1];
       setPhotos((prev) => [...prev, ...dataList]);
     } else {
-      //??????? ?? ?????? ??????.
+
       setEndOfData(true);
     }
     setIsLoading(false);
   };
 
-  //   처음 실행 시 사진 가져오기
-  // useEffect(()=>{
-  //     console.log('처음 사진 가져오기');
-  //     //스크롤 맨 위에서 시작안하는 현상 수정
-  //     window.scroll({
-  //       top: 0,
-  //       behavior: "instant",
-  //     });
-  //     getMorePhotos();
-  //   }
-  // ,[]);
+
+  useEffect(()=>{
+      window.scroll({
+        top: 0,
+        behavior: "instant",
+      });
+      getMorePhotos();
+      console.log("initial data request");
+    }
+  ,[]);
 
   return (
     <>
-      {takePhoto && <PhotoModal onToggleModalHandler={onToggleModalHandler} />}
+      {takePhoto && <PhotoModal onToggleModalHandler={onToggleModalHandler} modalOpened={takePhoto}/>}
       <div className={styles.background} ref={background}>
+        {!photos.length && <div className={styles.noPic}>No Picture!!</div> }
         <div className={styles.albumContainer}>
           {photos.map((data, index) => {
             if (data.url === "blank") {

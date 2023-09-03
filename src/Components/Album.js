@@ -18,7 +18,7 @@ const Album = ({data}) => {
   const imageurl = data.url;
   const vidConfig = data.vidConfig;
   const skinNum = data.skinNum;
-  console.log(vidConfig + " " + skinNum);
+  // console.log(vidConfig + " " + skinNum);
   const classNameBySkin = 
   skinNum === 0
       ? styles.opt0

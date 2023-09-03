@@ -33,3 +33,11 @@
   font-size: 40px;
   font-weight: 900;
 }
+.noPic{
+  width: 100vw;
+  height: 80px;
+  text-align: center;
+  font-family: "cocogoose";
+  font-size: 200px;
+  font-weight: 900;
+}

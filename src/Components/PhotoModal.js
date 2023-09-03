@@ -29,12 +29,11 @@ const BackDrop = () => {
   return <div className={styles.backdrop}></div>;
 };
 
-const Modal = ({ onToggleModalHandler }) => {
+const Modal = ({ onToggleModalHandler, modalOpened }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [imgfile, setImgfile] = useState(null);
   const [imgpreview, setImgpreview] = useState(null);
-  const [photoTaken, setPhotoTaken] = useState(false);
-  const [blankBuffer, setBlankBuffer] = useState(Math.floor(Math.random() * 4));
+  
   //sound
   const es = EffectSound(effect, 1);
   const playES = () => {
@@ -42,7 +41,6 @@ const Modal = ({ onToggleModalHandler }) => {
   };
 
   const createBlankAlbum = useCallback(async () => {
-    const id = new Date().getTime() % 200000000;
     const id = new Date().getTime() % 200000000;
     const timestamp = serverTimestamp();
     const newPhoto = {
@@ -53,20 +51,20 @@ const Modal = ({ onToggleModalHandler }) => {
     };
     try {
       const photos = collection(db, "Photos");
-      const response = await setDoc(doc(photos, `${id}`), newPhoto);
+      await setDoc(doc(photos, `${id}`), newPhoto);
     } catch (error) {
       console.log(error);
       return;
     }
   }, []);
 
-  useEffect(() => {
-    if (blankBuffer === 0) {
+  useEffect(()=>{
+    const random = Math.floor(Math.random()*4);
+    if(!random){
       createBlankAlbum();
-      console.log("empty Album created");
-      setBlankBuffer(Math.floor(Math.random() * 4));
+      console.log("빈 앨범 생성됨");
     }
-  }, [blankBuffer]);
+  },[modalOpened]);
 
   useEffect(() => {
     if (imgfile) {
@@ -100,8 +98,8 @@ const Modal = ({ onToggleModalHandler }) => {
   const curHeight = vidConfigList[vidConfigIdx].height;
   const [photoAnimation, setPhotoAnimation] = useState(null);
 
-  const selectVidConfigHandler = (idx) => setVidConfigIdx(0);
-  const selectSkinHandler = (idx) => setSkinIdx(0);
+  const selectVidConfigHandler = (idx) => setVidConfigIdx(idx);
+  const selectSkinHandler = (idx) => setSkinIdx(idx);
 
   const animation = useCallback(
     (time) => {
@@ -141,9 +139,9 @@ const Modal = ({ onToggleModalHandler }) => {
     console.log("saved to fireStorage");
     try {
       setIsLoading(true);
-      const upload = await uploadString(storageRef, file, "data_url");
+      await uploadString(storageRef, file, "data_url");
       const geturl = await getDownloadURL(sRef(storage, storageRef));
-      saveToFireStore(geturl);
+      await saveToFireStore(geturl);
       console.log("Image url: " + geturl);
     } catch (error) {
       console.log(error);
@@ -154,6 +152,7 @@ const Modal = ({ onToggleModalHandler }) => {
   const saveToFireStore = async (imgurl) => {
     let id = new Date().getTime() % 200000000;
     const timestamp = serverTimestamp();
+    console.log("받은 url: "+imgurl);
     const newPhoto = {
       id: +id,
       url: imgurl,
@@ -161,37 +160,38 @@ const Modal = ({ onToggleModalHandler }) => {
       skin: skinIdx,
       timestamp: timestamp,
     };
+    console.log('{'+imgurl+' id: '+id+'}');
     try {
       const photos = collection(db, "Photos");
-      const response = await setDoc(doc(photos, `${id}`), newPhoto);
+      await setDoc(doc(photos, `${id}`), newPhoto);
+      console.log("firestore 객체 생성됨");
     } catch (error) {
       console.log(error);
       return;
     }
-
-    console.log("image firebase sent");
+    window.location.reload();
   };
 
+  
   const takePhoto = useCallback(() => {
-    setPhotoTaken(true);
     animation(5);
     const timer = setTimeout(() => {
       const imageSrc = webcamRef.current.getScreenshot();
       setImgfile(imageSrc);
+      console.log("imgfile 저장됨");
       playES();
     }, 6000);
     return () => clearTimeout(timer);
   }, [webcamRef, animation]);
+
   const savePhoto = async () => {
-    console.log("savePhoto executed");
     onToggleModalHandler();
     await saveToFirebaseStorage(imgfile, saveToFireStore);
-    setBlankBuffer((prev) => prev - 1);
-    window.location.reload();
+    console.log("사진 저장 완료");
+    
   };
 
   const deletePhoto = () => {
-    setPhotoTaken(false);
     setImgfile(null);
   };
 
@@ -223,7 +223,6 @@ const Modal = ({ onToggleModalHandler }) => {
         <FrameButtons
           isLoading={isLoading}
           imgfile={imgfile}
-          photoTaken={photoTaken}
           onTakePhoto={takePhoto}
           onSavePhoto={savePhoto}
           onDeletePhoto={deletePhoto}
@@ -236,7 +235,7 @@ const Modal = ({ onToggleModalHandler }) => {
   );
 };
 
-const PhotoModal = ({ onToggleModalHandler }) => {
+const PhotoModal = ({ onToggleModalHandler, modalOpened }) => {
   return (
     <>
       {ReactDOM.createPortal(
@@ -244,7 +243,7 @@ const PhotoModal = ({ onToggleModalHandler }) => {
         document.getElementById("backdrop-root")
       )}
       {ReactDOM.createPortal(
-        <Modal onToggleModalHandler={onToggleModalHandler} />,
+        <Modal onToggleModalHandler={onToggleModalHandler} modalOpened={modalOpened}  />,
         document.getElementById("PhotoModal-root")
       )}
     </>

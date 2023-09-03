@@ -8,7 +8,6 @@ import ThumbImage from "../assets/Images/thumb.png";
 const FrameButtons = ({
   isLoading,
   imgfile,
-  photoTaken,
   onTakePhoto,
   onSavePhoto,
   onDeletePhoto,
@@ -17,7 +16,6 @@ const FrameButtons = ({
   onSkinSelect
 }) => {
   const [phase,setPhase] = useState(1);
-  useEffect(()=>{console.log('phase: '+phase)},[phase]);
   //phase 1: frame select phase 2: skin select phase 3: before photo 4: after photo 
   const againHandler = () => {
     onDeletePhoto();

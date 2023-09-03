@@ -175,6 +175,11 @@
   background: url("../assets/buttons/close-modal.png") center center/contain
     no-repeat;
 }
+/* @media (max-width: 700px) {
+  .close{
+    right: 0px;
+  }
+} */
 
 .lastbtn {
   width: 380px;
