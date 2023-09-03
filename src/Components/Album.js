@@ -44,7 +44,6 @@ const Album = ({ data }) => {
         : vidConfig === 1
         ? design1_vertical
         : design1_horizontal;
-
     skinElement = (
       <img className={styles.skinElement} src={image} width="350" />
     );

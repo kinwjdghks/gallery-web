@@ -136,7 +136,11 @@ const Gallery = ({ takePhoto, onToggleModalHandler }) => {
         {isLoading && <div className={styles.loadingDiv}>Loading...</div>}
         {arrows}
       </div>
-      {!endOfData && <div className={styles.pageEnd} ref={pageEnd}></div>}
+      {endOfData && (
+        <div className={styles.pageEnd} ref={pageEnd}>
+          123
+        </div>
+      )}
     </>
   );
 };
