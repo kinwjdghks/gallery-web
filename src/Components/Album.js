@@ -7,9 +7,9 @@ import design1_vertical from "../assets/skins/design1_vertical.svg";
 import design2_square from "../assets/skins/design2_square.svg";
 import design2_horizontal from "../assets/skins/design2_horizontal.svg";
 import design2_vertical from "../assets/skins/design2_vertical.svg";
-// import design3_square from "";
-// import design3_vertical from "";
-// import design3_horizontal from "";
+import design3_square from "../assets/skins/design3_square.svg";
+import design3_vertical from "../assets/skins/design3_vertical.svg";
+import design3_horizontal from "../assets/skins/design3_horizontal.svg";;
 
 const Album = ({ data }) => {
   // const [skinElement,setSkinElement] = useState(null);
@@ -68,18 +68,28 @@ const Album = ({ data }) => {
       </>
     );
   } else if (skinNum === 3) {
-    // const image =
-    //   vidConfig === 0
-    //     ? design1_square
-    //     : vidConfig === 1
-    //     ? design1_vertical
-    //     : design1_horizontal;
-    // skinElement = (
-    //   <>
-    //     {vidConfig === 1 && <div></div>}
-    //     <img className={styles.skinElement} src={image} width="350" />
-    //   </>
-    // );
+    const image =
+      vidConfig === 0
+        ? design3_square
+        : vidConfig === 1
+        ? design3_vertical
+        : design3_horizontal;
+    const width_ =
+        vidConfig === 0
+          ? 360
+          : vidConfig === 1
+          ? 439
+          : 337;
+    skinElement = (
+      <>
+        {vidConfig === 1 && <div>
+          <div className={styles.skkucomit}>
+            <p className={`${styles.skku} ${styles.design3}`}>SKKU</p>
+            <p className={styles.comit}>COMIT</p>
+          </div></div>}
+        <img className={`${styles.skinElement} ${styles.design3} ${classNameByConfig}`} src={image} width={width_}/>
+      </>
+    );
   } else if (skinNum === 4) {
     // if (vidConfig === 0) {
     //   setSkinElement();

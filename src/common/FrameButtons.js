@@ -1,4 +1,9 @@
 import { React, useEffect, useState } from "react";
+import building from "../assets/skins/design1_square.svg";
+import temple from "../assets/Images/명륜당.svg";
+import sungkyuni from "../assets/Images/성균이.svg";
+import leaves from "../assets/Images/낙엽.svg";
+
 //imports
 
 //css
@@ -43,27 +48,30 @@ const FrameButtons = ({
         <>
           <button
             className={`${styles.skinbtn} ${styles.skin1}`}
-            onClick={() => onSkinSelect(1)}
-          >
-            A
+            onClick={() => onSkinSelect(1)}>
+          <img className={`${styles.btndesign} ${styles.skin1}`} width='287' src={building}/>
           </button>
+          
           <button
             className={`${styles.skinbtn} ${styles.skin2}`}
-            onClick={() => onSkinSelect(2)}
-          >
-            B
+            onClick={() => onSkinSelect(2)}>
+          <img className={`${styles.btndesign} ${styles.skin2}`} width='300' src={temple}/>
+          
+            
           </button>
           <button
             className={`${styles.skinbtn} ${styles.skin3}`}
             onClick={() => onSkinSelect(3)}
           >
-            C
+          <img className={`${styles.btndesign} ${styles.skin3} ${styles.leaves}`} width='60' src={leaves}/>
+          <img className={`${styles.btndesign} ${styles.skin3} ${styles.sungkyuni}`} width='250' src={sungkyuni}/>
+          
           </button>
           <button
             className={`${styles.skinbtn} ${styles.skin4}`}
             onClick={() => onSkinSelect(4)}
           >
-            D
+            
           </button>
         </>
       )}

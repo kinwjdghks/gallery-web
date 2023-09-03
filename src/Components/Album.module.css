@@ -46,6 +46,9 @@
   font-size: 27px;
   color: #704a18;
 }
+.skku.design3{
+  color: #FFDFBE;
+}
 .comit {
   font-size: 33px;
   color: white;
@@ -79,4 +82,12 @@
   top: 0;
   left: 0;
   z-index: 10;
+}
+.skinElement.design3.horizontal{
+  top: 94px;
+  left: 10px;
+}
+.skinElement.design3.vertical{
+  top: 142px;
+  left: 0px;
 }
