@@ -115,22 +115,50 @@
   font-size: 120px;
   -webkit-text-stroke: 10px #303030;
   -webkit-text-fill-color: white;
+  overflow: hidden;
 }
 .skinbtn.skin1 {
   justify-self: end;
   bottom: 2px;
+  background: linear-gradient(#1f1f61 0%, #755d98 60%, #e0a6b2 100%);
 }
+
+.btndesign {
+  position: absolute;
+}
+.btndesign.skin1 {
+  top: -30px;
+  left: 0px;
+}
+
 .skinbtn.skin2 {
   justify-self: start;
   bottom: 2px;
+  background: linear-gradient(#ffc994 0%, #ffa852 60%, #ed743f 100%);
+}
+.btndesign.skin2 {
+  top: -50px;
+  left: 45px;
 }
 .skinbtn.skin3 {
   justify-self: end;
   bottom: 10px;
+  background-color: #044b2d;
+}
+.btndesign.skin3.leaves {
+  top: 0px;
+  left: 15px;
+  transform: rotate(30deg);
+}
+.btndesign.skin3.sungkyuni {
+  top: 78px;
+  left: 120px;
 }
 .skinbtn.skin4 {
   justify-self: start;
   bottom: 10px;
+  border: 2px solid black;
+  background-color: white;
 }
 .movebtn {
   grid-area: move;
