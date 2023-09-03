@@ -77,25 +77,25 @@ const FrameButtons = ({
         <>
           <button
             className={`${styles.skinbtn} ${styles.skin1}`}
-            onClick={() => onSkinSelect(0)}
+            onClick={() => onSkinSelect(1)}
           >
             A
           </button>
           <button
             className={`${styles.skinbtn} ${styles.skin2}`}
-            onClick={() => onSkinSelect(1)}
+            onClick={() => onSkinSelect(2)}
           >
             B
           </button>
           <button
             className={`${styles.skinbtn} ${styles.skin3}`}
-            onClick={() => onSkinSelect(2)}
+            onClick={() => onSkinSelect(3)}
           >
             C
           </button>
           <button
             className={`${styles.skinbtn} ${styles.skin4}`}
-            onClick={() => onSkinSelect(3)}
+            onClick={() => onSkinSelect(4)}
           >
             D
           </button>

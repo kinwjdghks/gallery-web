@@ -71,7 +71,6 @@ const Modal = ({ onToggleModalHandler, modalOpened }) => {
     const random = Math.floor(Math.random() * 4);
     if (!random) {
       createBlankAlbum();
-      console.log("后 举裹 积己凳");
     }
   }, [modalOpened]);
 
@@ -163,7 +162,7 @@ const Modal = ({ onToggleModalHandler, modalOpened }) => {
   const saveToFireStore = async (imgurl) => {
     let id = new Date().getTime() % 200000000;
     const timestamp = serverTimestamp();
-    console.log("罐篮 url: " + imgurl);
+
     const newPhoto = {
       id: +id,
       url: imgurl,
@@ -175,7 +174,6 @@ const Modal = ({ onToggleModalHandler, modalOpened }) => {
     try {
       const photos = collection(db, "Photos");
       await setDoc(doc(photos, `${id}`), newPhoto);
-      console.log("firestore 按眉 积己凳");
     } catch (error) {
       console.log(error);
       return;
@@ -188,7 +186,7 @@ const Modal = ({ onToggleModalHandler, modalOpened }) => {
     const timer = setTimeout(() => {
       const imageSrc = webcamRef.current.getScreenshot();
       setImgfile(imageSrc);
-      console.log("imgfile 历厘凳");
+
       playES();
     }, 6000);
     return () => clearTimeout(timer);
@@ -197,14 +195,12 @@ const Modal = ({ onToggleModalHandler, modalOpened }) => {
   const savePhoto = async () => {
     onToggleModalHandler();
     await saveToFirebaseStorage(imgfile, saveToFireStore);
-    console.log("荤柳 历厘 肯丰");
   };
 
   const deletePhoto = () => {
     setImgfile(null);
   };
 
-  //???????????
   const classNameByConfig =
     vidConfigIdx === 0
       ? styles.square
@@ -214,14 +210,16 @@ const Modal = ({ onToggleModalHandler, modalOpened }) => {
 
   const classNameBySkin =
     skinIdx === 0
-      ? styles.opt0
+      ? styles.default
       : skinIdx === 1
       ? styles.opt1
       : skinIdx === 2
       ? styles.opt2
-      : styles.opt3;
-  //???∑ ???
-  if (skinIdx === 0) {
+      : skinIdx === 3
+      ? styles.opt3
+      : styles.opt4;
+
+  if (skinIdx === 1) {
     const image =
       vidConfigIdx === 0
         ? design1_square
@@ -232,9 +230,7 @@ const Modal = ({ onToggleModalHandler, modalOpened }) => {
     skinElement = (
       <img className={styles.skinElement} src={image} width="933" />
     );
-  }
-  //?ラ?∑ ???
-  else if (skinIdx === 1) {
+  } else if (skinIdx === 2) {
     const image =
       vidConfigIdx === 0
         ? design2_square
@@ -253,9 +249,7 @@ const Modal = ({ onToggleModalHandler, modalOpened }) => {
         <img className={styles.skinElement} src={image} width="933" />
       </>
     );
-  }
-  //????∑ ???
-  else if (skinIdx === 2) {
+  } else if (skinIdx === 3) {
     // const image =
     //   vidConfigIdx === 0
     //     ? design1_square
@@ -268,9 +262,7 @@ const Modal = ({ onToggleModalHandler, modalOpened }) => {
     //     <img className={styles.skinElement} src={image} width="933" />
     //   </>
     // );
-  }
-  //???∑ ???
-  else {
+  } else if (skinIdx === 4) {
     // if (vidConfigIdx === 0) {
     //   setSkinElement();
     // } else if (vidConfigIdx === 1) {
