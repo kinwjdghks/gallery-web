@@ -24,6 +24,13 @@ import FrameButtons from "../common/FrameButtons";
 //sounds
 import EffectSound from "../common/EffectSound";
 import effect from "../assets/sounds/camera-shutter.wav";
+//images
+import design1_square from "../assets/skins/design1_square.svg";
+import design1_horizontal from "../assets/skins/design1_horizontal.svg";
+import design1_vertical from "../assets/skins/design1_vertical.svg";
+import design2_square from "../assets/skins/design2_square.svg";
+import design2_horizontal from "../assets/skins/design2_horizontal.svg";
+import design2_vertical from "../assets/skins/design2_vertical.svg";
 
 const BackDrop = () => {
   return <div className={styles.backdrop}></div>;
@@ -33,12 +40,14 @@ const Modal = ({ onToggleModalHandler, modalOpened }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [imgfile, setImgfile] = useState(null);
   const [imgpreview, setImgpreview] = useState(null);
-  
+
   //sound
   const es = EffectSound(effect, 1);
   const playES = () => {
     es.play();
   };
+  //images
+  let skinElement;
 
   const createBlankAlbum = useCallback(async () => {
     const id = new Date().getTime() % 200000000;
@@ -58,13 +67,13 @@ const Modal = ({ onToggleModalHandler, modalOpened }) => {
     }
   }, []);
 
-  useEffect(()=>{
-    const random = Math.floor(Math.random()*4);
-    if(!random){
+  useEffect(() => {
+    const random = Math.floor(Math.random() * 4);
+    if (!random) {
       createBlankAlbum();
-      console.log("ë¹ˆ ì•¨ë²” ìƒì„±ë¨");
+      console.log("ºó ¾Ù¹ü »ý¼ºµÊ");
     }
-  },[modalOpened]);
+  }, [modalOpened]);
 
   useEffect(() => {
     if (imgfile) {
@@ -133,6 +142,7 @@ const Modal = ({ onToggleModalHandler, modalOpened }) => {
   );
 
   const storage = getStorage();
+
   const saveToFirebaseStorage = async (file, saveToFireStore) => {
     const id = new Date().getTime();
     const storageRef = sRef(storage, "Images/" + id);
@@ -147,12 +157,13 @@ const Modal = ({ onToggleModalHandler, modalOpened }) => {
       console.log(error);
     }
     setIsLoading(false);
+    window.location.reload();
   };
 
   const saveToFireStore = async (imgurl) => {
     let id = new Date().getTime() % 200000000;
     const timestamp = serverTimestamp();
-    console.log("ë°›ì€ url: "+imgurl);
+    console.log("¹ÞÀº url: " + imgurl);
     const newPhoto = {
       id: +id,
       url: imgurl,
@@ -160,11 +171,11 @@ const Modal = ({ onToggleModalHandler, modalOpened }) => {
       skin: skinIdx,
       timestamp: timestamp,
     };
-    console.log('{'+imgurl+' id: '+id+'}');
+    console.log("{" + imgurl + " id: " + id + "}");
     try {
       const photos = collection(db, "Photos");
       await setDoc(doc(photos, `${id}`), newPhoto);
-      console.log("firestore ê°ì²´ ìƒì„±ë¨");
+      console.log("firestore °´Ã¼ »ý¼ºµÊ");
     } catch (error) {
       console.log(error);
       return;
@@ -172,13 +183,12 @@ const Modal = ({ onToggleModalHandler, modalOpened }) => {
     window.location.reload();
   };
 
-  
   const takePhoto = useCallback(() => {
     animation(5);
     const timer = setTimeout(() => {
       const imageSrc = webcamRef.current.getScreenshot();
       setImgfile(imageSrc);
-      console.log("imgfile ì €ìž¥ë¨");
+      console.log("imgfile ÀúÀåµÊ");
       playES();
     }, 6000);
     return () => clearTimeout(timer);
@@ -187,14 +197,14 @@ const Modal = ({ onToggleModalHandler, modalOpened }) => {
   const savePhoto = async () => {
     onToggleModalHandler();
     await saveToFirebaseStorage(imgfile, saveToFireStore);
-    console.log("ì‚¬ì§„ ì €ìž¥ ì™„ë£Œ");
-    
+    console.log("»çÁø ÀúÀå ¿Ï·á");
   };
 
   const deletePhoto = () => {
     setImgfile(null);
   };
 
+  //???????????
   const classNameByConfig =
     vidConfigIdx === 0
       ? styles.square
@@ -202,14 +212,82 @@ const Modal = ({ onToggleModalHandler, modalOpened }) => {
       ? styles.vertical
       : styles.horizontal;
 
+  const classNameBySkin =
+    skinIdx === 0
+      ? styles.opt0
+      : skinIdx === 1
+      ? styles.opt1
+      : skinIdx === 2
+      ? styles.opt2
+      : styles.opt3;
+  //???¡Æ ???
+  if (skinIdx === 0) {
+    const image =
+      vidConfigIdx === 0
+        ? design1_square
+        : vidConfigIdx === 1
+        ? design1_vertical
+        : design1_horizontal;
+
+    skinElement = (
+      <img className={styles.skinElement} src={image} width="933" />
+    );
+  }
+  //?¥é?¡Æ ???
+  else if (skinIdx === 1) {
+    const image =
+      vidConfigIdx === 0
+        ? design2_square
+        : vidConfigIdx === 1
+        ? design2_vertical
+        : design2_horizontal;
+
+    skinElement = (
+      <>
+        {vidConfigIdx === 1 && (
+          <div className={styles.skkucomit}>
+            <p className={styles.skku}>SKKU</p>
+            <p className={styles.comit}>COMIT</p>
+          </div>
+        )}
+        <img className={styles.skinElement} src={image} width="933" />
+      </>
+    );
+  }
+  //????¡Æ ???
+  else if (skinIdx === 2) {
+    // const image =
+    //   vidConfigIdx === 0
+    //     ? design1_square
+    //     : vidConfigIdx === 1
+    //     ? design1_vertical
+    //     : design1_horizontal;
+    // skinElement = (
+    //   <>
+    //     {vidConfigIdx === 1 && <div></div>}
+    //     <img className={styles.skinElement} src={image} width="933" />
+    //   </>
+    // );
+  }
+  //???¡Æ ???
+  else {
+    // if (vidConfigIdx === 0) {
+    //   setSkinElement();
+    // } else if (vidConfigIdx === 1) {
+    //   setSkinElement();
+    // } else {
+    //   setSkinElement();
+    // }
+  }
   return (
     <div className={styles.container}>
-      <div className={styles.cam_container}>
+      <div className={`${styles.cam_container} ${classNameBySkin}`}>
+        {skinElement}
         <div className={`${styles.cam_mask} ${classNameByConfig}`}>
           {photoAnimation}
           {imgpreview}
           <Webcam
-            className={`${styles.webcam} ${classNameByConfig}`}
+            className={styles.webcam}
             audio={false}
             height={curHeight}
             ref={webcamRef}
@@ -243,7 +321,10 @@ const PhotoModal = ({ onToggleModalHandler, modalOpened }) => {
         document.getElementById("backdrop-root")
       )}
       {ReactDOM.createPortal(
-        <Modal onToggleModalHandler={onToggleModalHandler} modalOpened={modalOpened}  />,
+        <Modal
+          onToggleModalHandler={onToggleModalHandler}
+          modalOpened={modalOpened}
+        />,
         document.getElementById("PhotoModal-root")
       )}
     </>

@@ -17,13 +17,13 @@ import {
 
 const Gallery = ({ takePhoto, onToggleModalHandler }) => {
   const [photos, setPhotos] = useState([]);
- 
+
   let timeStamp = useRef(null);
 
   const [endOfData, setEndOfData] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [backgroundHeight, setBackgroundHeight] = useState(0);
-  // <ScrollDown/> ?��
+
   const [arrows, setArrows] = useState([<ScrollDown key={0} top_={900} />]);
 
   const background = useRef(null);
@@ -46,7 +46,6 @@ const Gallery = ({ takePhoto, onToggleModalHandler }) => {
     }
   }, [backgroundHeight]);
 
-  //???????? ???????? ?????? ??????? ?? ?��???? ???????? ???.
   const pageEnd = useRef(null);
 
   useEffect(() => {
@@ -65,7 +64,6 @@ const Gallery = ({ takePhoto, onToggleModalHandler }) => {
   };
   const observer = new IntersectionObserver(onIntersect, { threshold: 0 });
 
-  //10???? ???? ????????.
   const getMorePhotos = async () => {
     console.log("photo request");
 
@@ -102,28 +100,30 @@ const Gallery = ({ takePhoto, onToggleModalHandler }) => {
       timeStamp = dataSnapShot.docs[length - 1];
       setPhotos((prev) => [...prev, ...dataList]);
     } else {
-
       setEndOfData(true);
     }
     setIsLoading(false);
   };
 
-
-  useEffect(()=>{
-      window.scroll({
-        top: 0,
-        behavior: "instant",
-      });
-      getMorePhotos();
-      console.log("initial data request");
-    }
-  ,[]);
+  useEffect(() => {
+    window.scroll({
+      top: 0,
+      behavior: "instant",
+    });
+    getMorePhotos();
+    console.log("initial data request");
+  }, []);
 
   return (
     <>
-      {takePhoto && <PhotoModal onToggleModalHandler={onToggleModalHandler} modalOpened={takePhoto}/>}
+      {takePhoto && (
+        <PhotoModal
+          onToggleModalHandler={onToggleModalHandler}
+          modalOpened={takePhoto}
+        />
+      )}
       <div className={styles.background} ref={background}>
-        {!photos.length && <div className={styles.noPic}>No Picture!!</div> }
+        {!photos.length && <div className={styles.noPic}>No Picture!!</div>}
         <div className={styles.albumContainer}>
           {photos.map((data, index) => {
             if (data.url === "blank") {

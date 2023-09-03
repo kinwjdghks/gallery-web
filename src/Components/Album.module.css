@@ -9,17 +9,22 @@
 
   position: relative;
 }
-.container.opt0{
-  background: linear-gradient(#1F1F61 0%, #755D98 60%, #E0A6B2 100%);
+.container.opt0 {
+  background: linear-gradient(#1f1f61 0%, #755d98 60%, #e0a6b2 100%);
 }
-.container.opt1{
-  background: linear-gradient(#FFC994 0%, #FFA852 60%, #ed743f 100%);
+.container.opt1 {
+  background: linear-gradient(#ffc994 0%, #ffa852 60%, #ed743f 100%);
 }
-.container.opt2{
-  background: #044B2D;
+.container.opt2 {
+  background-color: #044b2d;
 }
-.skkucomit{
-  font-family: 'cocogoose';
+/* 무지
+.container.opt3 {
+  
+} */
+/* skinNum =1 */
+.skkucomit {
+  font-family: "cocogoose";
   font-weight: 900;
   position: absolute;
   top: 66px;
@@ -27,16 +32,16 @@
   line-height: normal;
   transform: rotate(-90deg);
 }
-.skkucomit p{
+.skkucomit p {
   margin: 0;
   margin-bottom: -15px;
   float: right;
 }
-.skku{
+.skku {
   font-size: 27px;
-  color: #704A18;
+  color: #704a18;
 }
-.comit{
+.comit {
   font-size: 33px;
   color: white;
 }
@@ -64,8 +69,9 @@
   width: 300px;
   height: 225px;
 }
-.skinElement{
+.skinElement {
   position: absolute;
   top: 0;
   left: 0;
+  z-index: 10;
 }

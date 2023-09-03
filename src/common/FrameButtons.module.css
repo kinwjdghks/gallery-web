@@ -75,6 +75,8 @@
   position: relative;
 
   cursor: pointer;
+  position: relative;
+  overflow: hidden;
 }
 .framebtn.square {
   grid-area: square;
@@ -86,8 +88,8 @@
   grid-area: vertical;
   justify-self: end;
   bottom: 10px;
-  background: url("../assets/buttons/vertical-button.png") center center/contain
-    no-repeat;
+  background: url("../assets/buttons/vertical-button2.png") center
+    center/contain no-repeat;
 }
 .framebtn.horizontal {
   grid-area: horizontal;
@@ -98,8 +100,8 @@
 }
 
 .skinbtn {
-  width: 360px;
-  height: 250px;
+  width: 287px;
+  height: 287px;
 
   justify-self: center;
   align-self: center;
