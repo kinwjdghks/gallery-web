@@ -35,16 +35,16 @@
   justify-content: center;
   align-items: center;
 }
-.cam_container.opt0 {
+.cam_container.opt1 {
   background: linear-gradient(#1f1f61 0%, #755d98 60%, #e0a6b2 100%);
 }
-.cam_container.opt1 {
+.cam_container.opt2 {
   background: linear-gradient(#ffc994 0%, #ffa852 60%, #ed743f 100%);
 }
-.cam_container.opt2 {
+.cam_container.opt3 {
   background-color: #044b2d;
 }
-.cam_container.opt3 {
+.cam_container.opt4 {
   /* 임시 */
   background-color: white;
 }

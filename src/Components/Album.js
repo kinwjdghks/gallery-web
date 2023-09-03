@@ -20,12 +20,14 @@ const Album = ({ data }) => {
   console.log(vidConfig + " " + skinNum);
   const classNameBySkin =
     skinNum === 0
-      ? styles.opt0
+      ? styles.default
       : skinNum === 1
       ? styles.opt1
       : skinNum === 2
       ? styles.opt2
-      : styles.opt3;
+      : skinNum === 3
+      ? styles.opt3
+      : styles.opt4;
   console.log("ClassNameBySkin :");
   console.log(classNameBySkin);
   const classNameByConfig =
@@ -35,7 +37,7 @@ const Album = ({ data }) => {
       ? styles.vertical
       : styles.horizontal;
 
-  if (skinNum === 0) {
+  if (skinNum === 1) {
     const image =
       vidConfig === 0
         ? design1_square
@@ -46,7 +48,7 @@ const Album = ({ data }) => {
     skinElement = (
       <img className={styles.skinElement} src={image} width="350" />
     );
-  } else if (skinNum === 1) {
+  } else if (skinNum === 2) {
     const image =
       vidConfig === 0
         ? design2_square
@@ -65,7 +67,7 @@ const Album = ({ data }) => {
         <img className={styles.skinElement} src={image} width="350" />
       </>
     );
-  } else if (skinNum === 2) {
+  } else if (skinNum === 3) {
     // const image =
     //   vidConfig === 0
     //     ? design1_square
@@ -78,7 +80,7 @@ const Album = ({ data }) => {
     //     <img className={styles.skinElement} src={image} width="350" />
     //   </>
     // );
-  } else {
+  } else if (skinNum === 4) {
     // if (vidConfig === 0) {
     //   setSkinElement();
     // } else if (vidConfig === 1) {
