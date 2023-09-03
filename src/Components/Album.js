@@ -72,7 +72,7 @@ const Album = ({ data }) => {
     //   vidConfig === 0
     //     ? design1_square
     //     : vidConfig === 1
-    //     ? design1_vertical
+    //     ? design1_vertical2
     //     : design1_horizontal;
     // skinElement = (
     //   <>

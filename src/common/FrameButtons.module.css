@@ -2,7 +2,8 @@
   width: 900px;
   height: 933.33px;
   margin: 73.342px 0;
-
+  font-family: "cocogoose";
+  color: white;
   display: grid;
   grid-template-columns: 50% 50%;
   /* row-gap: 0px; */
@@ -43,65 +44,56 @@
 }
 .text {
   width: 100%;
-  font-family: "cocogoose";
-  font-weight: 900;
   font-size: 70px;
   grid-area: header;
   font-weight: 900;
+  position: relative;
+  top: -50px;
 }
 .text p {
   text-align: center;
   margin: 0;
 }
 .comit {
+  font-size: 90px;
   color: #603ebb;
 }
 .photobooth {
   position: relative;
+  color: black;
   top: -17.78px;
 }
 
 .framebtn {
-  width: 360px;
-  height: 250px;
+  width: 345px;
+  height: 210px;
 
-  border: none;
-  padding: 0;
-  /* font-size: 130pt;
-  font-family: "maplestorybold";
-  color: white;
-  text-shadow: #603ebb;
-  -webkit-text-stroke: 10px #603ebb; */
+  border-radius: 35px;
 
+  font-size: 70pt;
+  font-family: "gangwonedu";
   justify-self: center;
-  align-self: center;
-
-  position: relative;
-
-  cursor: pointer;
-  position: relative;
-  overflow: hidden;
-  /* outline: none; */
+  align-self: flex-start;
 }
 .framebtn.square {
   grid-area: square;
   bottom: 2px;
-  background: url("../assets/buttons/square-button.png") center center/contain
-    no-repeat;
+  /* background: url("../assets/buttons/square-button.png") center center/contain
+    no-repeat; */
 }
 .framebtn.vertical {
   grid-area: vertical;
   justify-self: end;
   bottom: 10px;
-  background: url("../assets/buttons/vertical-button2.png") center
-    center/contain no-repeat;
+  /* background: url("../assets/buttons/vertical-button2.png") center
+    center/contain no-repeat; */
 }
 .framebtn.horizontal {
   grid-area: horizontal;
   justify-self: start;
   bottom: 10px;
-  background: url("../assets/buttons/horizontal-button.png") center
-    center/contain no-repeat;
+  /* background: url("../assets/buttons/horizontal-button.png") center
+    center/contain no-repeat; */
 }
 
 .skinbtn {
@@ -118,7 +110,7 @@
   /* border: 10px solid #603EBB; */
   border: none;
   background-color: rgb(244, 244, 244);
-  font-family: 'maplestory';
+  font-family: "maplestory";
   font-weight: 900;
   font-size: 120px;
   -webkit-text-stroke: 10px #303030;
@@ -142,45 +134,74 @@
 }
 .movebtn {
   grid-area: move;
-  width: 756px;
-  height: 196px;
-
-  border: none;
-  padding: 0;
+  width: 720px;
+  height: 150px;
+  border-radius: 30px;
 
   justify-self: center;
-  align-self: center;
-  cursor: pointer;
-
-  position: relative;
+  align-self: self-start;
+  font-family: "cocogoose";
 }
 .movebtn.nextbtn {
-  background: url("../assets/buttons/next-Button2.png") center center/contain
-    no-repeat;
+  font-size: 60pt;
+}
+.movebtn.takePhoto {
+  font-size: 52pt;
+}
+.movebtn,
+.framebtn {
+  border: none;
+  padding: 0;
+  color: white;
+  background-color: #603ebb;
+  cursor: pointer;
+  position: relative;
   transform-style: preserve-3d;
   transition: transform 150ms cubic-bezier(0, 0, 0.58, 1);
+  box-sizing: border-box;
+  box-shadow: 0 0 0 2px black;
 }
-/* .movebtn.nextbtn::before {
+
+.movebtn::before,
+.framebtn::before {
   position: absolute;
+  box-sizing: border-box;
   content: "";
-  width: cd100%;
+  width: 100%;
   height: 100%;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-
-  box-shadow: 0 100px 0 0 rgba(96, 62, 187, 0.8);
-  transform: translate3d(0, 0px, 150px);
+  background: rgb(50, 25, 121);
+  border-radius: inherit;
+  box-shadow: 0 0 0 2px black, 0 0.15em 0 0 rgb(173, 173, 173);
+  transform: translate3d(0, 0.25em, -0.1em);
   transition: transform 150ms cubic-bezier(0, 0, 0.58, 1),
     box-shadow 150ms cubic-bezier(0, 0, 0.58, 1);
 }
-.movebtn.movebtn.nextbtn:hover {
-} */
-.movebtn.takePhoto {
-  background: url("../assets/buttons/takePhoto-button.png") center
-    center/contain no-repeat;
+.movebtn:hover,
+.framebtn:hover {
+  background-color: white;
+  transform: translate(0, 0.15em);
+  color: #603ebb;
 }
+.movebtn:hover::before,
+.framebtn:hover::before {
+  box-shadow: 0 0 0 2px black, 0 0.1em 0 0 rgb(173, 173, 173);
+  transform: translate3d(0, 0.1em, -1em);
+}
+.movebtn:active,
+.framebtn:active {
+  background: white;
+  transform: translate(0em, 0.2em);
+}
+.movebtn:active::before,
+.framebtn:active::before {
+  box-shadow: 0 0 0 2px black, 0 0 0 rgb(173, 173, 173);
+  transform: translate3d(0, 0, -1em);
+}
+
 .close {
   position: absolute;
   width: 60px;

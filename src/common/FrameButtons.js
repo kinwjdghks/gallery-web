@@ -6,8 +6,7 @@ import styles from "./FrameButtons.module.css";
 //images
 import SmileImage from "../assets/Images/smile.svg";
 import ThumbImage from "../assets/Images/thumb.png";
-import FrameAniImage1 from "../assets/buttons/frameImage.svg";
-import FrameAniImage2 from "../assets/buttons/frameImage2.svg";
+
 const FrameButtons = ({
   isLoading,
   imgfile,
@@ -72,34 +71,21 @@ const FrameButtons = ({
           <button
             className={`${styles.framebtn} ${styles.square}`}
             onClick={() => onFrameSelect(0)}
-          ></button>
+          >
+            1:1
+          </button>
           <button
             className={`${styles.framebtn} ${styles.vertical}`}
             onClick={() => onFrameSelect(1)}
           >
-            <img
-              src={FrameAniImage1}
-              alt="AniImage"
-              style={{
-                position: "absolute",
-                left: 40,
-                top: 20,
-              }}
-            />
-            <img
-              src={FrameAniImage2}
-              alt="AniImage2"
-              style={{
-                position: "relative",
-                top: 120,
-                opacity: 0.1,
-              }}
-            />
+            3:4
           </button>
           <button
             className={`${styles.framebtn} ${styles.horizontal}`}
             onClick={() => onFrameSelect(2)}
-          />
+          >
+            4:3
+          </button>
         </>
       )}
 
@@ -131,7 +117,9 @@ const FrameButtons = ({
         <button
           className={`${styles.movebtn} ${styles.nextbtn}`}
           onClick={() => setPhase((prev) => prev + 1)}
-        />
+        >
+          NEXT
+        </button>
       )}
       {/*Take Photo*/}
       {phase === 3 && (
@@ -141,7 +129,9 @@ const FrameButtons = ({
             onTakePhoto();
             setPhase(4);
           }}
-        />
+        >
+          TAKE A PICTURE
+        </button>
       )}
       {phase === 4 && imgfile && (
         <>

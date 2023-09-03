@@ -56,14 +56,14 @@ const Header = ({ onClick }) => {
       <motion.button
         className={styles.btn}
         onClick={onClick}
-        animate={{
-          y: [-10, 10, -10],
-        }}
-        transition={{
-          duration: 4,
-          ease: "easeOut",
-          repeat: Infinity,
-        }}
+        // animate={{
+        //   y: [-10, 10, -10],
+        // }}
+        // transition={{
+        //   duration: 4,
+        //   ease: "easeOut",
+        //   repeat: Infinity,
+        // }}
       >
         TAKE A PICTURE
       </motion.button>
