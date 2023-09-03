@@ -89,55 +89,31 @@
   z-index: 10;
 }
 
-/* animation */
-.animation {
-  position: absolute;
-  z-index: 100;
-}
-.animation.counting {
-  font-size: 30rem;
-  color: white;
-  font-weight: 200;
-  text-align: center;
-}
-.animation.shooting {
-  background-color: black;
-  animation: 2s flash forwards;
-}
-@keyframes flash {
-  from {
-    opacity: 1;
-  }
-  to {
-    opacity: 0;
-  }
-}
-
 .skinElement {
   position: absolute;
   top: 0;
   left: 0;
   z-index: 20;
 }
-.skinElement.design3.square{
+.skinElement.design3.square {
   top: 70px;
 }
-.skinElement.design3.vertical{
+.skinElement.design3.vertical {
   top: 389px;
 }
-.skinElement.design3.vertical{
+.skinElement.design3.vertical {
   top: 389px;
 }
-.skinElement.design3.horizontal{
+.skinElement.design3.horizontal {
   top: 265px;
   left: 37px;
 }
-.borderText p{
-  font-family: 'gangwonedu';
+.borderText p {
+  font-family: "gangwonedu";
   font-size: 30px;
   position: absolute;
 }
-.up{
-  top:0;
-  left:400px;
+.up {
+  top: 0;
+  left: 400px;
 }

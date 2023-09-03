@@ -42,8 +42,22 @@
   font-weight: 900;
   margin-top: 500px;
 }
-.pageEnd {
-  background-color: black;
-  width: 100%;
-  height: 50px;
+
+.footer {
+  background-color: #e0e0e0;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.footer img {
+  position: relative;
+  right: 20px;
+}
+.text p {
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+
+  font-size: 1.4rem;
+  color: #767676;
+  margin: 0.1rem;
 }

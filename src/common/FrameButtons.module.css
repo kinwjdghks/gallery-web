@@ -160,6 +160,33 @@
   border: 2px solid black;
   background-color: white;
 }
+/* photoTaking Animation */
+.animation {
+  width: 100%;
+  grid-area: img;
+  justify-self: center;
+  align-self: center;
+}
+.animation.counting {
+  font-family: "Kanit", sans-serif;
+  font-size: 20rem;
+  color: black;
+  /* font-weight: 200; */
+  text-align: center;
+}
+.animation.shooting {
+  background-color: white;
+  animation: 2s flash forwards;
+}
+@keyframes flash {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
 .movebtn {
   grid-area: move;
   width: 720px;

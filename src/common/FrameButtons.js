@@ -1,4 +1,4 @@
-import { React, useEffect, useState } from "react";
+import { React, useEffect, useState, useCallback } from "react";
 //imports
 
 //css
@@ -6,6 +6,10 @@ import styles from "./FrameButtons.module.css";
 //images
 import SmileImage from "../assets/Images/smile.svg";
 import ThumbImage from "../assets/Images/thumb.png";
+import building from "../assets/skins/design1_square.svg";
+import temple from "../assets/Images/명륜당.svg";
+import sungkyuni from "../assets/Images/성균이.svg";
+import leaves from "../assets/Images/낙엽.svg";
 
 const FrameButtons = ({
   isLoading,
@@ -19,6 +23,7 @@ const FrameButtons = ({
 }) => {
   const [phase, setPhase] = useState(1);
   //phase 1: frame select phase 2: skin select phase 3: before photo 4: after photo
+  const [photoAnimation, setPhotoAnimation] = useState();
   const againHandler = () => {
     onDeletePhoto();
   };
@@ -31,6 +36,23 @@ const FrameButtons = ({
       ? styles.beforePhoto
       : styles.afterPhoto;
 
+  const animation = useCallback((time) => {
+    let cnt = time;
+    const timer = setInterval(() => {
+      console.log(cnt);
+      if (cnt > 0) {
+        setPhotoAnimation(
+          <div className={`${styles.animation} ${styles.counting}`}>{cnt}</div>
+        );
+        cnt--;
+      } else {
+        setPhotoAnimation(
+          <div className={`${styles.animation} ${styles.shooting}`}></div>
+        );
+        clearInterval(timer);
+      }
+    }, 1000);
+  });
   return (
     <div className={`${styles.container} ${classNameByConfig}`}>
       <div className={styles.text}>
@@ -44,26 +66,41 @@ const FrameButtons = ({
             className={`${styles.skinbtn} ${styles.skin1}`}
             onClick={() => onSkinSelect(1)}
           >
-            A
+            <img
+              className={`${styles.btndesign} ${styles.skin1}`}
+              width="287"
+              src={building}
+            />
           </button>
           <button
             className={`${styles.skinbtn} ${styles.skin2}`}
             onClick={() => onSkinSelect(2)}
           >
-            B
+            <img
+              className={`${styles.btndesign} ${styles.skin2}`}
+              width="300"
+              src={temple}
+            />
           </button>
           <button
             className={`${styles.skinbtn} ${styles.skin3}`}
             onClick={() => onSkinSelect(3)}
           >
-            C
+            <img
+              className={`${styles.btndesign} ${styles.skin3} ${styles.leaves}`}
+              width="60"
+              src={leaves}
+            />
+            <img
+              className={`${styles.btndesign} ${styles.skin3} ${styles.sungkyuni}`}
+              width="250"
+              src={sungkyuni}
+            />
           </button>
           <button
             className={`${styles.skinbtn} ${styles.skin4}`}
             onClick={() => onSkinSelect(4)}
-          >
-            D
-          </button>
+          ></button>
         </>
       )}
       {phase === 2 && (
@@ -89,7 +126,7 @@ const FrameButtons = ({
         </>
       )}
 
-      {(phase === 3 || (phase === 4 && !imgfile)) && (
+      {phase === 3 && (
         <img
           src={SmileImage}
           alt="SmileImage"
@@ -101,6 +138,8 @@ const FrameButtons = ({
           }}
         />
       )}
+
+      {phase === 4 && !imgfile && photoAnimation}
       {phase === 4 && imgfile && (
         <img
           src={ThumbImage}
@@ -126,8 +165,9 @@ const FrameButtons = ({
         <button
           className={`${styles.movebtn} ${styles.takePhoto}`}
           onClick={() => {
-            onTakePhoto();
             setPhase(4);
+            animation(5);
+            onTakePhoto();
           }}
         >
           TAKE A PICTURE

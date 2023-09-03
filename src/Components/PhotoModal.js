@@ -107,41 +107,9 @@ const Modal = ({ onToggleModalHandler, modalOpened }) => {
   const [skinIdx, setSkinIdx] = useState(0);
   const curWidth = vidConfigList[vidConfigIdx].width;
   const curHeight = vidConfigList[vidConfigIdx].height;
-  const [photoAnimation, setPhotoAnimation] = useState(null);
 
   const selectVidConfigHandler = (idx) => setVidConfigIdx(idx);
   const selectSkinHandler = (idx) => setSkinIdx(idx);
-
-  const animation = useCallback(
-    (time) => {
-      let cnt = time;
-      const timer = setInterval(() => {
-        console.log(cnt);
-        if (cnt > 0) {
-          // console.log("count executed");
-
-          setPhotoAnimation(
-            <div
-              className={`${styles.animation} ${styles.counting}`}
-              style={{ height: curHeight, width: curWidth }}
-            >
-              {cnt}
-            </div>
-          );
-          cnt--;
-        } else {
-          setPhotoAnimation(
-            <div
-              className={`${styles.animation} ${styles.shooting}`}
-              style={{ height: curHeight, width: curWidth }}
-            ></div>
-          );
-          clearInterval(timer);
-        }
-      }, 1000);
-    },
-    [vidConfigIdx, vidConfigList]
-  );
 
   const storage = getStorage();
 
@@ -185,7 +153,6 @@ const Modal = ({ onToggleModalHandler, modalOpened }) => {
   };
 
   const takePhoto = useCallback(() => {
-    animation(5);
     const timer = setTimeout(() => {
       const imageSrc = webcamRef.current.getScreenshot();
       setImgfile(imageSrc);
@@ -193,7 +160,7 @@ const Modal = ({ onToggleModalHandler, modalOpened }) => {
       playES();
     }, 6000);
     return () => clearTimeout(timer);
-  }, [webcamRef, animation]);
+  }, [webcamRef]);
 
   const savePhoto = async () => {
     onToggleModalHandler();
@@ -259,32 +226,35 @@ const Modal = ({ onToggleModalHandler, modalOpened }) => {
         : vidConfigIdx === 1
         ? design3_vertical
         : design3_horizontal;
-      const width_ =
-      vidConfigIdx === 0
-        ? 960
-        : vidConfigIdx === 1
-        ? 1150
-        : 880;
+    const width_ = vidConfigIdx === 0 ? 960 : vidConfigIdx === 1 ? 1150 : 880;
     skinElement = (
       <>
-        {vidConfigIdx === 1 && <div>
-          <div className={styles.skkucomit}>
-            <p className={styles.skku}>SKKU</p>
-            <p className={styles.comit}>COMIT</p>
-          </div></div>}
-        <img className={`${styles.skinElement} ${styles.design3} ${classNameByConfig}`} src={image} width={width_} />
+        {vidConfigIdx === 1 && (
+          <div>
+            <div className={styles.skkucomit}>
+              <p className={styles.skku}>SKKU</p>
+              <p className={styles.comit}>COMIT</p>
+            </div>
+          </div>
+        )}
+        <img
+          className={`${styles.skinElement} ${styles.design3} ${classNameByConfig}`}
+          src={image}
+          width={width_}
+        />
       </>
     );
   } else if (skinIdx === 4) {
     skinElement = (
       <>
-        {vidConfigIdx === 0 && 
+        {vidConfigIdx === 0 && (
           <div className={styles.borderText}>
             <p className={styles.up}>COMIT FILM</p>
             <p className={styles.right}></p>
             <p className={styles.left}>COMIT</p>
             <p className={styles.down}>COMIT</p>
-          </div>}
+          </div>
+        )}
       </>
     );
   }
@@ -293,7 +263,6 @@ const Modal = ({ onToggleModalHandler, modalOpened }) => {
       <div className={`${styles.cam_container} ${classNameBySkin}`}>
         {skinElement}
         <div className={`${styles.cam_mask} ${classNameByConfig}`}>
-          {photoAnimation}
           {imgpreview}
           <Webcam
             className={styles.webcam}

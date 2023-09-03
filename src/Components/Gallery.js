@@ -14,7 +14,8 @@ import {
   orderBy,
   startAfter,
 } from "firebase/firestore/lite";
-
+//images
+import githubIcon from "../assets/Images/github-icon.png";
 const Gallery = ({ takePhoto, onToggleModalHandler }) => {
   const [photos, setPhotos] = useState([]);
 
@@ -136,9 +137,17 @@ const Gallery = ({ takePhoto, onToggleModalHandler }) => {
         {isLoading && <div className={styles.loadingDiv}>Loading...</div>}
         {arrows}
       </div>
+      {!endOfData && <div className={styles.pageEnd} ref={pageEnd} />}
       {endOfData && (
-        <div className={styles.pageEnd} ref={pageEnd}>
-          123
+        <div className={styles.footer}>
+          <a href="https://github.com/skku-comit/gallery-web">
+            <img src={githubIcon} alt="github-icon" rel="external" width={75} />
+          </a>
+          <div className={styles.text}>
+            <p>Made by Jung Jung Hwan & Kim Ji Ho</p>
+            <p>https://comit.skku.io/</p>
+            <p>2023. Copyright © COMIT All rights reserved</p>
+          </div>
         </div>
       )}
     </>

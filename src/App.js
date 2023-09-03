@@ -5,7 +5,7 @@ import { useCallback, useState } from "react";
 
 function App() {
   const [takePhoto, setTakePhoto] = useState(false);
-  const toggleModal = useCallback(() => setTakePhoto((prev) => !prev),[]);
+  const toggleModal = useCallback(() => setTakePhoto((prev) => !prev), []);
   return (
     <>
       <Header onClick={toggleModal} />
