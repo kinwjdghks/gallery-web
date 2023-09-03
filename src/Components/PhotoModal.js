@@ -30,7 +30,6 @@ const BackDrop = () => {
 };
 
 const Modal = ({ onClick }) => {
-  const [blankBuffer, setBlankBuffer] = useState(Math.floor(Math.random() * 4)); //���� �������� BlankAlbum �����ϱ�
   const [isLoading, setIsLoading] = useState(false);
   const [imgfile, setImgfile] = useState(null);
   const [imgpreview, setImgpreview] = useState(null);
@@ -41,6 +40,7 @@ const Modal = ({ onClick }) => {
   const playES = () => {
     es.play();
   };
+  
   const createBlankAlbum = useCallback(async () => {
     const id = new Date().getTime() % 100000000;
     const timestamp = serverTimestamp();
@@ -62,6 +62,7 @@ const Modal = ({ onClick }) => {
   useEffect(() => {
     if (blankBuffer === 0) {
       createBlankAlbum();
+      console.log("empty Album created");
       setBlankBuffer(Math.floor(Math.random() * 4));
     }
   }, [blankBuffer]);
@@ -93,6 +94,7 @@ const Modal = ({ onClick }) => {
     { width: 800, height: 600 },
   ];
   const [vidConfigIdx, setVidConfigIdx] = useState(0);
+  const [selectedSkin,setSelectedSkin] = useState(0);
   const curWidth = vidConfigList[vidConfigIdx].width;
   const curHeight = vidConfigList[vidConfigIdx].height;
 
@@ -104,7 +106,8 @@ const Modal = ({ onClick }) => {
       const timer = setInterval(() => {
         console.log(cnt);
         if (cnt > 0) {
-          console.log("count executed");
+          // console.log("count executed");
+          
           setPhotoAnimation(
             <div
               className={`${styles.animation} ${styles.counting}`}
@@ -128,6 +131,7 @@ const Modal = ({ onClick }) => {
     [vidConfigIdx, vidConfigList]
   );
 
+  const storage = getStorage();
   const saveToFirebaseStorage = async (file, saveToFireStore) => {
     const id = new Date().getTime();
     const storageRef = sRef(storage, "Images/" + id);
@@ -135,11 +139,9 @@ const Modal = ({ onClick }) => {
     try {
       setIsLoading(true);
       const upload = await uploadString(storageRef, file, "data_url");
-      // console.log(upload)
       const geturl = await getDownloadURL(sRef(storage, storageRef));
       saveToFireStore(geturl);
-      console.log("geturl");
-      console.log(geturl);
+      console.log("Image url: "+geturl);
     } catch (error) {
       console.log(error);
     }
@@ -151,10 +153,10 @@ const Modal = ({ onClick }) => {
     const timestamp = serverTimestamp();
     const newPhoto = {
       id: +id,
-      id: +id,
       url: imgurl,
-      timestamp: timestamp,
-      vidConfig: vidConfigIdx
+      vidConfig: vidConfigIdx,
+      skin: selectedSkin,
+      timestamp: timestamp
     };
     try {
       const photos = collection(db, "Photos");
@@ -167,12 +169,9 @@ const Modal = ({ onClick }) => {
     console.log("image firebase sent");
   };
 
-  const storage = getStorage();
-
-  const takePhoto = useCallback(
-    (e) => {
-      setPhotoTaken(true);
+  const takePhoto = useCallback((e) => {
       e.preventDefault();
+      setPhotoTaken(true);
       animation(5);
       const timer = setTimeout(() => {
         const imageSrc = webcamRef.current.getScreenshot();

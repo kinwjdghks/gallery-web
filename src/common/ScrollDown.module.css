@@ -2,11 +2,10 @@
     transform: rotate(270deg);
     position: absolute;
     left: 90px;
-    /* top: 600px; */
     display: flex;
     align-items: center;
-
 }
+
 .scrolldown{
     height: 45px;
     font-family: 'cocogoose';
