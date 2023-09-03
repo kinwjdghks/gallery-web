@@ -1,6 +1,10 @@
+//css
 import styles from "./Header.module.css";
+//images
 import logo from "../assets/Images/Logo.svg";
+//imports
 import { useState, useEffect, useCallback, useRef } from "react";
+import { motion } from "framer-motion";
 const Header = ({ onClick }) => {
   const [position, setPosition] = useState(window.pageYOffset);
   const [tempTop, setTempTop] = useState(0);
@@ -49,11 +53,21 @@ const Header = ({ onClick }) => {
       </div>
 
       <img width="122" src={logo} className={styles.logo} />
-      <button className={styles.btn} onClick={onClick}>
+      <motion.button
+        className={styles.btn}
+        onClick={onClick}
+        animate={{
+          y: [-10, 10, -10],
+        }}
+        transition={{
+          duration: 4,
+          ease: "easeOut",
+          repeat: Infinity,
+        }}
+      >
         TAKE A PICTURE
-      </button>
+      </motion.button>
     </div>
   );
 };
-
 export default Header;

@@ -24,6 +24,13 @@ import FrameButtons from "../common/FrameButtons";
 //sounds
 import EffectSound from "../common/EffectSound";
 import effect from "../assets/sounds/camera-shutter.wav";
+//images
+import design1_square from "../assets/skins/design1_square.svg";
+import design1_horizontal from "../assets/skins/design1_horizontal.svg";
+import design1_vertical from "../assets/skins/design1_vertical.svg";
+import design2_square from "../assets/skins/design2_square.svg";
+import design2_horizontal from "../assets/skins/design2_horizontal.svg";
+import design2_vertical from "../assets/skins/design2_vertical.svg";
 
 const BackDrop = () => {
   return <div className={styles.backdrop}></div>;
@@ -40,9 +47,10 @@ const Modal = ({ onToggleModalHandler }) => {
   const playES = () => {
     es.play();
   };
+  //images
+  let skinElement;
 
   const createBlankAlbum = useCallback(async () => {
-    const id = new Date().getTime() % 200000000;
     const id = new Date().getTime() % 200000000;
     const timestamp = serverTimestamp();
     const newPhoto = {
@@ -100,8 +108,8 @@ const Modal = ({ onToggleModalHandler }) => {
   const curHeight = vidConfigList[vidConfigIdx].height;
   const [photoAnimation, setPhotoAnimation] = useState(null);
 
-  const selectVidConfigHandler = (idx) => setVidConfigIdx(0);
-  const selectSkinHandler = (idx) => setSkinIdx(0);
+  const selectVidConfigHandler = (idx) => setVidConfigIdx(idx);
+  const selectSkinHandler = (idx) => setSkinIdx(idx);
 
   const animation = useCallback(
     (time) => {
@@ -135,6 +143,7 @@ const Modal = ({ onToggleModalHandler }) => {
   );
 
   const storage = getStorage();
+
   const saveToFirebaseStorage = async (file, saveToFireStore) => {
     const id = new Date().getTime();
     const storageRef = sRef(storage, "Images/" + id);
@@ -143,12 +152,13 @@ const Modal = ({ onToggleModalHandler }) => {
       setIsLoading(true);
       const upload = await uploadString(storageRef, file, "data_url");
       const geturl = await getDownloadURL(sRef(storage, storageRef));
-      saveToFireStore(geturl);
+      await saveToFireStore(geturl);
       console.log("Image url: " + geturl);
     } catch (error) {
       console.log(error);
     }
     setIsLoading(false);
+    window.location.reload();
   };
 
   const saveToFireStore = async (imgurl) => {
@@ -182,12 +192,16 @@ const Modal = ({ onToggleModalHandler }) => {
     }, 6000);
     return () => clearTimeout(timer);
   }, [webcamRef, animation]);
+
   const savePhoto = async () => {
     console.log("savePhoto executed");
     onToggleModalHandler();
     await saveToFirebaseStorage(imgfile, saveToFireStore);
     setBlankBuffer((prev) => prev - 1);
-    window.location.reload();
+    // const delay = setTimeout(() => {
+    //   window.location.reload();
+    // }, 3000);
+    // return () => clearTimeout(delay);
   };
 
   const deletePhoto = () => {
@@ -195,6 +209,7 @@ const Modal = ({ onToggleModalHandler }) => {
     setImgfile(null);
   };
 
+  //스타일입히기
   const classNameByConfig =
     vidConfigIdx === 0
       ? styles.square
@@ -202,14 +217,82 @@ const Modal = ({ onToggleModalHandler }) => {
       ? styles.vertical
       : styles.horizontal;
 
+  const classNameBySkin =
+    skinIdx === 0
+      ? styles.opt0
+      : skinIdx === 1
+      ? styles.opt1
+      : skinIdx === 2
+      ? styles.opt2
+      : styles.opt3;
+  //첫번째 스킨
+  if (skinIdx === 0) {
+    const image =
+      vidConfigIdx === 0
+        ? design1_square
+        : vidConfigIdx === 1
+        ? design1_vertical
+        : design1_horizontal;
+
+    skinElement = (
+      <img className={styles.skinElement} src={image} width="933" />
+    );
+  }
+  //두번째 스킨
+  else if (skinIdx === 1) {
+    const image =
+      vidConfigIdx === 0
+        ? design2_square
+        : vidConfigIdx === 1
+        ? design2_vertical
+        : design2_horizontal;
+
+    skinElement = (
+      <>
+        {vidConfigIdx === 1 && (
+          <div className={styles.skkucomit}>
+            <p className={styles.skku}>SKKU</p>
+            <p className={styles.comit}>COMIT</p>
+          </div>
+        )}
+        <img className={styles.skinElement} src={image} width="933" />
+      </>
+    );
+  }
+  //세번째 스킨
+  else if (skinIdx === 2) {
+    // const image =
+    //   vidConfigIdx === 0
+    //     ? design1_square
+    //     : vidConfigIdx === 1
+    //     ? design1_vertical
+    //     : design1_horizontal;
+    // skinElement = (
+    //   <>
+    //     {vidConfigIdx === 1 && <div></div>}
+    //     <img className={styles.skinElement} src={image} width="933" />
+    //   </>
+    // );
+  }
+  //네번째 스킨
+  else {
+    // if (vidConfigIdx === 0) {
+    //   setSkinElement();
+    // } else if (vidConfigIdx === 1) {
+    //   setSkinElement();
+    // } else {
+    //   setSkinElement();
+    // }
+  }
   return (
     <div className={styles.container}>
-      <div className={styles.cam_container}>
+      <div className={`${styles.cam_container} ${classNameBySkin}`}>
+        {skinElement}
         <div className={`${styles.cam_mask} ${classNameByConfig}`}>
           {photoAnimation}
           {imgpreview}
           <Webcam
-            className={`${styles.webcam} ${classNameByConfig}`}
+            className={styles.webcam}
             audio={false}
             height={curHeight}
             ref={webcamRef}

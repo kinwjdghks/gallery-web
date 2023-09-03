@@ -17,23 +17,23 @@ import {
 
 const Gallery = ({ takePhoto, onToggleModalHandler }) => {
   const [photos, setPhotos] = useState([]);
-  //?? Timestamp ?????? ???????? ??? ?ε??.
   let timeStamp = useRef(null);
-  //?? ??? ????? ??????? ??????
+  // let blankBuffer = useRef(Math.random()*4)
+
   const [endOfData, setEndOfData] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [backgroundHeight, setBackgroundHeight] = useState(0);
-  // <ScrollDown/> ?迭
+
   const [arrows, setArrows] = useState([<ScrollDown key={0} top_={900} />]);
 
   const background = useRef(null);
-  //??????? ??????????? backgroundHeight?? ??????????.
+
   useEffect(() => {
     if (background.current) {
       setBackgroundHeight(background.current.getBoundingClientRect().height);
     }
   }, [isLoading]);
-  //????? ???? ???? ?????? ?????? <ScrollDown />?? ??????.
+
   useEffect(() => {
     if (background.current) {
       const cnt = arrows.length;
@@ -47,7 +47,6 @@ const Gallery = ({ takePhoto, onToggleModalHandler }) => {
     }
   }, [backgroundHeight]);
 
-  //???????? ???????? ?????? ??????? ?? ?ε???? ???????? ???.
   const pageEnd = useRef(null);
 
   useEffect(() => {
@@ -59,7 +58,7 @@ const Gallery = ({ takePhoto, onToggleModalHandler }) => {
       console.log("intersect");
       observer.unobserve(entry.target);
       const response = await getMorePhotos();
-      //???? ?????? ?ε????? ?ð? ?????? ?? ?д?.
+
       setTimeout(() => {
         observer.observe(entry.target);
       }, 800);
@@ -67,12 +66,11 @@ const Gallery = ({ takePhoto, onToggleModalHandler }) => {
   };
   const observer = new IntersectionObserver(onIntersect, { threshold: 0 });
 
-  //10???? ???? ????????.
   const getMorePhotos = async () => {
-    console.log("???? ????????");
+    // console.log("get photos encountered");
 
     let queryTemp;
-    console.log("timeStamp: " + timeStamp);
+    // console.log("timeStamp: " + timeStamp);
     if (!timeStamp) {
       //first query
       queryTemp = query(
@@ -105,23 +103,18 @@ const Gallery = ({ takePhoto, onToggleModalHandler }) => {
       timeStamp = dataSnapShot.docs[length - 1];
       setPhotos((prev) => [...prev, ...dataList]);
     } else {
-      //??????? ?? ?????? ??????.
       setEndOfData(true);
     }
     setIsLoading(false);
   };
 
-  //   처음 실행 시 사진 가져오기
-  // useEffect(()=>{
-  //     console.log('처음 사진 가져오기');
-  //     //스크롤 맨 위에서 시작안하는 현상 수정
-  //     window.scroll({
-  //       top: 0,
-  //       behavior: "instant",
-  //     });
-  //     getMorePhotos();
-  //   }
-  // ,[]);
+  useEffect(() => {
+    window.scroll({
+      top: 0,
+      behavior: "instant",
+    });
+    getMorePhotos();
+  }, []);
 
   return (
     <>
