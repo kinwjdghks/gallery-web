@@ -11,7 +11,7 @@ import {
   query,
   limit,
   orderBy,
-  startAfter
+  startAfter,
 } from "firebase/firestore/lite";
 
 const Gallery = ({ takePhoto, onClick }) => {
@@ -38,7 +38,10 @@ const Gallery = ({ takePhoto, onClick }) => {
     if (background.current) {
       const cnt = arrows.length;
       if (280 + (cnt + 1) * 800 < backgroundHeight) {
-        const newArr = [...arrows,<ScrollDown key={cnt+1} top_={cnt * 800 + 700} />];
+        const newArr = [
+          ...arrows,
+          <ScrollDown key={cnt + 1} top_={cnt * 800 + 700} />,
+        ];
         setArrows(newArr);
       }
     }
@@ -98,7 +101,7 @@ const Gallery = ({ takePhoto, onClick }) => {
       setEndOfData(true);
     }
     setIsLoading(false);
-
+  };
   //   o?? ???? ?? ???? ????????
   useEffect(() => {
     window.scroll({
