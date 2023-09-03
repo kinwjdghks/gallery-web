@@ -1,7 +1,6 @@
 import Gallery from "./Components/Gallery";
 import Header from "./Components/Header";
 import "./App.css";
-import PhotoModal from "./Components/PhotoModal";
 import { useCallback, useState } from "react";
 
 function App() {
