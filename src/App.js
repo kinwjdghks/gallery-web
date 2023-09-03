@@ -10,7 +10,7 @@ function App() {
   return (
     <>
       <Header onClick={toggleModal} />
-      <Gallery takePhoto={takePhoto} onClick={toggleModal} />
+      <Gallery takePhoto={takePhoto} onToggleModalHandler={toggleModal} />
     </>
   );
 }

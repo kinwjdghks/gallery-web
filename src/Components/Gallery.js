@@ -15,7 +15,7 @@ import {
   startAfter
 } from "firebase/firestore/lite";
 
-const Gallery = ({ takePhoto, onClick }) => {
+const Gallery = ({ takePhoto, onToggleModalHandler }) => {
   const [photos, setPhotos] = useState([]);
   //이 Timestamp 이전의 사진들은 모두 로드됨.
   let timeStamp = useRef(null);
@@ -104,20 +104,20 @@ const Gallery = ({ takePhoto, onClick }) => {
   };
     
 //   처음 실행 시 사진 가져오기
-  useEffect(()=>{
-      console.log('처음 사진 가져오기');
-      //스크롤 맨 위에서 시작안하는 현상 수정
-      window.scroll({
-        top: 0,
-        behavior: "instant",
-      });
-      getMorePhotos();
-    }
-  ,[]);
+  // useEffect(()=>{
+  //     console.log('처음 사진 가져오기');
+  //     //스크롤 맨 위에서 시작안하는 현상 수정
+  //     window.scroll({
+  //       top: 0,
+  //       behavior: "instant",
+  //     });
+  //     getMorePhotos();
+  //   }
+  // ,[]);
 
   return (
     <>
-      {takePhoto && <PhotoModal onClick={onClick} />}
+      {takePhoto && <PhotoModal onToggleModalHandler={onToggleModalHandler} />}
       <div className={styles.background} ref={background}>
         <div className={styles.albumContainer}>
           {photos.map((data, index) => {
