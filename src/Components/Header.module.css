@@ -1,65 +1,97 @@
-/* .headerContainer{
-  height: calc(165px+ 165px);
-  top:-165px;
-  width: 100vw;
-  position: fixed;
-  left:0;
-  z-index:1;
-} */
 .header {
   height: 175px;
   width: 100vw;
   z-index: 2;
   background-color: #e0e0e0;
   position: fixed;
-  left:0;
-  top: 0px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
+.comitPhoto {
+  font-family: "cocogoose";
+  font-weight: 900;
+  font-size: 80px;
+  line-height: normal;
 
-
-.logo {
-  float: right;
-  margin-top: 10px;
-  margin-right: calc(50vw - 737.5px);
+  position: relative;
+  left: calc(50% - 737.5px);
 }
-
-.btn {
-    float:right;
-    border-radius: 10px;
-    padding: 10px 40px;
-    font-family: 'cocogoose';
-    font-weight: 900;
-    font-size: 30px;
-    cursor: pointer;
-    background-color: #603EBB;
-    color: white;
-    margin-top: calc(175px - 80px);
-    margin-right: -70px;
-    
-  }
-  .btn:hover{
-    background-color: white;
-    color: #603EBB;
-    border: none;
-  }
-
-.comitPhoto{
-      font-family: 'cocogoose';
-      font-weight: 900;
-      font-size: 80px;
-      line-height: normal;
-      display: inline-block;
-      margin-left:calc(50% - 737.5px);
-  }
-.comitPhoto p{
-    height: min-content;
-}
-.comit{
-    margin: 0;
-    color: #603EBB;
+.comit {
+  margin: 0;
+  color: #603ebb;
 }
 .photobooth {
   margin-top: -10px;
   margin-bottom: 0px;
   font-size: 60px;
+}
+
+.logo {
+  position: absolute;
+  left: 130px;
+  top: 20px;
+}
+
+.btn {
+  width: 418px;
+  height: 80px;
+  padding: 0;
+  border: 0;
+  box-shadow: 0 0 0 2px black;
+  border-radius: 10px;
+  font-family: "cocogoose";
+  font-weight: 900;
+  font-size: 37px;
+  cursor: pointer;
+  background-color: #603ebb;
+  color: white;
+  outline: none;
+
+  display: inline-block;
+  position: relative;
+  /* top: calc(66px - 20px); */
+  right: 40px;
+  transform-style: preserve-3d;
+  transition: transform 150ms cubic-bezier(0, 0, 0.58, 1);
+  box-sizing: border-box;
+}
+.btn::before {
+  position: absolute;
+  box-sizing: border-box;
+  content: "";
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgb(50, 25, 121);
+  border-radius: inherit;
+  box-shadow: 0 0 0 2px black, 0 0.4em 0 0 rgb(173, 173, 173);
+  transform: translate3d(0, 0.5em, -0.1em);
+  transition: transform 150ms cubic-bezier(0, 0, 0.58, 1),
+    box-shadow 150ms cubic-bezier(0, 0, 0.58, 1);
+}
+.btn:hover {
+  background-color: white;
+  transform: translate(0, 0.25em);
+  color: #603ebb;
+}
+.btn:hover::before {
+  box-shadow: 0 0 0 2px black, 0 0.3em 0 0 rgb(173, 173, 173);
+  transform: translate3d(0, 0.25em, -1em);
+}
+.btn:active {
+  background: white;
+  transform: translate(0em, 0.75em);
+}
+.btn:active::before {
+  box-shadow: 0 0 0 2px black, 0 0 0 rgb(173, 173, 173);
+  transform: translate3d(0, 0, -1em);
+}
+
+.comitPhoto p {
+  height: min-content;
 }

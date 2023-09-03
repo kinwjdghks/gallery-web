@@ -40,9 +40,9 @@ const Modal = ({ onClick }) => {
   const playES = () => {
     es.play();
   };
-  
+
   const createBlankAlbum = useCallback(async () => {
-    const id = new Date().getTime() % 100000000;
+    const id = new Date().getTime() % 200000000;
     const timestamp = serverTimestamp();
     const newPhoto = {
       id: +id,
@@ -94,7 +94,7 @@ const Modal = ({ onClick }) => {
     { width: 800, height: 600 },
   ];
   const [vidConfigIdx, setVidConfigIdx] = useState(0);
-  const [selectedSkin,setSelectedSkin] = useState(0);
+  const [selectedSkin, setSelectedSkin] = useState(0);
   const curWidth = vidConfigList[vidConfigIdx].width;
   const curHeight = vidConfigList[vidConfigIdx].height;
 
@@ -107,7 +107,7 @@ const Modal = ({ onClick }) => {
         console.log(cnt);
         if (cnt > 0) {
           // console.log("count executed");
-          
+
           setPhotoAnimation(
             <div
               className={`${styles.animation} ${styles.counting}`}
@@ -141,7 +141,7 @@ const Modal = ({ onClick }) => {
       const upload = await uploadString(storageRef, file, "data_url");
       const geturl = await getDownloadURL(sRef(storage, storageRef));
       saveToFireStore(geturl);
-      console.log("Image url: "+geturl);
+      console.log("Image url: " + geturl);
     } catch (error) {
       console.log(error);
     }
@@ -149,14 +149,14 @@ const Modal = ({ onClick }) => {
   };
 
   const saveToFireStore = async (imgurl) => {
-    let id = new Date().getTime() % 100000000;
+    let id = new Date().getTime() % 200000000;
     const timestamp = serverTimestamp();
     const newPhoto = {
       id: +id,
       url: imgurl,
       vidConfig: vidConfigIdx,
       skin: selectedSkin,
-      timestamp: timestamp
+      timestamp: timestamp,
     };
     try {
       const photos = collection(db, "Photos");
@@ -169,7 +169,8 @@ const Modal = ({ onClick }) => {
     console.log("image firebase sent");
   };
 
-  const takePhoto = useCallback((e) => {
+  const takePhoto = useCallback(
+    (e) => {
       e.preventDefault();
       setPhotoTaken(true);
       animation(5);
@@ -184,8 +185,8 @@ const Modal = ({ onClick }) => {
   );
   const savePhoto = async () => {
     console.log("savePhoto executed");
-    await saveToFirebaseStorage(imgfile,saveToFireStore);
-    setBlankBuffer((prev) => prev-1);
+    await saveToFirebaseStorage(imgfile, saveToFireStore);
+    setBlankBuffer((prev) => prev - 1);
     onClick();
     window.location.reload();
   };
@@ -238,7 +239,7 @@ const Modal = ({ onClick }) => {
   );
 };
 
-const PhotoModal = ({onClick }) => {
+const PhotoModal = ({ onClick }) => {
   return (
     <>
       {ReactDOM.createPortal(
