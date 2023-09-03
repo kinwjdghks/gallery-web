@@ -10,6 +10,7 @@ import building from "../assets/skins/design1_square.svg";
 import temple from "../assets/Images/명륜당.svg";
 import sungkyuni from "../assets/Images/성균이.svg";
 import leaves from "../assets/Images/낙엽.svg";
+import loading from "../assets/Images/loading.svg";
 
 const FrameButtons = ({
   isLoading,
@@ -70,6 +71,7 @@ const FrameButtons = ({
               className={`${styles.btndesign} ${styles.skin1}`}
               width="287"
               src={building}
+              alt='btndesign'
             />
           </button>
           <button
@@ -80,6 +82,7 @@ const FrameButtons = ({
               className={`${styles.btndesign} ${styles.skin2}`}
               width="300"
               src={temple}
+              alt='btndesign'
             />
           </button>
           <button
@@ -90,17 +93,24 @@ const FrameButtons = ({
               className={`${styles.btndesign} ${styles.skin3} ${styles.leaves}`}
               width="60"
               src={leaves}
+              alt='btndesign'
             />
             <img
               className={`${styles.btndesign} ${styles.skin3} ${styles.sungkyuni}`}
               width="250"
               src={sungkyuni}
+              alt='btndesign'
             />
           </button>
           <button
             className={`${styles.skinbtn} ${styles.skin4}`}
-            onClick={() => onSkinSelect(4)}
-          ></button>
+            onClick={() => onSkinSelect(4)}>
+            <div className={`${styles.btndesign} ${styles.skin4}`}>
+              <p className={styles.comitfilm1}>COMIT FILM</p>
+              <p className={styles.comitfilm2}>COMIT FILM</p>
+              <p className={styles.comitfilm3}>COMIT FILM</p>
+            </div>
+            </button>
         </>
       )}
       {phase === 2 && (

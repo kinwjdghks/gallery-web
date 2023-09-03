@@ -128,20 +128,20 @@
 }
 
 .right.vertical{
-  transform:rotate(180deg);
-  top: 306.5px;
-  left: 20px;
+  transform:rotate(-90deg);
+  top: 210px;
+  left: 235px;
+  width: 100px;
 }
 .down.vertical{
-  left: 670px;
-  top: 760px;
-  transform: rotate(90deg);
+  left: 170px;
+  top: 307px;
+  transform: rotate(180deg);
 }
 .right.horizontal{
-  transform: rotate(90deg);
-  top: 154px;
-  left: 228px;
-  width: max-content;
+  top: 235px;
+  left: 32px;
+  width: 50px;
 }
 .down.horizontal{
   top: 200px;
@@ -152,13 +152,13 @@
   position: absolute;
 }
 .camera.vertical{
-  top: 150px;
+  top: 50px;
   left: 265px;
   transform: rotate(-90deg);
 }
 .camera.horizontal{
-  top: 265px;
-  left: 145px;
+  top: 270px;
+  left: 240px;
 }
 
 

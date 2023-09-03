@@ -12,7 +12,6 @@ import {
   uploadString,
 } from "firebase/storage";
 import { db } from "../Utility/firebase";
-import { async } from "@firebase/util";
 import {
   collection,
   setDoc,
@@ -128,7 +127,6 @@ const Modal = ({ onToggleModalHandler, modalOpened }) => {
       console.log(error);
     }
     setIsLoading(false);
-    window.location.reload();
   };
 
   const saveToFireStore = async (imgurl) => {
@@ -142,7 +140,6 @@ const Modal = ({ onToggleModalHandler, modalOpened }) => {
       skin: skinIdx,
       timestamp: timestamp,
     };
-    console.log("{" + imgurl + " id: " + id + "}");
     try {
       const photos = collection(db, "Photos");
       await setDoc(doc(photos, `${id}`), newPhoto);
@@ -150,7 +147,6 @@ const Modal = ({ onToggleModalHandler, modalOpened }) => {
       console.log(error);
       return;
     }
-    window.location.reload();
   };
 
   const takePhoto = useCallback(() => {
@@ -164,8 +160,9 @@ const Modal = ({ onToggleModalHandler, modalOpened }) => {
   }, [webcamRef]);
 
   const savePhoto = async () => {
-    onToggleModalHandler();
     await saveToFirebaseStorage(imgfile, saveToFireStore);
+    onToggleModalHandler();
+    window.location.reload();
   };
 
   const deletePhoto = () => {
@@ -251,7 +248,9 @@ const Modal = ({ onToggleModalHandler, modalOpened }) => {
         <div className={styles.borderText}>
           <p className={styles.up}>COMIT FILM</p>
           <p className={`${styles.right} ${classNameByConfig}`}>
-            TAKE YOUR MEMORY
+            TAKE
+            YOUR
+            MEMORY
           </p>
           <div className={styles.left}>
             <p style={{ display: "inline" }}>11</p>
@@ -262,7 +261,7 @@ const Modal = ({ onToggleModalHandler, modalOpened }) => {
             <img
               className={`${styles.camera} ${classNameByConfig}`}
               src={camera}
-              width="110"
+              width="170"
             />
           )}
         </div>

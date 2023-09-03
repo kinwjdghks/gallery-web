@@ -141,7 +141,7 @@ const Gallery = ({ takePhoto, onToggleModalHandler }) => {
       {endOfData && (
         <div className={styles.footer}>
           <a href="https://github.com/skku-comit/gallery-web">
-            <img src={githubIcon} alt="github-icon" rel="external" width={75} />
+            <img src={githubIcon} alt="github-icon" rel="external" width='75' />
           </a>
           <div className={styles.text}>
             <p>Made by Jung Jung Hwan & Kim Ji Ho</p>

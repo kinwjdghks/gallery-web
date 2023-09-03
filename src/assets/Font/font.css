@@ -25,3 +25,8 @@
     font-family: 'gangwonedu';
     src: url('../Font/강원교육튼튼.otf');
 }
+
+@font-face {
+    font-family: 'Josefin';
+    src: url('../Font/JosefinSans-VariableFont_wght.ttf');
+}

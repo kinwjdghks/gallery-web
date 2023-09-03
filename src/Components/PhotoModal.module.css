@@ -61,6 +61,7 @@
 .cam_container.opt4 {
   background-color: white;
   border: 3px solid black;
+  box-sizing: border-box;
 }
 .cam_mask {
   margin: 66.67px;
@@ -134,7 +135,7 @@
 .right.square {
   transform: rotate(90deg);
   top: 400px;
-  left: 710px;
+  left: 705px;
   width: max-content;
 }
 .left {
@@ -154,20 +155,19 @@
 }
 
 .right.vertical {
-  transform: rotate(180deg);
-  top: 850px;
-  left: 100px;
+  transform: rotate(-90deg);
+  width: 200px;
+  top: 630px;
+  left: 630px;
 }
 .down.vertical {
-  left: 670px;
-  top: 760px;
-  transform: rotate(90deg);
+  top: 840px;
+  transform: rotate(180deg);
 }
 .right.horizontal {
-  transform: rotate(90deg);
-  top: 300px;
-  left: 710px;
-  width: max-content;
+  top: 650px;
+  left: 80px;
+  width: 200px;
 }
 .down.horizontal {
   top: 540px;
@@ -178,11 +178,11 @@
   position: absolute;
 }
 .camera.vertical {
-  top: 420px;
-  left: 740px;
+  top: 140px;
+  left: 710px;
   transform: rotate(-90deg);
 }
 .camera.horizontal {
-  top: 750px;
-  left: 420px;
+  top: 725px;
+  left: 630px;
 }

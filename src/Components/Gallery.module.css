@@ -8,6 +8,7 @@
   align-items: center;
   z-index: 0;
   background-color: #e0e0e0;
+  overflow: auto;
 }
 .albumContainer {
   display: grid;
@@ -17,7 +18,11 @@
   row-gap: 30px;
   column-gap: 25px;
   width: 1475px;
-  padding-bottom: 300px;
+  background-color: #d6d6d6;
+  border-radius: 30px;
+  padding: 30px;
+  padding-bottom: 40px;
+  margin-bottom: 200px;
 }
 
 .pageEnd {
@@ -41,14 +46,11 @@
   font-weight: 900;
   margin-top: 500px;
 }
-.pageEnd {
-  background-color: black;
-  width: 100%;
-  height: 50px;
-}
+
 .footer {
   background-color: #e0e0e0;
   margin: 0;
+  padding-bottom: 15px;
   display: flex;
   justify-content: center;
   align-items: center;
