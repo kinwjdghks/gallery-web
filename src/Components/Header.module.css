@@ -45,7 +45,7 @@
   font-family: "gangwonedu";
   font-weight: 900;
   font-size: 37px;
-  cursor: pointer;
+  cursor: url("../assets/Images/mouse-pointer.png") 25 25, auto;
   background-color: #603ebb;
   color: white;
   outline: none;
@@ -85,7 +85,7 @@
 }
 .btn:active {
   background: white;
-  transform: translate(0em, 0.75em);
+  transform: translate(0em, 0.5em);
 }
 .btn:active::before {
   box-shadow: 0 0 0 2px black, 0 0 0 rgb(173, 173, 173);

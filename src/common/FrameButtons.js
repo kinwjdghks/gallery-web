@@ -191,11 +191,15 @@ const FrameButtons = ({
               againHandler();
               setPhase(1);
             }}
-          />
+          >
+            RE?
+          </button>
           <button
             className={`${styles.lastbtn} ${styles.save}`}
             onClick={onSavePhoto}
-          />
+          >
+            SAVE
+          </button>
         </>
       )}
       <button className={styles.close} onClick={onToggleModalHandler}>
