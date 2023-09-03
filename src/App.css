@@ -2,7 +2,7 @@
 
 .App {
   text-align: center;
-  cursor: url("../src/assets/Images/mouse-pointer.png") 50 67, auto;
+  cursor: url("../src/assets/Images/mouse-pointer.png") 25 25, auto;
 }
 .App-logo {
   height: 40vmin;

@@ -7,10 +7,10 @@ function App() {
   const [takePhoto, setTakePhoto] = useState(false);
   const toggleModal = useCallback(() => setTakePhoto((prev) => !prev), []);
   return (
-    <>
+    <div className="App">
       <Header onClick={toggleModal} />
       <Gallery takePhoto={takePhoto} onToggleModalHandler={toggleModal} />
-    </>
+    </div>
   );
 }
 

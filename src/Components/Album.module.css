@@ -26,7 +26,7 @@
 .container.opt4 {
   background-color: white;
   box-shadow: 5px 6px 1px rgb(67, 67, 67);
-} 
+}
 /* skinNum =1 */
 .skkucomit {
   font-family: "cocogoose";
@@ -46,8 +46,8 @@
   font-size: 27px;
   color: #704a18;
 }
-.skku.design3{
-  color: #FFDFBE;
+.skku.design3 {
+  color: #ffdfbe;
 }
 .comit {
   font-size: 33px;
@@ -82,83 +82,81 @@
   left: 0;
   z-index: 10;
 }
-.skinElement.design3.horizontal{
+.skinElement.design3.horizontal {
   top: 94px;
   left: 10px;
 }
-.skinElement.design3.vertical{
+.skinElement.design3.vertical {
   top: 142px;
   left: 0px;
 }
-.skinElement.design3.square{
+.skinElement.design3.square {
   top: 30px;
   left: 0px;
 }
 
-.borderText p{
-  font-family: 'gangwonedu';
+.borderText p {
+  font-family: "gangwonedu";
   font-size: 20px;
   position: absolute;
 }
-.up{
-  top:-17px;
-  left:113px;
+.up {
+  top: -17px;
+  left: 113px;
 }
-.right.square{
+.right.square {
   transform: rotate(90deg);
   top: 145px;
   left: 228px;
   width: max-content;
 }
-.left{
+.left {
   display: flex;
   position: absolute;
   top: 40px;
-  left:3px;
+  left: 3px;
 }
-.left p{
+.left p {
   display: inline-block;
   transform: rotate(-90deg);
   margin-left: 3px;
 }
-.down.square{
+.down.square {
   top: 307px;
-  left:162px;
+  left: 162px;
   transform: rotate(180deg);
 }
 
-.right.vertical{
-  transform:rotate(180deg);
+.right.vertical {
+  transform: rotate(180deg);
   top: 306.5px;
   left: 20px;
 }
-.down.vertical{
+.down.vertical {
   left: 670px;
   top: 760px;
   transform: rotate(90deg);
 }
-.right.horizontal{
+.right.horizontal {
   transform: rotate(90deg);
   top: 154px;
   left: 228px;
   width: max-content;
 }
-.down.horizontal{
+.down.horizontal {
   top: 200px;
   left: 2px;
   transform: rotate(-90deg);
 }
-.camera{
+.camera {
   position: absolute;
 }
-.camera.vertical{
+.camera.vertical {
   top: 150px;
   left: 265px;
   transform: rotate(-90deg);
 }
-.camera.horizontal{
+.camera.horizontal {
   top: 265px;
   left: 145px;
 }
-
-
