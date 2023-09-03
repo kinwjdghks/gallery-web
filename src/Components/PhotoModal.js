@@ -35,19 +35,20 @@ const Modal = ({ onClick }) => {
   const [imgfile, setImgfile] = useState(null);
   const [imgpreview, setImgpreview] = useState(null);
   const [photoTaken, setPhotoTaken] = useState(false);
+  const [blankBuffer, setBlankBuffer] = useState(Math.floor(Math.random() * 4));
   //sound
   const es = EffectSound(effect, 1);
   const playES = () => {
     es.play();
   };
-  //�������� ��� ���� �� �� image��ü ������
   const createBlankAlbum = useCallback(async () => {
-    const id = new Date().getTime()%100000000;
+    const id = new Date().getTime() % 100000000;
     const timestamp = serverTimestamp();
     const newPhoto = {
       id: +id,
       url: "blank",
       timestamp: timestamp,
+      vidConfig: vidConfigIdx,
     };
     try {
       const photos = collection(db, "Photos");
@@ -56,7 +57,6 @@ const Modal = ({ onClick }) => {
       console.log(error);
       return;
     }
-    console.log("Blank Album �������");
   }, []);
 
   useEffect(() => {
@@ -66,7 +66,6 @@ const Modal = ({ onClick }) => {
     }
   }, [blankBuffer]);
 
-  //���� �Կ� �� preview �̹��� ����
   useEffect(() => {
     if (imgfile) {
       setImgpreview(
@@ -129,7 +128,7 @@ const Modal = ({ onClick }) => {
     [vidConfigIdx, vidConfigList]
   );
 
-  const saveToFirebaseStorage = async (file,saveToFireStore) => {
+  const saveToFirebaseStorage = async (file, saveToFireStore) => {
     const id = new Date().getTime();
     const storageRef = sRef(storage, "Images/" + id);
     console.log("saved to fireStorage");
@@ -139,6 +138,7 @@ const Modal = ({ onClick }) => {
       // console.log(upload)
       const geturl = await getDownloadURL(sRef(storage, storageRef));
       saveToFireStore(geturl);
+      console.log("geturl");
       console.log(geturl);
     } catch (error) {
       console.log(error);
@@ -147,9 +147,10 @@ const Modal = ({ onClick }) => {
   };
 
   const saveToFireStore = async (imgurl) => {
-    let id = new Date().getTime()%100000000;
+    let id = new Date().getTime() % 100000000;
     const timestamp = serverTimestamp();
     const newPhoto = {
+      id: +id,
       id: +id,
       url: imgurl,
       timestamp: timestamp,
@@ -172,21 +173,22 @@ const Modal = ({ onClick }) => {
     (e) => {
       setPhotoTaken(true);
       e.preventDefault();
-      animation(1);
+      animation(5);
       const timer = setTimeout(() => {
         const imageSrc = webcamRef.current.getScreenshot();
         setImgfile(imageSrc);
         playES();
-      }, 2000);
+      }, 6000);
       return () => clearTimeout(timer);
     },
     [webcamRef, animation]
   );
-  const savePhoto = async() => {
+  const savePhoto = async () => {
     console.log("savePhoto executed");
     await saveToFirebaseStorage(imgfile,saveToFireStore);
     setBlankBuffer((prev) => prev-1);
     onClick();
+    window.location.reload();
   };
 
   const deletePhoto = () => {

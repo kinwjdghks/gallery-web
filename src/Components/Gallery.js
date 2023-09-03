@@ -21,20 +21,20 @@ const Gallery = ({ takePhoto, onClick }) => {
   let timeStamp = useRef(null);
   //더 이상 불러올 데이터가 없는지
   const [endOfData, setEndOfData] = useState(false);
-  //데이터 로딩중
+  //?????? ?��???
   const [isLoading, setIsLoading] = useState(false);
   const [backgroundHeight, setBackgroundHeight] = useState(0);
-  // <ScrollDown/> 개수
+  // <ScrollDown/> ����
   const [arrows, setArrows] = useState([<ScrollDown key={0} top_={900} />]);
 
   const background = useRef(null);
-  //새로 데이터가 로딩될때마다 background 높이 업데이트하기
+  //���� �����Ͱ� �ε��ɶ����� background ���� ������Ʈ�ϱ�
   useEffect(() => {
     if (background.current) {
       setBackgroundHeight(background.current.getBoundingClientRect().height);
     }
   }, [isLoading]);
-  //일정 높이에 도달할 때마다 <ScrollDown /> 추가하기
+  //���� ���̿� ������ ������ <ScrollDown /> �߰��ϱ�
   useEffect(() => {
     if (background.current) {
       const cnt = arrows.length;
@@ -45,7 +45,7 @@ const Gallery = ({ takePhoto, onClick }) => {
     }
   }, [backgroundHeight]);
 
-  //가장 아래에 닿으면 데이터를 10개씩 더 가져온다.
+  //���� �Ʒ��� ������ �����͸� 10���� �� �����´�.
   const pageEnd = useRef(null);
 
     useEffect(()=>{
@@ -94,7 +94,7 @@ const Gallery = ({ takePhoto, onClick }) => {
             orderBy("id","desc"),
             limit(10));
     }
-    
+
     setIsLoading(true);
     const dataSnapShot = await getDocs(queryTemp);
     const dataList = dataSnapShot.docs.map((doc) => doc.data());
@@ -133,7 +133,7 @@ const Gallery = ({ takePhoto, onClick }) => {
             }
           })}
         </div>
-        {isLoading && <div className={styles.loadingDiv}> Loading...</div>}
+        {isLoading && <div className={styles.loadingDiv}>Loading...</div>}
         {arrows}
       </div>
       {!endOfData && <div className={styles.pageEnd} ref={pageEnd}></div>}
