@@ -11,7 +11,6 @@ import FrameAniImage2 from "../assets/buttons/frameImage2.svg";
 const FrameButtons = ({
   isLoading,
   imgfile,
-  photoTaken,
   onTakePhoto,
   onSavePhoto,
   onDeletePhoto,
