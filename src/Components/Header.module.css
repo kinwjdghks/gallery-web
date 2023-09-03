@@ -21,6 +21,7 @@
 .comit {
   margin: 0;
   color: #603ebb;
+  text-shadow: 3px 5px 1px rgb(187, 187, 187);
 }
 .photobooth {
   margin-top: -10px;

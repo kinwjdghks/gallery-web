@@ -109,19 +109,19 @@ const FrameButtons = ({
             className={`${styles.framebtn} ${styles.square}`}
             onClick={() => onFrameSelect(0)}
           >
-            1:1
+            정방형
           </button>
           <button
             className={`${styles.framebtn} ${styles.vertical}`}
             onClick={() => onFrameSelect(1)}
           >
-            3:4
+            세로
           </button>
           <button
             className={`${styles.framebtn} ${styles.horizontal}`}
             onClick={() => onFrameSelect(2)}
           >
-            4:3
+            가로
           </button>
         </>
       )}

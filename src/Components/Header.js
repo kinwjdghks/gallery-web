@@ -5,10 +5,12 @@ import logo from "../assets/Images/Logo.svg";
 //imports
 import { useState, useEffect, useCallback, useRef } from "react";
 const Header = ({ onClick }) => {
-  const [position, setPosition] = useState(window.pageYOffset);
-  const [tempTop, setTempTop] = useState(0);
-  const headerRef = useRef(null);
-  const throttleRef = useRef(null);
+  
+  const [isBtnHovered, setIsBtnHovered] = useState(false);
+  // const [position, setPosition] = useState(window.pageYOffset);
+  // const [tempTop, setTempTop] = useState(0);
+  // const headerRef = useRef(null);
+  // const throttleRef = useRef(null);
 
   //   const scrollDetectHandler = useCallback((e) => {
   //         const scrollTop = e.target.documentElement.scrollTop;
@@ -52,8 +54,10 @@ const Header = ({ onClick }) => {
       </div>
 
       <img width="122" src={logo} className={styles.logo} />
-      <button className={styles.btn} onClick={onClick}>
-        사진찍기 ㄱㄱ
+      <button className={styles.btn} onClick={onClick}
+       onMouseEnter={()=>setIsBtnHovered(true)}
+      onMouseLeave={()=>setIsBtnHovered(false)}>
+      {!isBtnHovered ? "사진찍기 ㄱㄱ" : "스마일~"}
       </button>
     </div>
   );

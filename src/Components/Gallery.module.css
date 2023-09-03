@@ -22,8 +22,7 @@
 
 .pageEnd {
   width: 100vw;
-  height: 3px;
-  background-color: red;
+  height: 5px;
 }
 .loadingDiv {
   width: 100vw;
@@ -42,7 +41,11 @@
   font-weight: 900;
   margin-top: 500px;
 }
-
+.pageEnd {
+  background-color: black;
+  width: 100%;
+  height: 50px;
+}
 .footer {
   background-color: #e0e0e0;
   margin: 0;
