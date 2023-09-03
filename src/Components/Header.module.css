@@ -42,7 +42,6 @@
   border: 0;
   box-shadow: 0 0 0 2px black;
   border-radius: 10px;
-  /* font-family: "cocogoose"; */
   font-family: "gangwonedu";
   font-weight: 900;
   font-size: 37px;
@@ -53,7 +52,6 @@
 
   display: inline-block;
   position: relative;
-  /* top: calc(66px - 20px); */
   right: 80px;
   transform-style: preserve-3d;
   transition: transform 150ms cubic-bezier(0, 0, 0.58, 1);
