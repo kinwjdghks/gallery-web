@@ -59,6 +59,24 @@
   font-size: 90px;
   color: #603ebb;
   text-shadow: 3px 5px 1px rgb(187, 187, 187);
+  animation: wiggle 2.5s infinite;
+}
+@keyframes wiggle {
+  0%{
+    transform: rotate(0deg);
+  }
+  80%{
+    transform: rotate(0deg);
+  }
+  85%{
+    transform: rotate(5deg);
+  }
+  95%{
+    transform: rotate(-5deg);
+  }
+  100%{
+    transform: rotate(0deg);
+  }
 }
 .photobooth {
   position: relative;
@@ -161,20 +179,20 @@
 .btndesign.skin4{
   font-family: 'josefin';
   font-size: 60px;
-  font-weight: 300;
-  top:-30px;
-  left:-50px;
+  font-weight: 700;
+  top:0px;
+  left:-70px;
   transform: rotate(-30deg);
 }
 .btndesign.skin4 p{
-  margin-bottom: -40px;
+  margin-bottom: -50px;
   width: max-content;
 }
 .comitfilm1{
-  margin-left: 40px;
+  margin-left: 70px;
 }
 .comitfilm3{
-  margin-left: -40px;
+  margin-left: -70px;
 }
 
 /* photoTaking Animation */
@@ -203,6 +221,16 @@
     opacity: 0;
   }
 }
+.smile{
+  font-family: josefin;
+  font-weight: 400;
+  font-size:50px;
+  position: absolute;
+  top: 260px;
+  left:640px;
+  color: black;
+  transform: rotate(30deg);
+}
 
 .movebtn {
   grid-area: move;
@@ -213,11 +241,13 @@
   justify-self: center;
   align-self: self-start;
   font-family: "cocogoose";
+  font-weight: 600;
 }
 .movebtn.nextbtn {
   font-size: 60pt;
 }
 .movebtn.takePhoto {
+  font-family: 'gangwonedu';
   font-size: 52pt;
 }
 .movebtn,
@@ -292,12 +322,18 @@
   background: url("../assets/buttons/close-modal.png") center center/contain
     no-repeat;
 }
-/* @media (max-width: 700px) {
-  .close{
-    right: 0px;
+.loading{
+  animation: rotate 1s ease-out infinite;
+}
+@keyframes rotate {
+  0%{
+    transform: rotate(0deg);
   }
-} */
 
+  100%{
+    transform: rotate(360deg);
+  }
+}
 .lastbtn {
   width: 380px;
   height: 180px;
@@ -309,6 +345,7 @@
   cursor: url("../assets/Images/mouse-pointer2.png") 25 25, auto;
   font-family: "cocogoose";
   font-size: 52pt;
+  font-weight: 550;
   border-radius: 30px;
   position: relative;
 }

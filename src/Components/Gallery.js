@@ -125,7 +125,7 @@ const Gallery = ({ takePhoto, onToggleModalHandler }) => {
       )}
       <div className={styles.background} ref={background}>
         {!photos.length && <div className={styles.noPic}>사진찍기 ㄱㄱ</div>}
-        <div className={styles.albumContainer}>
+        {photos.length && <div className={styles.albumContainer}>
           {photos.map((data, index) => {
             if (data.url === "blank") {
               return <BlankAlbum key={index} />;
@@ -134,6 +134,7 @@ const Gallery = ({ takePhoto, onToggleModalHandler }) => {
             }
           })}
         </div>
+      }
         {isLoading && <div className={styles.loadingDiv}>Loading...</div>}
         {arrows}
       </div>
@@ -144,7 +145,7 @@ const Gallery = ({ takePhoto, onToggleModalHandler }) => {
             <img src={githubIcon} alt="github-icon" rel="external" width='75' />
           </a>
           <div className={styles.text}>
-            <p>Made by Jung Jung Hwan & Kim Ji Ho</p>
+            <p>Made by Jung Jung Hwan & Kim Ji Ho & Hong Min Jae</p>
             <p>https://comit.skku.io/</p>
             <p>2023. Copyright © COMIT All rights reserved</p>
           </div>

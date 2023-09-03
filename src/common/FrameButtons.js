@@ -1,4 +1,4 @@
-import { React, useEffect, useState, useCallback } from "react";
+import { React, useState, useCallback } from "react";
 //imports
 
 //css
@@ -15,6 +15,8 @@ import loading from "../assets/Images/loading.svg";
 const FrameButtons = ({
   isLoading,
   imgfile,
+  whileTimer,
+  onStartTimer,
   onTakePhoto,
   onSavePhoto,
   onDeletePhoto,
@@ -137,6 +139,7 @@ const FrameButtons = ({
       )}
 
       {phase === 3 && (
+        <>
         <img
           src={SmileImage}
           alt="SmileImage"
@@ -147,6 +150,8 @@ const FrameButtons = ({
             width: 500,
           }}
         />
+        <div className={styles.smile}>Smile!</div>
+        </>
       )}
 
       {phase === 4 && !imgfile && photoAnimation}
@@ -178,9 +183,10 @@ const FrameButtons = ({
             setPhase(4);
             animation(5);
             onTakePhoto();
+            onStartTimer();
           }}
         >
-          TAKE A PICTURE
+          준비 완료!
         </button>
       )}
       {phase === 4 && imgfile && (
@@ -198,13 +204,14 @@ const FrameButtons = ({
             className={`${styles.lastbtn} ${styles.save}`}
             onClick={onSavePhoto}
           >
-            SAVE
+            {isLoading ? <img width='50'src={loading} className={styles.loading} />
+            :"SAVE"}
           </button>
         </>
       )}
-      <button className={styles.close} onClick={onToggleModalHandler}>
+      {!whileTimer && <button className={styles.close} onClick={onToggleModalHandler}>
         X
-      </button>
+      </button>}
     </div>
   );
 };

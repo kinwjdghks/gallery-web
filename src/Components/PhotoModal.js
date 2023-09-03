@@ -43,6 +43,8 @@ const Modal = ({ onToggleModalHandler, modalOpened }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [imgfile, setImgfile] = useState(null);
   const [imgpreview, setImgpreview] = useState(null);
+  const [whileTimer,setWhileTimer] = useState(false);
+  const startTimer = () => setWhileTimer(true);
 
   //sound
   const es = EffectSound(effect, 1);
@@ -104,7 +106,7 @@ const Modal = ({ onToggleModalHandler, modalOpened }) => {
     { width: 800, height: 600 },
   ];
   const [vidConfigIdx, setVidConfigIdx] = useState(0);
-  const [skinIdx, setSkinIdx] = useState(0);
+  const [skinIdx, setSkinIdx] = useState(1);
   const curWidth = vidConfigList[vidConfigIdx].width;
   const curHeight = vidConfigList[vidConfigIdx].height;
 
@@ -155,6 +157,7 @@ const Modal = ({ onToggleModalHandler, modalOpened }) => {
       setImgfile(imageSrc);
 
       playES();
+      setWhileTimer(false);
     }, 6000);
     return () => clearTimeout(timer);
   }, [webcamRef]);
@@ -274,6 +277,7 @@ const Modal = ({ onToggleModalHandler, modalOpened }) => {
         {skinElement}
         <div className={`${styles.cam_mask} ${classNameByConfig}`}>
           {imgpreview}
+          {imgfile && <div className={styles.shutter}></div>}
           <Webcam
             className={styles.webcam}
             audio={false}
@@ -289,6 +293,8 @@ const Modal = ({ onToggleModalHandler, modalOpened }) => {
         <FrameButtons
           isLoading={isLoading}
           imgfile={imgfile}
+          whileTimer = {whileTimer}
+          onStartTimer = {startTimer}
           onTakePhoto={takePhoto}
           onSavePhoto={savePhoto}
           onDeletePhoto={deletePhoto}

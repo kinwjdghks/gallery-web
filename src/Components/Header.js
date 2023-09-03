@@ -57,7 +57,7 @@ const Header = ({ onClick }) => {
       <button className={styles.btn} onClick={onClick}
        onMouseEnter={()=>setIsBtnHovered(true)}
       onMouseLeave={()=>setIsBtnHovered(false)}>
-      {!isBtnHovered ? "사진찍기 ㄱㄱ" : "스마일~"}
+      {!isBtnHovered ? "사진찍으러 ㄱㄱ" : "스마일~"}
       </button>
     </div>
   );
