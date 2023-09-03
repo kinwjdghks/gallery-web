@@ -29,7 +29,7 @@ const BackDrop = () => {
   return <div className={styles.backdrop}></div>;
 };
 
-const Modal = ({ onClick }) => {
+const Modal = ({ onToggleModalHandler }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [imgfile, setImgfile] = useState(null);
   const [imgpreview, setImgpreview] = useState(null);
@@ -42,6 +42,7 @@ const Modal = ({ onClick }) => {
   };
 
   const createBlankAlbum = useCallback(async () => {
+    const id = new Date().getTime() % 200000000;
     const id = new Date().getTime() % 200000000;
     const timestamp = serverTimestamp();
     const newPhoto = {
@@ -94,11 +95,13 @@ const Modal = ({ onClick }) => {
     { width: 800, height: 600 },
   ];
   const [vidConfigIdx, setVidConfigIdx] = useState(0);
-  const [selectedSkin, setSelectedSkin] = useState(0);
+  const [skinIdx, setSkinIdx] = useState(0);
   const curWidth = vidConfigList[vidConfigIdx].width;
   const curHeight = vidConfigList[vidConfigIdx].height;
-
   const [photoAnimation, setPhotoAnimation] = useState(null);
+
+  const selectVidConfigHandler = (idx) => setVidConfigIdx(0);
+  const selectSkinHandler = (idx) => setSkinIdx(0);
 
   const animation = useCallback(
     (time) => {
@@ -155,7 +158,7 @@ const Modal = ({ onClick }) => {
       id: +id,
       url: imgurl,
       vidConfig: vidConfigIdx,
-      skin: selectedSkin,
+      skin: skinIdx,
       timestamp: timestamp,
     };
     try {
@@ -169,25 +172,21 @@ const Modal = ({ onClick }) => {
     console.log("image firebase sent");
   };
 
-  const takePhoto = useCallback(
-    (e) => {
-      e.preventDefault();
-      setPhotoTaken(true);
-      animation(5);
-      const timer = setTimeout(() => {
-        const imageSrc = webcamRef.current.getScreenshot();
-        setImgfile(imageSrc);
-        playES();
-      }, 6000);
-      return () => clearTimeout(timer);
-    },
-    [webcamRef, animation]
-  );
+  const takePhoto = useCallback(() => {
+    setPhotoTaken(true);
+    animation(5);
+    const timer = setTimeout(() => {
+      const imageSrc = webcamRef.current.getScreenshot();
+      setImgfile(imageSrc);
+      playES();
+    }, 6000);
+    return () => clearTimeout(timer);
+  }, [webcamRef, animation]);
   const savePhoto = async () => {
     console.log("savePhoto executed");
+    onToggleModalHandler();
     await saveToFirebaseStorage(imgfile, saveToFireStore);
     setBlankBuffer((prev) => prev - 1);
-    onClick();
     window.location.reload();
   };
 
@@ -203,9 +202,6 @@ const Modal = ({ onClick }) => {
       ? styles.vertical
       : styles.horizontal;
 
-  const clickHandler = (index) => {
-    setVidConfigIdx(index);
-  };
   return (
     <div className={styles.container}>
       <div className={styles.cam_container}>
@@ -225,21 +221,22 @@ const Modal = ({ onClick }) => {
 
       <div className={styles.actions}>
         <FrameButtons
-          clicked={clickHandler}
           isLoading={isLoading}
           imgfile={imgfile}
           photoTaken={photoTaken}
           onTakePhoto={takePhoto}
           onSavePhoto={savePhoto}
           onDeletePhoto={deletePhoto}
-          onClick={onClick}
+          onToggleModalHandler={onToggleModalHandler}
+          onFrameSelect={selectVidConfigHandler}
+          onSkinSelect={selectSkinHandler}
         />
       </div>
     </div>
   );
 };
 
-const PhotoModal = ({ onClick }) => {
+const PhotoModal = ({ onToggleModalHandler }) => {
   return (
     <>
       {ReactDOM.createPortal(
@@ -247,7 +244,7 @@ const PhotoModal = ({ onClick }) => {
         document.getElementById("backdrop-root")
       )}
       {ReactDOM.createPortal(
-        <Modal onClick={onClick} />,
+        <Modal onToggleModalHandler={onToggleModalHandler} />,
         document.getElementById("PhotoModal-root")
       )}
     </>

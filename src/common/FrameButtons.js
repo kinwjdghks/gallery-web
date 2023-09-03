@@ -1,4 +1,4 @@
-import { React, useState } from "react";
+import { React, useEffect, useState } from "react";
 //imports
 
 //css
@@ -6,36 +6,25 @@ import styles from "./FrameButtons.module.css";
 import ThumbImage from "../assets/Images/thumb.png";
 
 const FrameButtons = ({
-  clicked,
   isLoading,
   imgfile,
   photoTaken,
   onTakePhoto,
   onSavePhoto,
   onDeletePhoto,
-  onClick,
+  onToggleModalHandler,
+  onFrameSelect,
+  onSkinSelect
 }) => {
-  const [frameSelected, setFrameSelected] = useState(false);
-  const [skinSelected, setSkinSelected] = useState(false);
-
-  const clickHandler = () => {
-    if (!frameSelected) {
-      setFrameSelected(true);
-    } else {
-      setSkinSelected(true);
-    }
-  };
+  const [phase,setPhase] = useState(1);
+  useEffect(()=>{console.log('phase: '+phase)},[phase]);
+  //phase 1: frame select phase 2: skin select phase 3: before photo 4: after photo 
   const againHandler = () => {
-    setFrameSelected(false);
-    setSkinSelected(false);
     onDeletePhoto();
   };
-  const classNameByConfig = !frameSelected
-    ? styles.frame
-    : !skinSelected
-    ? styles.skin
-    : !photoTaken
-    ? styles.beforePhoto
+  const classNameByConfig = phase===1 ? styles.frame
+    : phase===2 ? styles.skin
+    : phase===3 ? styles.beforePhoto
     : styles.afterPhoto;
 
   return (
@@ -45,39 +34,35 @@ const FrameButtons = ({
         <p className={styles.photobooth}>Photo Booth</p>
       </div>
 
-      {!frameSelected && (
+      {phase === 1 && <>
         <button
           className={`${styles.framebtn} ${styles.square}`}
-          onClick={() => clicked(0)}
+          onClick={() => onFrameSelect(0)}
         />
-      )}
-
-      {!frameSelected && (
         <button
           className={`${styles.framebtn} ${styles.vertical}`}
-          onClick={() => clicked(1)}
+          onClick={() => onFrameSelect(1)}
         />
-      )}
-      {!frameSelected && (
         <button
           className={`${styles.framebtn} ${styles.horizontal}`}
-          onClick={() => clicked(2)}
+          onClick={() => onFrameSelect(2)}
         />
-      )}
+        </>
+      }
       {/* skin */}
-      {frameSelected && !skinSelected && (
-        <button className={`${styles.skinbtn} ${styles.skin1}`}>A</button>
-      )}
-      {frameSelected && !skinSelected && (
-        <button className={`${styles.skinbtn} ${styles.skin2}`}>B</button>
-      )}
-      {frameSelected && !skinSelected && (
-        <button className={`${styles.skinbtn} ${styles.skin3}`}>C</button>
-      )}
-      {frameSelected && !skinSelected && (
-        <button className={`${styles.skinbtn} ${styles.skin4}`}>D</button>
-      )}
-      {frameSelected && skinSelected && (
+      {phase === 2 && <>
+        <button className={`${styles.skinbtn} ${styles.skin1}`}
+          onClick={() => onSkinSelect(0)}>A</button>
+        <button className={`${styles.skinbtn} ${styles.skin2}`}
+          onClick={() => onSkinSelect(1)}>B</button>
+        <button className={`${styles.skinbtn} ${styles.skin3}`}
+          onClick={() => onSkinSelect(2)}>C</button>
+        <button className={`${styles.skinbtn} ${styles.skin4}`}
+          onClick={() => onSkinSelect(3)}>D</button>
+      </>}
+
+      {/* (phase===3 || (phase===4 && !imgfile)) &&  */}
+      {phase===4 && imgfile && 
         <img
           src={ThumbImage}
           alt="ThumbImage"
@@ -86,35 +71,34 @@ const FrameButtons = ({
             justifySelf: "center",
             alignSelf: "center",
           }}
-        />
-      )}
+        />}
+
       {/* Next */}
-      {!frameSelected || !skinSelected ? (
+      {(phase===1 || phase===2) && 
         <button
           className={`${styles.movebtn} ${styles.nextbtn}`}
-          onClick={clickHandler}
+          onClick={()=>setPhase((prev)=>prev+1)}
         />
-      ) : (
-        /*Take Photo*/
-        !(photoTaken || imgfile) && (
+      }
+    
+      {/*Take Photo*/}
+      {phase===3 && 
           <button
             className={`${styles.movebtn} ${styles.takePhoto}`}
-            onClick={onTakePhoto}
+            onClick={()=>{onTakePhoto(); setPhase(4);}}
           />
-        )
-      )}
-      {skinSelected && imgfile && (
+      }
+
+      {phase===4 && imgfile &&
+        <>
         <button
           className={`${styles.lastbtn} ${styles.again}`}
-          onClick={againHandler}
+          onClick={()=>{againHandler(); setPhase(1)}}
         />
-      )}
-      {skinSelected && imgfile && (
         <button
           className={`${styles.lastbtn} ${styles.save}`}
           onClick={onSavePhoto}
-        />
-      )}
+        /></>}
 
       {/* !isLoading &&
         !imgfile && (
@@ -134,7 +118,7 @@ const FrameButtons = ({
         </button>
       )} */}
 
-      <button className={styles.close} onClick={onClick}>
+      <button className={styles.close} onClick={onToggleModalHandler}>
         X
       </button>
     </div>

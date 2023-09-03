@@ -15,25 +15,25 @@ import {
   startAfter,
 } from "firebase/firestore/lite";
 
-const Gallery = ({ takePhoto, onClick }) => {
+const Gallery = ({ takePhoto, onToggleModalHandler }) => {
   const [photos, setPhotos] = useState([]);
-  //이 Timestamp 이전의 사진들은 모두 로드됨.
+  //?? Timestamp ?????? ???????? ??? ?ε??.
   let timeStamp = useRef(null);
-  //더 이상 불러올 데이터가 없는지
+  //?? ??? ????? ??????? ??????
   const [endOfData, setEndOfData] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [backgroundHeight, setBackgroundHeight] = useState(0);
-  // <ScrollDown/> 배열
+  // <ScrollDown/> ?迭
   const [arrows, setArrows] = useState([<ScrollDown key={0} top_={900} />]);
 
   const background = useRef(null);
-  //데이터를 가져올때마다 backgroundHeight를 업데이트한다.
+  //??????? ??????????? backgroundHeight?? ??????????.
   useEffect(() => {
     if (background.current) {
       setBackgroundHeight(background.current.getBoundingClientRect().height);
     }
   }, [isLoading]);
-  //높이가 일정 수준 증가할 때마다 <ScrollDown />를 추가한다.
+  //????? ???? ???? ?????? ?????? <ScrollDown />?? ??????.
   useEffect(() => {
     if (background.current) {
       const cnt = arrows.length;
@@ -47,7 +47,7 @@ const Gallery = ({ takePhoto, onClick }) => {
     }
   }, [backgroundHeight]);
 
-  //페이지의 마지막에 닿으면 데이터를 더 로딩하는 무한스크롤 코드.
+  //???????? ???????? ?????? ??????? ?? ?ε???? ???????? ???.
   const pageEnd = useRef(null);
 
   useEffect(() => {
@@ -59,7 +59,7 @@ const Gallery = ({ takePhoto, onClick }) => {
       console.log("intersect");
       observer.unobserve(entry.target);
       const response = await getMorePhotos();
-      //다음 데이터 로딩까지 시간 간격을 약간 둔다.
+      //???? ?????? ?ε????? ?ð? ?????? ?? ?д?.
       setTimeout(() => {
         observer.observe(entry.target);
       }, 800);
@@ -67,9 +67,9 @@ const Gallery = ({ takePhoto, onClick }) => {
   };
   const observer = new IntersectionObserver(onIntersect, { threshold: 0 });
 
-  //10개씩 사진 가져오기.
+  //10???? ???? ????????.
   const getMorePhotos = async () => {
-    console.log("사진 가져오기");
+    console.log("???? ????????");
 
     let queryTemp;
     console.log("timeStamp: " + timeStamp);
@@ -105,26 +105,27 @@ const Gallery = ({ takePhoto, onClick }) => {
       timeStamp = dataSnapShot.docs[length - 1];
       setPhotos((prev) => [...prev, ...dataList]);
     } else {
-      //데이터가 더 없으면 표시한다.
+      //??????? ?? ?????? ??????.
       setEndOfData(true);
     }
     setIsLoading(false);
   };
 
   //   처음 실행 시 사진 가져오기
-  useEffect(() => {
-    console.log("처음 사진 가져오기");
-    //스크롤 맨 위에서 시작안하는 현상 수정
-    window.scroll({
-      top: 0,
-      behavior: "smooth",
-    });
-    getMorePhotos();
-  }, []);
+  // useEffect(()=>{
+  //     console.log('처음 사진 가져오기');
+  //     //스크롤 맨 위에서 시작안하는 현상 수정
+  //     window.scroll({
+  //       top: 0,
+  //       behavior: "instant",
+  //     });
+  //     getMorePhotos();
+  //   }
+  // ,[]);
 
   return (
     <>
-      {takePhoto && <PhotoModal onClick={onClick} />}
+      {takePhoto && <PhotoModal onToggleModalHandler={onToggleModalHandler} />}
       <div className={styles.background} ref={background}>
         <div className={styles.albumContainer}>
           {photos.map((data, index) => {
