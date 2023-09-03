@@ -9,17 +9,22 @@
 
   position: relative;
 }
-.container.opt0 {
+/*default
+.container{
+  
+}
+*/
+.container.opt1 {
   background: linear-gradient(#1f1f61 0%, #755d98 60%, #e0a6b2 100%);
 }
-.container.opt1 {
+.container.opt2 {
   background: linear-gradient(#ffc994 0%, #ffa852 60%, #ed743f 100%);
 }
-.container.opt2 {
+.container.opt3 {
   background-color: #044b2d;
 }
 /* 무지
-.container.opt3 {
+.container.opt4 {
   
 } */
 /* skinNum =1 */
