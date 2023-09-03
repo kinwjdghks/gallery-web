@@ -123,7 +123,7 @@ const Gallery = ({ takePhoto, onToggleModalHandler }) => {
         />
       )}
       <div className={styles.background} ref={background}>
-        {!photos.length && <div className={styles.noPic}>No Picture!!</div>}
+        {!photos.length && <div className={styles.noPic}>사진찍기 ㄱㄱ</div>}
         <div className={styles.albumContainer}>
           {photos.map((data, index) => {
             if (data.url === "blank") {

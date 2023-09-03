@@ -67,13 +67,13 @@ const Modal = ({ onToggleModalHandler, modalOpened }) => {
     }
   }, []);
 
-  useEffect(() => {
-    const random = Math.floor(Math.random() * 4);
-    if (!random) {
-      createBlankAlbum();
-      console.log("ºó ¾Ù¹ü »ý¼ºµÊ");
-    }
-  }, [modalOpened]);
+  // useEffect(() => {
+  //   const random = Math.floor(Math.random() * 4);
+  //   if (!random) {
+  //     createBlankAlbum();
+  //     console.log("ï¿½ï¿½ ï¿½Ù¹ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
+  //   }
+  // }, [modalOpened]);
 
   useEffect(() => {
     if (imgfile) {
@@ -163,7 +163,7 @@ const Modal = ({ onToggleModalHandler, modalOpened }) => {
   const saveToFireStore = async (imgurl) => {
     let id = new Date().getTime() % 200000000;
     const timestamp = serverTimestamp();
-    console.log("¹ÞÀº url: " + imgurl);
+    console.log("ï¿½ï¿½ï¿½ï¿½ url: " + imgurl);
     const newPhoto = {
       id: +id,
       url: imgurl,
@@ -175,7 +175,7 @@ const Modal = ({ onToggleModalHandler, modalOpened }) => {
     try {
       const photos = collection(db, "Photos");
       await setDoc(doc(photos, `${id}`), newPhoto);
-      console.log("firestore °´Ã¼ »ý¼ºµÊ");
+      console.log("firestore ï¿½ï¿½Ã¼ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
     } catch (error) {
       console.log(error);
       return;
@@ -188,7 +188,7 @@ const Modal = ({ onToggleModalHandler, modalOpened }) => {
     const timer = setTimeout(() => {
       const imageSrc = webcamRef.current.getScreenshot();
       setImgfile(imageSrc);
-      console.log("imgfile ÀúÀåµÊ");
+      console.log("imgfile ï¿½ï¿½ï¿½ï¿½ï¿½");
       playES();
     }, 6000);
     return () => clearTimeout(timer);
@@ -197,7 +197,7 @@ const Modal = ({ onToggleModalHandler, modalOpened }) => {
   const savePhoto = async () => {
     onToggleModalHandler();
     await saveToFirebaseStorage(imgfile, saveToFireStore);
-    console.log("»çÁø ÀúÀå ¿Ï·á");
+    console.log("ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ï·ï¿½");
   };
 
   const deletePhoto = () => {
@@ -220,7 +220,7 @@ const Modal = ({ onToggleModalHandler, modalOpened }) => {
       : skinIdx === 2
       ? styles.opt2
       : styles.opt3;
-  //???¡Æ ???
+  //???ï¿½ï¿½ ???
   if (skinIdx === 0) {
     const image =
       vidConfigIdx === 0
@@ -233,7 +233,7 @@ const Modal = ({ onToggleModalHandler, modalOpened }) => {
       <img className={styles.skinElement} src={image} width="933" />
     );
   }
-  //?¥é?¡Æ ???
+  //?ï¿½ï¿½?ï¿½ï¿½ ???
   else if (skinIdx === 1) {
     const image =
       vidConfigIdx === 0
@@ -254,7 +254,7 @@ const Modal = ({ onToggleModalHandler, modalOpened }) => {
       </>
     );
   }
-  //????¡Æ ???
+  //????ï¿½ï¿½ ???
   else if (skinIdx === 2) {
     // const image =
     //   vidConfigIdx === 0
@@ -269,7 +269,7 @@ const Modal = ({ onToggleModalHandler, modalOpened }) => {
     //   </>
     // );
   }
-  //???¡Æ ???
+  //???ï¿½ï¿½ ???
   else {
     // if (vidConfigIdx === 0) {
     //   setSkinElement();
