@@ -81,6 +81,7 @@
   cursor: pointer;
   position: relative;
   overflow: hidden;
+  /* outline: none; */
 }
 .framebtn.square {
   grid-area: square;

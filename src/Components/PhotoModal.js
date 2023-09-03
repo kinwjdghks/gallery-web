@@ -68,7 +68,7 @@ const Modal = ({ onToggleModalHandler, modalOpened }) => {
   }, []);
 
   useEffect(() => {
-    const random = Math.floor(Math.random() * 4);
+    const random = Math.floor(Math.random() * 3);
     if (!random) {
       createBlankAlbum();
     }

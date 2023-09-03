@@ -25,9 +25,9 @@ const FrameButtons = ({
   };
   const classNameByConfig =
     phase === 1
-      ? styles.frame
-      : phase === 2
       ? styles.skin
+      : phase === 2
+      ? styles.frame
       : phase === 3
       ? styles.beforePhoto
       : styles.afterPhoto;
@@ -38,42 +38,8 @@ const FrameButtons = ({
         <p className={styles.comit}>COMIT</p>
         <p className={styles.photobooth}>Photo Booth</p>
       </div>
-      {phase === 1 && (
-        <>
-          <button
-            className={`${styles.framebtn} ${styles.square}`}
-            onClick={() => onFrameSelect(0)}
-          ></button>
-          <button
-            className={`${styles.framebtn} ${styles.vertical}`}
-            onClick={() => onFrameSelect(1)}
-          >
-            <img
-              src={FrameAniImage1}
-              alt="AniImage"
-              style={{
-                position: "absolute",
-                left: 40,
-                top: 20,
-              }}
-            />
-            <img
-              src={FrameAniImage2}
-              alt="AniImage2"
-              style={{
-                position: "relative",
-                top: 120,
-              }}
-            />
-          </button>
-          <button
-            className={`${styles.framebtn} ${styles.horizontal}`}
-            onClick={() => onFrameSelect(2)}
-          />
-        </>
-      )}
       {/* skin */}
-      {phase === 2 && (
+      {phase === 1 && (
         <>
           <button
             className={`${styles.skinbtn} ${styles.skin1}`}
@@ -101,6 +67,42 @@ const FrameButtons = ({
           </button>
         </>
       )}
+      {phase === 2 && (
+        <>
+          <button
+            className={`${styles.framebtn} ${styles.square}`}
+            onClick={() => onFrameSelect(0)}
+          ></button>
+          <button
+            className={`${styles.framebtn} ${styles.vertical}`}
+            onClick={() => onFrameSelect(1)}
+          >
+            <img
+              src={FrameAniImage1}
+              alt="AniImage"
+              style={{
+                position: "absolute",
+                left: 40,
+                top: 20,
+              }}
+            />
+            <img
+              src={FrameAniImage2}
+              alt="AniImage2"
+              style={{
+                position: "relative",
+                top: 120,
+                opacity: 0.1,
+              }}
+            />
+          </button>
+          <button
+            className={`${styles.framebtn} ${styles.horizontal}`}
+            onClick={() => onFrameSelect(2)}
+          />
+        </>
+      )}
+
       {(phase === 3 || (phase === 4 && !imgfile)) && (
         <img
           src={SmileImage}
