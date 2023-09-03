@@ -3,7 +3,8 @@ import PhotoModal from "./PhotoModal";
 import BlankAlbum from "./BlankAlbum";
 import Album from "./Album";
 import ScrollDown from "../common/ScrollDown";
-import { useState, useEffect, useRef, useCallback } from "react";
+import { useState, useEffect, useRef } from "react";
+
 import { db } from "../Utility/firebase";
 import {
   collection,
@@ -15,95 +16,105 @@ import {
 } from "firebase/firestore/lite";
 
 const Gallery = ({ takePhoto, onClick }) => {
-  let tempTimeStamp = useRef(null);
-  //?? Timestamp ?????? ???????? ???? ?ε???.
-  // const [curTimeStamp, setCurTimeStamp] = useState(null);
-  //?? ??? ????? ??????? ??????
+  const [photos, setPhotos] = useState([]);
+  //이 Timestamp 이전의 사진들은 모두 로드됨.
+  let timeStamp = useRef(null);
+  //더 이상 불러올 데이터가 없는지
   const [endOfData, setEndOfData] = useState(false);
-  //?????? ?ε???
   const [isLoading, setIsLoading] = useState(false);
   const [backgroundHeight, setBackgroundHeight] = useState(0);
-  // <ScrollDown/> 개수
+  // <ScrollDown/> 배열
   const [arrows, setArrows] = useState([<ScrollDown key={0} top_={900} />]);
 
   const background = useRef(null);
-  //새로 데이터가 로딩될때마다 background 높이 업데이트하기
+  //데이터를 가져올때마다 backgroundHeight를 업데이트한다.
   useEffect(() => {
     if (background.current) {
       setBackgroundHeight(background.current.getBoundingClientRect().height);
     }
   }, [isLoading]);
-  //일정 높이에 도달할 때마다 <ScrollDown /> 추가하기
+  //높이가 일정 수준 증가할 때마다 <ScrollDown />를 추가한다.
   useEffect(() => {
     if (background.current) {
       const cnt = arrows.length;
-      if (280 + (cnt + 1) * 800 < backgroundHeight) {
+      if ((cnt + 1) * 1000 < backgroundHeight) {
         const newArr = [
           ...arrows,
-          <ScrollDown key={cnt + 1} top_={cnt * 800 + 700} />,
+          <ScrollDown key={cnt + 1} top_={cnt * 1000 + 700} />,
         ];
         setArrows(newArr);
       }
     }
   }, [backgroundHeight]);
 
-  //가장 아래에 닿으면 데이터를 10개씩 더 가져온다.
+  //페이지의 마지막에 닿으면 데이터를 더 로딩하는 무한스크롤 코드.
   const pageEnd = useRef(null);
 
+  useEffect(() => {
+    if (pageEnd.current) observer.observe(pageEnd.current);
+  }, []);
+
   const onIntersect = async ([entry], observer) => {
-    console.log("intersect");
     if (entry.isIntersecting) {
+      console.log("intersect");
       observer.unobserve(entry.target);
       const response = await getMorePhotos();
-      observer.observe(entry.target);
+      //다음 데이터 로딩까지 시간 간격을 약간 둔다.
+      setTimeout(() => {
+        observer.observe(entry.target);
+      }, 800);
     }
   };
-  const observer = new IntersectionObserver(onIntersect, { threshold: 0.5 });
+  const observer = new IntersectionObserver(onIntersect, { threshold: 0 });
 
-  const [photos, setPhotos] = useState([]);
-
+  //10개씩 사진 가져오기.
   const getMorePhotos = async () => {
-    //10???? ???? ????????.
-    console.log("getmorePhotos");
-    console.log("curTimeStamp");
-    // console.log(curTimeStamp);
+    console.log("사진 가져오기");
+
     let queryTemp;
-    if (tempTimeStamp) {
-      console.log("If");
-      queryTemp = query(
-        collection(db, "Photos"),
-        orderBy("id", "desc"),
-        startAfter(tempTimeStamp),
-        limit(10)
-      );
-    } else {
-      console.log("Else");
+    console.log("timeStamp: " + timeStamp);
+    if (!timeStamp) {
       //first query
       queryTemp = query(
         collection(db, "Photos"),
         orderBy("id", "desc"),
         limit(10)
       );
+    } else {
+      //first query
+      queryTemp = query(
+        collection(db, "Photos"),
+        orderBy("id", "desc"),
+        startAfter(timeStamp),
+        limit(10)
+      );
     }
 
     setIsLoading(true);
-    const dataSnapShot = await getDocs(queryTemp);
+    let dataSnapShot;
+    try {
+      dataSnapShot = await getDocs(queryTemp);
+    } catch (error) {
+      console.log(error);
+    }
+
     const dataList = dataSnapShot.docs.map((doc) => doc.data());
+
     const length = dataList.length;
     if (length) {
-      console.log("Here");
-      console.log(dataSnapShot.docs[length - 1].data().timestamp);
-      // setCurTimeStamp(dataSnapShot.docs[length - 1]); //?????? ?????? ???????? TimeStamp?? ????
-      tempTimeStamp = dataSnapShot.docs[length - 1];
-
+      timeStamp = dataSnapShot.docs[length - 1];
       setPhotos((prev) => [...prev, ...dataList]);
     } else {
+      //데이터가 더 없으면 표시한다.
       setEndOfData(true);
     }
     setIsLoading(false);
   };
-  //   o?? ???? ?? ???? ????????
+
+  //   처음 실행 시 사진 가져오기
   useEffect(() => {
+    console.log("처음 사진 가져오기");
+    //스크롤 맨 위에서 시작안하는 현상 수정
     window.scroll({
       top: 0,
       behavior: "smooth",
@@ -113,7 +124,7 @@ const Gallery = ({ takePhoto, onClick }) => {
 
   return (
     <>
-      {takePhoto && <PhotoModal photoList={photos} onClick={onClick} />}
+      {takePhoto && <PhotoModal onClick={onClick} />}
       <div className={styles.background} ref={background}>
         <div className={styles.albumContainer}>
           {photos.map((data, index) => {
