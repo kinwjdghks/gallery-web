@@ -8,6 +8,11 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  transition: all 0.5s;
+}
+.header.darkmode{
+  background-color: rgb(36, 36, 36);
+  /* background-color: none; */
 }
 .comitPhoto {
   font-family: "cocogoose";
@@ -22,18 +27,26 @@
   margin: 0;
   margin-top: 10px;
   color: #603ebb;
-  text-shadow: 3px 5px 1px rgb(187, 187, 187);
+  text-shadow: 3px 5px 1px rgb(156, 156, 156);
+}
+.comit.darkmode{
+  text-shadow: 3px 5px 1px white;
 }
 .photobooth {
   margin-top: -10px;
   margin-bottom: 0px;
   font-size: 60px;
+  transition: all 0.5s;
+}
+.photobooth.darkmode{
+  color: white;
 }
 
 .logo {
   position: absolute;
   left: 170px;
   top: 20px;
+  /* cursor: pointer; */
 }
 
 .btn {

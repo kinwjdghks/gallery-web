@@ -4,11 +4,14 @@ import "./index.css";
 import "./assets/Font/font.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
+import DisplayProvider from "./Context/provider/DisplayContextProvider";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   // <React.StrictMode>
+    <DisplayProvider>
     <App />
+    </DisplayProvider>
   // </React.StrictMode>
 );
 

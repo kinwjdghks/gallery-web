@@ -3,7 +3,8 @@ import PhotoModal from "./PhotoModal";
 import BlankAlbum from "./BlankAlbum";
 import Album from "./Album";
 import ScrollDown from "../common/ScrollDown";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useContext } from "react";
+import DisplayContext from "../Context/context/Display";
 
 import { db } from "../Utility/firebase";
 import {
@@ -17,6 +18,7 @@ import {
 //images
 import githubIcon from "../assets/Images/github-icon.png";
 const Gallery = ({ takePhoto, onToggleModalHandler }) => {
+  const darkmode = useContext(DisplayContext).darkmode;
   const [photos, setPhotos] = useState([]);
 
   let timeStamp = useRef(null);
@@ -123,7 +125,7 @@ const Gallery = ({ takePhoto, onToggleModalHandler }) => {
           modalOpened={takePhoto}
         />
       )}
-      <div className={styles.background} ref={background}>
+      <div className={`${styles.background} ${darkmode && styles.darkmode}`} ref={background}>
         {!photos.length && <div className={styles.noPic}>사진찍기 ㄱㄱ</div>}
         {photos.length && <div className={styles.albumContainer}>
           {photos.map((data, index) => {
@@ -140,7 +142,7 @@ const Gallery = ({ takePhoto, onToggleModalHandler }) => {
       </div>
       {!endOfData && <div className={styles.pageEnd} ref={pageEnd} />}
       {endOfData && (
-        <div className={styles.footer}>
+        <div className={`${styles.footer} ${darkmode && styles.darkmode}`}>
           <a href="https://github.com/skku-comit/gallery-web">
             <img src={githubIcon} alt="github-icon" rel="external" width='75' />
           </a>

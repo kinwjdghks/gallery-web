@@ -1,10 +1,7 @@
 import React, { useState, useRef, useEffect, useCallback } from "react";
 import ReactDOM from "react-dom";
-//css
 import styles from "./PhotoModal.module.css";
-//framework
 import Webcam from "react-webcam";
-//firebase
 import {
   getStorage,
   ref as sRef,
@@ -18,7 +15,6 @@ import {
   doc,
   serverTimestamp,
 } from "firebase/firestore/lite";
-//Components
 import FrameButtons from "../common/FrameButtons";
 //sounds
 import EffectSound from "../common/EffectSound";
