@@ -55,7 +55,7 @@ const Modal = ({ onToggleModalHandler, modalOpened }) => {
   let skinElement;
 
   const createBlankAlbum = useCallback(async () => {
-    const id = new Date().getTime() % 200000000;
+    const id = new Date().getTime() % 100000000;
     const timestamp = serverTimestamp();
     const newPhoto = {
       id: +id,
@@ -132,7 +132,7 @@ const Modal = ({ onToggleModalHandler, modalOpened }) => {
   };
 
   const saveToFireStore = async (imgurl) => {
-    let id = new Date().getTime() % 200000000;
+    let id = new Date().getTime() % 100000000;
     const timestamp = serverTimestamp();
 
     const newPhoto = {
