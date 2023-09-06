@@ -1,3 +1,4 @@
+
 .background {
   width: 100vw;
   height: auto;
@@ -14,19 +15,32 @@
 .background.darkmode {
   background-color: rgb(36, 36, 36);
 }
+
 .albumContainer {
   display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-auto-rows: 40vw;
+  row-gap: 2vw;
+  column-gap: 1vw;
+  width: 90vw;
+  margin-top: 14vh;
+  border-radius: 30px;
+  padding: 5vw 2vw;
+  background-color: #d6d6d6;
+}
+@media (min-width:1024px) {
+ .albumContainer{
   margin-top: 240px;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   grid-auto-rows: 350px;
   row-gap: 30px;
   column-gap: 25px;
   width: 1475px;
-  background-color: #d6d6d6;
   border-radius: 30px;
   padding: 30px;
   padding-bottom: 40px;
   margin-bottom: 200px;
+ } 
 }
 
 .pageEnd {

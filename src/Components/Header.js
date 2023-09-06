@@ -19,7 +19,7 @@ const Header = ({ onClick, version }) => {
         <p className={`${styles.photobooth} ${darkmode && styles.darkmode}`}>Photo Booth</p>
       </div>
 
-      <img width="122" src={logo} className={styles.logo} onClick={toggleDarkmode} />
+      <img src={logo} className={styles.logo} onClick={toggleDarkmode} />
       {version!=='mobile' && <button className={styles.btn} onClick={onClick}
        onMouseEnter={()=>setIsBtnHovered(true)}
       onMouseLeave={()=>setIsBtnHovered(false)}>

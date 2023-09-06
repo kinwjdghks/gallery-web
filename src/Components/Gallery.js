@@ -130,16 +130,19 @@ const Gallery = ({ version }) => {
         {photos.length && (
           <div className={styles.albumContainer}>
             {photos.map((data, index) => {
-              if (data.url === "blank") {
+              // if (data.type === "blank") {
+                if (data.url === "blank") {
                 return <BlankAlbum key={index} />;
-              } else {
+              }
+              else if(data.type==="photo"){
+      
                 return <Album key={index} data={data} />;
               }
             })}
           </div>
         )}
         {isLoading && <div className={styles.loadingDiv}>Loading...</div>}
-        {arrows}
+        {version!== 'mobile' && arrows}
       </div>
       {!endOfData && <div className={styles.pageEnd} ref={pageEnd} />}
       {endOfData && (

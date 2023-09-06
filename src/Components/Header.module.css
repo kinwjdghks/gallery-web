@@ -1,5 +1,5 @@
 .header {
-  height: 175px;
+  height: 10vh;
   width: 100vw;
   z-index: 2;
   background-color: #e0e0e0;
@@ -12,20 +12,22 @@
 }
 .header.darkmode {
   background-color: rgb(36, 36, 36);
-  /* background-color: none; */
 }
 .comitPhoto {
   font-family: "cocogoose";
   font-weight: 900;
-  font-size: 80px;
+  font-size: 10vw;
   line-height: normal;
 
-  position: relative;
-  left: calc(50% - 737.5px);
+  position: absolute;
+  top: 0;
+  left: 50vw;
+  transform: translate(-50%,0%);
 }
 .comit {
+  position: relative;
+  top:0;
   margin: 0;
-  margin-top: 10px;
   color: #603ebb;
   text-shadow: 3px 5px 1px rgb(156, 156, 156);
 }
@@ -35,18 +37,44 @@
 .photobooth {
   margin-top: -10px;
   margin-bottom: 0px;
-  font-size: 60px;
+  font-size: 7vw;
   transition: all 0.5s;
 }
 .photobooth.darkmode {
   color: white;
 }
-
-.logo {
+.logo{
   position: absolute;
-  left: 170px;
-  top: 20px;
-  /* cursor: pointer; */
+  top: 5vh;
+  left:10vw;
+  transform: translate(0%,-50%);
+  width: 12vw;
+
+}
+@media (min-width: 1024px) {
+  .header {
+    height: 175px;
+  
+    justify-content: space-between;
+    align-items: center;
+  }
+  .comitPhoto {
+    font-weight: 900;
+    font-size: 80px;
+    left: calc(50% - 737.5px);
+  }
+  .photobooth {
+  margin-top: -10px;
+  margin-bottom: 0px;
+  font-size: 60px;
+  transition: all 0.5s;
+}
+  .logo {
+    left: 170px;
+    top: 20px;
+    width:122px;
+    /* cursor: pointer; */
+  }
 }
 .logo:hover {
   cursor: url("../assets/Images/mouse-pointer-white.png") 25 25, auto;

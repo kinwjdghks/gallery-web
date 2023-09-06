@@ -55,7 +55,7 @@ const Modal = ({ onCloseModal }) => {
     const timestamp = serverTimestamp();
     const newPhoto = {
       id: +id,
-      url: "blank",
+      type: 'blank',
       timestamp: timestamp,
       vidConfig: vidConfigIdx,
     };
@@ -133,6 +133,7 @@ const Modal = ({ onCloseModal }) => {
 
     const newPhoto = {
       id: +id,
+      type:'photo',
       url: imgurl,
       vidConfig: vidConfigIdx,
       skin: skinIdx,

@@ -8,20 +8,78 @@
   }
   /*conatiner*/
   .container {
-    width: 90vw;
+    box-sizing: border-box;
+    width: 94vw;
     height: 90vh;
     border: 5px solid black;
     border-radius: 30px;
     background-color: white;
   
     position: fixed;
-    left: 5vw;
-    top: 2.5vh;
+    left: 3vw;
+    top: 100vh;
     z-index: 32;
-  
+    top: 100vh;
     display: flex;
-    justify-content: space-evenly;
+    flex-direction: column;
+    /* justify-content: center; */
     align-items: center;
     cursor: url("../assets/Images/mouse-pointer-white.png") 25 25, auto;
+    transition: top .6s ease;
+}
+
+
+  .noteinput{
+    width: 75vw;
+    height: 30vh;
+    border: 2px solid black;
+    font-size: 6vw;
+    padding: 5vw;
+    
+  }
+  .noteinput.error{
+    border: 2px solid red;
+    animation: shake 0.2s;
+  }
+  @keyframes shake {
+    0%{
+        transform: translate(0%,0%);
+    }
+    69%{
+        transform: translate(0%,0%);
+    }
+    70%{
+        transform: translate(-3%,0%);
+    }
+    80%{
+        transform: translate(3%,0%);
+    }
+    90%{
+        transform: translate(-3%,0%);
+    }
+    100%{
+        transform: translate(0%,0%);
+    }
   }
   
+  .title{
+    font-size: 36px;
+    width: 300px;
+    font-family: 'gangwonedu';
+    padding: 8vw 12vw;
+    text-align: center;
+  }
+  .actions{
+    width: 68vw;
+    height: 10vw;
+    display: flex;
+    justify-content: space-between;
+    margin: 5vw;
+    position: absolute;
+    top: 60vh;
+  }
+
+  .message{
+    font-size: 5vw;
+    font-family: 'gangwonedu';
+  }

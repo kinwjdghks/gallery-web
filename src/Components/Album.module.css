@@ -1,19 +1,23 @@
 .container {
   box-sizing: border-box;
-  width: 350px;
-  height: 350px;
-  border-radius: 30px;
+  width: 40vw;
+  height: 40vw;
+  border-radius: 4vw;
   background-color: white;
   overflow: hidden;
   display: inline-block;
   position: relative;
   box-shadow: 5px 6px 1px rgb(168, 168, 168);
 }
-/*default
-.container{
 
+@media (min-width: 1024px) {
+  .container{
+    width: 350px;
+    height: 350px;
+    border-radius: 30px;
+  }
 }
-*/
+
 .container.opt1 {
   background: linear-gradient(#1f1f61 0%, #755d98 60%, #e0a6b2 100%);
 }

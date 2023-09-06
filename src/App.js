@@ -1,6 +1,7 @@
 import Gallery from "./Components/Gallery";
 import Header from "./Components/Header";
 import PhotoModal from "./Components/PhotoModal";
+import NoteModal from "./Components/NoteModal";
 import "./App.css";
 import { useCallback, useEffect, useState } from "react";
 import { useMediaQuery } from "react-responsive";
@@ -26,6 +27,8 @@ function App() {
     <div className="App">
       {modal==='photo' && (
         <PhotoModal onCloseModal={()=>setModal('noModal')}/>)}
+      {modal==='note' && (
+        <NoteModal onCloseModal={()=>setModal('noModal')}/>)}
 
       <Header onClick={modalHandler} version={version} />
       <Gallery modal={modal} modalHandler={modalHandler} version={version} />
