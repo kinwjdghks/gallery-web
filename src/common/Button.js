@@ -1,1 +1,18 @@
-//width, height, text, onClick 인자로 받는 버튼.
+//css
+import styles from "../Button.module.css";
+//imports
+
+const Button = ({ text, width, height, onClick }) => {
+  return (
+    <>
+      <button
+        className={styles.btn}
+        style={{ width: width, height: height }}
+        onClick={onClick}
+      >
+        {text}
+      </button>
+    </>
+  );
+};
+export default Button;
