@@ -20,11 +20,11 @@ const Header = ({ onClick, version }) => {
       </div>
 
       <img width="122" src={logo} className={styles.logo} onClick={toggleDarkmode} />
-      <button className={styles.btn} onClick={onClick}
+      {version!=='mobile' && <button className={styles.btn} onClick={onClick}
        onMouseEnter={()=>setIsBtnHovered(true)}
       onMouseLeave={()=>setIsBtnHovered(false)}>
       {!isBtnHovered ? "사진찍으러 ㄱㄱ" : "스마일~"}
-      </button>
+      </button>}
     </div>
   );
 };

@@ -3,6 +3,7 @@ import Header from "./Components/Header";
 import "./App.css";
 import { useCallback, useState } from "react";
 import { useMediaQuery } from "react-responsive";
+import ActionBar from "./Components/ActionBar";
 
 function App() {
   
@@ -22,7 +23,7 @@ function App() {
     <div className="App">
       <Header onClick={toggleModal} version={version} />
       <Gallery takePhoto={takePhoto} onToggleModalHandler={toggleModal} version={version} />
-      
+      {MOBILE && <ActionBar onTakePhoto={toggleModal}/>}
     </div>
   );
 }

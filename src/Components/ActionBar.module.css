@@ -1,0 +1,19 @@
+.actionbar{
+    position: fixed;
+    width: 100vw;
+    height: 100px;
+    left: 0;
+    /* top:calc(100vh - 100px); */
+    bottom:0;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: blueviolet;
+    border-top-right-radius: 20px;
+    border-top-left-radius: 20px;
+}
+
+.btn{
+    width: 45vw;
+    height: 60px;
+}
