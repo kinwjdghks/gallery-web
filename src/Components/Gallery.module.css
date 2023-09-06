@@ -11,7 +11,7 @@
   overflow: auto;
   transition: all 0.5s;
 }
-.background.darkmode{
+.background.darkmode {
   background-color: rgb(36, 36, 36);
 }
 .albumContainer {
@@ -59,7 +59,7 @@
   justify-content: center;
   align-items: center;
 }
-.footer{
+.footer {
   transition: all 0.5s;
   background-color: rgb(36, 36, 36);
   color: white;
@@ -74,4 +74,7 @@
   font-size: 1.4rem;
   color: #767676;
   margin: 0.1rem;
+}
+.githubLink:hover {
+  cursor: url("../assets/Images/mouse-pointer-white.png") 25 25, auto;
 }

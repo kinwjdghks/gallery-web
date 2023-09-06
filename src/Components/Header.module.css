@@ -10,7 +10,7 @@
   align-items: center;
   transition: all 0.5s;
 }
-.header.darkmode{
+.header.darkmode {
   background-color: rgb(36, 36, 36);
   /* background-color: none; */
 }
@@ -29,7 +29,7 @@
   color: #603ebb;
   text-shadow: 3px 5px 1px rgb(156, 156, 156);
 }
-.comit.darkmode{
+.comit.darkmode {
   text-shadow: 3px 5px 1px white;
 }
 .photobooth {
@@ -38,7 +38,7 @@
   font-size: 60px;
   transition: all 0.5s;
 }
-.photobooth.darkmode{
+.photobooth.darkmode {
   color: white;
 }
 
@@ -47,6 +47,9 @@
   left: 170px;
   top: 20px;
   /* cursor: pointer; */
+}
+.logo:hover {
+  cursor: url("../assets/Images/mouse-pointer-white.png") 25 25, auto;
 }
 
 .btn {
@@ -59,7 +62,7 @@
   font-family: "gangwonedu";
   font-weight: 900;
   font-size: 37px;
-  cursor: url("../assets/Images/mouse-pointer.png") 25 25, auto;
+  cursor: url("../assets/Images/mouse-pointer-black.png") 25 25, auto;
   background-color: #603ebb;
   color: white;
   outline: none;
@@ -92,6 +95,7 @@
   background-color: white;
   transform: translate(0, 0.25em);
   color: #603ebb;
+  cursor: url("../assets/Images/mouse-pointer-white.png") 25 25, auto;
 }
 .btn:hover::before {
   box-shadow: 0 0 0 2px black, 0 0.3em 0 0 rgb(173, 173, 173);

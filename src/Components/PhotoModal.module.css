@@ -4,7 +4,7 @@
   height: 100vh;
   z-index: 31;
   background: rgba(0, 0, 0, 0.75);
-  cursor: url("../assets/Images/mouse-pointer2.png") 25 25, auto;
+  cursor: url("../assets/Images/mouse-pointer-white.png") 25 25, auto;
 }
 /*conatiner*/
 .container {
@@ -22,7 +22,7 @@
   display: flex;
   justify-content: space-evenly;
   align-items: center;
-  cursor: url("../assets/Images/mouse-pointer2.png") 25 25, auto;
+  cursor: url("../assets/Images/mouse-pointer-white.png") 25 25, auto;
 }
 
 .cam_container {

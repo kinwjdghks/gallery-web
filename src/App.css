@@ -2,7 +2,7 @@
 
 .App {
   text-align: center;
-  cursor: url("../src/assets/Images/mouse-pointer.png") 25 25, auto;
+  cursor: url("../src/assets/Images/mouse-pointer-black.png") 25 25, auto;
 }
 .App-logo {
   height: 40vmin;
@@ -39,11 +39,11 @@
   }
 }
 
-*{
-  -webkit-user-select:none;
-  -moz-user-select:none;
-  -ms-user-select:none;
-  user-select:none;
+* {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
   -webkit-user-drag: none;
   -khtml-user-drag: none;
   -moz-user-drag: none;

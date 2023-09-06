@@ -75,14 +75,14 @@ const Gallery = ({ takePhoto, onToggleModalHandler }) => {
       //first query
       queryTemp = query(
         collection(db, "Photos"),
-        orderBy("id", "desc"),
+        orderBy("timestamp", "desc"),
         limit(10)
       );
     } else {
       //first query
       queryTemp = query(
         collection(db, "Photos"),
-        orderBy("id", "desc"),
+        orderBy("timestamp", "desc"),
         startAfter(timeStamp),
         limit(10)
       );
@@ -125,26 +125,33 @@ const Gallery = ({ takePhoto, onToggleModalHandler }) => {
           modalOpened={takePhoto}
         />
       )}
-      <div className={`${styles.background} ${darkmode && styles.darkmode}`} ref={background}>
+      <div
+        className={`${styles.background} ${darkmode && styles.darkmode}`}
+        ref={background}
+      >
         {!photos.length && <div className={styles.noPic}>사진찍기 ㄱㄱ</div>}
-        {photos.length && <div className={styles.albumContainer}>
-          {photos.map((data, index) => {
-            if (data.url === "blank") {
-              return <BlankAlbum key={index} />;
-            } else {
-              return <Album key={index} data={data} />;
-            }
-          })}
-        </div>
-      }
+        {photos.length && (
+          <div className={styles.albumContainer}>
+            {photos.map((data, index) => {
+              if (data.url === "blank") {
+                return <BlankAlbum key={index} />;
+              } else {
+                return <Album key={index} data={data} />;
+              }
+            })}
+          </div>
+        )}
         {isLoading && <div className={styles.loadingDiv}>Loading...</div>}
         {arrows}
       </div>
       {!endOfData && <div className={styles.pageEnd} ref={pageEnd} />}
       {endOfData && (
         <div className={`${styles.footer} ${darkmode && styles.darkmode}`}>
-          <a href="https://github.com/skku-comit/gallery-web">
-            <img src={githubIcon} alt="github-icon" rel="external" width='75' />
+          <a
+            href="https://github.com/skku-comit/gallery-web"
+            className={styles.githubLink}
+          >
+            <img src={githubIcon} alt="github-icon" rel="external" width="75" />
           </a>
           <div className={styles.text}>
             <p>Made by Jung Jung Hwan & Kim Ji Ho & Hong Min Jae</p>
