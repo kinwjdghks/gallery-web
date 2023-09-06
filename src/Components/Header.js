@@ -6,7 +6,7 @@ import logo from "../assets/Images/Logo.svg";
 import { useState } from "react";
 import { useContext } from "react";
 import DisplayContext from "../Context/context/Display";
-const Header = ({ onClick }) => {
+const Header = ({ onClick, version }) => {
   const darkmode = useContext(DisplayContext).darkmode;
   const toggleDarkmode = useContext(DisplayContext).displayToggle;
   const [isBtnHovered, setIsBtnHovered] = useState(false);

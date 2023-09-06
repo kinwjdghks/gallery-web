@@ -17,7 +17,10 @@ import {
 } from "firebase/firestore/lite";
 //images
 import githubIcon from "../assets/Images/github-icon.png";
-const Gallery = ({ takePhoto, onToggleModalHandler }) => {
+
+
+
+const Gallery = ({ takePhoto, onToggleModalHandler, version }) => {
   const darkmode = useContext(DisplayContext).darkmode;
   const [photos, setPhotos] = useState([]);
 
