@@ -35,7 +35,7 @@ const BackDrop = () => {
   return <div className={styles.backdrop}></div>;
 };
 
-const Modal = ({ onToggleModalHandler, modalOpened }) => {
+const Modal = ({ onCloseModal }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [imgfile, setImgfile] = useState(null);
   const [imgpreview, setImgpreview] = useState(null);
@@ -68,12 +68,12 @@ const Modal = ({ onToggleModalHandler, modalOpened }) => {
     }
   }, []);
 
-  useEffect(() => {
-    const random = Math.floor(Math.random() * 3);
-    if (!random) {
-      createBlankAlbum();
-    }
-  }, [modalOpened]);
+  // useEffect(() => {
+  //   const random = Math.floor(Math.random() * 3);
+  //   if (!random) {
+  //     createBlankAlbum();
+  //   }
+  // }, [modalOpened]);
 
   useEffect(() => {
     if (imgfile) {
@@ -160,7 +160,7 @@ const Modal = ({ onToggleModalHandler, modalOpened }) => {
 
   const savePhoto = async () => {
     await saveToFirebaseStorage(imgfile, saveToFireStore);
-    onToggleModalHandler();
+    onCloseModal();
     window.location.reload();
   };
 
@@ -292,7 +292,7 @@ const Modal = ({ onToggleModalHandler, modalOpened }) => {
           onTakePhoto={takePhoto}
           onSavePhoto={savePhoto}
           onDeletePhoto={deletePhoto}
-          onToggleModalHandler={onToggleModalHandler}
+          onCloseModal={onCloseModal}
           onFrameSelect={selectVidConfigHandler}
           onSkinSelect={selectSkinHandler}
         />
@@ -301,7 +301,7 @@ const Modal = ({ onToggleModalHandler, modalOpened }) => {
   );
 };
 
-const PhotoModal = ({ onToggleModalHandler, modalOpened }) => {
+const PhotoModal = ({ onCloseModal}) => {
   return (
     <>
       {ReactDOM.createPortal(
@@ -310,10 +310,9 @@ const PhotoModal = ({ onToggleModalHandler, modalOpened }) => {
       )}
       {ReactDOM.createPortal(
         <Modal
-          onToggleModalHandler={onToggleModalHandler}
-          modalOpened={modalOpened}
+          onCloseModal={onCloseModal}
         />,
-        document.getElementById("PhotoModal-root")
+        document.getElementById("modal-root")
       )}
     </>
   );

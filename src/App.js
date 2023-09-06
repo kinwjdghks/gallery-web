@@ -1,7 +1,8 @@
 import Gallery from "./Components/Gallery";
 import Header from "./Components/Header";
+import PhotoModal from "./Components/PhotoModal";
 import "./App.css";
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useMediaQuery } from "react-responsive";
 import ActionBar from "./Components/ActionBar";
 
@@ -17,13 +18,18 @@ function App() {
     query : "(max-width:767px)"
   });
   const version = PC ? 'pc' : TABLET ? 'tablet' : 'mobile';
-  const [takePhoto, setTakePhoto] = useState(false);
-  const toggleModal = useCallback(() => setTakePhoto((prev) => !prev), []);
+  const [modal, setModal] = useState("noModal"); //modal: 'noModal', 'photo', 'note'
+  const modalHandler = useCallback((which) => setModal(which), []);
+
+  useEffect(()=>{console.log(modal)},[modal]);
   return (
     <div className="App">
-      <Header onClick={toggleModal} version={version} />
-      <Gallery takePhoto={takePhoto} onToggleModalHandler={toggleModal} version={version} />
-      {MOBILE && <ActionBar onTakePhoto={toggleModal}/>}
+      {modal==='photo' && (
+        <PhotoModal onCloseModal={()=>setModal('noModal')}/>)}
+
+      <Header onClick={modalHandler} version={version} />
+      <Gallery modal={modal} modalHandler={modalHandler} version={version} />
+      {MOBILE && <ActionBar onTakePhoto={()=>setModal('photo')} onWriteNote={()=>setModal('note')}/>}
     </div>
   );
 }

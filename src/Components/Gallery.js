@@ -1,5 +1,4 @@
 import styles from "./Gallery.module.css";
-import PhotoModal from "./PhotoModal";
 import BlankAlbum from "./BlankAlbum";
 import Album from "./Album";
 import ScrollDown from "../common/ScrollDown";
@@ -20,7 +19,7 @@ import githubIcon from "../assets/Images/github-icon.png";
 
 
 
-const Gallery = ({ takePhoto, onToggleModalHandler, version }) => {
+const Gallery = ({ version }) => {
   const darkmode = useContext(DisplayContext).darkmode;
   const [photos, setPhotos] = useState([]);
 
@@ -111,23 +110,18 @@ const Gallery = ({ takePhoto, onToggleModalHandler, version }) => {
     setIsLoading(false);
   };
 
-  useEffect(() => {
-    window.scroll({
-      top: 0,
-      behavior: "instant",
-    });
-    getMorePhotos();
-    console.log("initial data request");
-  }, []);
+  // useEffect(() => {
+  //   window.scroll({
+  //     top: 0,
+  //     behavior: "instant",
+  //   });
+  //   getMorePhotos();
+  //   console.log("initial data request");
+  // }, []);
 
   return (
     <>
-      {takePhoto && (
-        <PhotoModal
-          onToggleModalHandler={onToggleModalHandler}
-          modalOpened={takePhoto}
-        />
-      )}
+      
       <div
         className={`${styles.background} ${darkmode && styles.darkmode}`}
         ref={background}

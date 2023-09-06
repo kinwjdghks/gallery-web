@@ -1,8 +1,8 @@
 //css
-import styles from "../Button.module.css";
+import styles from "./Button.module.css";
 //imports
 
-const Button = ({ text, width, height, onClick }) => {
+const Button = ({ children, width, height, onClick }) => {
   return (
     <>
       <button
@@ -10,7 +10,7 @@ const Button = ({ text, width, height, onClick }) => {
         style={{ width: width, height: height }}
         onClick={onClick}
       >
-        {text}
+        {children}
       </button>
     </>
   );

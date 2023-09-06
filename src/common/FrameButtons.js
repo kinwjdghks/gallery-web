@@ -20,7 +20,7 @@ const FrameButtons = ({
   onTakePhoto,
   onSavePhoto,
   onDeletePhoto,
-  onToggleModalHandler,
+  onCloseModal,
   onFrameSelect,
   onSkinSelect,
 }) => {
@@ -214,7 +214,7 @@ const FrameButtons = ({
         </>
       )}
       {!whileTimer && (
-        <button className={styles.close} onClick={onToggleModalHandler}>
+        <button className={styles.close} onClick={onCloseModal}>
           X
         </button>
       )}
