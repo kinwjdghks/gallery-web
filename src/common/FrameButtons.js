@@ -1,6 +1,6 @@
 import { React, useState, useCallback } from "react";
 //imports
-
+import Button from "./Button";
 //css
 import styles from "./FrameButtons.module.css";
 //images
@@ -73,7 +73,7 @@ const FrameButtons = ({
               className={`${styles.btndesign} ${styles.skin1}`}
               width="287"
               src={building}
-              alt='btndesign'
+              alt="btndesign"
             />
           </button>
           <button
@@ -84,7 +84,7 @@ const FrameButtons = ({
               className={`${styles.btndesign} ${styles.skin2}`}
               width="300"
               src={temple}
-              alt='btndesign'
+              alt="btndesign"
             />
           </button>
           <button
@@ -95,24 +95,25 @@ const FrameButtons = ({
               className={`${styles.btndesign} ${styles.skin3} ${styles.leaves}`}
               width="60"
               src={leaves}
-              alt='btndesign'
+              alt="btndesign"
             />
             <img
               className={`${styles.btndesign} ${styles.skin3} ${styles.sungkyuni}`}
               width="250"
               src={sungkyuni}
-              alt='btndesign'
+              alt="btndesign"
             />
           </button>
           <button
             className={`${styles.skinbtn} ${styles.skin4}`}
-            onClick={() => onSkinSelect(4)}>
+            onClick={() => onSkinSelect(4)}
+          >
             <div className={`${styles.btndesign} ${styles.skin4}`}>
               <p className={styles.comitfilm1}>COMIT FILM</p>
               <p className={styles.comitfilm2}>COMIT FILM</p>
               <p className={styles.comitfilm3}>COMIT FILM</p>
             </div>
-            </button>
+          </button>
         </>
       )}
       {phase === 2 && (
@@ -140,17 +141,17 @@ const FrameButtons = ({
 
       {phase === 3 && (
         <>
-        <img
-          src={SmileImage}
-          alt="SmileImage"
-          style={{
-            gridArea: "img",
-            justifySelf: "center",
-            alignSelf: "center",
-            width: 500,
-          }}
-        />
-        <div className={styles.smile}>Smile!</div>
+          <img
+            src={SmileImage}
+            alt="SmileImage"
+            style={{
+              gridArea: "img",
+              justifySelf: "center",
+              alignSelf: "center",
+              width: 500,
+            }}
+          />
+          <div className={styles.smile}>Smile!</div>
         </>
       )}
 
@@ -204,14 +205,19 @@ const FrameButtons = ({
             className={`${styles.lastbtn} ${styles.save}`}
             onClick={onSavePhoto}
           >
-            {isLoading ? <img width='50'src={loading} className={styles.loading} />
-            :"SAVE"}
+            {isLoading ? (
+              <img width="50" src={loading} className={styles.loading} />
+            ) : (
+              "SAVE"
+            )}
           </button>
         </>
       )}
-      {!whileTimer && <button className={styles.close} onClick={onToggleModalHandler}>
-        X
-      </button>}
+      {!whileTimer && (
+        <button className={styles.close} onClick={onToggleModalHandler}>
+          X
+        </button>
+      )}
     </div>
   );
 };

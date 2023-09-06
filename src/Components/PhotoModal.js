@@ -39,7 +39,7 @@ const Modal = ({ onToggleModalHandler, modalOpened }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [imgfile, setImgfile] = useState(null);
   const [imgpreview, setImgpreview] = useState(null);
-  const [whileTimer,setWhileTimer] = useState(false);
+  const [whileTimer, setWhileTimer] = useState(false);
   const startTimer = () => setWhileTimer(true);
 
   //sound
@@ -247,9 +247,7 @@ const Modal = ({ onToggleModalHandler, modalOpened }) => {
         <div className={styles.borderText}>
           <p className={styles.up}>COMIT FILM</p>
           <p className={`${styles.right} ${classNameByConfig}`}>
-            TAKE
-            YOUR
-            MEMORY
+            TAKE YOUR MEMORY
           </p>
           <div className={styles.left}>
             <p style={{ display: "inline" }}>11</p>
@@ -274,14 +272,14 @@ const Modal = ({ onToggleModalHandler, modalOpened }) => {
         <div className={`${styles.cam_mask} ${classNameByConfig}`}>
           {imgpreview}
           {imgfile && <div className={styles.shutter}></div>}
-          <Webcam
+          {/* <Webcam
             className={styles.webcam}
             audio={false}
             height={curHeight}
             ref={webcamRef}
             screenshotFormat="image/jpeg"
             mirrored={true}
-          />
+          /> */}
         </div>
       </div>
 
@@ -289,8 +287,8 @@ const Modal = ({ onToggleModalHandler, modalOpened }) => {
         <FrameButtons
           isLoading={isLoading}
           imgfile={imgfile}
-          whileTimer = {whileTimer}
-          onStartTimer = {startTimer}
+          whileTimer={whileTimer}
+          onStartTimer={startTimer}
           onTakePhoto={takePhoto}
           onSavePhoto={savePhoto}
           onDeletePhoto={deletePhoto}
