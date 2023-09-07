@@ -10,21 +10,29 @@ const Header = ({ onModalHandler, version }) => {
   const darkmode = useContext(DisplayContext).darkmode;
   const toggleDarkmode = useContext(DisplayContext).displayToggle;
   const [isBtnHovered, setIsBtnHovered] = useState(false);
- 
 
   return (
     <div className={`${styles.header} ${darkmode && styles.darkmode}`}>
       <div className={styles.comitPhoto}>
-        <p className={`${styles.comit} ${darkmode && styles.darkmode}`}>COMIT</p>
-        <p className={`${styles.photobooth} ${darkmode && styles.darkmode}`}>Photo Booth</p>
+        <p className={`${styles.comit} ${darkmode && styles.darkmode}`}>
+          COMIT
+        </p>
+        <p className={`${styles.photobooth} ${darkmode && styles.darkmode}`}>
+          Photo Booth
+        </p>
       </div>
 
       <img src={logo} className={styles.logo} onClick={toggleDarkmode} />
-      {version!=='mobile' && <button className={styles.btn} onClick={()=>onModalHandler('photo')}
-       onMouseEnter={()=>setIsBtnHovered(true)}
-      onMouseLeave={()=>setIsBtnHovered(false)}>
-      {!isBtnHovered ? "사진찍으러 ㄱㄱ" : "스마일~"}
-      </button>}
+      {version !== "mobile" && (
+        <button
+          className={styles.btn}
+          onClick={() => onModalHandler("photo")}
+          onMouseEnter={() => setIsBtnHovered(true)}
+          onMouseLeave={() => setIsBtnHovered(false)}
+        >
+          {!isBtnHovered ? "사진찍으러 ㄱㄱ" : "스마일~"}
+        </button>
+      )}
     </div>
   );
 };

@@ -34,7 +34,7 @@
   background-color: white;
   transform: translate(0, 0.15em);
   color: #603ebb;
-  cursor: url("../assets/Images/mouse-pointer-black.png") 25 25, auto; 
+  cursor: url("../assets/Images/mouse-pointer-black.png") 25 25, auto;
 }
 
 .btn::before {
@@ -44,26 +44,4 @@
 .btn:active {
   background: white;
   transform: translate(0em, 0.2em);
-}
-
-.btn.skinbtn {
-  justify-self: center;
-  align-self: center;
-
-  font-size: 3rem;
-  border-radius: 30px;
-  overflow: hidden;
-  cursor: url("../assets/Images/mouse-pointer-white.png") 25 25, auto;
-
-  transition: transform 150ms ease-in;
-}
-.btn.skinbtn:hover {
-  transform: scale(1.15);
-  transition: transform 150ms linear;
-  cursor: url("../assets/Images/mouse-pointer-black.png") 25 25, auto;
-}
-.btn.skinbtn.skin1 {
-  justify-self: end;
-  bottom: 2px;
-  background: linear-gradient(#1f1f61 0%, #755d98 60%, #e0a6b2 100%);
 }

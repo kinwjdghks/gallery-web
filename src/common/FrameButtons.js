@@ -65,7 +65,7 @@ const FrameButtons = ({
       {/* skin */}
       {phase === 1 && (
         <>
-          {/* <button
+          <button
             className={`${styles.skinbtn} ${styles.skin1}`}
             onClick={() => onSkinSelect(1)}
           >
@@ -75,9 +75,9 @@ const FrameButtons = ({
               src={building}
               alt="btndesign"
             />
-          </button> */}
+          </button>
 
-          <Button
+          {/* <Button
             children=""
             width="287px"
             height="240px"
@@ -90,8 +90,8 @@ const FrameButtons = ({
               src={building}
               alt="btndesign"
             />
-          </Button>
-          {/* <button
+          </Button> */}
+          <button
             className={`${styles.skinbtn} ${styles.skin2}`}
             onClick={() => onSkinSelect(2)}
           >
@@ -128,7 +128,7 @@ const FrameButtons = ({
               <p className={styles.comitfilm2}>COMIT FILM</p>
               <p className={styles.comitfilm3}>COMIT FILM</p>
             </div>
-          </button> */}
+          </button>
         </>
       )}
       {phase === 2 && (

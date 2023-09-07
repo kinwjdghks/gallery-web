@@ -8,31 +8,42 @@ import { useMediaQuery } from "react-responsive";
 import ActionBar from "./Components/ActionBar";
 
 function App() {
-  
   const PC = useMediaQuery({
-    query : "(min-width:1024px)"
+    query: "(min-width:1024px)",
   });
   const TABLET = useMediaQuery({
-    query : "(min-width:768px) and (max-width:1023px)"
+    query: "(min-width:768px) and (max-width:1023px)",
   });
   const MOBILE = useMediaQuery({
-    query : "(max-width:767px)"
+    query: "(max-width:767px)",
   });
-  const version = PC ? 'pc' : TABLET ? 'tablet' : 'mobile';
+  const version = PC ? "pc" : TABLET ? "tablet" : "mobile";
   const [modal, setModal] = useState("noModal"); //modal: 'noModal', 'photo', 'note'
   const modalHandler = useCallback((which) => setModal(which), []);
 
-  useEffect(()=>{console.log(modal)},[modal]);
+  useEffect(() => {
+    console.log(modal);
+  }, [modal]);
   return (
     <div className="App">
-      {modal==='photo' && (
-        <PhotoModal onCloseModal={()=>setModal('noModal')}/>)}
-      {modal==='note' && (
-        <NoteModal onCloseModal={()=>setModal('noModal')}/>)}
+      {modal === "photo" && (
+        <PhotoModal onCloseModal={() => setModal("noModal")} />
+      )}
+      {modal === "note" && (
+        <NoteModal onCloseModal={() => setModal("noModal")} />
+      )}
 
-      <Header onModalHandler={(which)=>modalHandler(which)} version={version} />
+      <Header
+        onModalHandler={(which) => modalHandler(which)}
+        version={version}
+      />
       <Gallery modal={modal} modalHandler={modalHandler} version={version} />
-      {MOBILE && <ActionBar onTakePhoto={()=>setModal('photo')} onWriteNote={()=>setModal('note')}/>}
+      {MOBILE && (
+        <ActionBar
+          onTakePhoto={() => setModal("photo")}
+          onWriteNote={() => setModal("note")}
+        />
+      )}
     </div>
   );
 }
