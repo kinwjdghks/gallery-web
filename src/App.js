@@ -30,7 +30,7 @@ function App() {
       {modal==='note' && (
         <NoteModal onCloseModal={()=>setModal('noModal')}/>)}
 
-      <Header onClick={modalHandler} version={version} />
+      <Header onModalHandler={(which)=>modalHandler(which)} version={version} />
       <Gallery modal={modal} modalHandler={modalHandler} version={version} />
       {MOBILE && <ActionBar onTakePhoto={()=>setModal('photo')} onWriteNote={()=>setModal('note')}/>}
     </div>

@@ -54,26 +54,38 @@
 @media (min-width: 1024px) {
   .header {
     height: 175px;
-  
+    width: 100vw;
+    z-index: 2;
+    background-color: #e0e0e0;
+    position: fixed;
+
+    display: flex;
     justify-content: space-between;
     align-items: center;
+    transition: all 0.5s;
   }
   .comitPhoto {
+    font-family: "cocogoose";
     font-weight: 900;
     font-size: 80px;
-    left: calc(50% - 737.5px);
+    line-height: normal;
+
+    position: relative;
+    left: calc(50% - 767.5px);
+    transform: translate(0%,0%);
   }
   .photobooth {
-  margin-top: -10px;
-  margin-bottom: 0px;
-  font-size: 60px;
-  transition: all 0.5s;
+    margin-top: -10px;
+    margin-bottom: 0px;
+    font-size: 60px;
+    transition: all 0.5s;
 }
   .logo {
-    left: 170px;
-    top: 20px;
-    width:122px;
-    /* cursor: pointer; */
+    width: 110px;
+    position: absolute;
+    left: calc(50% - 767.5px - 20px);
+    top:10px;
+    transform: translate(-100%,0%);
   }
 }
 .logo:hover {
@@ -94,6 +106,7 @@
   background-color: #603ebb;
   color: white;
   outline: none;
+  z-index: 0;
 
   display: inline-block;
   position: relative;
@@ -106,6 +119,7 @@
   position: absolute;
   box-sizing: border-box;
   content: "";
+  z-index: -1;
   width: 100%;
   height: 100%;
   top: 0;

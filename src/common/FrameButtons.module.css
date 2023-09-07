@@ -307,7 +307,7 @@
   top: -60px;
   border: none;
   cursor: url("../assets/Images/mouse-pointer-white.png") 25 25, auto;
-  background: url("../assets/buttons/close-modal.png") center center/contain
+  background: url("../assets/Images/close-modal.png") center center/contain
     no-repeat;
 }
 .close:hover {

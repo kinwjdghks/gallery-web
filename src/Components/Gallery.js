@@ -110,14 +110,14 @@ const Gallery = ({ version }) => {
     setIsLoading(false);
   };
 
-  // useEffect(() => {
-  //   window.scroll({
-  //     top: 0,
-  //     behavior: "instant",
-  //   });
-  //   getMorePhotos();
-  //   console.log("initial data request");
-  // }, []);
+  useEffect(() => {
+    window.scroll({
+      top: 0,
+      behavior: "instant",
+    });
+    getMorePhotos();
+    console.log("initial data request");
+  }, []);
 
   return (
     <>
@@ -130,14 +130,17 @@ const Gallery = ({ version }) => {
         {photos.length && (
           <div className={styles.albumContainer}>
             {photos.map((data, index) => {
-              // if (data.type === "blank") {
-                if (data.url === "blank") {
+                // if (data.type ==="blank" ||data.url === "blank") {
+                  
+              if (data.url === "blank") {
                 return <BlankAlbum key={index} />;
               }
-              else if(data.type==="photo"){
-      
+              else if(data.url==="photo"){
                 return <Album key={index} data={data} />;
               }
+              // else{ //data.type === 'note'
+              //   return <Note key ={index} data={data} />;
+              // }
             })}
           </div>
         )}

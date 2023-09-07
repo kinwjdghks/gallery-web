@@ -17,7 +17,9 @@ const Modal =({onCloseModal}) => {
     const containerRef = useRef(null);
     useEffect(()=>{
         if(containerRef){
-            containerRef.current.style.top = '15vh';
+            setTimeout(()=>{
+                containerRef.current.style.top = '15vh';
+            },100);
         }
     },[]);
     const closeModalHandler = () =>{
@@ -57,7 +59,7 @@ const Modal =({onCloseModal}) => {
     
     return <div className={styles.container} ref={containerRef}>
         <div className={styles.title}>기깔나는 방명록을 작성해보아요</div>
-        <textarea autoFocus onFocus={()=>setMessage(null)} className={`${styles.noteinput} ${message && styles.error}`} ref={contentRef}/>
+        <textarea onFocus={()=>setMessage(null)} className={`${styles.noteinput} ${message && styles.error}`} ref={contentRef}/>
         {message}
         <div className={styles.actions}>
             <Button width='32vw' height='12vw' onClick={closeModalHandler}>취소하기</Button>
