@@ -4,7 +4,7 @@ import styles from "./Button.module.css";
 
 const Button = ({ children, width, height, onClick, classes }) => {
   const getStyleByClassName = (className) => {
-    return styles[className];
+    return styles[className+''];
   };
   let styleNames = classes.split(" ");
   let combinedStyles = "";
