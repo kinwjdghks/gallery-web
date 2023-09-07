@@ -7,7 +7,7 @@ import { useCallback, useEffect, useState } from "react";
 import { useMediaQuery } from "react-responsive";
 import ActionBar from "./Components/ActionBar";
 
-function App() {
+const App = () => {
   const PC = useMediaQuery({
     query: "(min-width:1024px)",
   });
@@ -21,13 +21,13 @@ function App() {
   const [modal, setModal] = useState("noModal"); //modal: 'noModal', 'photo', 'note'
   const modalHandler = useCallback((which) => setModal(which), []);
 
+  useEffect(() => {
+    console.log(modal);
+  }, [modal]);
   return (
     <div className="App">
       {modal === "photo" && (
-        <PhotoModal
-          onCloseModal={() => setModal("noModal")}
-          version={version}
-        />
+        <PhotoModal onCloseModal={() => setModal("noModal")} />
       )}
       {modal === "note" && (
         <NoteModal onCloseModal={() => setModal("noModal")} />
@@ -46,6 +46,6 @@ function App() {
       )}
     </div>
   );
-}
+};
 
 export default App;
