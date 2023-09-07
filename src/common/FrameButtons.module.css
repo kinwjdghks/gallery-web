@@ -364,9 +364,10 @@
 
 @media (min-width: 1024px) {
   .container {
-    width: 94%;
-    height: 96%;
-    padding: 2% 3% 2% 3%;
+    width: 900px;
+    height: 933.33px;
+    padding: 0;
+    margin: 73.342px 0;
     font-family: "cocogoose";
     color: white;
     display: grid;
