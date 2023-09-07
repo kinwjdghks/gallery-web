@@ -9,20 +9,19 @@
   /*conatiner*/
   .container {
     box-sizing: border-box;
-    width: 94vw;
+    width: calc(100vw + 10px);
     height: 90vh;
     border: 5px solid black;
     border-radius: 30px;
     background-color: white;
   
     position: fixed;
-    left: 3vw;
+    left: -5px;
     top: 100vh;
     z-index: 32;
     top: 100vh;
     display: flex;
     flex-direction: column;
-    /* justify-content: center; */
     align-items: center;
     cursor: url("../assets/Images/mouse-pointer-white.png") 25 25, auto;
     transition: top .6s ease;

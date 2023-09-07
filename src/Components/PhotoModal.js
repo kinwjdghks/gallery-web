@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect, useCallback } from "react";
+import React, { useState, useRef, useEffect, useCallback, useTransition } from "react";
 import ReactDOM from "react-dom";
 import styles from "./PhotoModal.module.css";
 import Webcam from "react-webcam";
@@ -35,7 +35,23 @@ const BackDrop = () => {
   return <div className={styles.backdrop}></div>;
 };
 
-const Modal = ({ onCloseModal }) => {
+const Modal = ({ onCloseModal,version }) => {
+  //등장 animation
+    const containerRef = useRef(null);
+    useEffect(()=>{
+      if(containerRef){
+        setTimeout(()=>{
+          containerRef.current.style.top = '3vh';
+        },100);
+      }
+    },[]);
+  const closeModalHandler = () =>{
+    containerRef.current.style.top = '100vh';
+    setTimeout(()=>{
+       onCloseModal();
+    },600);
+    
+  }
   const [isLoading, setIsLoading] = useState(false);
   const [imgfile, setImgfile] = useState(null);
   const [imgpreview, setImgpreview] = useState(null);
@@ -161,7 +177,8 @@ const Modal = ({ onCloseModal }) => {
 
   const savePhoto = async () => {
     await saveToFirebaseStorage(imgfile, saveToFireStore);
-    onCloseModal();
+    if(version==='mobile') closeModalHandler();
+    else onCloseModal();
     window.location.reload();
   };
 
@@ -267,12 +284,12 @@ const Modal = ({ onCloseModal }) => {
     );
   }
   return (
-    <div className={styles.container}>
+    <div className={styles.container} ref={containerRef}>
       <div className={`${styles.cam_container} ${classNameBySkin}`}>
-        {skinElement}
-        <div className={`${styles.cam_mask} ${classNameByConfig}`}>
-          {imgpreview}
-          {imgfile && <div className={styles.shutter}></div>}
+        {/* {skinElement} */}
+        {/* <div className={`${styles.cam_mask} ${classNameByConfig}`}> */}
+          {/* {imgpreview} */}
+          {/* {imgfile && <div className={styles.shutter}></div>} */}
           {/* <Webcam
             className={styles.webcam}
             audio={false}
@@ -281,7 +298,7 @@ const Modal = ({ onCloseModal }) => {
             screenshotFormat="image/jpeg"
             mirrored={true}
           /> */}
-        </div>
+        {/* </div> */}
       </div>
 
       <div className={styles.actions}>
@@ -293,16 +310,17 @@ const Modal = ({ onCloseModal }) => {
           onTakePhoto={takePhoto}
           onSavePhoto={savePhoto}
           onDeletePhoto={deletePhoto}
-          onCloseModal={onCloseModal}
+          onCloseModal={closeModalHandler}
           onFrameSelect={selectVidConfigHandler}
           onSkinSelect={selectSkinHandler}
+          version={version}
         />
       </div>
     </div>
   );
 };
 
-const PhotoModal = ({ onCloseModal}) => {
+const PhotoModal = ({ onCloseModal, version }) => {
   return (
     <>
       {ReactDOM.createPortal(
@@ -312,6 +330,7 @@ const PhotoModal = ({ onCloseModal}) => {
       {ReactDOM.createPortal(
         <Modal
           onCloseModal={onCloseModal}
+          version={version}
         />,
         document.getElementById("modal-root")
       )}

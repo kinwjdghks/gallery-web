@@ -21,13 +21,13 @@ function App() {
   const [modal, setModal] = useState("noModal"); //modal: 'noModal', 'photo', 'note'
   const modalHandler = useCallback((which) => setModal(which), []);
 
-  useEffect(() => {
-    console.log(modal);
-  }, [modal]);
   return (
     <div className="App">
       {modal === "photo" && (
-        <PhotoModal onCloseModal={() => setModal("noModal")} />
+        <PhotoModal
+          onCloseModal={() => setModal("noModal")}
+          version={version}
+        />
       )}
       {modal === "note" && (
         <NoteModal onCloseModal={() => setModal("noModal")} />
