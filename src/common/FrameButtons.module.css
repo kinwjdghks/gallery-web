@@ -372,7 +372,7 @@
     grid-template-columns: 50% 50%;
     /* row-gap: 0px; */
     column-gap: 30px;
-  
+
     position: relative;
     left: -30px;
   }

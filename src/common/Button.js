@@ -26,8 +26,8 @@ const Button = ({
         className={`${styles.btn} ${combinedStyles}`}
         style={{ width: width, height: height }}
         onClick={onClick}
-        onMouseEnter={() => onMouseHover(true)}
-        onMouseLeave={() => onMouseHover(false)}
+        // onMouseEnter={() => onMouseHover(true)}
+        // onMouseLeave={() => onMouseHover(false)}
       >
         {children}
       </button>
