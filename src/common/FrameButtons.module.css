@@ -82,6 +82,48 @@
   color: black;
   top: -17.78px;
 }
+.skinbtn {
+  width: 340px;
+  height: 250px;
+  justify-self: center;
+  align-self: center;
+
+  font-size: 3rem;
+  border-radius: 30px;
+  overflow: hidden;
+  cursor: url("../assets/Images/mouse-pointer-white.png") 25 25, auto;
+
+  transition: transform 150ms ease-in;
+  position: relative;
+}
+.skinbtn:hover {
+  transform: scale(1.15);
+  transition: transform 150ms linear;
+  cursor: url("../assets/Images/mouse-pointer-black.png") 25 25, auto;
+}
+.skinbtn.skin1 {
+  justify-self: end;
+  bottom: 2px;
+  background: linear-gradient(#1f1f61 0%, #755d98 60%, #e0a6b2 100%);
+}
+
+.skinbtn.skin2 {
+  justify-self: start;
+  bottom: 2px;
+  background: linear-gradient(#ffc994 0%, #ffa852 60%, #ed743f 100%);
+}
+.skinbtn.skin3 {
+  justify-self: end;
+  bottom: 10px;
+  background-color: #044b2d;
+}
+
+.skinbtn.skin4 {
+  justify-self: start;
+  bottom: 10px;
+  background-color: white;
+  border: 2px solid black;
+}
 
 .framebtn {
   width: 345px;
@@ -109,35 +151,6 @@
   bottom: 10px;
 }
 
-.skinbtn {
-  border: none;
-  padding: 0;
-  width: 287px;
-  height: 240px;
-
-  justify-self: center;
-  align-self: center;
-
-  font-size: 3rem;
-  border-radius: 30px;
-  border: none;
-  overflow: hidden;
-  cursor: url("../assets/Images/mouse-pointer-white.png") 25 25, auto;
-  position: relative;
-  transition: transform 150ms ease-in;
-  /* transition-delay: 200ms; */
-}
-.skinbtn:hover {
-  transform: scale(1.15);
-  transition: transform 150ms linear;
-  cursor: url("../assets/Images/mouse-pointer-black.png") 25 25, auto;
-}
-.skinbtn.skin1 {
-  justify-self: end;
-  bottom: 2px;
-  background: linear-gradient(#1f1f61 0%, #755d98 60%, #e0a6b2 100%);
-}
-
 .btndesign {
   position: absolute;
   /* z-index: 10; */
@@ -147,20 +160,11 @@
   left: 0px;
 }
 
-.skinbtn.skin2 {
-  justify-self: start;
-  bottom: 2px;
-  background: linear-gradient(#ffc994 0%, #ffa852 60%, #ed743f 100%);
-}
 .btndesign.skin2 {
   top: -50px;
   left: 45px;
 }
-.skinbtn.skin3 {
-  justify-self: end;
-  bottom: 10px;
-  background-color: #044b2d;
-}
+
 .btndesign.skin3.leaves {
   top: 0px;
   left: 15px;
@@ -170,12 +174,7 @@
   top: 78px;
   left: 120px;
 }
-.skinbtn.skin4 {
-  justify-self: start;
-  bottom: 10px;
-  background-color: white;
-  border: 2px solid black;
-}
+
 .btndesign.skin4 {
   font-family: "josefin";
   font-size: 60px;

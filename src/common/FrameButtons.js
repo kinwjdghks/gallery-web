@@ -78,6 +78,21 @@ const FrameButtons = ({
               alt="btndesign"
             />
           </button>
+
+          {/* <Button
+            children=""
+            width="287px"
+            height="240px"
+            onClick={() => onSkinSelect(1)}
+            classes="skinbtn skin1"
+          >
+            <img
+              className={`${styles.btndesign} ${styles.skin1}`}
+              width="287"
+              src={building}
+              alt="btndesign"
+            />
+          </Button> */}
           <button
             className={`${styles.skinbtn} ${styles.skin2}`}
             onClick={() => onSkinSelect(2)}
