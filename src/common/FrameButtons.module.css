@@ -12,14 +12,6 @@
 
   position: relative;
 }
-.container.frame {
-  grid-template-rows: 15vh 24vh 24vh 15vh;
-  grid-template-areas:
-    "header header"
-    "square square"
-    "vertical horizontal"
-    "move move";
-}
 .container.skin {
   grid-template-rows: 15vh 24vh 24vh 15vh;
   grid-template-areas:
@@ -35,6 +27,15 @@
     "img img"
     "move move";
 }
+.container.frame {
+  grid-template-rows: 15vh 24vh 24vh 15vh;
+  grid-template-areas:
+    "header header"
+    "square square"
+    "vertical horizontal"
+    "move move";
+}
+
 .container.afterPhoto {
   grid-template-rows: 15vh 48vh 15vh;
   grid-template-areas:
@@ -309,7 +310,7 @@
   position: absolute;
   width: 60px;
   height: 60px;
-  /* right: -35px; */
+  right: -35px;
   top: -60px;
   border: none;
   cursor: url("../assets/Images/mouse-pointer-white.png") 25 25, auto;
@@ -365,6 +366,7 @@
   .container {
     width: 900px;
     height: 933.33px;
+    padding: 0;
     margin: 73.342px 0;
     font-family: "cocogoose";
     color: white;
@@ -374,6 +376,17 @@
     column-gap: 30px;
 
     position: relative;
-    left: -30px;
+    /* left: -30px; */
+  }
+  .close {
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    right: -35px;
+    top: -60px;
+    border: none;
+    cursor: url("../assets/Images/mouse-pointer-white.png") 25 25, auto;
+    background: url("../assets/Images/close-modal.png") center center/contain
+      no-repeat;
   }
 }

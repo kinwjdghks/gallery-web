@@ -1,4 +1,10 @@
-import React, { useState, useRef, useEffect, useCallback, useTransition } from "react";
+import React, {
+  useState,
+  useRef,
+  useEffect,
+  useCallback,
+  useTransition,
+} from "react";
 import ReactDOM from "react-dom";
 import styles from "./PhotoModal.module.css";
 import Webcam from "react-webcam";
@@ -35,23 +41,24 @@ const BackDrop = () => {
   return <div className={styles.backdrop}></div>;
 };
 
-const Modal = ({ onCloseModal,version }) => {
+const Modal = ({ onCloseModal, version }) => {
   //등장 animation
-    const containerRef = useRef(null);
-    useEffect(()=>{
-      if(containerRef){
-        setTimeout(()=>{
-          containerRef.current.style.top = '3vh';
-        },100);
-      }
-    },[]);
-  const closeModalHandler = () =>{
-    containerRef.current.style.top = '100vh';
-    setTimeout(()=>{
-       onCloseModal();
-    },600);
-    
-  }
+  const containerRef = useRef(null);
+  useEffect(() => {
+    if (containerRef) {
+      const popup = setTimeout(() => {
+        containerRef.current.style.top = "3vh";
+      }, 100);
+      return () => clearTimeout(popup);
+    }
+  }, []);
+  const closeModalHandler = () => {
+    containerRef.current.style.top = "100vh";
+    const close = setTimeout(() => {
+      onCloseModal();
+    }, 600);
+    return () => clearTimeout(close);
+  };
   const [isLoading, setIsLoading] = useState(false);
   const [imgfile, setImgfile] = useState(null);
   const [imgpreview, setImgpreview] = useState(null);
@@ -71,7 +78,7 @@ const Modal = ({ onCloseModal,version }) => {
     const timestamp = serverTimestamp();
     const newPhoto = {
       id: +id,
-      type: 'blank',
+      type: "blank",
       timestamp: timestamp,
       vidConfig: vidConfigIdx,
     };
@@ -149,7 +156,7 @@ const Modal = ({ onCloseModal,version }) => {
 
     const newPhoto = {
       id: +id,
-      type:'photo',
+      type: "photo",
       url: imgurl,
       vidConfig: vidConfigIdx,
       skin: skinIdx,
@@ -177,7 +184,7 @@ const Modal = ({ onCloseModal,version }) => {
 
   const savePhoto = async () => {
     await saveToFirebaseStorage(imgfile, saveToFireStore);
-    if(version==='mobile') closeModalHandler();
+    if (version === "mobile") closeModalHandler();
     else onCloseModal();
     window.location.reload();
   };
@@ -286,19 +293,19 @@ const Modal = ({ onCloseModal,version }) => {
   return (
     <div className={styles.container} ref={containerRef}>
       <div className={`${styles.cam_container} ${classNameBySkin}`}>
-        {/* {skinElement} */}
-        {/* <div className={`${styles.cam_mask} ${classNameByConfig}`}> */}
-          {/* {imgpreview} */}
-          {/* {imgfile && <div className={styles.shutter}></div>} */}
-          {/* <Webcam
+        {skinElement}
+        <div className={`${styles.cam_mask} ${classNameByConfig}`}>
+          {imgpreview}
+          {imgfile && <div className={styles.shutter}></div>}
+          <Webcam
             className={styles.webcam}
             audio={false}
             height={curHeight}
             ref={webcamRef}
             screenshotFormat="image/jpeg"
             mirrored={true}
-          /> */}
-        {/* </div> */}
+          />
+        </div>
       </div>
 
       <div className={styles.actions}>
@@ -328,10 +335,7 @@ const PhotoModal = ({ onCloseModal, version }) => {
         document.getElementById("backdrop-root")
       )}
       {ReactDOM.createPortal(
-        <Modal
-          onCloseModal={onCloseModal}
-          version={version}
-        />,
+        <Modal onCloseModal={onCloseModal} version={version} />,
         document.getElementById("modal-root")
       )}
     </>

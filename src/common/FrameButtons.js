@@ -26,7 +26,9 @@ const FrameButtons = ({
   version,
 }) => {
   const [phase, setPhase] = useState(1);
-  //phase 1: frame select phase 2: skin select phase 3: before photo 4: after photo
+  //phase 1: frame select / 2: take photo / 3: skin select / 4: after photo
+  //phase 1: frame select / 2: skin select/ 3: before photo/ 4: after photo
+  const [animationStarted, setAnimationStarted] = useState(false);
   const [photoAnimation, setPhotoAnimation] = useState();
   const againHandler = () => {
     onDeletePhoto();
@@ -35,12 +37,13 @@ const FrameButtons = ({
     phase === 1
       ? styles.skin
       : phase === 2
-      ? styles.frame
-      : phase === 3
       ? styles.beforePhoto
+      : phase === 3
+      ? styles.frame
       : styles.afterPhoto;
 
   const animation = useCallback((time) => {
+    setAnimationStarted(true);
     let cnt = time;
     const timer = setInterval(() => {
       console.log(cnt);
@@ -56,6 +59,10 @@ const FrameButtons = ({
         clearInterval(timer);
       }
     }, 1000);
+    const setTimer = setTimeout(() => {
+      setPhase((prev) => prev + 1);
+    }, 6000);
+    return () => clearTimeout(setTimer);
   });
   return (
     <div className={`${styles.container} ${classNameByConfig}`}>
@@ -134,7 +141,38 @@ const FrameButtons = ({
           </button>
         </>
       )}
-      {phase === 2 && (
+
+      {/*Smile Image*/}
+      {phase === 2 && !animationStarted && (
+        <>
+          <img
+            src={SmileImage}
+            alt="SmileImage"
+            style={{
+              gridArea: "img",
+              justifySelf: "center",
+              alignSelf: "center",
+              width: 500,
+            }}
+          />
+          <div className={styles.smile}>Smile!</div>
+        </>
+      )}
+      {/*Take Photo*/}
+      {phase === 2 && !animationStarted && (
+        <button
+          className={`${styles.movebtn} ${styles.takePhoto}`}
+          onClick={() => {
+            onStartTimer();
+            animation(5);
+            onTakePhoto();
+          }}
+        >
+          사진 찍기!
+        </button>
+      )}
+      {phase === 2 && !imgfile && photoAnimation}
+      {phase === 3 && imgfile && (
         <>
           <button
             className={`${styles.framebtn} ${styles.square}`}
@@ -156,24 +194,6 @@ const FrameButtons = ({
           </button>
         </>
       )}
-
-      {phase === 3 && (
-        <>
-          <img
-            src={SmileImage}
-            alt="SmileImage"
-            style={{
-              gridArea: "img",
-              justifySelf: "center",
-              alignSelf: "center",
-              width: 500,
-            }}
-          />
-          <div className={styles.smile}>Smile!</div>
-        </>
-      )}
-
-      {phase === 4 && !imgfile && photoAnimation}
       {phase === 4 && imgfile && (
         <img
           src={ThumbImage}
@@ -186,7 +206,7 @@ const FrameButtons = ({
         />
       )}
       {/* Next */}
-      {(phase === 1 || phase === 2) && (
+      {(phase === 1 || (phase === 3 && imgfile)) && (
         <button
           className={`${styles.movebtn} ${styles.nextbtn}`}
           onClick={() => setPhase((prev) => prev + 1)}
@@ -194,20 +214,7 @@ const FrameButtons = ({
           NEXT
         </button>
       )}
-      {/*Take Photo*/}
-      {phase === 3 && (
-        <button
-          className={`${styles.movebtn} ${styles.takePhoto}`}
-          onClick={() => {
-            setPhase(4);
-            animation(5);
-            onTakePhoto();
-            onStartTimer();
-          }}
-        >
-          준비 완료!
-        </button>
-      )}
+
       {phase === 4 && imgfile && (
         <>
           <button
