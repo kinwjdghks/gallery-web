@@ -11,7 +11,7 @@ const Button = ({
   onMouseHover,
 }) => {
   const getStyleByClassName = (className) => {
-    return styles[className];
+    return styles[className+''];
   };
   let styleNames = classes.split(" ");
   let combinedStyles = "";

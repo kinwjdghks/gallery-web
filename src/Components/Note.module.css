@@ -1,0 +1,20 @@
+.container{
+    width: 42vw;
+    height: 42vw;
+    border-radius: 20px;
+    background-color: rgb(214, 171, 255);
+    
+}
+
+.textField{
+    width: 36vw;
+    height: 36vw;
+    margin: 3vw;
+    background-color: rgb(223, 214, 231);
+}
+
+@media (min-width: 1024px) {
+    .container{
+
+    }
+}

@@ -11,6 +11,7 @@ import temple from "../assets/Images/명륜당.svg";
 import sungkyuni from "../assets/Images/성균이.svg";
 import leaves from "../assets/Images/낙엽.svg";
 import loading from "../assets/Images/loading.svg";
+import camera from "../assets/Images/camera_btn_black.svg";
 
 const FrameButtons = ({
   isLoading,
@@ -200,6 +201,33 @@ const FrameButtons = ({
           />
         </>
       )}
+
+      {phase === 3 && <>
+      {version !== 'mobile' && <>
+          <img
+            src={SmileImage}
+            alt="SmileImage"
+            style={{
+              gridArea: "img",
+              justifySelf: "center",
+              alignSelf: "center",
+              width: 500,
+            }}/>
+          <div className={styles.smile}>Smile!</div>
+        </>}
+        <button
+          className={`${styles.movebtn} ${styles.takePhoto}`}
+          onClick={() => {
+            setPhase(4);
+            animation(5);
+            onTakePhoto();
+            onStartTimer();
+          }}
+        >
+          {version==='mobile' ? <img src={camera} className={styles.camera}/> : "준비 완료!"}
+        </button></>}
+
+      {phase === 4 && !imgfile && photoAnimation}
       {phase === 4 && imgfile && (
         <img
           src={ThumbImage}
@@ -221,7 +249,6 @@ const FrameButtons = ({
           classes="movebtn nextbtn"
         />
       )}
-
       {phase === 4 && imgfile && (
         <>
           <Button
