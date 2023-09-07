@@ -19,12 +19,12 @@ const Button = ({
     const style = getStyleByClassName(className) + " ";
     combinedStyles += style;
   });
-
+  const fontSize = (parseInt(width) + parseInt(height)) / 12;
   return (
     <>
       <button
         className={`${styles.btn} ${combinedStyles}`}
-        style={{ width: width, height: height }}
+        style={{ width: width, height: height, fontSize: fontSize }}
         onClick={onClick}
         // onMouseEnter={() => onMouseHover(true)}
         // onMouseLeave={() => onMouseHover(false)}

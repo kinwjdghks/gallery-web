@@ -160,38 +160,44 @@ const FrameButtons = ({
       )}
       {/*Take Photo*/}
       {phase === 2 && !animationStarted && (
-        <button
-          className={`${styles.movebtn} ${styles.takePhoto}`}
+        <Button
+          children="사진 찍기!"
+          width="720px"
+          height="150px"
           onClick={() => {
             onStartTimer();
             animation(5);
             onTakePhoto();
           }}
-        >
-          사진 찍기!
-        </button>
+          classes="movebtn takePhoto"
+        />
       )}
       {phase === 2 && !imgfile && photoAnimation}
       {phase === 3 && imgfile && (
         <>
-          <button
-            className={`${styles.framebtn} ${styles.square}`}
+          <Button
+            children="정방형"
+            width="345px"
+            height="210px"
             onClick={() => onFrameSelect(0)}
-          >
-            정방형
-          </button>
-          <button
-            className={`${styles.framebtn} ${styles.vertical}`}
+            classes="framebtn square"
+          />
+
+          <Button
+            children="세로"
+            width="345px"
+            height="210px"
             onClick={() => onFrameSelect(1)}
-          >
-            세로
-          </button>
-          <button
-            className={`${styles.framebtn} ${styles.horizontal}`}
+            classes="framebtn vertical"
+          />
+
+          <Button
+            children="가로"
+            width="345px"
+            height="210px"
             onClick={() => onFrameSelect(2)}
-          >
-            가로
-          </button>
+            classes="framebtn horizontal"
+          />
         </>
       )}
       {phase === 4 && imgfile && (
@@ -207,35 +213,40 @@ const FrameButtons = ({
       )}
       {/* Next */}
       {(phase === 1 || (phase === 3 && imgfile)) && (
-        <button
-          className={`${styles.movebtn} ${styles.nextbtn}`}
+        <Button
+          children="스킨 선택 완료"
+          width="720px"
+          height="150px"
           onClick={() => setPhase((prev) => prev + 1)}
-        >
-          NEXT
-        </button>
+          classes="movebtn nextbtn"
+        />
       )}
 
       {phase === 4 && imgfile && (
         <>
-          <button
-            className={`${styles.lastbtn} ${styles.again}`}
+          <Button
+            children="RE?"
+            width="380px"
+            height="180px"
             onClick={() => {
               againHandler();
               setPhase(1);
             }}
-          >
-            RE?
-          </button>
-          <button
-            className={`${styles.lastbtn} ${styles.save}`}
+            classes="lastbtn again"
+          />
+          <Button
+            children="RE?"
+            width="380px"
+            height="180px"
             onClick={onSavePhoto}
+            classes="lastbtn save"
           >
             {isLoading ? (
               <img width="50" src={loading} className={styles.loading} />
             ) : (
               "SAVE"
             )}
-          </button>
+          </Button>
         </>
       )}
       {!whileTimer && (

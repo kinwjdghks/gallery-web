@@ -126,32 +126,6 @@
   border: 2px solid black;
 }
 
-.framebtn {
-  width: 345px;
-  height: 210px;
-
-  border-radius: 35px;
-
-  font-size: 70pt;
-  font-family: "gangwonedu";
-  justify-self: center;
-  align-self: flex-start;
-}
-.framebtn.square {
-  grid-area: square;
-  bottom: 2px;
-}
-.framebtn.vertical {
-  grid-area: vertical;
-  justify-self: end;
-  bottom: 10px;
-}
-.framebtn.horizontal {
-  grid-area: horizontal;
-  justify-self: start;
-  bottom: 10px;
-}
-
 .btndesign {
   position: absolute;
   /* z-index: 10; */
@@ -232,24 +206,6 @@
   transform: rotate(30deg);
 }
 
-.movebtn {
-  grid-area: move;
-  width: 720px;
-  height: 150px;
-  border-radius: 30px;
-
-  justify-self: center;
-  align-self: self-start;
-  font-family: "cocogoose";
-  font-weight: 600;
-}
-.movebtn.nextbtn {
-  font-size: 60pt;
-}
-.movebtn.takePhoto {
-  font-family: "gangwonedu";
-  font-size: 52pt;
-}
 .movebtn,
 .framebtn,
 .lastbtn {
@@ -331,35 +287,6 @@
   100% {
     transform: rotate(360deg);
   }
-}
-.lastbtn {
-  width: 380px;
-  height: 180px;
-
-  border: none;
-  padding: 0;
-
-  align-self: center;
-  cursor: url("../assets/Images/mouse-pointer-white.png") 25 25, auto;
-  font-family: "cocogoose";
-  font-size: 52pt;
-  font-weight: 550;
-  border-radius: 30px;
-  position: relative;
-}
-.lastbtn.again {
-  grid-area: again;
-  justify-self: end;
-  right: 10px;
-  background: rgb(182, 162, 241);
-}
-.lastbtn.again::before {
-  background: rgb(68, 34, 161);
-}
-.lastbtn.save {
-  grid-area: save;
-  justify-self: start;
-  left: 10px;
 }
 
 @media (min-width: 1024px) {
