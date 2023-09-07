@@ -1,6 +1,10 @@
 /* default button animation */
 .btn {
+  font-family: "gangwonedu";
+  font-weight: 900;
+  font-size: 37px;
   border: none;
+  border: 0;
   padding: 0;
   position: relative;
   transform-style: preserve-3d;
@@ -37,7 +41,7 @@
   cursor: url("../assets/Images/mouse-pointer-black.png") 25 25, auto;
 }
 
-.btn::before {
+.btn:hover::before {
   box-shadow: 0 0 0 2px black, 0 0.1em 0 0 rgb(173, 173, 173);
   transform: translate3d(0, 0.1em, -1em);
 }

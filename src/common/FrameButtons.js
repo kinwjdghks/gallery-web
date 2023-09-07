@@ -23,9 +23,8 @@ const FrameButtons = ({
   onCloseModal,
   onFrameSelect,
   onSkinSelect,
-  version
+  version,
 }) => {
-
   const [phase, setPhase] = useState(1);
   //phase 1: frame select phase 2: skin select phase 3: before photo 4: after photo
   const [photoAnimation, setPhotoAnimation] = useState();
@@ -60,10 +59,12 @@ const FrameButtons = ({
   });
   return (
     <div className={`${styles.container} ${classNameByConfig}`}>
-      {version!=='mobile' && <div className={styles.text}>
-        <p className={styles.comit}>COMIT</p>
-        <p className={styles.photobooth}>Photo Booth</p>
-      </div>}
+      {version !== "mobile" && (
+        <div className={styles.text}>
+          <p className={styles.comit}>COMIT</p>
+          <p className={styles.photobooth}>Photo Booth</p>
+        </div>
+      )}
       {/* skin */}
       {phase === 1 && (
         <>
