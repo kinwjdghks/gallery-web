@@ -4,12 +4,28 @@
   padding: 2% 3% 2% 3%;
   font-family: "cocogoose";
   color: white;
+  display: grid;
+  grid-template-columns: 50% 50%;
   background-color: white;
+  /* row-gap: 0px; */
+  /* column-gap: 30px; */
+
   position: relative;
 }
+.container.skin {
+  grid-template-rows: 15vh 24vh 24vh 15vh;
+  grid-template-areas:
+    "header header"
+    "skin1 skin2"
+    "skin3 skin4"
+    "move move";
+}
 .container.beforePhoto {
-  display: flex;
-  justify-content: center;
+  grid-template-rows: 15vh 48vh 15vh;
+  grid-template-areas:
+    "header header"
+    "img img"
+    "move move";
 }
 .container.frame {
   grid-template-rows: 15vh 24vh 24vh 15vh;
@@ -17,13 +33,6 @@
     "header header"
     "square square"
     "vertical horizontal"
-    "move move";
-}
-.container.skin {
-  grid-template-rows: 8vh 8vh 12vh;
-  grid-template-areas:
-    "skin1 skin2"
-    "skin3 skin4"
     "move move";
 }
 
@@ -126,20 +135,11 @@
   left: 0px;
 }
 
-.skinbtn.skin2 {
-  justify-self: start;
-  bottom: 2px;
-  background: linear-gradient(#ffc994 0%, #ffa852 60%, #ed743f 100%);
-}
 .btndesign.skin2 {
   top: -50px;
   left: 45px;
 }
-.skinbtn.skin3 {
-  justify-self: end;
-  bottom: 10px;
-  background-color: #044b2d;
-}
+
 .btndesign.skin3.leaves {
   top: 0px;
   left: 15px;
@@ -149,12 +149,7 @@
   top: 78px;
   left: 120px;
 }
-.skinbtn.skin4 {
-  justify-self: start;
-  bottom: 10px;
-  background-color: white;
-  border: 2px solid black;
-}
+
 .btndesign.skin4 {
   font-family: "josefin";
   font-size: 60px;
@@ -209,9 +204,6 @@
   left: 640px;
   color: black;
   transform: rotate(30deg);
-}
-.camera {
-  width: 12vw;
 }
 
 .movebtn,
@@ -274,6 +266,7 @@
   position: absolute;
   width: 60px;
   height: 60px;
+  right: -35px;
   top: -60px;
   border: none;
   cursor: url("../assets/Images/mouse-pointer-white.png") 25 25, auto;
@@ -306,333 +299,21 @@
     color: white;
     display: grid;
     grid-template-columns: 50% 50%;
-    background-color: white;
+    /* row-gap: 0px; */
+    column-gap: 30px;
+
     position: relative;
+    /* left: -30px; */
   }
-  .container.frame {
-    grid-template-rows: 15vh 24vh 24vh 15vh;
-    grid-template-areas:
-      "header header"
-      "square square"
-      "vertical horizontal"
-      "move move";
-  }
-  .container.skin {
-    grid-template-rows: 15vh 24vh 24vh 15vh;
-    grid-template-areas:
-      "header header"
-      "skin1 skin2"
-      "skin3 skin4"
-      "move move";
-  }
-  .container.beforePhoto {
-    grid-template-rows: 15vh 48vh 15vh;
-    grid-template-areas:
-      "header header"
-      "img img"
-      "move move";
-  }
-  .container.afterPhoto {
-    grid-template-rows: 15vh 48vh 15vh;
-    grid-template-areas:
-      "header header"
-      "img img"
-      "again save";
-  }
-  .text {
-    width: 100%;
-    font-size: 70px;
-    grid-area: header;
-    font-weight: 900;
-    position: relative;
-    top: -50px;
-  }
-  .text p {
-    text-align: center;
-    margin: 0;
-  }
-  .comit {
-    font-size: 90px;
-    color: #603ebb;
-    text-shadow: 3px 5px 1px rgb(187, 187, 187);
-    animation: wiggle 2.5s infinite;
-  }
-
-  .photobooth {
-    position: relative;
-    color: black;
-    top: -17.78px;
-  }
-
-  .framebtn {
-    width: 345px;
-    height: 210px;
-
-    border-radius: 35px;
-
-    font-size: 70pt;
-    font-family: "gangwonedu";
-    justify-self: center;
-    align-self: flex-start;
-  }
-  .framebtn.square {
-    grid-area: square;
-    bottom: 2px;
-  }
-  .framebtn.vertical {
-    grid-area: vertical;
-    justify-self: end;
-    bottom: 10px;
-  }
-  .framebtn.horizontal {
-    grid-area: horizontal;
-    justify-self: start;
-    bottom: 10px;
-  }
-
-  .skinbtn {
-    border: none;
-    padding: 0;
-    width: 287px;
-    height: 240px;
-
-    justify-self: center;
-    align-self: center;
-
-    font-size: 3rem;
-    border-radius: 30px;
-    border: none;
-    overflow: hidden;
-    cursor: url("../assets/Images/mouse-pointer-white.png") 25 25, auto;
-    position: relative;
-    transition: transform 150ms ease-in;
-    /* transition-delay: 200ms; */
-  }
-  .skinbtn:hover {
-    transform: scale(1.15);
-    transition: transform 150ms linear;
-    cursor: url("../assets/Images/mouse-pointer-black.png") 25 25, auto;
-  }
-  .skinbtn.skin1 {
-    justify-self: end;
-    bottom: 2px;
-    background: linear-gradient(#1f1f61 0%, #755d98 60%, #e0a6b2 100%);
-  }
-
-  .btndesign {
-    position: absolute;
-    /* z-index: 10; */
-  }
-  .btndesign.skin1 {
-    top: -30px;
-    left: 0px;
-  }
-
-  .skinbtn.skin2 {
-    justify-self: start;
-    bottom: 2px;
-    background: linear-gradient(#ffc994 0%, #ffa852 60%, #ed743f 100%);
-  }
-  .btndesign.skin2 {
-    top: -50px;
-    left: 45px;
-  }
-  .skinbtn.skin3 {
-    justify-self: end;
-    bottom: 10px;
-    background-color: #044b2d;
-  }
-  .btndesign.skin3.leaves {
-    top: 0px;
-    left: 15px;
-    transform: rotate(30deg);
-  }
-  .btndesign.skin3.sungkyuni {
-    top: 78px;
-    left: 120px;
-  }
-  .skinbtn.skin4 {
-    justify-self: start;
-    bottom: 10px;
-    background-color: white;
-    border: 2px solid black;
-  }
-  .btndesign.skin4 {
-    font-family: "josefin";
-    font-size: 60px;
-    font-weight: 700;
-    top: 0px;
-    left: -70px;
-    transform: rotate(-30deg);
-  }
-  .btndesign.skin4 p {
-    margin-bottom: -50px;
-    width: max-content;
-  }
-  .comitfilm1 {
-    margin-left: 70px;
-  }
-  .comitfilm3 {
-    margin-left: -70px;
-  }
-
-  /* photoTaking Animation */
-  .animation {
-    width: 100%;
-    grid-area: img;
-    justify-self: center;
-    align-self: center;
-  }
-  .animation.counting {
-    font-family: "Kanit", sans-serif;
-    font-size: 20rem;
-    color: black;
-    /* font-weight: 200; */
-    text-align: center;
-  }
-  .animation.shooting {
-    background-color: white;
-    animation: 2s flash forwards;
-  }
-
-  .smile {
-    font-family: josefin;
-    font-weight: 400;
-    font-size: 50px;
-    position: absolute;
-    top: 260px;
-    left: 640px;
-    color: black;
-    transform: rotate(30deg);
-  }
-
-  .movebtn {
-    grid-area: move;
-    width: 720px;
-    height: 150px;
-    border-radius: 30px;
-
-    justify-self: center;
-    align-self: self-start;
-    font-family: "cocogoose";
-    font-weight: 600;
-  }
-  .movebtn.nextbtn {
-    font-size: 60pt;
-  }
-  .movebtn.takePhoto {
-    font-family: "gangwonedu";
-    font-size: 52pt;
-  }
-
-  .movebtn,
-  .framebtn,
-  .lastbtn {
-    /* border: none;
-    padding: 0;
-    color: white;
-    background-color: #603ebb; */
-    cursor: url("../assets/Images/mouse-pointer-white.png") 25 25, auto;
-    /* position: relative;
-    transform-style: preserve-3d;
-    transition: transform 150ms cubic-bezier(0, 0, 0.58, 1);
-    box-sizing: border-box;
-    box-shadow: 0 0 0 2px black; */
-  }
-
-  /* .movebtn::before,
-  .framebtn::before,
-  .lastbtn::before {
-    position: absolute;
-    z-index: -1;
-    box-sizing: border-box;
-    content: "";
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgb(50, 25, 121);
-    border-radius: inherit;
-    box-shadow: 0 0 0 2px black, 0 0.15em 0 0 rgb(173, 173, 173);
-    transform: translate3d(0, 0.25em, -0.1em);
-    transition: transform 150ms cubic-bezier(0, 0, 0.58, 1),
-      box-shadow 150ms cubic-bezier(0, 0, 0.58, 1);
-  } */
-  /* .movebtn:hover,
-  .framebtn:hover,
-  .lastbtn:hover {
-    background-color: white;
-    transform: translate(0, 0.15em);
-    color: #603ebb;
-    cursor: url("../assets/Images/mouse-pointer-black.png") 25 25, auto;
-  }
-  .movebtn:hover::before,
-  .framebtn:hover::before,
-  .lastbtn:hover::before {
-    box-shadow: 0 0 0 2px black, 0 0.1em 0 0 rgb(173, 173, 173);
-    transform: translate3d(0, 0.1em, -1em);
-  }
-  .movebtn:active,
-  .framebtn:active,
-  .lastbtn:active {
-    background: white;
-    transform: translate(0em, 0.2em);
-  } */
-
   .close {
     position: absolute;
     width: 60px;
     height: 60px;
+    right: -35px;
     top: -60px;
     border: none;
     cursor: url("../assets/Images/mouse-pointer-white.png") 25 25, auto;
     background: url("../assets/Images/close-modal.png") center center/contain
       no-repeat;
-  }
-  .close:hover {
-    cursor: url("../assets/Images/mouse-pointer-black.png") 25 25, auto;
-  }
-  .loading {
-    animation: rotate 1s ease-out infinite;
-  }
-  @keyframes rotate {
-    0% {
-      transform: rotate(0deg);
-    }
-
-    100% {
-      transform: rotate(360deg);
-    }
-  }
-  .lastbtn {
-    width: 380px;
-    height: 180px;
-
-    border: none;
-    padding: 0;
-
-    align-self: center;
-    cursor: url("../assets/Images/mouse-pointer-white.png") 25 25, auto;
-    font-family: "cocogoose";
-    font-size: 52pt;
-    font-weight: 550;
-    border-radius: 30px;
-    position: relative;
-  }
-  .lastbtn.again {
-    grid-area: again;
-    justify-self: end;
-    right: 10px;
-    background: rgb(182, 162, 241);
-  }
-  .lastbtn.again::before {
-    background: rgb(68, 34, 161);
-  }
-  .lastbtn.save {
-    grid-area: save;
-    justify-self: start;
-    left: 10px;
   }
 }

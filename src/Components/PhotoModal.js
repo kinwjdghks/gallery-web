@@ -297,14 +297,14 @@ const Modal = ({ onCloseModal, version }) => {
         <div className={`${styles.cam_mask} ${classNameByConfig}`}>
           {imgpreview}
           {imgfile && <div className={styles.shutter}></div>}
-          {/* <Webcam
+          <Webcam
             className={styles.webcam}
             audio={false}
             height={curHeight}
             ref={webcamRef}
             screenshotFormat="image/jpeg"
             mirrored={true}
-          /> */}
+          />
         </div>
       </div>
 

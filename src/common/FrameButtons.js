@@ -1,4 +1,4 @@
-import { React, useState, useCallback } from "react";
+import { React, useState, useCallback, useEffect } from "react";
 //imports
 import Button from "./Button";
 //css
@@ -27,6 +27,9 @@ const FrameButtons = ({
   version,
 }) => {
   const [phase, setPhase] = useState(1);
+  useEffect(() => {
+    console.log(phase);
+  }, [phase]);
   //phase 1: frame select / 2: take photo / 3: skin select / 4: after photo
   //phase 1: frame select / 2: skin select/ 3: before photo/ 4: after photo
   const [animationStarted, setAnimationStarted] = useState(false);
@@ -62,7 +65,9 @@ const FrameButtons = ({
     }, 1000);
     const setTimer = setTimeout(() => {
       setPhase((prev) => prev + 1);
+      setAnimationStarted(false);
     }, 6000);
+
     return () => clearTimeout(setTimer);
   });
   return (
@@ -202,30 +207,40 @@ const FrameButtons = ({
         </>
       )}
 
-      {phase === 3 && <>
-      {version !== 'mobile' && <>
-          <img
-            src={SmileImage}
-            alt="SmileImage"
-            style={{
-              gridArea: "img",
-              justifySelf: "center",
-              alignSelf: "center",
-              width: 500,
-            }}/>
-          <div className={styles.smile}>Smile!</div>
-        </>}
-        <button
-          className={`${styles.movebtn} ${styles.takePhoto}`}
-          onClick={() => {
-            setPhase(4);
-            animation(5);
-            onTakePhoto();
-            onStartTimer();
-          }}
-        >
-          {version==='mobile' ? <img src={camera} className={styles.camera}/> : "준비 완료!"}
-        </button></>}
+      {/* {phase === 3 && (
+        <>
+          {version !== "mobile" && (
+            <>
+              <img
+                src={SmileImage}
+                alt="SmileImage"
+                style={{
+                  gridArea: "img",
+                  justifySelf: "center",
+                  alignSelf: "center",
+                  width: 500,
+                }}
+              />
+              <div className={styles.smile}>Smile!</div>
+            </>
+          )}
+          <button
+            className={`${styles.movebtn} ${styles.takePhoto}`}
+            onClick={() => {
+              setPhase(4);
+              animation(5);
+              onTakePhoto();
+              onStartTimer();
+            }}
+          >
+            {version === "mobile" ? (
+              <img src={camera} className={styles.camera} />
+            ) : (
+              "준비 완료!"
+            )}
+          </button>
+        </>
+      )} */}
 
       {phase === 4 && !imgfile && photoAnimation}
       {phase === 4 && imgfile && (
@@ -258,11 +273,12 @@ const FrameButtons = ({
             onClick={() => {
               againHandler();
               setPhase(1);
+              onFrameSelect(0);
             }}
             classes="lastbtn again"
           />
           <Button
-            children="RE?"
+            children=""
             width="380px"
             height="180px"
             onClick={onSavePhoto}
