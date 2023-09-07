@@ -1,16 +1,16 @@
 .container {
-  width: 900px;
-  height: 933.33px;
-  margin: 73.342px 0;
+  width: 94%;
+  height: 96%;
+  padding: 2% 3% 2% 3%;
   font-family: "cocogoose";
   color: white;
   display: grid;
   grid-template-columns: 50% 50%;
+  background-color: white;
   /* row-gap: 0px; */
-  column-gap: 30px;
+  /* column-gap: 30px; */
 
   position: relative;
-  left: -30px;
 }
 .container.frame {
   grid-template-rows: 15vh 24vh 24vh 15vh;
@@ -310,7 +310,7 @@
   position: absolute;
   width: 60px;
   height: 60px;
-  right: -35px;
+  /* right: -35px; */
   top: -60px;
   border: none;
   cursor: url("../assets/Images/mouse-pointer-white.png") 25 25, auto;
@@ -360,4 +360,21 @@
   grid-area: save;
   justify-self: start;
   left: 10px;
+}
+
+@media (min-width: 1024px) {
+  .container {
+    width: 900px;
+    height: 933.33px;
+    margin: 73.342px 0;
+    font-family: "cocogoose";
+    color: white;
+    display: grid;
+    grid-template-columns: 50% 50%;
+    /* row-gap: 0px; */
+    column-gap: 30px;
+  
+    position: relative;
+    left: -30px;
+  }
 }

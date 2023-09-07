@@ -6,33 +6,38 @@
   background: rgba(0, 0, 0, 0.75);
   cursor: url("../assets/Images/mouse-pointer-white.png") 25 25, auto;
 }
-/*conatiner*/
+/*container*/
 .container {
-  width: 90vw;
-  height: 90vh;
+  box-sizing: border-box;
+  width: calc(100vw + 10px);
+  height: 110vh;
   border: 5px solid black;
   border-radius: 30px;
-  background-color: white;
-
+  background-color: black;
+  
   position: fixed;
-  left: 5vw;
-  top: 2.5vh;
+  left:-5px;
+  /* top: 3vh; */
+  top: 100vh;
   z-index: 32;
 
   display: flex;
-  justify-content: space-evenly;
+  flex-direction: column;
   align-items: center;
   cursor: url("../assets/Images/mouse-pointer-white.png") 25 25, auto;
+  transition: top 0.7s ease;
 }
 
+
+
 .cam_container {
-  width: 933.33px;
-  height: 933.33px;
+  width: 100vw;
+  height: 100vw;
+  margin-top: 80px;
   background-color: #c9b3ef;
-  border-radius: 10%;
+  /* border-radius: 30px; */
 
   position: relative;
-
   display: flex;
   justify-content: center;
   align-items: center;
@@ -97,8 +102,9 @@
 }
 
 .actions {
-  width: 880px;
-  height: 90vh;
+  width: 100vw;
+  height: calc(97vh - 100vw - 85px);
+  position: relative;
 }
 
 .imgpreview {
@@ -205,4 +211,211 @@
   to {
     opacity: 0;
   }
+}
+/* PC 모드 */
+@media (min-width: 1024px) {
+  .backdrop {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    z-index: 31;
+    background: rgba(0, 0, 0, 0.75);
+    cursor: url("../assets/Images/mouse-pointer-white.png") 25 25, auto;
+  }
+  /*container*/
+  .container {
+    width: 90vw;
+    height: 90vh;
+    border: 5px solid black;
+    border-radius: 30px;
+    background-color: white;
+  
+    position: fixed;
+    left: 5vw;
+    top: 2.5vh;
+    z-index: 32;
+  
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    cursor: url("../assets/Images/mouse-pointer-white.png") 25 25, auto;
+  }
+  
+  
+  
+  .cam_container {
+    width: 933.33px;
+    height: 933.33px;
+    background-color: #c9b3ef;
+    border-radius: 10%;
+  
+    position: relative;
+  
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+  }
+  .cam_container.default {
+    box-shadow: inset -10px -8px 1px #9d83ca;
+  }
+  .cam_container.default::after {
+    content: "";
+    width: 300px;
+    height: 10px;
+    border-radius: 5px;
+    background-color: #eadffc;
+    position: absolute;
+    top: 10px;
+    left: 90px;
+  }
+  .cam_container.opt1 {
+    background: linear-gradient(#1f1f61 0%, #755d98 60%, #e0a6b2 100%);
+  }
+  .cam_container.opt2 {
+    background: linear-gradient(#ffc994 0%, #ffa852 60%, #ed743f 100%);
+  }
+  .cam_container.opt3 {
+    background-color: #044b2d;
+  }
+  .cam_container.opt4 {
+    background-color: white;
+    border: 3px solid black;
+    box-sizing: border-box;
+  }
+  .cam_mask {
+    margin: 66.67px;
+    border-radius: 50px;
+    overflow: hidden;
+  
+    position: relative;
+  
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .cam_mask.square {
+    width: 800px;
+    height: 800px;
+  }
+  .cam_mask.vertical {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 600px;
+    height: 800px;
+  }
+  .cam_mask.horizontal {
+    position: absolute;
+    width: 800px;
+    height: 600px;
+    left: 0;
+    top: 0;
+  }
+  
+  .actions {
+    width: 880px;
+    height: 90vh;
+  }
+  
+  .imgpreview {
+    position: absolute;
+    z-index: 10;
+  }
+  
+  .skinElement {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 20;
+  }
+  .skinElement.design3.square {
+    top: 70px;
+  }
+  .skinElement.design3.vertical {
+    top: 389px;
+  }
+  .skinElement.design3.vertical {
+    top: 389px;
+  }
+  .skinElement.design3.horizontal {
+    top: 265px;
+    left: 37px;
+  }
+  .borderText p {
+    font-family: "gangwonedu";
+    font-size: 35px;
+    position: absolute;
+  }
+  .up {
+    top: -18px;
+    left: calc(933.33px / 2 - 207px / 2);
+  }
+  .right.square {
+    transform: rotate(90deg);
+    top: 400px;
+    left: 705px;
+    width: max-content;
+  }
+  .left {
+    display: flex;
+    position: absolute;
+    top: 80px;
+    left: 25px;
+  }
+  .left p {
+    display: inline-block;
+    transform: rotate(-90deg);
+  }
+  .down.square {
+    top: 850px;
+    left: 450px;
+    transform: rotate(180deg);
+  }
+  
+  .right.vertical {
+    transform: rotate(-90deg);
+    width: 200px;
+    top: 630px;
+    left: 630px;
+  }
+  .down.vertical {
+    top: 840px;
+    transform: rotate(180deg);
+  }
+  .right.horizontal {
+    top: 650px;
+    left: 80px;
+    width: 200px;
+  }
+  .down.horizontal {
+    top: 540px;
+    left: 14px;
+    transform: rotate(-90deg);
+  }
+  .camera {
+    position: absolute;
+  }
+  .camera.vertical {
+    top: 140px;
+    left: 710px;
+    transform: rotate(-90deg);
+  }
+  .camera.horizontal {
+    top: 725px;
+    left: 630px;
+  }
+  .shutter {
+    position: absolute;
+    z-index: 100;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: white;
+    animation: shutter 1s ease-out forwards;
+  }
+
+
 }
