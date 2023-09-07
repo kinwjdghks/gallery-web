@@ -8,6 +8,7 @@
   box-shadow: 0 0 0 2px black;
   color: white;
   background-color: #603ebb;
+  z-index: 0;
 }
 .btn::before {
   position: absolute;
@@ -32,7 +33,7 @@
   background-color: white;
   transform: translate(0, 0.15em);
   color: #603ebb;
-  /* cursor: url("../assets/Images/mouse-pointer-black.png") 25 25, auto; */
+  cursor: url("../assets/Images/mouse-pointer-black.png") 25 25, auto; 
 }
 
 .btn::before {
