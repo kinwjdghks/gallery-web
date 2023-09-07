@@ -22,7 +22,8 @@ import githubIcon from "../assets/Images/github-icon.png";
 
 const Gallery = ({ version }) => {
   const darkmode = useContext(DisplayContext).darkmode;
-  const [photos, setPhotos] = useState([<Note/>,<Note/>,<Note/>]);
+  const [photos, setPhotos] = useState([]);
+  // <Note/>,<Note/>,<Note/>
 
   let timeStamp = useRef(null);
 

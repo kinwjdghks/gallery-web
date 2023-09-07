@@ -1,6 +1,7 @@
 .container{
     width: 40vw;
     height: 40vw;
+    /* border-radius: 20px; */
     display: flex;
 }
 .design{

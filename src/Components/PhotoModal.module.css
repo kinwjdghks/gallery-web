@@ -239,6 +239,7 @@
     justify-content: space-evenly;
     align-items: center;
     cursor: url("../assets/Images/mouse-pointer-white.png") 25 25, auto;
+
   }
   
   
@@ -250,7 +251,6 @@
     border-radius: 10%;
   
     position: relative;
-  
     display: flex;
     justify-content: center;
     align-items: center;
@@ -317,6 +317,7 @@
   .actions {
     width: 880px;
     height: 90vh;
+    position: static;
   }
   
   .imgpreview {

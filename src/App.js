@@ -27,7 +27,7 @@ const App = () => {
   return (
     <div className="App">
       {modal === "photo" && (
-        <PhotoModal onCloseModal={() => setModal("noModal")} />
+        <PhotoModal onCloseModal={() => setModal("noModal")} version={version}/>
       )}
       {modal === "note" && (
         <NoteModal onCloseModal={() => setModal("noModal")} />

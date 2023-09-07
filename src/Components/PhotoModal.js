@@ -286,10 +286,10 @@ const Modal = ({ onCloseModal,version }) => {
   return (
     <div className={styles.container} ref={containerRef}>
       <div className={`${styles.cam_container} ${classNameBySkin}`}>
-        {/* {skinElement} */}
-        {/* <div className={`${styles.cam_mask} ${classNameByConfig}`}> */}
-          {/* {imgpreview} */}
-          {/* {imgfile && <div className={styles.shutter}></div>} */}
+        {skinElement}
+        <div className={`${styles.cam_mask} ${classNameByConfig}`}>
+          {imgpreview}
+          {imgfile && <div className={styles.shutter}></div>}
           {/* <Webcam
             className={styles.webcam}
             audio={false}
@@ -298,7 +298,7 @@ const Modal = ({ onCloseModal,version }) => {
             screenshotFormat="image/jpeg"
             mirrored={true}
           /> */}
-        {/* </div> */}
+        </div>
       </div>
 
       <div className={styles.actions}>
