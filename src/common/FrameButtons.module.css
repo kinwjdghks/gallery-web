@@ -109,23 +109,16 @@
   bottom: 10px;
 }
 
-.skinbtn {
-  border: none;
-  padding: 0;
-  width: 287px;
-  height: 240px;
-
+/* .skinbtn {
   justify-self: center;
   align-self: center;
 
   font-size: 3rem;
   border-radius: 30px;
-  border: none;
   overflow: hidden;
   cursor: url("../assets/Images/mouse-pointer-white.png") 25 25, auto;
-  position: relative;
+
   transition: transform 150ms ease-in;
-  /* transition-delay: 200ms; */
 }
 .skinbtn:hover {
   transform: scale(1.15);
@@ -136,7 +129,7 @@
   justify-self: end;
   bottom: 2px;
   background: linear-gradient(#1f1f61 0%, #755d98 60%, #e0a6b2 100%);
-}
+} */
 
 .btndesign {
   position: absolute;
