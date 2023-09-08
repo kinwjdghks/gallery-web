@@ -300,12 +300,15 @@
     /* left: -30px; */
   }
   .container.skin {
+    grid-template-columns: 50% 50%;
     grid-template-rows: 15vh 24vh 24vh 15vh;
     grid-template-areas:
       "header header"
       "skin1 skin2"
       "skin3 skin4"
       "move move";
+    row-gap: 0px;
+    padding: 0;
   }
   .close {
     position: absolute;
@@ -323,12 +326,12 @@
     height: 250px;
     justify-self: center;
     align-self: center;
-  
+
     font-size: 3rem;
     border-radius: 30px;
     overflow: hidden;
     cursor: url("../assets/Images/mouse-pointer-white.png") 25 25, auto;
-  
+
     transition: transform 150ms ease-in;
     position: relative;
   }
@@ -337,7 +340,7 @@
     bottom: 2px;
     background: linear-gradient(#1f1f61 0%, #755d98 60%, #e0a6b2 100%);
   }
-  
+
   .skinbtn.skin2 {
     justify-self: start;
     bottom: 2px;
@@ -348,7 +351,7 @@
     bottom: 10px;
     background-color: #044b2d;
   }
-  
+
   .skinbtn.skin4 {
     justify-self: start;
     bottom: 10px;

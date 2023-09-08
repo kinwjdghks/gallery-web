@@ -16,7 +16,8 @@
   background-color: black;
 
   position: fixed;
-  /* border 두께 */ left: -5px;
+  /* border 두께 */
+  left: -5px;
   top: 100vh;
   /* activated-> top: 3vh; */
   z-index: 32;
@@ -248,6 +249,7 @@
     border-radius: 10%;
     margin: 0;
     position: relative;
+    bottom: 0;
 
     display: flex;
     justify-content: center;

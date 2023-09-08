@@ -30,7 +30,7 @@ const FrameButtons = ({
   useEffect(() => {
     console.log(phase);
   }, [phase]);
-  //phase 1: frame select / 2: take photo / 3: after photo / 4: skin select 
+  //phase 1: frame select / 2: take photo / 3: after photo / 4: skin select
   //phase 1: frame select / 2: skin select/ 3: before photo/ 4: after photo
   const [animationStarted, setAnimationStarted] = useState(false);
   const [photoAnimation, setPhotoAnimation] = useState();
@@ -83,28 +83,31 @@ const FrameButtons = ({
         <>
           <button
             className={`${styles.skinbtn} ${styles.skin1}`}
-            onClick={() => onSkinSelect(1)}>
-            {/* <img
+            onClick={() => onSkinSelect(1)}
+          >
+            <img
               className={`${styles.btndesign} ${styles.skin1}`}
               width="287" //PC
               src={building}
               alt="btndesign"
-            /> */}
+            />
           </button>
 
           <button
             className={`${styles.skinbtn} ${styles.skin2}`}
-            onClick={() => onSkinSelect(2)}>
-            {/* <img
+            onClick={() => onSkinSelect(2)}
+          >
+            <img
               className={`${styles.btndesign} ${styles.skin2}`}
               width="300"
               src={temple}
               alt="btndesign"
-            /> */}
+            />
           </button>
           <button
             className={`${styles.skinbtn} ${styles.skin3}`}
-            onClick={() => onSkinSelect(3)}>
+            onClick={() => onSkinSelect(3)}
+          >
             {/* <img
               className={`${styles.btndesign} ${styles.skin3} ${styles.leaves}`}
               width="60"
@@ -141,21 +144,23 @@ const FrameButtons = ({
               justifySelf: "center",
               alignSelf: "center",
               width: 500,
-            }}/>
+            }}
+          />
           <div className={styles.smile}>Smile!</div>
-      {/*Take Photo*/}
-        <Button
-          children="사진 찍기!"
-          width="720px"
-          height="150px"
-          onClick={() => {
-            onStartTimer();
-            animation(5);
-            onTakePhoto();
-          }}
-          classes="movebtn takePhoto"
-        />
-      </>)}
+          {/*Take Photo*/}
+          <Button
+            children="사진 찍기!"
+            width="720px"
+            height="150px"
+            onClick={() => {
+              onStartTimer();
+              animation(5);
+              onTakePhoto();
+            }}
+            classes="movebtn takePhoto"
+          />
+        </>
+      )}
       {phase === 2 && !imgfile && photoAnimation}
       {phase === 3 && imgfile && (
         <>
@@ -236,8 +241,8 @@ const FrameButtons = ({
       {(phase === 1 || (phase === 3 && imgfile)) && (
         <Button
           children="저장하기"
-          width={version==='mobile'? '40vw' :"720px"}
-          height={version==='mobile' ? '80px':"150px"}
+          width={version === "mobile" ? "40vw" : "720px"}
+          height={version === "mobile" ? "80px" : "150px"}
           onClick={() => setPhase((prev) => prev + 1)}
           classes="movebtn nextbtn"
         />
