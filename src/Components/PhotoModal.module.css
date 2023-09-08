@@ -8,34 +8,35 @@
 }
 /*container*/
 .container {
-  /* box-sizing: border-box; */
+  box-sizing: border-box;
   width: calc(100vw + 10px);
-  height: 110vh;
+  height: 97vh;
   border: 5px solid black;
   border-radius: 30px;
   background-color: black;
 
   position: fixed;
-  left: -5px;
-  /* top: 3vh; */
+  /* border 두께 */ left: -5px;
   top: 100vh;
+  /* activated-> top: 3vh; */
   z-index: 32;
 
   display: flex;
   flex-direction: column;
+  justify-content: end;
   align-items: center;
   cursor: url("../assets/Images/mouse-pointer-white.png") 25 25, auto;
-  transition: top 2s ease;
+  transition: top 0.7s ease;
 }
 
 .cam_container {
-  width: 100vw;
-  height: 100vw;
-  margin-top: 80px;
+  width: min(100vw, calc(97vh - 380px));
+  height: min(100vw, calc(97vh - 380px));
+  bottom: 280px;
   background-color: #c9b3ef;
   /* border-radius: 30px; */
 
-  position: relative;
+  position: absolute;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -101,8 +102,11 @@
 
 .actions {
   width: 100vw;
-  height: calc(97vh - 100vw - 85px);
-  position: relative;
+  /* height: calc(97vh - 100vw - 85px); */
+  height: 280px;
+  position: absolute;
+  bottom: 0px;
+  background-color: white;
 }
 
 .imgpreview {
@@ -311,7 +315,7 @@
   .actions {
     width: 45vw;
     height: 90vh;
-    position: static;
+    position: relative;
   }
 
   .imgpreview {

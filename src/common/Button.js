@@ -19,7 +19,7 @@ const Button = ({
     const style = getStyleByClassName(className) + " ";
     combinedStyles += style;
   });
-  const fontSize = (parseInt(width) + parseInt(height)) / 12;
+  const fontSize = parseInt(height) * 0.35;
   return (
     <>
       <button

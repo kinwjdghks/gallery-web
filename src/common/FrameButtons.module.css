@@ -13,12 +13,14 @@
   position: relative;
 }
 .container.skin {
-  grid-template-rows: 15vh 24vh 24vh 15vh;
+  grid-template-rows: 100px 100px;
+  grid-template-columns: 20vw 20vw 20vw 20vw;
+  row-gap: 20px;
+  column-gap: 4vw;
+  padding: 4vw;
   grid-template-areas:
-    "header header"
-    "skin1 skin2"
-    "skin3 skin4"
-    "move move";
+    "skin1 skin2 skin3 skin4"
+    "none none  move move";
 }
 .container.beforePhoto {
   grid-template-rows: 15vh 48vh 15vh;
@@ -84,13 +86,13 @@
   top: -17.78px;
 }
 .skinbtn {
-  width: 340px;
-  height: 250px;
+  width: 20vw;
+  height: 100px;
   justify-self: center;
   align-self: center;
 
   font-size: 3rem;
-  border-radius: 30px;
+  border-radius: 3vw;
   overflow: hidden;
   cursor: url("../assets/Images/mouse-pointer-white.png") 25 25, auto;
 
@@ -103,25 +105,17 @@
   cursor: url("../assets/Images/mouse-pointer-black.png") 25 25, auto;
 }
 .skinbtn.skin1 {
-  justify-self: end;
-  bottom: 2px;
   background: linear-gradient(#1f1f61 0%, #755d98 60%, #e0a6b2 100%);
 }
 
 .skinbtn.skin2 {
-  justify-self: start;
-  bottom: 2px;
   background: linear-gradient(#ffc994 0%, #ffa852 60%, #ed743f 100%);
 }
 .skinbtn.skin3 {
-  justify-self: end;
-  bottom: 10px;
   background-color: #044b2d;
 }
 
 .skinbtn.skin4 {
-  justify-self: start;
-  bottom: 10px;
   background-color: white;
   border: 2px solid black;
 }
@@ -305,6 +299,14 @@
     position: relative;
     /* left: -30px; */
   }
+  .container.skin {
+    grid-template-rows: 15vh 24vh 24vh 15vh;
+    grid-template-areas:
+      "header header"
+      "skin1 skin2"
+      "skin3 skin4"
+      "move move";
+  }
   .close {
     position: absolute;
     width: 60px;
@@ -315,5 +317,42 @@
     cursor: url("../assets/Images/mouse-pointer-white.png") 25 25, auto;
     background: url("../assets/Images/close-modal.png") center center/contain
       no-repeat;
+  }
+  .skinbtn {
+    width: 340px;
+    height: 250px;
+    justify-self: center;
+    align-self: center;
+  
+    font-size: 3rem;
+    border-radius: 30px;
+    overflow: hidden;
+    cursor: url("../assets/Images/mouse-pointer-white.png") 25 25, auto;
+  
+    transition: transform 150ms ease-in;
+    position: relative;
+  }
+  .skinbtn.skin1 {
+    justify-self: end;
+    bottom: 2px;
+    background: linear-gradient(#1f1f61 0%, #755d98 60%, #e0a6b2 100%);
+  }
+  
+  .skinbtn.skin2 {
+    justify-self: start;
+    bottom: 2px;
+    background: linear-gradient(#ffc994 0%, #ffa852 60%, #ed743f 100%);
+  }
+  .skinbtn.skin3 {
+    justify-self: end;
+    bottom: 10px;
+    background-color: #044b2d;
+  }
+  
+  .skinbtn.skin4 {
+    justify-self: start;
+    bottom: 10px;
+    background-color: white;
+    border: 2px solid black;
   }
 }

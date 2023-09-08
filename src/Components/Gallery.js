@@ -63,7 +63,7 @@ const Gallery = ({ version }) => {
     if (entry.isIntersecting) {
       console.log("intersect");
       observer.unobserve(entry.target);
-      await getMorePhotos();
+      // await getMorePhotos();
       setTimeout(() => {
         observer.observe(entry.target);
       }, 800);
@@ -129,7 +129,7 @@ const Gallery = ({ version }) => {
         ref={background}
       >
         {!photos.length && <div className={styles.noPic}>사진찍기 ㄱㄱ</div>}
-        {photos.length && (
+        {photos.length > 0 && (
           <div className={styles.albumContainer}>
             {/* {photos.map((data, index) => {
                 // if (data.type ==="blank" ||data.url === "blank") {
@@ -144,7 +144,6 @@ const Gallery = ({ version }) => {
                 return <Note key ={index} data={data} />;
               }
             })} */}
-            {photos}
           </div>
         )}
         {isLoading && <div className={styles.loadingDiv}>Loading...</div>}
