@@ -117,6 +117,12 @@
   justify-self: start;
   left: 10px;
 }
+
+.mobile{
+  height: 80px;
+  background-color: grey;
+  border-radius: 3vw;
+}
 @media (min-width: 1024px) {
   /* default button animation */
 .btn {
@@ -183,13 +189,11 @@
 /* Next */
 .movebtn {
   grid-area: move;
-
   justify-self: center;
   align-self: self-start;
   font-weight: 600;
   /* font-size: 60pt; */
 }
-
 /* Frame */
 .framebtn {
   justify-self: center;

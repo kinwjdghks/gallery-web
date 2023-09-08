@@ -11,7 +11,7 @@ import temple from "../assets/Images/명륜당.svg";
 import sungkyuni from "../assets/Images/성균이.svg";
 import leaves from "../assets/Images/낙엽.svg";
 import loading from "../assets/Images/loading.svg";
-import camera from "../assets/Images/camera_btn_black.svg";
+import camera_btn from "../assets/Images/camera_btn_black.svg";
 
 const FrameButtons = ({
   isLoading,
@@ -26,7 +26,7 @@ const FrameButtons = ({
   onSkinSelect,
   version,
 }) => {
-  const [phase, setPhase] = useState(1);
+  const [phase, setPhase] = useState(2);
   useEffect(() => {
     console.log(phase);
   }, [phase]);
@@ -39,12 +39,12 @@ const FrameButtons = ({
   };
   const classNameByConfig =
     phase === 1
-      ? styles.skin
+      ? styles.frame
       : phase === 2
-      ? styles.beforePhoto
+      ? styles.beforephoto
       : phase === 3
-      ? styles.afterPhoto
-      : styles.frame;
+      ? styles.afterphoto
+      : styles.skin;
 
   const animation = useCallback((time) => {
     setAnimationStarted(true);
@@ -78,8 +78,53 @@ const FrameButtons = ({
           <p className={styles.photobooth}>Photo Booth</p>
         </div>
       )}
-      {/* PHASE 1:  skin selection */}
-      {phase === 1 && (
+      {/* PHASE 1:  frame selection */}
+      {version !== 'mobile' && phase === 2 && !animationStarted && (
+        <>
+          <img
+            src={SmileImage}
+            alt="SmileImage"
+            style={{
+              gridArea: "img",
+              justifySelf: "center",
+              alignSelf: "center",
+              width:500,
+            }}/>
+          <div className={styles.smile}>Smile!</div>
+      {/*Take Photo*/}
+        <Button
+          children="사진 찍기!"
+          width="720px"
+          height="150px"
+          onClick={() => {
+            onStartTimer();
+            animation(5);
+            onTakePhoto();
+          }}
+          classes="movebtn takePhoto"
+        />
+      </>)}
+
+      {version==='mobile'&& phase===2 && <>
+          <Button
+          children="취소"
+          width="40vw"
+          height="80px"
+          onClick={()=>{}}
+          classes="quit"
+          ></Button>
+          <div className={styles.takePhoto_mobile}>
+            <img src={camera_btn} alt="camera" width='80'/>
+          </div>
+      </>}
+
+
+
+
+
+
+
+      {phase === 4 && (
         <>
           <button
             className={`${styles.skinbtn} ${styles.skin1}`}
@@ -131,31 +176,7 @@ const FrameButtons = ({
 
       {/* PHASE 2: take photo */}
       {/*Smile Image*/}
-      {phase === 2 && !animationStarted && (
-        <>
-          <img
-            src={SmileImage}
-            alt="SmileImage"
-            style={{
-              gridArea: "img",
-              justifySelf: "center",
-              alignSelf: "center",
-              width: 500,
-            }}/>
-          <div className={styles.smile}>Smile!</div>
-      {/*Take Photo*/}
-        <Button
-          children="사진 찍기!"
-          width="720px"
-          height="150px"
-          onClick={() => {
-            onStartTimer();
-            animation(5);
-            onTakePhoto();
-          }}
-          classes="movebtn takePhoto"
-        />
-      </>)}
+      
       {phase === 2 && !imgfile && photoAnimation}
       {phase === 3 && imgfile && (
         <>
@@ -185,7 +206,7 @@ const FrameButtons = ({
         </>
       )}
 
-      {/* {phase === 3 && (
+      {/* {phase === 2 && (
         <>
           {version !== "mobile" && (
             <>
@@ -220,8 +241,8 @@ const FrameButtons = ({
         </>
       )} */}
 
-      {phase === 4 && !imgfile && photoAnimation}
-      {phase === 4 && imgfile && (
+      {phase === 3 && !imgfile && photoAnimation}
+      {phase === 3 && imgfile && (
         <img
           src={ThumbImage}
           alt="ThumbImage"
@@ -242,7 +263,7 @@ const FrameButtons = ({
           classes="movebtn nextbtn"
         />
       )}
-      {phase === 4 && imgfile && (
+      {phase === 3 && imgfile && (
         <>
           <Button
             children="RE?"
