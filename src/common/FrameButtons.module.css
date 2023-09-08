@@ -26,6 +26,13 @@
   position: relative;
   display: flex;
   flex-direction: column;
+  align-items: center;
+}
+.takePhoto_mobile{
+  width: 100px;
+  height: 100px;
+  background-color: rgb(187, 187, 187);
+  border-radius: 50px;
 }
 .container.frame {
   grid-template-rows: 15vh 24vh 24vh 15vh;

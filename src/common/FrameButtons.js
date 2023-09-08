@@ -31,7 +31,6 @@ const FrameButtons = ({
     console.log(phase);
   }, [phase]);
   //phase 1: frame select / 2: take photo / 3: after photo / 4: skin select 
-  //phase 1: frame select / 2: skin select/ 3: before photo/ 4: after photo
   const [animationStarted, setAnimationStarted] = useState(false);
   const [photoAnimation, setPhotoAnimation] = useState();
   const againHandler = () => {
@@ -41,9 +40,9 @@ const FrameButtons = ({
     phase === 1
       ? styles.frame
       : phase === 2
-      ? styles.beforephoto
+      ? styles.beforePhoto
       : phase === 3
-      ? styles.afterphoto
+      ? styles.afterPhoto
       : styles.skin;
 
   const animation = useCallback((time) => {
@@ -79,6 +78,9 @@ const FrameButtons = ({
         </div>
       )}
       {/* PHASE 1:  frame selection */}
+
+      {/* PHASE 2: before photo */}
+      {/* PC */}
       {version !== 'mobile' && phase === 2 && !animationStarted && (
         <>
           <img
@@ -91,7 +93,7 @@ const FrameButtons = ({
               width:500,
             }}/>
           <div className={styles.smile}>Smile!</div>
-      {/*Take Photo*/}
+
         <Button
           children="사진 찍기!"
           width="720px"
@@ -104,18 +106,16 @@ const FrameButtons = ({
           classes="movebtn takePhoto"
         />
       </>)}
-
+      {/* Mobile */}
       {version==='mobile'&& phase===2 && <>
+          <div className={styles.takePhoto_mobile}>
+            <img src={camera_btn} alt="camera" style={{width:80}}/>
+          </div>
           <Button
           children="취소"
-          width="40vw"
-          height="80px"
           onClick={()=>{}}
-          classes="quit"
+          classes="mobile quit"
           ></Button>
-          <div className={styles.takePhoto_mobile}>
-            <img src={camera_btn} alt="camera" width='80'/>
-          </div>
       </>}
 
 

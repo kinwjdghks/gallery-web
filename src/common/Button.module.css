@@ -119,8 +119,8 @@
 }
 
 .mobile{
-  height: 80px;
-  background-color: grey;
+  height: 60px;
+  width: 40vw;
   border-radius: 3vw;
 }
 @media (min-width: 1024px) {
