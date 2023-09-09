@@ -8,16 +8,9 @@
 }
 /*container*/
 .container {
-  box-sizing: border-box;
-  width: calc(100vw + 10px);
-  height: 97vh;
-  border: 5px solid black;
-  border-radius: 30px;
-  background-color: black;
-
+  width: 100vw;
+  height: 100vh;
   position: fixed;
-  /* border 두께 */
-  left: -5px;
   top: 100vh;
   /* activated-> top: 3vh; */
   z-index: 32;
@@ -31,8 +24,8 @@
 }
 
 .cam_container {
-  width: min(100vw, calc(97vh - 380px));
-  height: min(100vw, calc(97vh - 380px));
+  width: min(100vw, calc(97vh - 280px));
+  height: min(100vw, calc(97vh - 280px));
   bottom: 280px;
   background-color: #c9b3ef;
   border-radius: 10%;
@@ -80,8 +73,8 @@
 .animation.counting {
   font-family: "Kanit", sans-serif;
   font-size: 15rem;
-  color: black;
-  /* font-weight: 200; */
+  color: white;
+  opacity: 0.3;
   text-align: center;
 }
 .animation.shooting {
@@ -243,11 +236,12 @@
     flex-direction: row;
 
     left: 5vw;
-    top: 2.5vh;
+    top: 5vh;
     z-index: 32;
 
     justify-content: space-evenly;
     overflow: hidden;
+    border-radius: 60px;
   }
 
   .cam_container {
@@ -403,6 +397,12 @@
   .camera.horizontal {
     top: 725px;
     left: 630px;
+  }
+  .animation.counting{
+    color: black;
+    grid-area: img;
+    align-self: center;
+    opacity: 1;
   }
   .shutter {
     position: absolute;

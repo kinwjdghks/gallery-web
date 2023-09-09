@@ -21,7 +21,6 @@
   /* padding: 4vw; */
   grid-template-areas:
     "img img"
-    "img img"
     "cancel .";
 }
 .container.afterPhoto {
@@ -50,7 +49,7 @@
   width: 100px;
   height: 100px;
   background-color: rgb(187, 187, 187);
-  /* border-radius: 50%; */
+  border-radius: 50%;
 }
 .container.frame {
   grid-template-rows: 15vh 24vh 24vh 15vh;
@@ -207,7 +206,7 @@
   }
   .container.beforePhoto {
     display: grid;
-    grid-template-rows: 20% 55% 20%;
+    grid-template-rows: 20% 60% 20%;
     grid-template-columns: 1fr;
     justify-content: center;
     grid-template-areas:
@@ -218,7 +217,7 @@
   }
   .container.afterPhoto {
     display: grid;
-    grid-template-rows: 20% 55% 20%;
+    grid-template-rows: 20% 60% 20%;
     grid-template-columns: 1fr 1fr;
     grid-template-areas:
       "header header"
@@ -232,7 +231,7 @@
       "header header"
       "skin1 skin2"
       "skin3 skin4"
-      "quit save";
+      "cancel save";
     row-gap: 0;
     column-gap: 0;
     padding: 0;

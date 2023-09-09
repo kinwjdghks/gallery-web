@@ -3,7 +3,6 @@ import React, {
   useRef,
   useEffect,
   useCallback,
-  useTransition,
 } from "react";
 import ReactDOM from "react-dom";
 import styles from "./PhotoModal.module.css";
@@ -46,9 +45,15 @@ const Modal = ({ onCloseModal, version }) => {
   //등장 animation
   const containerRef = useRef(null);
   useEffect(() => {
-    if (containerRef) {
+    if (containerRef && version==='mobile') {
       const popup = setTimeout(() => {
-        containerRef.current.style.top = "3vh";
+        containerRef.current.style.top = "0";
+      }, 100);
+      return () => clearTimeout(popup);
+    }
+    else if(containerRef) {
+      const popup = setTimeout(() => {
+        containerRef.current.style.top = "5vh";
       }, 100);
       return () => clearTimeout(popup);
     }
@@ -250,7 +255,6 @@ const Modal = ({ onCloseModal, version }) => {
             className={styles.webcam}
             audio={false}
             height="100%"
-            // height={curHeight}
             ref={webcamRef}
             screenshotFormat="image/jpeg"
             mirrored={true}

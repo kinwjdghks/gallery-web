@@ -20,7 +20,6 @@ const Button = ({
     combinedStyles += style;
   });
   const fontSize = parseInt(height) * 0.35;
-  console.log(parseInt(height));
   return (
     <>
       <button
