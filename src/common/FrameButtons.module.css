@@ -21,6 +21,7 @@
   /* padding: 4vw; */
   grid-template-areas:
     "img img"
+    "img img"
     "cancel .";
 }
 .container.afterPhoto {
@@ -49,7 +50,7 @@
   width: 100px;
   height: 100px;
   background-color: rgb(187, 187, 187);
-  border-radius: 50%;
+  /* border-radius: 50%; */
 }
 .container.frame {
   grid-template-rows: 15vh 24vh 24vh 15vh;
@@ -145,18 +146,15 @@
   /* z-index: 10; */
 }
 .btndesign.skin1 {
-
 }
 
 .btndesign.skin2 {
-
 }
 
-.btndesign.skin3{
+.btndesign.skin3 {
 }
 
 .btndesign.skin4 {
-
 }
 
 .comitfilm1 {

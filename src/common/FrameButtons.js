@@ -24,6 +24,7 @@ const FrameButtons = ({
   version,
 }) => {
   const [phase, setPhase] = useState(2);
+  const [phase, setPhase] = useState(2);
   useEffect(() => {
     console.log(phase);
   }, [phase]);
@@ -41,7 +42,7 @@ const FrameButtons = ({
       : phase === 3
       ? styles.afterPhoto
       : styles.skin;
-  
+
   return (
     <div className={`${styles.container} ${classNameByConfig}`}>
       {version !== "mobile" && (
@@ -133,7 +134,7 @@ const FrameButtons = ({
               againHandler();
               setPhase(2);
             }}
-            classes="again"
+            classes={version === "mobile" ? "again" : "popup again"}
           />
           <Button
             children="다음"
