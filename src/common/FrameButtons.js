@@ -23,7 +23,7 @@ const FrameButtons = ({
   onSkinSelect,
   version,
 }) => {
-  const [phase, setPhase] = useState(2);
+  const [phase, setPhase] = useState(4);
   useEffect(() => {
     console.log(phase);
   }, [phase]);
@@ -100,7 +100,7 @@ const FrameButtons = ({
             animation(5);
             onTakePhoto();
           }}
-          classes="movebtn takePhoto"
+          classes="popup movebtn takePhoto"
         />
       </>)}
       {/* Mobile */}
@@ -111,10 +111,53 @@ const FrameButtons = ({
           <Button
           children="취소"
           onClick={()=>{}}
-          classes="mobile quit"
+          classes="quit"
           ></Button>
       </>}
-
+        {/* PHASE 3: after photo */}
+        {phase === 3 && !imgfile && photoAnimation}
+        {/* {phase === 3 && imgfile && ( */}
+           {phase === 3&& (
+        <img
+          src={ThumbImage}
+          alt="ThumbImage"
+          style={{
+            width:'50%',
+            gridArea: "img",
+            justifySelf: "center",
+            alignSelf: "center"
+          }}
+        />
+      )}
+      {/* {phase === 3 && imgfile && ( */}
+      {phase === 3 && (
+          <>
+            <Button
+              children="RE?"
+              width="80%"
+              height="150px"
+              onClick={() => {
+                againHandler();
+                setPhase(1);
+                onFrameSelect(0);
+              }}
+              classes="popup lastbtn again"
+            />
+            <Button
+              children="저장"
+              width="80%"
+              height="150px"
+              onClick={onSavePhoto}
+              classes="popup lastbtn save"
+            >
+              {isLoading ? (
+                <img width="50" src={loading} className={styles.loading} />
+              ) : (
+                "SAVE"
+              )}
+            </Button>
+          </>
+        )}
 
 
 
@@ -168,40 +211,20 @@ const FrameButtons = ({
               <p className={styles.comitfilm3}>COMIT FILM</p>
             </div> */}
           </button>
+          <Button
+          children="취소"
+          onClick={()=>{}}
+          classes="popup quit"
+          ></Button>
+          <Button
+          children="저장"
+          onClick={()=>{}}
+          classes="popup save"
+          ></Button>
         </>
       )}
 
-      {/* PHASE 2: take photo */}
-      {/*Smile Image*/}
       
-      {phase === 2 && !imgfile && photoAnimation}
-      {phase === 3 && imgfile && (
-        <>
-          <Button
-            children="정방형"
-            width="345px"
-            height="210px"
-            onClick={() => onFrameSelect(0)}
-            classes="framebtn square"
-          />
-
-          <Button
-            children="세로"
-            width="345px"
-            height="210px"
-            onClick={() => onFrameSelect(1)}
-            classes="framebtn vertical"
-          />
-
-          <Button
-            children="가로"
-            width="345px"
-            height="210px"
-            onClick={() => onFrameSelect(2)}
-            classes="framebtn horizontal"
-          />
-        </>
-      )}
 
       {/* {phase === 2 && (
         <>
@@ -239,17 +262,7 @@ const FrameButtons = ({
       )} */}
 
       {phase === 3 && !imgfile && photoAnimation}
-      {phase === 3 && imgfile && (
-        <img
-          src={ThumbImage}
-          alt="ThumbImage"
-          style={{
-            gridArea: "img",
-            justifySelf: "center",
-            alignSelf: "center",
-          }}
-        />
-      )}
+      
       {/* Next */}
       {(phase === 1 || (phase === 3 && imgfile)) && (
         <Button
@@ -260,34 +273,7 @@ const FrameButtons = ({
           classes="movebtn nextbtn"
         />
       )}
-      {phase === 3 && imgfile && (
-        <>
-          <Button
-            children="RE?"
-            width="380px"
-            height="180px"
-            onClick={() => {
-              againHandler();
-              setPhase(1);
-              onFrameSelect(0);
-            }}
-            classes="lastbtn again"
-          />
-          <Button
-            children=""
-            width="380px"
-            height="180px"
-            onClick={onSavePhoto}
-            classes="lastbtn save"
-          >
-            {isLoading ? (
-              <img width="50" src={loading} className={styles.loading} />
-            ) : (
-              "SAVE"
-            )}
-          </Button>
-        </>
-      )}
+      
       {!whileTimer && (
         <button className={styles.close} onClick={onCloseModal}>
           X

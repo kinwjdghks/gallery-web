@@ -233,8 +233,7 @@
     margin: 0;
     font-family: "cocogoose";
     color: white;
-    /* display: grid; */
-    grid-template-columns: unset;
+
     /* row-gap: 0px; */
     /* column-gap: 30px; */
 
@@ -243,13 +242,41 @@
   .container.beforePhoto {
     display: grid;
     grid-template-rows: 20% 55% 20%;
+    grid-template-columns: 1fr;
+    justify-content: center;
     grid-template-areas:
       "header"
       "img"
       "move";
-      justify-content: center;
     }
-  
+  .container.afterPhoto {
+    display: grid;
+    grid-template-rows: 20% 55% 20%;
+    grid-template-areas:
+      "header header"
+      "img img"
+      "again save";
+  }
+  .container.skin {
+    grid-template-rows: 20% 30% 30% 20%;
+    grid-template-areas:
+      "header header"
+      "skin1 skin2"
+      "skin3 skin4"
+      "quit save";
+      row-gap: 0;
+      column-gap: 0;
+      padding:  0;
+  }
+  .container.frame {
+    display: grid;
+    grid-template-rows: 20% 30% 30% 20%;
+    grid-template-areas:
+      "header header"
+      "square square"
+      "vertical horizontal"
+      "move move";
+  }
   .smileText{
     font-family: josefin;
     font-weight: 400;
@@ -283,14 +310,8 @@ animation: wiggle 2.5s infinite;
   color: black;
   top:0;
 }
-  .container.skin {
-    grid-template-rows: 15vh 24vh 24vh 15vh;
-    grid-template-areas:
-      "header header"
-      "skin1 skin2"
-      "skin3 skin4"
-      "move move";
-  }
+
+
   .close {
     position: absolute;
     width: 60px;
@@ -303,8 +324,8 @@ animation: wiggle 2.5s infinite;
       no-repeat;
   }
   .skinbtn {
-    width: 340px;
-    height: 250px;
+    width: 80%;
+    height: 80%;
     justify-self: center;
     align-self: center;
   
@@ -317,26 +338,27 @@ animation: wiggle 2.5s infinite;
     position: relative;
   }
   .skinbtn.skin1 {
+    grid-area: skin1;
     justify-self: end;
-    bottom: 2px;
     background: linear-gradient(#1f1f61 0%, #755d98 60%, #e0a6b2 100%);
   }
   
   .skinbtn.skin2 {
+    grid-area: skin2;
     justify-self: start;
-    bottom: 2px;
     background: linear-gradient(#ffc994 0%, #ffa852 60%, #ed743f 100%);
   }
   .skinbtn.skin3 {
+    grid-area: skin3;
     justify-self: end;
-    bottom: 10px;
     background-color: #044b2d;
   }
   
   .skinbtn.skin4 {
+    grid-area: skin4;
     justify-self: start;
-    bottom: 10px;
     background-color: white;
     border: 2px solid black;
+    box-sizing: border-box;
   }
 }
