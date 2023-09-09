@@ -20,14 +20,14 @@
   column-gap: 2vw;
   padding: 4vw;
   grid-template-areas:
-    "image image"
+    "img img"
     "cancel .";
 }
 .container.afterPhoto {
   grid-template-rows: 9fr 5fr;
   grid-template-columns: repeat(2, 1fr);
   grid-template-areas:
-    "image image"
+    "img img"
     "again next";
 }
 .container.skin {
@@ -142,18 +142,15 @@
   /* z-index: 10; */
 }
 .btndesign.skin1 {
-
 }
 
 .btndesign.skin2 {
-
 }
 
-.btndesign.skin3{
+.btndesign.skin3 {
 }
 
 .btndesign.skin4 {
-
 }
 
 .comitfilm1 {

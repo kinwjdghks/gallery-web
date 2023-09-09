@@ -34,7 +34,7 @@ const Header = ({ onModalHandler, version }) => {
           height="80px"
           classes="popup header"
           onClick={() => onModalHandler("photo")}
-          onMouseHover={hoverHandler}
+          // onMouseHover={hoverHandler}
         />
       )}
     </div>

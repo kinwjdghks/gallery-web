@@ -43,7 +43,7 @@ const FrameButtons = ({
       : phase === 3
       ? styles.afterPhoto
       : styles.skin;
-  
+
   return (
     <div className={`${styles.container} ${classNameByConfig}`}>
       {version !== "mobile" && (
@@ -113,14 +113,14 @@ const FrameButtons = ({
 
       {/* {phase === 3 && !imgfile && photoAnimation} */}
       {/* {phase === 3 && imgfile && ( */}
-      {phase === 3 && (  
+      {phase === 3 && (
         <>
           <img
             src={ThumbImage}
             alt="ThumbImage"
             style={{
               width: 160,
-              gridArea: "image",
+              gridArea: "img",
               justifySelf: "center",
               alignSelf: "center",
             }}
@@ -133,7 +133,7 @@ const FrameButtons = ({
               againHandler();
               setPhase(2);
             }}
-            classes="again"
+            classes={version === "mobile" ? "again" : "popup again"}
           />
           <Button
             children="다음"
