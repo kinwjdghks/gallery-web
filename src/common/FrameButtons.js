@@ -101,7 +101,7 @@ const FrameButtons = ({
           onClick={()=>{}}
           classes="quit"
           ></Button>
-      </>}
+      </>)}
         {/* PHASE 3: after photo */}
         {phase === 3 && !imgfile && photoAnimation}
         {/* {phase === 3 && imgfile && ( */}
