@@ -43,7 +43,7 @@ const FrameButtons = ({
       : phase === 3
       ? styles.afterPhoto
       : styles.skin;
-
+  
   return (
     <div className={`${styles.container} ${classNameByConfig}`}>
       {version !== "mobile" && (
