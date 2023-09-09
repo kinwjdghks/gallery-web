@@ -18,11 +18,12 @@
 .btn:active {
   background: white;
   color: #603ebb;
+  color: #603ebb;
 }
-.btn:active::before {
+/* .btn:active::before {
   box-shadow: 0 0 0 2px black, 0 0 0 rgb(173, 173, 173);
   transform: translate3d(0, 0, -1em);
-}
+} */
 
 /* Header */
 .header {
@@ -33,7 +34,7 @@
 /* 다시찍기 */
 .again {
   grid-area: again;
-  justify-self: center ;
+  justify-self: center;
 }
 /* 다음 */
 .next {
@@ -45,11 +46,17 @@
 .cancel {
   grid-area: cancel;
   justify-self: center;
+  align-self: flex-start;
 }
-
+.cancel.note {
+  margin-top: 5vh;
+}
 .save {
   grid-area: save;
   justify-self: center;
+}
+.save.note {
+  margin-top: 5vh;
 }
 /* Next */
 .movebtn {

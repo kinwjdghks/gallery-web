@@ -76,7 +76,7 @@ const FrameButtons = ({
             onClick={() => {
               onStartTimer();
               onStartAnimation(5);
-              setPhase((prev)=>prev+1);
+              setPhase((prev) => prev + 1);
               onTakePhoto();
             }}>
             <img src={camera_btn} alt="camera" style={{ height: '75%' }} />
@@ -145,7 +145,7 @@ const FrameButtons = ({
             src={ThumbImage}
             alt="ThumbImage"
             style={{
-              width: version==='mobile' ? '30%' : '50%',
+              width: version === "mobile" ? "30%" : "50%",
               gridArea: "img",
               justifySelf: "center",
               alignSelf: "center",

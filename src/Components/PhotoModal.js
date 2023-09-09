@@ -108,7 +108,7 @@ const Modal = ({ onCloseModal, version }) => {
         <img
           className={styles.imgpreview}
           style={{
-            height: '100%',
+            height: "100%",
             // height: vidConfigList[vidConfigIdx].height,
             apsectRatio: 3 / 4,
           }}

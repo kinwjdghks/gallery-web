@@ -27,6 +27,7 @@ const Modal = ({ onCloseModal }) => {
       onCloseModal();
     }, 500);
   };
+
   const contentRef = useRef(null);
   const [message, setMessage] = useState("");
 
@@ -55,35 +56,42 @@ const Modal = ({ onCloseModal }) => {
       return;
     }
   };
-
   return (
     <div className={styles.container} ref={containerRef}>
       <div className={styles.title}>기깔나는 방명록을 작성해보아요</div>
+
       <textarea
         onFocus={() => setMessage(null)}
         className={`${styles.noteinput} ${message && styles.error}`}
         ref={contentRef}
       />
+
       {message}
-      <div className={styles.actions}>
-        <Button
-          width="32vw"
-          height="12vw"
-          onClick={closeModalHandler}
-          classes=""
-        >
-          취소하기
-        </Button>
-        <Button width="32vw" height="12vw" onClick={submitNote} classes="">
-          작성하기
-        </Button>
-      </div>
-      <img
+
+      {/* <div className={styles.actions}> */}
+      <Button
+        width="32vw"
+        height="11vh"
+        onClick={closeModalHandler}
+        classes="cancel note"
+      >
+        취소하기
+      </Button>
+      <Button
+        width="32vw"
+        height="11vh"
+        onClick={submitNote}
+        classes="save note"
+      >
+        저장하기
+      </Button>
+      {/* </div> */}
+      {/* <img
         style={{ position: "absolute", bottom: "15vw" }}
         src={logo}
         width="35vw"
         alt="comit"
-      />
+      /> */}
     </div>
   );
 };
