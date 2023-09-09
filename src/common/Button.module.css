@@ -61,17 +61,19 @@
 }
 
 /* 다시찍기 */
-.again {
-  grid-area: again;
-  align-self: center;
+.cancel {
+  grid-area: cancel;
 }
 /* 다음 */
 .next {
   grid-area: next;
-  align-self: center;
   justify-self: end;
 }
 
+/* 저장하기 */
+.save {
+  grid-area: save;
+}
 /* Next */
 .movebtn {
   grid-area: move;

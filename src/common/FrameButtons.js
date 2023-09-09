@@ -104,7 +104,7 @@ const FrameButtons = ({
             onClick={() => {
               onCloseModal();
             }}
-            classes="quit"
+            classes="cancel"
           />
         </>
       )}
@@ -156,8 +156,8 @@ const FrameButtons = ({
         />
       )} */}
 
-      {/* {phase === 3 && imgfile && ( */}
-      {version !== "mobile" && phase === 3 && (
+      {/* {phase === 4 && imgfile && ( */}
+      {/* {version !== "mobile" && phase === 3 && (
         <>
           <Button
             children="RE?"
@@ -184,32 +184,32 @@ const FrameButtons = ({
             )}
           </Button>
         </>
-      )}
+      )} */}
 
-      {phase === 4 && (
+      {version === "mobile" && phase === 4 && (
         <>
           <button
             className={`${styles.skinbtn} ${styles.skin1}`}
             onClick={() => onSkinSelect(1)}
           >
-            <img
+            {/* <img
               className={`${styles.btndesign} ${styles.skin1}`}
               width="287" //PC
               src={building}
               alt="btndesign"
-            />
+            /> */}
           </button>
 
           <button
             className={`${styles.skinbtn} ${styles.skin2}`}
             onClick={() => onSkinSelect(2)}
           >
-            <img
+            {/* <img
               className={`${styles.btndesign} ${styles.skin2}`}
               width="300"
               src={temple}
               alt="btndesign"
-            />
+            /> */}
           </button>
           <button
             className={`${styles.skinbtn} ${styles.skin3}`}
@@ -238,14 +238,37 @@ const FrameButtons = ({
           </button>
           <Button
             children="취소"
-            onClick={() => {}}
-            classes="popup quit"
-          ></Button>
+            width="110px"
+            height="60px"
+            onClick={onCloseModal}
+            classes="cancel"
+          />
           <Button
+            children="저장하기"
+            width="110px"
+            height="60px"
+            onClick={onSavePhoto}
+            classes="save"
+          >
+            {isLoading ? (
+              <img width="50" src={loading} className={styles.loading} />
+            ) : (
+              "저장하기"
+            )}
+          </Button>
+          {/* <Button
             children="저장"
-            onClick={() => {}}
-            classes="popup save"
-          ></Button>
+            width="80%"
+            height="150px"
+            onClick={onSavePhoto}
+            classes="popup lastbtn save"
+          >
+            {isLoading ? (
+              <img width="50" src={loading} className={styles.loading} />
+            ) : (
+              "SAVE"
+            )}
+          </Button> */}
         </>
       )}
 

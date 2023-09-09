@@ -12,22 +12,30 @@
 
   position: relative;
 }
-.container.skin {
-  grid-template-rows: 100px 100px;
-  grid-template-columns: 20vw 20vw 20vw 20vw;
-  row-gap: 20px;
-  column-gap: 4vw;
-  padding: 4vw;
-  grid-template-areas:
-    "skin1 skin2 skin3 skin4"
-    ". . move move";
-}
+
+/* Phase에 따른 grid */
 .container.beforePhoto {
   grid-template-columns: repeat(2, 1fr);
   grid-template-rows: 9fr 5fr;
   grid-template-areas:
     "image image"
-    "again .";
+    "cancel .";
+}
+.container.afterPhoto {
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: 9fr 5fr;
+  grid-template-areas:
+    "image image"
+    "again next";
+}
+.container.skin {
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: 9fr 5fr;
+  column-gap: 2vw;
+  padding: 4vw;
+  grid-template-areas:
+    "skin1 skin2 skin3 skin4"
+    "cancel . . save";
 }
 .takePhoto_mobile {
   grid-area: image;
@@ -47,13 +55,6 @@
     "move move";
 }
 
-.container.afterPhoto {
-  grid-template-columns: repeat(2, 1fr);
-  grid-template-rows: 9fr 5fr;
-  grid-template-areas:
-    "image image"
-    "again next";
-}
 .text {
   width: 100%;
   font-size: 70px;
@@ -95,8 +96,8 @@
   top: -17.78px;
 }
 .skinbtn {
-  width: 20vw;
-  height: 100px;
+  width: 100%;
+  height: 110px;
   justify-self: center;
   align-self: center;
 
