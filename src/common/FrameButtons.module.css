@@ -40,13 +40,13 @@
     "cancel cancel save save";
 }
 .takePhoto_mobile {
-  grid-area: image;
+  grid-area: img;
   justify-self: center;
   align-self: center;
-  width: 120px;
-  height: 120px;
+  width: 10%;
+  aspect-ratio: 1;
   background-color: rgb(187, 187, 187);
-  border-radius: 50%;
+  /* border-radius: 50%; */
 }
 .container.frame {
   grid-template-rows: 15vh 24vh 24vh 15vh;

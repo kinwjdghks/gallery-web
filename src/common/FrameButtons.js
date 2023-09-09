@@ -25,7 +25,7 @@ const FrameButtons = ({
   onSkinSelect,
   version,
 }) => {
-  const [phase, setPhase] = useState(3);
+  const [phase, setPhase] = useState(2);
   useEffect(() => {
     console.log(phase);
   }, [phase]);
@@ -113,7 +113,7 @@ const FrameButtons = ({
 
       {/* {phase === 3 && !imgfile && photoAnimation} */}
       {/* {phase === 3 && imgfile && ( */}
-      {phase === 3 && (
+      {phase === 3 && imgfile && (
         <>
           <img
             src={ThumbImage}
@@ -309,7 +309,7 @@ const FrameButtons = ({
 
       {/* {phase === 3 && !imgfile && photoAnimation} */}
 
-      {!whileTimer && (
+      {!whileTimer && version !== "mobile" && (
         <button className={styles.close} onClick={onCloseModal}>
           X
         </button>
