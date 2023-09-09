@@ -9,11 +9,13 @@ import ThumbImage from "../assets/Images/thumb.png";
 import building from "../assets/skins/design1_square.svg";
 import loading from "../assets/Images/loading.svg";
 import camera_btn from "../assets/Images/camera_btn_black.svg";
-
+import temple from "../assets/Images/camera_btn_black.svg";
 const FrameButtons = ({
   isLoading,
   imgfile,
   whileTimer,
+  photoAnimation,
+  onStartAnimation,
   onStartTimer,
   onTakePhoto,
   onSavePhoto,
@@ -27,9 +29,9 @@ const FrameButtons = ({
   useEffect(() => {
     console.log(phase);
   }, [phase]);
-  //phase 1: frame select / 2: take photo / 3: after photo / 4: skin select 
+  //phase 1: frame select / 2: take photo / 3: after photo / 4: skin select
   const [animationStarted, setAnimationStarted] = useState(false);
-  const [photoAnimation, setPhotoAnimation] = useState();
+
   const againHandler = () => {
     onDeletePhoto();
   };
@@ -42,30 +44,6 @@ const FrameButtons = ({
       ? styles.afterPhoto
       : styles.skin;
 
-  const animation = useCallback((time) => {
-    setAnimationStarted(true);
-    let cnt = time;
-    const timer = setInterval(() => {
-      console.log(cnt);
-      if (cnt > 0) {
-        setPhotoAnimation(
-          <div className={`${styles.animation} ${styles.counting}`}>{cnt}</div>
-        );
-        cnt--;
-      } else {
-        setPhotoAnimation(
-          <div className={`${styles.animation} ${styles.shooting}`}></div>
-        );
-        clearInterval(timer);
-      }
-    }, 1000);
-    const setTimer = setTimeout(() => {
-      setPhase((prev) => prev + 1);
-      setAnimationStarted(false);
-    }, 6000);
-
-    return () => clearTimeout(setTimer);
-  });
   return (
     <div className={`${styles.container} ${classNameByConfig}`}>
       {version !== "mobile" && (
@@ -78,7 +56,7 @@ const FrameButtons = ({
 
       {/* PHASE 2: before photo */}
       {/* PC */}
-      {version !== 'mobile' && phase === 2 && !animationStarted && (
+      {version !== "mobile" && phase === 2 && !animationStarted && (
         <>
           <img
             src={SmileImage}
@@ -87,8 +65,9 @@ const FrameButtons = ({
               gridArea: "img",
               justifySelf: "center",
               alignSelf: "center",
-              width: '65%'
-            }}/>
+              width: "65%",
+            }}
+          />
           <div className={styles.smileText}>Smile!</div>
 
         <Button
@@ -104,9 +83,18 @@ const FrameButtons = ({
         />
       </>)}
       {/* Mobile */}
-      {version==='mobile'&& phase===2 && <>
-          <div className={styles.takePhoto_mobile}>
-            <img src={camera_btn} alt="camera" style={{width:80}}/>
+      {version === "mobile" && phase === 2 && (
+        <>
+          <div
+            className={styles.takePhoto_mobile}
+            onClick={() => {
+              onStartTimer();
+              onStartAnimation(5);
+              setPhase(3);
+              onTakePhoto();
+            }}
+          >
+            <img src={camera_btn} alt="camera" style={{ width: 80 }} />
           </div>
           <Button
           children="취소"
@@ -168,28 +156,31 @@ const FrameButtons = ({
         <>
           <button
             className={`${styles.skinbtn} ${styles.skin1}`}
-            onClick={() => onSkinSelect(1)}>
-            {/* <img
+            onClick={() => onSkinSelect(1)}
+          >
+            <img
               className={`${styles.btndesign} ${styles.skin1}`}
               width="287" //PC
               src={building}
               alt="btndesign"
-            /> */}
+            />
           </button>
 
           <button
             className={`${styles.skinbtn} ${styles.skin2}`}
-            onClick={() => onSkinSelect(2)}>
-            {/* <img
+            onClick={() => onSkinSelect(2)}
+          >
+            <img
               className={`${styles.btndesign} ${styles.skin2}`}
               width="300"
               src={temple}
               alt="btndesign"
-            /> */}
+            />
           </button>
           <button
             className={`${styles.skinbtn} ${styles.skin3}`}
-            onClick={() => onSkinSelect(3)}>
+            onClick={() => onSkinSelect(3)}
+          >
             {/* <img
               className={`${styles.btndesign} ${styles.skin3} ${styles.leaves}`}
               width="60"
@@ -267,8 +258,8 @@ const FrameButtons = ({
       {(phase === 1 || (phase === 3 && imgfile)) && (
         <Button
           children="저장하기"
-          width={version==='mobile'? '40vw' :"720px"}
-          height={version==='mobile' ? '80px':"150px"}
+          width={version === "mobile" ? "40vw" : "720px"}
+          height={version === "mobile" ? "80px" : "150px"}
           onClick={() => setPhase((prev) => prev + 1)}
           classes="movebtn nextbtn"
         />

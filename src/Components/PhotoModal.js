@@ -103,7 +103,8 @@ const Modal = ({ onCloseModal, version }) => {
         <img
           className={styles.imgpreview}
           style={{
-            height: vidConfigList[vidConfigIdx].height,
+            height: 350,
+            // height: vidConfigList[vidConfigIdx].height,
             apsectRatio: 3 / 4,
           }}
           src={imgfile}
@@ -192,12 +193,12 @@ const Modal = ({ onCloseModal, version }) => {
     setImgfile(null);
   };
 
-
   const skinList = [
-    [design1_square, design1_vertical,design1_horizontal],
-    [design2_square, design2_vertical,design2_horizontal],
-    [design3_square, design3_vertical,design3_horizontal],
-    [design4_square, design4_vertical,design4_horizontal]];
+    [design1_square, design1_vertical, design1_horizontal],
+    [design2_square, design2_vertical, design2_horizontal],
+    [design3_square, design3_vertical, design3_horizontal],
+    [design4_square, design4_vertical, design4_horizontal],
+  ];
 
   const classNameByConfig =
     vidConfigIdx === 0
@@ -217,25 +218,50 @@ const Modal = ({ onCloseModal, version }) => {
       ? styles.opt3
       : styles.opt4;
 
-    const image = skinList[skinIdx-1][vidConfigIdx];
-    const skinElement = (
-      <img className={styles.skinElement} src={image} />
-    );
+  const image = skinList[skinIdx - 1][vidConfigIdx];
+  const skinElement = <img className={styles.skinElement} src={image} />;
+
+  const [photoAnimation, setPhotoAnimation] = useState();
+  const animation = useCallback((time) => {
+    // setAnimationStarted(true);
+    let cnt = time;
+    const timer = setInterval(() => {
+      if (cnt > 0) {
+        setPhotoAnimation(
+          <div className={`${styles.animation} ${styles.counting}`}>{cnt}</div>
+        );
+        cnt--;
+      } else {
+        setPhotoAnimation(
+          <div className={`${styles.animation} ${styles.shooting}`}></div>
+        );
+        clearInterval(timer);
+      }
+    }, 1000);
+    // const setTimer = setTimeout(() => {
+    //   setPhase((prev) => prev + 1);
+    //   setAnimationStarted(false);
+    // }, 6000);
+
+    // return () => clearTimeout(setTimer);
+  });
   return (
     <div className={styles.container} ref={containerRef}>
       <div className={`${styles.cam_container} ${classNameBySkin}`}>
+        {version === "mobile" && photoAnimation}
         {skinElement}
         <div className={`${styles.cam_mask} ${classNameByConfig}`}>
           {imgpreview}
           {imgfile && <div className={styles.shutter}></div>}
-          {/* <Webcam
+          <Webcam
             className={styles.webcam}
             audio={false}
-            height={curHeight}
+            height="350"
+            // height={curHeight}
             ref={webcamRef}
             screenshotFormat="image/jpeg"
             mirrored={true}
-          /> */}
+          />
         </div>
       </div>
 
@@ -244,6 +270,8 @@ const Modal = ({ onCloseModal, version }) => {
           isLoading={isLoading}
           imgfile={imgfile}
           whileTimer={whileTimer}
+          photoAnimation={photoAnimation}
+          onStartAnimation={animation}
           onStartTimer={startTimer}
           onTakePhoto={takePhoto}
           onSavePhoto={savePhoto}

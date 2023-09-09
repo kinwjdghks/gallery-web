@@ -28,11 +28,11 @@
   flex-direction: column;
   align-items: center;
 }
-.takePhoto_mobile{
+.takePhoto_mobile {
   width: 100px;
   height: 100px;
   background-color: rgb(187, 187, 187);
-  border-radius: 50px;
+  border-radius: 50%;
 }
 .container.frame {
   grid-template-rows: 15vh 24vh 24vh 15vh;
@@ -168,36 +168,6 @@
   margin-left: -70px;
 }
 
-/* photoTaking Animation */
-.animation {
-  width: 100%;
-  grid-area: img;
-  justify-self: center;
-  align-self: center;
-
-  
-}
-.animation.counting {
-  font-family: "Kanit", sans-serif;
-  font-size: 20rem;
-  color: black;
-  /* font-weight: 200; */
-  text-align: center;
-}
-.animation.shooting {
-  background-color: white;
-  animation: 2s flash forwards;
-}
-@keyframes flash {
-  from {
-    opacity: 1;
-  }
-  to {
-    opacity: 0;
-  }
-}
-
-
 .close {
   position: absolute;
   width: 60px;
@@ -328,12 +298,12 @@ animation: wiggle 2.5s infinite;
     height: 80%;
     justify-self: center;
     align-self: center;
-  
+
     font-size: 3rem;
     border-radius: 30px;
     overflow: hidden;
     cursor: url("../assets/Images/mouse-pointer-white.png") 25 25, auto;
-  
+
     transition: transform 150ms ease-in;
     position: relative;
   }
@@ -342,7 +312,7 @@ animation: wiggle 2.5s infinite;
     justify-self: end;
     background: linear-gradient(#1f1f61 0%, #755d98 60%, #e0a6b2 100%);
   }
-  
+
   .skinbtn.skin2 {
     grid-area: skin2;
     justify-self: start;
@@ -353,7 +323,7 @@ animation: wiggle 2.5s infinite;
     justify-self: end;
     background-color: #044b2d;
   }
-  
+
   .skinbtn.skin4 {
     grid-area: skin4;
     justify-self: start;
