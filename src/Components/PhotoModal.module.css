@@ -35,13 +35,13 @@
   height: min(100vw, calc(97vh - 380px));
   bottom: 280px;
   background-color: #c9b3ef;
-  /* border-radius: 30px; */
+  border-radius: 10%;
 
   position: absolute;
   display: flex;
   justify-content: center;
   align-items: center;
-  /* overflow: hidden; */
+  overflow: hidden;
 }
 .cam_container.default {
   box-shadow: inset -10px -8px 1px #9d83ca;
@@ -97,8 +97,7 @@
   }
 }
 .cam_mask {
-  margin: 66.67px;
-  border-radius: 50px;
+  border-radius: 8%;
   overflow: hidden;
 
   position: relative;
@@ -108,25 +107,26 @@
   align-items: center;
 }
 
+.cam.mask {
+  position: absolute;
+  left: 7.14%;
+  top: 7.14%;
+}
 .cam_mask.square {
-  width: 800px;
-  height: 800px;
+  aspect-ratio: 1 / 1;
+  height: 85.71%;
+  width: unset;
 }
 .cam_mask.vertical {
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 600px;
-  height: 800px;
+  aspect-ratio: 3 / 4;
+  height: 85.71%;
+  width: unset;
 }
 .cam_mask.horizontal {
-  position: absolute;
-  width: 800px;
-  height: 600px;
-  left: 0;
-  top: 0;
+  aspect-ratio: 3 / 4;
+  width: 85.71%;
+  height: unset;
 }
-
 .actions {
   width: 100%;
   /* height: calc(97vh - 100vw - 85px); */
@@ -142,10 +142,10 @@
 }
 
 .skinElement {
-  position: absolute;
-  top: 0;
-  left: 0;
+  
   z-index: 20;
+  width: 100%;
+  height: 100%;
 }
 .skinElement.design3.square {
   top: 70px;
@@ -360,19 +360,7 @@
     z-index: 10;
   }
 
-  .skinElement.design3.square {
-    top: 70px;
-  }
-  .skinElement.design3.vertical {
-    top: 389px;
-  }
-  .skinElement.design3.vertical {
-    top: 389px;
-  }
-  .skinElement.design3.horizontal {
-    top: 265px;
-    left: 37px;
-  }
+  
   .borderText p {
     font-family: "gangwonedu";
     font-size: 35px;

@@ -256,7 +256,7 @@ const Modal = ({ onCloseModal, version }) => {
           <Webcam
             className={styles.webcam}
             audio={false}
-            height="350"
+            height="100%"
             // height={curHeight}
             ref={webcamRef}
             screenshotFormat="image/jpeg"
