@@ -119,15 +119,8 @@ const Modal = ({ onCloseModal, version }) => {
 
   const webcamRef = useRef(null);
 
-  const vidConfigList = [
-    { width: 800, height: 800 },
-    { width: 600, height: 800 },
-    { width: 800, height: 600 },
-  ];
   const [vidConfigIdx, setVidConfigIdx] = useState(0);
   const [skinIdx, setSkinIdx] = useState(1);
-  const curWidth = vidConfigList[vidConfigIdx].width;
-  const curHeight = vidConfigList[vidConfigIdx].height;
 
   const selectVidConfigHandler = (idx) => setVidConfigIdx(idx);
   const selectSkinHandler = (idx) => setSkinIdx(idx);

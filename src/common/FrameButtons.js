@@ -6,10 +6,8 @@ import styles from "./FrameButtons.module.css";
 //images
 import SmileImage from "../assets/Images/smile.svg";
 import ThumbImage from "../assets/Images/thumb.png";
-import building from "../assets/skins/design1_square.svg";
 import loading from "../assets/Images/loading.svg";
 import camera_btn from "../assets/Images/camera_btn_black.svg";
-import temple from "../assets/Images/camera_btn_black.svg";
 const FrameButtons = ({
   isLoading,
   imgfile,
@@ -75,7 +73,7 @@ const FrameButtons = ({
             width="100%"
             height="150px"
             onClick={() => {
-              onStartTimer();
+              onStartTimer(); //5초 
               onStartAnimation(5);
               onTakePhoto();
             }}
@@ -84,18 +82,20 @@ const FrameButtons = ({
         </>
       )}
       {/* Mobile */}
-      {version === "mobile" && phase === 2 && (
+      {phase === 2 && (
         <>
+        
           <div
             className={styles.takePhoto_mobile}
             onClick={() => {
               onStartTimer();
               onStartAnimation(5);
-              setPhase(3);
+              setPhase((prev)=>prev+1);
               onTakePhoto();
-            }}
-          >
+            }}>
             <img src={camera_btn} alt="camera" style={{ height: '75%' }} />
+
+
           </div>
           <Button
             children="취소"
@@ -108,12 +108,12 @@ const FrameButtons = ({
           />
         </>
       )}
+ 
 
       {/* PHASE 3: after photo */}
 
       {/* {phase === 3 && !imgfile && photoAnimation} */}
-      {/* {phase === 3 && imgfile && ( */}
-      {phase === 3 && (  
+      {phase === 3 && imgfile && (
         <>
           <img
             src={ThumbImage}
@@ -309,7 +309,7 @@ const FrameButtons = ({
 
       {/* {phase === 3 && !imgfile && photoAnimation} */}
 
-      {!whileTimer && (
+      {version!=='mobile' && !whileTimer && (
         <button className={styles.close} onClick={onCloseModal}>
           X
         </button>
