@@ -1,11 +1,11 @@
 .container {
   width: 94%;
   height: 96%;
-  padding: 2% 3% 2% 3%;
+  padding: 2% 3%;
   font-family: "cocogoose";
   color: white;
   display: grid;
-  grid-template-columns: 50% 50%;
+
   background-color: white;
   /* row-gap: 0px; */
   /* column-gap: 30px; */
@@ -23,14 +23,18 @@
     ". . move move";
 }
 .container.beforePhoto {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: 9fr 5fr;
+  grid-template-areas:
+    "image image"
+    "again .";
 }
 .takePhoto_mobile {
-  width: 100px;
-  height: 100px;
+  grid-area: image;
+  justify-self: center;
+  align-self: center;
+  width: 120px;
+  height: 120px;
   background-color: rgb(187, 187, 187);
   border-radius: 50%;
 }

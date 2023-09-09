@@ -95,7 +95,7 @@ const FrameButtons = ({
               onTakePhoto();
             }}
           >
-            <img src={camera_btn} alt="camera" style={{ width: 80 }} />
+            <img src={camera_btn} alt="camera" style={{ height: 120 }} />
           </div>
           <Button children="취소" onClick={() => {}} classes="mobile quit" />
         </>
