@@ -87,13 +87,13 @@ const FrameButtons = ({
               gridArea: "img",
               justifySelf: "center",
               alignSelf: "center",
-              width:500,
+              width: '65%'
             }}/>
-          <div className={styles.smile}>Smile!</div>
+          <div className={styles.smileText}>Smile!</div>
 
         <Button
           children="사진 찍기!"
-          width="720px"
+          width="100%"
           height="150px"
           onClick={() => {
             onStartTimer();

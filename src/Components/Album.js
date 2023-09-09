@@ -47,7 +47,7 @@ const Album = ({ data }) => {
 
     const image = skinList[skinNum-1][vidConfig];
     const skinElement = (
-      <img className={styles.skinElement} src={image} width="350" />
+      <img className={styles.skinElement} src={image} />
     );
   
   return (

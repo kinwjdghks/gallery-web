@@ -35,7 +35,9 @@ import design2_vertical from "../assets/skins/design2_vertical.svg";
 import design3_square from "../assets/skins/design3_square.svg";
 import design3_horizontal from "../assets/skins/design3_horizontal.svg";
 import design3_vertical from "../assets/skins/design3_vertical.svg";
-import camera from "../assets/Images/camera.png";
+import design4_square from "../assets/skins/design4_square.svg";
+import design4_horizontal from "../assets/skins/design4_horizontal.svg";
+import design4_vertical from "../assets/skins/design4_vertical.svg";
 const BackDrop = () => {
   return <div className={styles.backdrop}></div>;
 };
@@ -69,8 +71,6 @@ const Modal = ({ onCloseModal, version }) => {
   const playES = () => {
     es.play();
   };
-  //images
-  let skinElement;
 
   const createBlankAlbum = useCallback(async () => {
     const id = new Date().getTime() % 100000000;
@@ -192,6 +192,13 @@ const Modal = ({ onCloseModal, version }) => {
     setImgfile(null);
   };
 
+
+  const skinList = [
+    [design1_square, design1_vertical,design1_horizontal],
+    [design2_square, design2_vertical,design2_horizontal],
+    [design3_square, design3_vertical,design3_horizontal],
+    [design4_square, design4_vertical,design4_horizontal]];
+
   const classNameByConfig =
     vidConfigIdx === 0
       ? styles.square
@@ -210,64 +217,10 @@ const Modal = ({ onCloseModal, version }) => {
       ? styles.opt3
       : styles.opt4;
 
-  if (skinIdx === 1) {
-    const image =
-      vidConfigIdx === 0
-        ? design1_square
-        : vidConfigIdx === 1
-        ? design1_vertical
-        : design1_horizontal;
-
-    skinElement = (
-      <img className={styles.skinElement} src={image} width="933" />
+    const image = skinList[skinIdx-1][vidConfigIdx];
+    const skinElement = (
+      <img className={styles.skinElement} src={image} />
     );
-  } else if (skinIdx === 2) {
-    const image =
-      vidConfigIdx === 0
-        ? design2_square
-        : vidConfigIdx === 1
-        ? design2_vertical
-        : design2_horizontal;
-
-    skinElement = (
-      <>
-        {vidConfigIdx === 1 && (
-          <div className={styles.skkucomit}>
-            <p className={styles.skku}>SKKU</p>
-            <p className={styles.comit}>COMIT</p>
-          </div>
-        )}
-        <img className={styles.skinElement} src={image} width="933" />
-      </>
-    );
-  } else if (skinIdx === 3) {
-    const image =
-      vidConfigIdx === 0
-        ? design3_square
-        : vidConfigIdx === 1
-        ? design3_vertical
-        : design3_horizontal;
-    const width_ = vidConfigIdx === 0 ? 960 : vidConfigIdx === 1 ? 1150 : 880;
-    skinElement = (
-      <>
-        {vidConfigIdx === 1 && (
-          <div>
-            <div className={styles.skkucomit}>
-              <p className={styles.skku}>SKKU</p>
-              <p className={styles.comit}>COMIT</p>
-            </div>
-          </div>
-        )}
-        <img
-          className={`${styles.skinElement} ${styles.design3} ${classNameByConfig}`}
-          src={image}
-          width={width_}
-        />
-      </>
-    );
-  } else if (skinIdx === 4) {
-    
-  }
   return (
     <div className={styles.container} ref={containerRef}>
       <div className={`${styles.cam_container} ${classNameBySkin}`}>

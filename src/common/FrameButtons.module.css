@@ -196,16 +196,6 @@
     opacity: 0;
   }
 }
-.smile {
-  font-family: josefin;
-  font-weight: 400;
-  font-size: 50px;
-  position: absolute;
-  top: 260px;
-  left: 640px;
-  color: black;
-  transform: rotate(30deg);
-}
 
 
 .close {
@@ -237,27 +227,62 @@
 
 @media (min-width: 1024px) {
   .container {
-    width: 900px;
-    height: 933.33px;
+    width: 100%;
+    height: 100%;
     padding: 0;
-    margin: 73.342px 0;
+    margin: 0;
     font-family: "cocogoose";
     color: white;
-    display: grid;
-    grid-template-columns: 50% 50%;
+    /* display: grid; */
+    grid-template-columns: unset;
     /* row-gap: 0px; */
-    column-gap: 30px;
+    /* column-gap: 30px; */
 
     position: relative;
-    /* left: -30px; */
   }
   .container.beforePhoto {
-    grid-template-rows: 15vh 48vh 15vh;
+    display: grid;
+    grid-template-rows: 20% 55% 20%;
     grid-template-areas:
-      "header header"
-      "img img"
-      "move move";
+      "header"
+      "img"
+      "move";
+      justify-content: center;
+    }
+  
+  .smileText{
+    font-family: josefin;
+    font-weight: 400;
+    font-size: 50px;
+    position: absolute;
+    top: 30%;
+    left: 65%;
+    color: black;
+    transform: rotate(30deg);
   }
+  .text {
+  width: 100%;
+  font-size: 70px;
+  grid-area: header;
+  font-weight: 900;
+  position: relative;
+  top: 20%;
+}
+.text p {
+  text-align: center;
+  margin: 0;
+}
+.comit {
+font-size: 90px;
+color: #603ebb;
+text-shadow: 3px 5px 1px rgb(187, 187, 187);
+animation: wiggle 2.5s infinite;
+}
+.photobooth {
+  position: relative;
+  color: black;
+  top:0;
+}
   .container.skin {
     grid-template-rows: 15vh 24vh 24vh 15vh;
     grid-template-areas:
