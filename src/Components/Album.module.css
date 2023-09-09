@@ -86,18 +86,17 @@
   left: 0;
   z-index: 10;
 }
-.skinElement.design3.horizontal {
-  top: 94px;
-  left: 10px;
+
+@media (min-width: 1024px) {
+  .skinElement {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 350px;
+    z-index: 10;
+  }
 }
-.skinElement.design3.vertical {
-  top: 142px;
-  left: 0px;
-}
-.skinElement.design3.square {
-  top: 30px;
-  left: 0px;
-}
+
 
 .borderText p {
   font-family: "gangwonedu";

@@ -32,7 +32,7 @@ const Header = ({ onModalHandler, version }) => {
           children={!isBtnHovered ? "사진찍으러 ㄱㄱ" : "스마일~"}
           width="380px"
           height="80px"
-          classes="header"
+          classes="popup header"
           onClick={() => onModalHandler("photo")}
           onMouseHover={hoverHandler}
         />

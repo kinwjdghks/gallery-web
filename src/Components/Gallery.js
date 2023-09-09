@@ -2,7 +2,7 @@ import styles from "./Gallery.module.css";
 import BlankAlbum from "./BlankAlbum";
 import Album from "./Album";
 import Note from "./Note";
-import ScrollDown from "../common/ScrollDown";
+import scrollDown from "../assets/Images/scrollDown.svg";
 import { useState, useEffect, useRef, useContext } from "react";
 import DisplayContext from "../Context/context/Display";
 
@@ -22,17 +22,16 @@ import githubIcon from "../assets/Images/github-icon.png";
 
 const Gallery = ({ version }) => {
   const darkmode = useContext(DisplayContext).darkmode;
-  const [photos, setPhotos] = useState([]);
-  // <Note/>,<Note/>,<Note/>
+  const [photos, setPhotos] = useState([<Album data={{vidConfig:1, skin:3}}/>]);
 
   let timeStamp = useRef(null);
 
   const [endOfData, setEndOfData] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+
+  // scrolldown 배치 코드
   const [backgroundHeight, setBackgroundHeight] = useState(0);
-
-  const [arrows, setArrows] = useState([<ScrollDown key={0} top_={900} />]);
-
+  const [arrows, setArrows] = useState([<img src ={scrollDown} key={0} style={{position:'absolute', top:700, left:110}} />]);
   const background = useRef(null);
   useEffect(() => {
     if (background.current) {
@@ -46,7 +45,7 @@ const Gallery = ({ version }) => {
       if ((cnt + 1) * 1000 < backgroundHeight) {
         const newArr = [
           ...arrows,
-          <ScrollDown key={cnt + 1} top_={cnt * 1000 + 700} />,
+          <img src ={scrollDown} key={cnt + 1} style={{position:'absolute', top:cnt * 1000 + 700, left:110}} />,
         ];
         setArrows(newArr);
       }
@@ -144,6 +143,7 @@ const Gallery = ({ version }) => {
                 return <Note key ={index} data={data} />;
               }
             })} */}
+            {photos}
           </div>
         )}
         {isLoading && <div className={styles.loadingDiv}>Loading...</div>}

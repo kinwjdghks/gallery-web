@@ -35,8 +35,9 @@ import design2_vertical from "../assets/skins/design2_vertical.svg";
 import design3_square from "../assets/skins/design3_square.svg";
 import design3_horizontal from "../assets/skins/design3_horizontal.svg";
 import design3_vertical from "../assets/skins/design3_vertical.svg";
-import triangle from "../assets/Images/triangle.svg";
-import camera from "../assets/Images/camera.png";
+import design4_square from "../assets/skins/design4_square.svg";
+import design4_horizontal from "../assets/skins/design4_horizontal.svg";
+import design4_vertical from "../assets/skins/design4_vertical.svg";
 const BackDrop = () => {
   return <div className={styles.backdrop}></div>;
 };
@@ -70,8 +71,6 @@ const Modal = ({ onCloseModal, version }) => {
   const playES = () => {
     es.play();
   };
-  //images
-  let skinElement;
 
   const createBlankAlbum = useCallback(async () => {
     const id = new Date().getTime() % 100000000;
@@ -104,7 +103,8 @@ const Modal = ({ onCloseModal, version }) => {
         <img
           className={styles.imgpreview}
           style={{
-            height: vidConfigList[vidConfigIdx].height,
+            height: 350,
+            // height: vidConfigList[vidConfigIdx].height,
             apsectRatio: 3 / 4,
           }}
           src={imgfile}
@@ -193,6 +193,13 @@ const Modal = ({ onCloseModal, version }) => {
     setImgfile(null);
   };
 
+  const skinList = [
+    [design1_square, design1_vertical, design1_horizontal],
+    [design2_square, design2_vertical, design2_horizontal],
+    [design3_square, design3_vertical, design3_horizontal],
+    [design4_square, design4_vertical, design4_horizontal],
+  ];
+
   const classNameByConfig =
     vidConfigIdx === 0
       ? styles.square
@@ -211,100 +218,50 @@ const Modal = ({ onCloseModal, version }) => {
       ? styles.opt3
       : styles.opt4;
 
-  if (skinIdx === 1) {
-    const image =
-      vidConfigIdx === 0
-        ? design1_square
-        : vidConfigIdx === 1
-        ? design1_vertical
-        : design1_horizontal;
+  const image = skinList[skinIdx - 1][vidConfigIdx];
+  const skinElement = <img className={styles.skinElement} src={image} />;
 
-    skinElement = (
-      <img className={styles.skinElement} src={image} width="933" />
-    );
-  } else if (skinIdx === 2) {
-    const image =
-      vidConfigIdx === 0
-        ? design2_square
-        : vidConfigIdx === 1
-        ? design2_vertical
-        : design2_horizontal;
+  const [photoAnimation, setPhotoAnimation] = useState();
+  const animation = useCallback((time) => {
+    // setAnimationStarted(true);
+    let cnt = time;
+    const timer = setInterval(() => {
+      if (cnt > 0) {
+        setPhotoAnimation(
+          <div className={`${styles.animation} ${styles.counting}`}>{cnt}</div>
+        );
+        cnt--;
+      } else {
+        setPhotoAnimation(
+          <div className={`${styles.animation} ${styles.shooting}`}></div>
+        );
+        clearInterval(timer);
+      }
+    }, 1000);
+    // const setTimer = setTimeout(() => {
+    //   setPhase((prev) => prev + 1);
+    //   setAnimationStarted(false);
+    // }, 6000);
 
-    skinElement = (
-      <>
-        {vidConfigIdx === 1 && (
-          <div className={styles.skkucomit}>
-            <p className={styles.skku}>SKKU</p>
-            <p className={styles.comit}>COMIT</p>
-          </div>
-        )}
-        <img className={styles.skinElement} src={image} width="933" />
-      </>
-    );
-  } else if (skinIdx === 3) {
-    const image =
-      vidConfigIdx === 0
-        ? design3_square
-        : vidConfigIdx === 1
-        ? design3_vertical
-        : design3_horizontal;
-    const width_ = vidConfigIdx === 0 ? 960 : vidConfigIdx === 1 ? 1150 : 880;
-    skinElement = (
-      <>
-        {vidConfigIdx === 1 && (
-          <div>
-            <div className={styles.skkucomit}>
-              <p className={styles.skku}>SKKU</p>
-              <p className={styles.comit}>COMIT</p>
-            </div>
-          </div>
-        )}
-        <img
-          className={`${styles.skinElement} ${styles.design3} ${classNameByConfig}`}
-          src={image}
-          width={width_}
-        />
-      </>
-    );
-  } else if (skinIdx === 4) {
-    skinElement = (
-      <>
-        <div className={styles.borderText}>
-          <p className={styles.up}>COMIT FILM</p>
-          <p className={`${styles.right} ${classNameByConfig}`}>
-            TAKE YOUR MEMORY
-          </p>
-          <div className={styles.left}>
-            <p style={{ display: "inline" }}>11</p>
-            <img width="26" src={triangle} />
-          </div>
-          <p className={`${styles.down} ${classNameByConfig}`}>29</p>
-          {vidConfigIdx !== 0 && (
-            <img
-              className={`${styles.camera} ${classNameByConfig}`}
-              src={camera}
-              width="170"
-            />
-          )}
-        </div>
-      </>
-    );
-  }
+    // return () => clearTimeout(setTimer);
+  });
   return (
     <div className={styles.container} ref={containerRef}>
       <div className={`${styles.cam_container} ${classNameBySkin}`}>
+        {version === "mobile" && photoAnimation}
         {skinElement}
         <div className={`${styles.cam_mask} ${classNameByConfig}`}>
           {imgpreview}
           {imgfile && <div className={styles.shutter}></div>}
-          {/* <Webcam
+          <Webcam
             className={styles.webcam}
             audio={false}
-            height={curHeight}
+            height="350"
+            // height={curHeight}
             ref={webcamRef}
             screenshotFormat="image/jpeg"
             mirrored={true}
-          /> */}
+          />
         </div>
       </div>
 
@@ -313,6 +270,8 @@ const Modal = ({ onCloseModal, version }) => {
           isLoading={isLoading}
           imgfile={imgfile}
           whileTimer={whileTimer}
+          photoAnimation={photoAnimation}
+          onStartAnimation={animation}
           onStartTimer={startTimer}
           onTakePhoto={takePhoto}
           onSavePhoto={savePhoto}

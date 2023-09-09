@@ -70,6 +70,32 @@
   border: 3px solid black;
   box-sizing: border-box;
 }
+
+/* photoTaking Animation */
+.animation {
+  position: absolute;
+  z-index: 10;
+  width: 100%;
+}
+.animation.counting {
+  font-family: "Kanit", sans-serif;
+  font-size: 15rem;
+  color: black;
+  /* font-weight: 200; */
+  text-align: center;
+}
+.animation.shooting {
+  background-color: white;
+  animation: 2s flash forwards;
+}
+@keyframes flash {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
 .cam_mask {
   margin: 66.67px;
   border-radius: 50px;
@@ -243,23 +269,23 @@
   }
 
   .cam_container {
-    width: 933.33px;
-    height: 933.33px;
+    aspect-ratio: 1 / 1;
+    height: 90%;
+    width: unset;
     background-color: #c9b3ef;
     border-radius: 10%;
-    margin: 0;
     position: relative;
-    bottom: 0;
-
     display: flex;
     justify-content: center;
     align-items: center;
-    /* overflow: auto; */
+    overflow: hidden;
+    bottom: 0;
+    margin-left: 5%;
   }
   .cam_container.default {
     box-shadow: inset -10px -8px 1px #9d83ca;
   }
-  .cam_container.default::after {
+  /* .cam_container.default::after {
     content: "";
     width: 300px;
     height: 10px;
@@ -268,7 +294,7 @@
     position: absolute;
     top: 10px;
     left: 90px;
-  }
+  } */
   .cam_container.opt1 {
     background: linear-gradient(#1f1f61 0%, #755d98 60%, #e0a6b2 100%);
   }
@@ -283,40 +309,49 @@
     border: 3px solid black;
     box-sizing: border-box;
   }
+
   .cam_mask {
-    margin: 66.67px;
     border-radius: 50px;
     overflow: hidden;
-
+    margin: 0;
     position: relative;
-
     display: flex;
     justify-content: center;
     align-items: center;
   }
-
+  .cam.mask {
+    position: absolute;
+    left: 7.14%;
+    top: 7.14%;
+  }
   .cam_mask.square {
-    width: 800px;
-    height: 800px;
+    aspect-ratio: 1 / 1;
+    height: 85.71%;
+    width: unset;
   }
   .cam_mask.vertical {
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 600px;
-    height: 800px;
+    aspect-ratio: 3 / 4;
+    height: 85.71%;
+    width: unset;
   }
   .cam_mask.horizontal {
+    aspect-ratio: 3 / 4;
+    width: 85.71%;
+    height: unset;
+  }
+
+  .skinElement {
     position: absolute;
-    width: 800px;
-    height: 600px;
-    left: 0;
     top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 20;
   }
 
   .actions {
-    width: 45vw;
-    height: 90vh;
+    width: 40%;
+    height: 100%;
     position: relative;
   }
 
@@ -325,12 +360,6 @@
     z-index: 10;
   }
 
-  .skinElement {
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 20;
-  }
   .skinElement.design3.square {
     top: 70px;
   }
