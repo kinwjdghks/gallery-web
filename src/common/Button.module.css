@@ -61,8 +61,8 @@
 }
 
 /* 다시찍기 */
-.cancel {
-  grid-area: cancel;
+.again {
+  grid-area: again;
 }
 /* 다음 */
 .next {
@@ -71,8 +71,14 @@
 }
 
 /* 저장하기 */
+.cancel {
+  grid-area: cancel;
+  justify-self:center;
+}
+
 .save {
   grid-area: save;
+  justify-self: center;
 }
 /* Next */
 .movebtn {
@@ -129,7 +135,6 @@
 .lastbtn.save {
   grid-area: save;
   justify-self: start;
-  left: 10px;
 }
 
 .mobile {
@@ -200,12 +205,14 @@
     cursor: url("../assets/Images/mouse-pointer-black.png") 25 25, auto;
     right: 80px;
   }
-  /* Quit */
-  .quit {
-    grid-area: quit;
+  /* cancel */
+  .cancel {
+    grid-area: cancel;
+    justify-self: end;
   }
   .save {
     grid-area: save;
+    justify-self: center;
   }
   /* Next */
   .movebtn {

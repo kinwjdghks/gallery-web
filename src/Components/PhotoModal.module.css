@@ -67,8 +67,8 @@
 }
 .cam_container.opt4 {
   background-color: white;
-  border: 3px solid black;
-  box-sizing: border-box;
+  /* border: 3px solid black; */
+  /* box-sizing: border-box; */
 }
 
 /* photoTaking Animation */
@@ -99,19 +99,14 @@
 .cam_mask {
   border-radius: 8%;
   overflow: hidden;
-
-  position: relative;
-
   display: flex;
   justify-content: center;
   align-items: center;
-}
-
-.cam.mask {
   position: absolute;
   left: 7.14%;
   top: 7.14%;
 }
+
 .cam_mask.square {
   aspect-ratio: 1 / 1;
   height: 85.71%;
@@ -142,24 +137,11 @@
 }
 
 .skinElement {
-  
   z-index: 20;
   width: 100%;
   height: 100%;
 }
-.skinElement.design3.square {
-  top: 70px;
-}
-.skinElement.design3.vertical {
-  top: 389px;
-}
-.skinElement.design3.vertical {
-  top: 389px;
-}
-.skinElement.design3.horizontal {
-  top: 265px;
-  left: 37px;
-}
+
 .borderText p {
   font-family: "gangwonedu";
   font-size: 35px;
@@ -314,15 +296,14 @@
     border-radius: 50px;
     overflow: hidden;
     margin: 0;
-    position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
-  }
-  .cam.mask {
     position: absolute;
     left: 7.14%;
     top: 7.14%;
+  }
+  .cam.mask {
   }
   .cam_mask.square {
     aspect-ratio: 1 / 1;

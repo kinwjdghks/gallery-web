@@ -25,7 +25,7 @@ const FrameButtons = ({
   onSkinSelect,
   version,
 }) => {
-  const [phase, setPhase] = useState(4);
+  const [phase, setPhase] = useState(3);
   useEffect(() => {
     console.log(phase);
   }, [phase]);
@@ -99,7 +99,7 @@ const FrameButtons = ({
           </div>
           <Button
             children="취소"
-            width="140px"
+            width="60%"
             height="60px"
             onClick={() => {
               onCloseModal();
@@ -108,12 +108,12 @@ const FrameButtons = ({
           />
         </>
       )}
-      {/* {phase === 3 && !imgfile && photoAnimation} */}
 
       {/* PHASE 3: after photo */}
 
-      {/*mobile*/}
-      {version === "mobile" && phase === 3 && imgfile && (
+      {/* {phase === 3 && !imgfile && photoAnimation} */}
+      {/* {phase === 3 && imgfile && ( */}
+      {phase === 3 && (  
         <>
           <img
             src={ThumbImage}
@@ -127,7 +127,7 @@ const FrameButtons = ({
           />
           <Button
             children="다시 찍기"
-            width="140px"
+            width="60%"
             height="60px"
             onClick={() => {
               againHandler();
@@ -137,7 +137,7 @@ const FrameButtons = ({
           />
           <Button
             children="다음"
-            width="120px"
+            width="60%"
             height="60px"
             onClick={() => setPhase((prev) => prev + 1)}
             classes="next"
@@ -238,14 +238,14 @@ const FrameButtons = ({
           </button>
           <Button
             children="취소"
-            width="110px"
+            width="60%"
             height="60px"
             onClick={onCloseModal}
             classes="cancel"
           />
           <Button
             children="저장하기"
-            width="110px"
+            width="60%"
             height="60px"
             onClick={onSavePhoto}
             classes="save"

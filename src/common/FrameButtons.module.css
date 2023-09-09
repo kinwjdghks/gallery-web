@@ -17,13 +17,15 @@
 .container.beforePhoto {
   grid-template-columns: repeat(2, 1fr);
   grid-template-rows: 9fr 5fr;
+  column-gap: 2vw;
+  padding: 4vw;
   grid-template-areas:
     "image image"
     "cancel .";
 }
 .container.afterPhoto {
-  grid-template-columns: repeat(2, 1fr);
   grid-template-rows: 9fr 5fr;
+  grid-template-columns: repeat(2, 1fr);
   grid-template-areas:
     "image image"
     "again next";
@@ -35,7 +37,7 @@
   padding: 4vw;
   grid-template-areas:
     "skin1 skin2 skin3 skin4"
-    "cancel . . save";
+    "cancel cancel save save";
 }
 .takePhoto_mobile {
   grid-area: image;
@@ -115,19 +117,24 @@
   cursor: url("../assets/Images/mouse-pointer-black.png") 25 25, auto;
 }
 .skinbtn.skin1 {
+  grid-area: skin1;
   background: linear-gradient(#1f1f61 0%, #755d98 60%, #e0a6b2 100%);
 }
 
 .skinbtn.skin2 {
+  grid-area: skin2;
   background: linear-gradient(#ffc994 0%, #ffa852 60%, #ed743f 100%);
 }
 .skinbtn.skin3 {
+  grid-area: skin3;
   background-color: #044b2d;
 }
 
 .skinbtn.skin4 {
+  grid-area: skin4;
   background-color: white;
   border: 2px solid black;
+  box-sizing: border-box;
 }
 
 .btndesign {
@@ -135,37 +142,20 @@
   /* z-index: 10; */
 }
 .btndesign.skin1 {
-  top: -30px;
-  left: 0px;
+
 }
 
 .btndesign.skin2 {
-  top: -50px;
-  left: 45px;
+
 }
 
-.btndesign.skin3.leaves {
-  top: 0px;
-  left: 15px;
-  transform: rotate(30deg);
-}
-.btndesign.skin3.sungkyuni {
-  top: 78px;
-  left: 120px;
+.btndesign.skin3{
 }
 
 .btndesign.skin4 {
-  font-family: "josefin";
-  font-size: 60px;
-  font-weight: 700;
-  top: 0px;
-  left: -70px;
-  transform: rotate(-30deg);
+
 }
-.btndesign.skin4 p {
-  margin-bottom: -50px;
-  width: max-content;
-}
+
 .comitfilm1 {
   margin-left: 70px;
 }
@@ -223,10 +213,12 @@
       "header"
       "img"
       "move";
+    padding: 0;
   }
   .container.afterPhoto {
     display: grid;
     grid-template-rows: 20% 55% 20%;
+    grid-template-columns: 1fr 1fr;
     grid-template-areas:
       "header header"
       "img img"
