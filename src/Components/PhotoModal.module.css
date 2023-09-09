@@ -128,7 +128,7 @@
 }
 
 .actions {
-  width: 100vw;
+  width: 100%;
   /* height: calc(97vh - 100vw - 85px); */
   height: 280px;
   position: absolute;
@@ -264,7 +264,7 @@
     top: 2.5vh;
     z-index: 32;
 
-    justify-content: space-between;
+    justify-content: space-evenly;
     overflow: hidden;
   }
 

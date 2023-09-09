@@ -1,36 +1,48 @@
 .container {
   width: 94%;
   height: 96%;
-  padding: 2% 3% 2% 3%;
+  padding: 2% 3%;
   font-family: "cocogoose";
   color: white;
   display: grid;
-  grid-template-columns: 50% 50%;
+
   background-color: white;
   /* row-gap: 0px; */
   /* column-gap: 30px; */
 
   position: relative;
 }
+
+/* Phase에 따른 grid */
+.container.beforePhoto {
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: 9fr 5fr;
+  grid-template-areas:
+    "image image"
+    "cancel .";
+}
+.container.afterPhoto {
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: 9fr 5fr;
+  grid-template-areas:
+    "image image"
+    "again next";
+}
 .container.skin {
-  grid-template-rows: 100px 100px;
-  grid-template-columns: 20vw 20vw 20vw 20vw;
-  row-gap: 20px;
-  column-gap: 4vw;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: 9fr 5fr;
+  column-gap: 2vw;
   padding: 4vw;
   grid-template-areas:
     "skin1 skin2 skin3 skin4"
-    ". . move move";
-}
-.container.beforePhoto {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+    "cancel . . save";
 }
 .takePhoto_mobile {
-  width: 100px;
-  height: 100px;
+  grid-area: image;
+  justify-self: center;
+  align-self: center;
+  width: 120px;
+  height: 120px;
   background-color: rgb(187, 187, 187);
   border-radius: 50%;
 }
@@ -43,13 +55,6 @@
     "move move";
 }
 
-.container.afterPhoto {
-  grid-template-rows: 15vh 48vh 15vh;
-  grid-template-areas:
-    "header header"
-    "img img"
-    "again save";
-}
 .text {
   width: 100%;
   font-size: 70px;
@@ -91,8 +96,8 @@
   top: -17.78px;
 }
 .skinbtn {
-  width: 20vw;
-  height: 100px;
+  width: 100%;
+  height: 110px;
   justify-self: center;
   align-self: center;
 
@@ -218,7 +223,7 @@
       "header"
       "img"
       "move";
-    }
+  }
   .container.afterPhoto {
     display: grid;
     grid-template-rows: 20% 55% 20%;
@@ -234,9 +239,9 @@
       "skin1 skin2"
       "skin3 skin4"
       "quit save";
-      row-gap: 0;
-      column-gap: 0;
-      padding:  0;
+    row-gap: 0;
+    column-gap: 0;
+    padding: 0;
   }
   .container.frame {
     display: grid;
@@ -247,7 +252,7 @@
       "vertical horizontal"
       "move move";
   }
-  .smileText{
+  .smileText {
     font-family: josefin;
     font-weight: 400;
     font-size: 50px;
@@ -258,29 +263,28 @@
     transform: rotate(30deg);
   }
   .text {
-  width: 100%;
-  font-size: 70px;
-  grid-area: header;
-  font-weight: 900;
-  position: relative;
-  top: 20%;
-}
-.text p {
-  text-align: center;
-  margin: 0;
-}
-.comit {
-font-size: 90px;
-color: #603ebb;
-text-shadow: 3px 5px 1px rgb(187, 187, 187);
-animation: wiggle 2.5s infinite;
-}
-.photobooth {
-  position: relative;
-  color: black;
-  top:0;
-}
-
+    width: 100%;
+    font-size: 70px;
+    grid-area: header;
+    font-weight: 900;
+    position: relative;
+    top: 20%;
+  }
+  .text p {
+    text-align: center;
+    margin: 0;
+  }
+  .comit {
+    font-size: 90px;
+    color: #603ebb;
+    text-shadow: 3px 5px 1px rgb(187, 187, 187);
+    animation: wiggle 2.5s infinite;
+  }
+  .photobooth {
+    position: relative;
+    color: black;
+    top: 0;
+  }
 
   .close {
     position: absolute;
