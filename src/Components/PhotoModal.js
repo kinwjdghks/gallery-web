@@ -35,7 +35,6 @@ import design2_vertical from "../assets/skins/design2_vertical.svg";
 import design3_square from "../assets/skins/design3_square.svg";
 import design3_horizontal from "../assets/skins/design3_horizontal.svg";
 import design3_vertical from "../assets/skins/design3_vertical.svg";
-import triangle from "../assets/Images/triangle.svg";
 import camera from "../assets/Images/camera.png";
 const BackDrop = () => {
   return <div className={styles.backdrop}></div>;
@@ -267,28 +266,7 @@ const Modal = ({ onCloseModal, version }) => {
       </>
     );
   } else if (skinIdx === 4) {
-    skinElement = (
-      <>
-        <div className={styles.borderText}>
-          <p className={styles.up}>COMIT FILM</p>
-          <p className={`${styles.right} ${classNameByConfig}`}>
-            TAKE YOUR MEMORY
-          </p>
-          <div className={styles.left}>
-            <p style={{ display: "inline" }}>11</p>
-            <img width="26" src={triangle} />
-          </div>
-          <p className={`${styles.down} ${classNameByConfig}`}>29</p>
-          {vidConfigIdx !== 0 && (
-            <img
-              className={`${styles.camera} ${classNameByConfig}`}
-              src={camera}
-              width="170"
-            />
-          )}
-        </div>
-      </>
-    );
+    
   }
   return (
     <div className={styles.container} ref={containerRef}>

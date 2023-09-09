@@ -315,7 +315,7 @@
   .actions {
     width: 45vw;
     height: 90vh;
-    position: relative;
+    position: static;
   }
 
   .imgpreview {

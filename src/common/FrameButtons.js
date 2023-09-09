@@ -7,9 +7,6 @@ import styles from "./FrameButtons.module.css";
 import SmileImage from "../assets/Images/smile.svg";
 import ThumbImage from "../assets/Images/thumb.png";
 import building from "../assets/skins/design1_square.svg";
-import temple from "../assets/Images/명륜당.svg";
-import sungkyuni from "../assets/Images/성균이.svg";
-import leaves from "../assets/Images/낙엽.svg";
 import loading from "../assets/Images/loading.svg";
 import camera_btn from "../assets/Images/camera_btn_black.svg";
 
