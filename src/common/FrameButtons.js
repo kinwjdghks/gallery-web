@@ -7,7 +7,7 @@ import styles from "./FrameButtons.module.css";
 import SmileImage from "../assets/Images/smile.svg";
 import ThumbImage from "../assets/Images/thumb.png";
 import loading from "../assets/Images/loading.svg";
-import camera_btn from "../assets/Images/camera_btn_black.svg";
+import camera_btn from "../assets/Images/camera_btn.svg";
 const FrameButtons = ({
   isLoading,
   imgfile,
@@ -73,7 +73,7 @@ const FrameButtons = ({
             width="100%"
             height="150px"
             onClick={() => {
-              onStartTimer(); //5초 
+              onStartTimer(); //5초
               onStartAnimation(5);
               onTakePhoto();
             }}
@@ -84,18 +84,16 @@ const FrameButtons = ({
       {/* Mobile */}
       {phase === 2 && (
         <>
-        
           <div
             className={styles.takePhoto_mobile}
             onClick={() => {
               onStartTimer();
               onStartAnimation(5);
-              setPhase((prev)=>prev+1);
+              setPhase((prev) => prev + 1);
               onTakePhoto();
-            }}>
-            <img src={camera_btn} alt="camera" style={{ height: '75%' }} />
-
-
+            }}
+          >
+            <img src={camera_btn} alt="camera" style={{ width: "35%" }} />
           </div>
           <Button
             children="취소"
@@ -108,7 +106,6 @@ const FrameButtons = ({
           />
         </>
       )}
- 
 
       {/* PHASE 3: after photo */}
 
@@ -119,7 +116,7 @@ const FrameButtons = ({
             src={ThumbImage}
             alt="ThumbImage"
             style={{
-              width: version==='mobile' ? '30%' : '50%',
+              width: version === "mobile" ? "30%" : "50%",
               gridArea: "img",
               justifySelf: "center",
               alignSelf: "center",
@@ -309,7 +306,7 @@ const FrameButtons = ({
 
       {/* {phase === 3 && !imgfile && photoAnimation} */}
 
-      {version!=='mobile' && !whileTimer && (
+      {version !== "mobile" && !whileTimer && (
         <button className={styles.close} onClick={onCloseModal}>
           X
         </button>

@@ -11,9 +11,8 @@
   box-sizing: border-box;
   width: calc(100vw + 10px);
   height: 97vh;
-  border: 5px solid black;
+
   border-radius: 30px;
-  background-color: black;
 
   position: fixed;
   /* border 두께 */
@@ -340,7 +339,6 @@
     z-index: 10;
   }
 
-  
   .borderText p {
     font-family: "gangwonedu";
     font-size: 35px;

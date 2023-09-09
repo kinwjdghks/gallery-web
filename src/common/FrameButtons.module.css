@@ -21,7 +21,6 @@
   /* padding: 4vw; */
   grid-template-areas:
     "img img"
-    "img img"
     "cancel .";
 }
 .container.afterPhoto {
@@ -45,11 +44,10 @@
   display: flex;
   justify-content: center;
   align-items: center;
+
   justify-self: center;
-  align-self: center;
-  width: 100px;
-  height: 100px;
-  background-color: rgb(187, 187, 187);
+  align-self: flex-start;
+  position: relative;
   /* border-radius: 50%; */
 }
 .container.frame {

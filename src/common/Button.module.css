@@ -6,8 +6,6 @@
   border: 0;
   padding: 0;
   position: relative;
-  transform-style: preserve-3d;
-  transition: transform 150ms cubic-bezier(0, 0, 0.58, 1);
   box-sizing: border-box;
   box-shadow: 0 0 0 2px black;
   color: white;
@@ -16,7 +14,7 @@
   border-radius: 0.35em;
 }
 
-.btn::before {
+/* .btn::before {
   position: absolute;
   z-index: -1;
   box-sizing: border-box;
@@ -43,15 +41,15 @@
 .btn:hover::before {
   box-shadow: 0 0 0 2px black, 0 0.1em 0 0 rgb(173, 173, 173);
   transform: translate3d(0, 0.15em, -1em);
-}
+} */
 .btn:active {
   background: white;
-  transform: translate(0em, 0.3em);
+  color: #603ebb;
 }
-.btn:active::before {
+/* .btn:active::before {
   box-shadow: 0 0 0 2px black, 0 0 0 rgb(173, 173, 173);
   transform: translate3d(0, 0, -1em);
-}
+} */
 
 /* Header */
 .header {
@@ -62,7 +60,7 @@
 /* 다시찍기 */
 .again {
   grid-area: again;
-  justify-self: center ;
+  justify-self: center;
 }
 /* 다음 */
 .next {
@@ -74,11 +72,17 @@
 .cancel {
   grid-area: cancel;
   justify-self: center;
+  align-self: flex-start;
 }
-
+.cancel.note {
+  margin-top: 5vh;
+}
 .save {
   grid-area: save;
   justify-self: center;
+}
+.save.note {
+  margin-top: 5vh;
 }
 /* Next */
 .movebtn {
