@@ -18,33 +18,36 @@
   grid-template-columns: repeat(2, 1fr);
   grid-template-rows: 9fr 5fr;
   column-gap: 2vw;
-  padding: 4vw;
+  /* padding: 4vw; */
   grid-template-areas:
-    "image image"
+    "img img"
     "cancel .";
 }
 .container.afterPhoto {
   grid-template-rows: 9fr 5fr;
   grid-template-columns: repeat(2, 1fr);
   grid-template-areas:
-    "image image"
+    "img img"
     "again next";
 }
 .container.skin {
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: 9fr 5fr;
   column-gap: 2vw;
-  padding: 4vw;
+  /* padding: 4vw; */
   grid-template-areas:
     "skin1 skin2 skin3 skin4"
     "cancel cancel save save";
 }
 .takePhoto_mobile {
-  grid-area: image;
+  grid-area: img;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   justify-self: center;
   align-self: center;
-  width: 120px;
-  height: 120px;
+  width: 100px;
+  height: 100px;
   background-color: rgb(187, 187, 187);
   border-radius: 50%;
 }
@@ -222,10 +225,11 @@
     grid-template-areas:
       "header header"
       "img img"
-      "again save";
+      "again next";
   }
   .container.skin {
     grid-template-rows: 20% 30% 30% 20%;
+    grid-template-columns: 1fr 1fr;
     grid-template-areas:
       "header header"
       "skin1 skin2"

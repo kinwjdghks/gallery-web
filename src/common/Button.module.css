@@ -63,11 +63,12 @@
 /* 다시찍기 */
 .again {
   grid-area: again;
+  justify-self: center ;
 }
 /* 다음 */
 .next {
   grid-area: next;
-  justify-self: end;
+  justify-self: center;
 }
 
 /* 저장하기 */
@@ -214,15 +215,10 @@
     grid-area: save;
     justify-self: center;
   }
-  /* Next */
-  .movebtn {
-    grid-area: move;
-    justify-self: center;
-    align-self: self-start;
-    font-weight: 600;
-    /* font-size: 60pt; */
+  .next {
+    grid-area: next;
+    justify-self: end;
   }
-
   /* Frame select*/
   .framebtn {
     justify-self: center;

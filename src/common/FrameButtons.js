@@ -25,7 +25,7 @@ const FrameButtons = ({
   onSkinSelect,
   version,
 }) => {
-  const [phase, setPhase] = useState(3);
+  const [phase, setPhase] = useState(2);
   useEffect(() => {
     console.log(phase);
   }, [phase]);
@@ -95,7 +95,7 @@ const FrameButtons = ({
               onTakePhoto();
             }}
           >
-            <img src={camera_btn} alt="camera" style={{ height: 120 }} />
+            <img src={camera_btn} alt="camera" style={{ height: '75%' }} />
           </div>
           <Button
             children="취소"
@@ -119,8 +119,8 @@ const FrameButtons = ({
             src={ThumbImage}
             alt="ThumbImage"
             style={{
-              width: 160,
-              gridArea: "image",
+              width: version==='mobile' ? '30%' : '50%',
+              gridArea: "img",
               justifySelf: "center",
               alignSelf: "center",
             }}
