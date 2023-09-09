@@ -24,7 +24,6 @@ const FrameButtons = ({
   version,
 }) => {
   const [phase, setPhase] = useState(2);
-  const [phase, setPhase] = useState(2);
   useEffect(() => {
     console.log(phase);
   }, [phase]);
