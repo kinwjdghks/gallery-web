@@ -264,7 +264,7 @@
     top: 2.5vh;
     z-index: 32;
 
-    justify-content: space-between;
+    justify-content: space-evenly;
     overflow: hidden;
   }
 
