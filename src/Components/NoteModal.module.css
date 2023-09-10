@@ -46,7 +46,9 @@
   width: 78vw;
   height: 75%;
   border: 2px solid black;
-  font-size: 6vw;
+  font-family: "kotrahope";
+  font-size: 10vw;
+  font-weight: 1300;
   padding: 2vw 4vw;
   margin-bottom: 20px;
 }

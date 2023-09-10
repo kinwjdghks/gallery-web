@@ -95,7 +95,7 @@
   justify-content: center;
   align-items: center;
   position: absolute;
-  left: 7.14%;  
+  left: 7.14%;
   top: 7.14%;
 }
 
@@ -204,6 +204,13 @@
   height: 100%;
   background-color: white;
   animation: shutter 1s ease-out forwards;
+}
+.backCamera {
+  position: absolute;
+  z-index: 1000;
+  width: 100px;
+  height: 100px;
+  background-color: #ed743f;
 }
 @keyframes shutter {
   from {

@@ -41,7 +41,7 @@ const BackDrop = () => {
 
 const Modal = ({ onCloseModal, version }) => {
   const darkmode = useContext(DisplayContext).darkmode;
-  const mobile = version === 'mobile';
+  const mobile = version === "mobile";
   //등장 animation
   const containerRef = useRef(null);
   useEffect(() => {
@@ -59,14 +59,13 @@ const Modal = ({ onCloseModal, version }) => {
   }, []);
 
   const closeModalHandler = () => {
-    if(mobile){
-    containerRef.current.style.bottom = "-100%";
-    const close = setTimeout(() => {
-      onCloseModal();
-    }, 600);
-    return () => clearTimeout(close);
-  }
-    else{
+    if (mobile) {
+      containerRef.current.style.bottom = "-100%";
+      const close = setTimeout(() => {
+        onCloseModal();
+      }, 600);
+      return () => clearTimeout(close);
+    } else {
       containerRef.current.style.top = "100vh";
       const close = setTimeout(() => {
         onCloseModal();
@@ -116,7 +115,7 @@ const Modal = ({ onCloseModal, version }) => {
         <img
           className={styles.imgpreview}
           width={mobile ? "100%" : ""}
-          height = {mobile ? "":"100%"}
+          height={mobile ? "" : "100%"}
           src={imgfile}
           alt="preview"
         />
@@ -164,7 +163,7 @@ const Modal = ({ onCloseModal, version }) => {
       vidConfig: vidConfigIdx,
       skin: skinIdx,
       timestamp: timestamp,
-      mobile: mobile
+      mobile: mobile,
     };
     try {
       const photos = collection(db, "Photos");
@@ -241,6 +240,22 @@ const Modal = ({ onCloseModal, version }) => {
     }, 1000);
 
   });
+  const FACING_MODE_USER = "user";
+  const FACING_MODE_ENVIRONMENT = "environment";
+
+  const [faceMode, setFaceMode] = useState(FACING_MODE_USER);
+
+  const handleFacingMode = useCallback(() => {
+    setFaceMode((prevState) =>
+      prevState === FACING_MODE_USER
+        ? FACING_MODE_ENVIRONMENT
+        : FACING_MODE_USER
+    );
+  }, []);
+  useEffect(() => {
+    console.log(faceMode);
+  }, [faceMode]);
+
   return (
     <div className={styles.container} ref={containerRef}>
       <div className={`${styles.cam_container} ${classNameBySkin}`}>
@@ -249,12 +264,17 @@ const Modal = ({ onCloseModal, version }) => {
         <div className={`${styles.cam_mask} ${classNameByConfig}`}>
           {imgpreview}
           {imgfile && <div className={styles.shutter}></div>}
-          {!imgfile &&
+          {version === "mobile" && (
+            <div className={styles.backCamera} onClick={handleFacingMode}>
+              Back
+            </div>
+          )}
+          {!imgfile && (
             <Webcam
               className={styles.webcam}
-              audio={false}
               ref={webcamRef}
               screenshotFormat="image/jpeg"
+              audio={false}
               mirrored={true}
               imageSmoothing={true}
               width={mobile ? "100%" : ""}
