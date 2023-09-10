@@ -28,8 +28,8 @@ const FrameButtons = ({
   onSkinSelect,
   version,
 }) => {
-  const mobile = version === 'mobile';
-  const [phase, setPhase] = useState(2);
+  const mobile = version === "mobile";
+  const [phase, setPhase] = useState(1);
   // const [skinHovered, setSkinHovered] = useState(1);
   useEffect(() => {
     console.log(phase);
@@ -58,7 +58,49 @@ const FrameButtons = ({
         </div>
       )}
       {/* PHASE 1:  frame selection */}
-
+      {phase === 1 && (
+        <>
+          <Button
+            children="정방형"
+            width="30vw"
+            height="10vh"
+            onClick={() => onFrameSelect(0)}
+            classes="framebtn square"
+          />
+          <Button
+            children="세로"
+            width="30vw"
+            height="10vh"
+            onClick={() => onFrameSelect(1)}
+            classes="framebtn vertical"
+          />
+          <Button
+            children="가로"
+            width="30vw"
+            height="10vh"
+            onClick={() => onFrameSelect(2)}
+            classes="framebtn horizontal"
+          />
+          <Button
+            children="취소"
+            width={mobile ? "50%" : "95%"}
+            height={mobile ? "60px" : "100px"}
+            onClick={() => {
+              setPhase(0);
+              onCloseModal();
+            }}
+            classes={mobile ? "cancel frame" : "popup cancel"}
+          />
+          <Button
+            children="다음"
+            width={mobile ? "50%" : "95%"}
+            height={mobile ? "60px" : "100px"}
+            onClick={() => setPhase((prev) => prev + 1)}
+            classes={mobile ? "save frame" : "popup save"}
+          />
+          ``
+        </>
+      )}
       {/* PHASE 2: before photo */}
       {phase === 2 && (
         <>
@@ -252,12 +294,12 @@ const FrameButtons = ({
             />
           </button>
           <Button
-            children="뒤로가기"
+            children="취소"
             width={mobile ? "60%" : "95%"}
             height={mobile ? "60px" : "100px"}
             onClick={() => {
               onDeletePhoto();
-              setPhase((prev) => prev - 2);
+              onCloseModal();
             }}
             classes="popup cancel"
           />
@@ -279,8 +321,7 @@ const FrameButtons = ({
 
       {/* PC exit button */}
       {version !== "mobile" && !whileTimer && (
-        <button className={styles.close} onClick={onCloseModal}>
-          </button>
+        <button className={styles.close} onClick={onCloseModal}></button>
       )}
     </div>
   );

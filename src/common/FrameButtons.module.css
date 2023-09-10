@@ -14,6 +14,15 @@
 }
 
 /* Phase에 따른 grid */
+.container.frame {
+  column-gap: 1%;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: 9fr 5fr;
+  grid-template-areas:
+    "square vertical horizontal"
+    "cancel .  save";
+}
+
 .container.beforePhoto {
   grid-template-columns: repeat(2, 1fr);
   grid-template-rows: 9fr 5fr;
@@ -52,14 +61,14 @@
   background-color: rgb(187, 187, 187);
   border-radius: 50%;
 }
-.container.frame {
+/* .container.frame {
   grid-template-rows: 15vh 24vh 24vh 15vh;
   grid-template-areas:
     "header header"
     "square square"
     "vertical horizontal"
     "move move";
-}
+} */
 
 .text {
   width: 100%;
