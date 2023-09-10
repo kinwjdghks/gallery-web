@@ -290,7 +290,7 @@ const Modal = ({ onCloseModal, version }) => {
               screenshotFormat="image/jpeg"
               audio={false}
               mirrored={true}
-              imageSmoothing={true}
+              // imageSmoothing={true}
               width={mobile ? "100%" : ""}
               height={mobile ? "" : "100%"}
               style={{ position: "absolute" }}
