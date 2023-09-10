@@ -2,7 +2,7 @@
   position: fixed;
   width: 100vw;
   height: 100vh;
-  z-index: -31;
+  z-index: 31;
   background: rgba(0, 0, 0, 0.75);
   cursor: url("../assets/Images/mouse-pointer-white.png") 25 25, auto;
 }
@@ -40,13 +40,13 @@
 }
 .cam_container.default::after {
   content: "";
-  width: 300px;
+  width: 150px;
   height: 10px;
   border-radius: 5px;
   background-color: #eadffc;
   position: absolute;
   top: 10px;
-  left: 90px;
+  left: 40px;
 }
 .cam_container.opt1 {
   background: linear-gradient(#1f1f61 0%, #755d98 60%, #e0a6b2 100%);

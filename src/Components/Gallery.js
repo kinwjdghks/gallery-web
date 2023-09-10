@@ -124,7 +124,8 @@ const Gallery = ({ version }) => {
     <>
       
       <div
-        className={`${styles.background} ${darkmode && styles.darkmode}`}
+        className={styles.background}
+        style={{backgroundColor: darkmode?"#484848":'#e0e0e0'}}
         ref={background}
       >
         {!photos.length && <div className={styles.noPic}>사진찍기 ㄱㄱ</div>}

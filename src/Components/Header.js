@@ -19,9 +19,14 @@ const Header = ({ onModalHandler, version }) => {
     console.log("Encountered");
   };
   return (
-    <div className={`${styles.header} ${darkmode && styles.darkmode}`}>
+    <div className={styles.header}
+    style={{backgroundColor: darkmode?"#484848":'#e0e0e0'}}>
       <div className={styles.comitPhoto}>
-        <p className={`${styles.comit} ${darkmode && styles.darkmode}`}>
+        <p className={styles.comit}
+        style={{
+          color: darkmode?"#997aec":'#7556cb',
+          transition:'color 0.6s',
+          textShadow: darkmode?"3px 5px 1px black":"3px 5px 1px black"}}>
           COMIT
         </p>
         <p className={`${styles.photobooth} ${darkmode && styles.darkmode}`}>
