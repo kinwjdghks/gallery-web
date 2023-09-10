@@ -6,11 +6,12 @@
   background: rgba(0, 0, 0, 0.75);
   cursor: url("../assets/Images/mouse-pointer-white.png") 25 25, auto;
 }
-/*conatiner*/
+
 .container {
   box-sizing: border-box;
   width: 100vw;
-  height: 90vh;
+  height: 50vh;
+  padding-bottom: 15vh;
   bottom: -100%;
   border-radius: 10vw 10vw 0 0;
   background-color: white;
@@ -44,7 +45,7 @@
   justify-self: center;
   align-self: flex-start;
   width: 78vw;
-  height: 75%;
+  height: 25vw;
   border: 2px solid black;
   font-family: "kotrahope";
   font-size: 10vw;
@@ -88,12 +89,11 @@
   top: 60vh;
 }
 
-.message {
+/* .message {
   grid-area: textarea;
   justify-self: center;
   align-self: flex-start;
   font-size: 5vw;
   font-family: "gangwonedu";
-  margin-top: 90%;
-  /* margin-top: 2vh; */
-}
+
+} */

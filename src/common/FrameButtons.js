@@ -98,6 +98,7 @@ const FrameButtons = ({
             onClick={() => setPhase((prev) => prev + 1)}
             classes={mobile ? "mobile save" : "popup save"}
           />
+          
         </>
       )}
       {/* PHASE 2: before photo */}

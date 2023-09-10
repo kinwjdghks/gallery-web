@@ -35,10 +35,10 @@ const Modal = ({ onCloseModal }) => {
     if (!contentRef) return;
 
     const content = contentRef.current.value.toString().trim();
-    if (content.length < 10) {
-      setMessage(<div className={styles.message}>10글자는 써죠잉 ㅜㅜ</div>);
-      return;
-    }
+    // if (content.length < 10) {
+    //   setMessage(<div className={styles.message}>10글자는 써죠잉 ㅜㅜ</div>);
+    //   return;
+    // }
     let id = new Date().getTime() % 100000000;
     const timestamp = serverTimestamp();
 
@@ -100,7 +100,7 @@ const NoteModal = ({ onCloseModal }) => {
   return (
     <>
       {ReactDOM.createPortal(
-        <BackDrop />,
+        <BackDrop/>,
         document.getElementById("backdrop-root")
       )}
       {ReactDOM.createPortal(

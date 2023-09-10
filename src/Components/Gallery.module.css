@@ -12,9 +12,6 @@
   overflow: auto;
   transition: all 0.5s;
 }
-.background.darkmode {
-  background-color: rgb(36, 36, 36);
-}
 
 .albumContainer {
   display: grid;
