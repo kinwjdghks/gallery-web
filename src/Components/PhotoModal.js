@@ -256,9 +256,15 @@ const Modal = ({ onCloseModal, version }) => {
       }
     }, 1000);
   });
-  const [faceMode, setFaceMode] = useState("user");
+  const FACING_MODE_USER = "user";
+  const FACING_MODE_ENVIRONMENT = "environment";
+  const [faceMode, setFaceMode] = useState(FACING_MODE_USER);
   const handleFacingMode = useCallback(() => {
-    setFaceMode((prevState) => (prevState === "user" ? "environment" : "user"));
+    setFaceMode((prevState) =>
+      prevState === FACING_MODE_USER
+        ? FACING_MODE_ENVIRONMENT
+        : FACING_MODE_USER
+    );
   }, []);
   return (
     <div className={styles.container} ref={containerRef}>
@@ -276,11 +282,6 @@ const Modal = ({ onCloseModal, version }) => {
         <div className={`${styles.cam_mask} ${classNameByConfig}`}>
           {imgpreview}
           {imgfile && <div className={styles.shutter}></div>}
-          {version === "mobile" && (
-            <div className={styles.backCamera} onClick={handleFacingMode}>
-              Back
-            </div>
-          )}
           {!imgfile && (
             <Webcam
               className={styles.webcam}
