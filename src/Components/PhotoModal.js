@@ -34,6 +34,7 @@ import { ReactComponent as Design3_vertical } from "../assets/skins/design3_vert
 import { ReactComponent as Design4_square } from "../assets/skins/design4_square.svg";
 import { ReactComponent as Design4_horizontal } from "../assets/skins/design4_horizontal.svg";
 import { ReactComponent as Design4_vertical } from "../assets/skins/design4_vertical.svg";
+import ConvertCamera from "../assets/Images/convertCamera.png";
 const BackDrop = () => {
   return <div className={styles.backdrop}></div>;
 };
@@ -256,17 +257,10 @@ const Modal = ({ onCloseModal, version }) => {
       }
     }, 1000);
   });
-  const FACING_MODE_USER = "user";
-  const FACING_MODE_ENVIRONMENT = "environment";
 
-  const [faceMode, setFaceMode] = useState(FACING_MODE_USER);
-
+  const [faceMode, setFaceMode] = useState("user");
   const handleFacingMode = useCallback(() => {
-    setFaceMode((prevState) =>
-      prevState === FACING_MODE_USER
-        ? FACING_MODE_ENVIRONMENT
-        : FACING_MODE_USER
-    );
+    setFaceMode((prevState) => (prevState === "user" ? "environment" : "user"));
   }, []);
   useEffect(() => {
     console.log(faceMode);
@@ -277,14 +271,18 @@ const Modal = ({ onCloseModal, version }) => {
       <div className={`${styles.cam_container} ${classNameBySkin}`}>
         {mobile && photoAnimation}
         {skinElement}
+        {version === "mobile" && !imgfile && !photoAnimation && (
+          <img
+            src={ConvertCamera}
+            alt="convertcamera"
+            className={styles.convertCamera}
+            onClick={handleFacingMode}
+          />
+        )}
         <div className={`${styles.cam_mask} ${classNameByConfig}`}>
           {imgpreview}
           {imgfile && <div className={styles.shutter}></div>}
-          {version === "mobile" && (
-            <div className={styles.backCamera} onClick={handleFacingMode}>
-              Back
-            </div>
-          )}
+
           {!imgfile && (
             <Webcam
               className={styles.webcam}

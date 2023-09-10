@@ -206,12 +206,13 @@
   background-color: white;
   animation: shutter 1s ease-out forwards;
 }
-.backCamera {
+.convertCamera {
   position: absolute;
-  z-index: 1000;
-  width: 100px;
-  height: 100px;
-  background-color: #ed743f;
+  z-index: 10;
+  bottom: 13%;
+  right: 3%;
+  width: 20%;
+  aspect-ratio: 1/1;
 }
 @keyframes shutter {
   from {
