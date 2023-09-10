@@ -286,6 +286,7 @@ const Modal = ({ onCloseModal, version }) => {
               width={mobile ? "100%" : ""}
               height={mobile ? "" : "100%"}
               style={{ position: "absolute" }}
+              facingMode={facingMode}
             />
           )}
         </div>
