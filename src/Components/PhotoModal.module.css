@@ -100,9 +100,9 @@
 }
 
 .cam_mask.square {
-  aspect-ratio: 1 / 1;
-  height: 85.71%;
   width: unset;
+  height: 85.71%;
+  aspect-ratio: 1 / 1;
 }
 .cam_mask.vertical {
   aspect-ratio: 3 / 4;
@@ -286,13 +286,13 @@
   }
 
   .cam_mask {
-    border-radius:50px;
+    border-radius: 50px;
     overflow: hidden;
     z-index: 0;
-    
+
     margin: 0;
     display: flex;
-    
+
     justify-content: center;
     align-items: center;
     align-content: center;
@@ -303,14 +303,13 @@
     background-color: black;
 
     -webkit-backface-visibility: hidden;
-    backface-visibility:hidden;
+    backface-visibility: hidden;
     -moz-backface-visibility: hidden;
     -webkit-transform: translate3d(0, 0, 0);
     transform: translate3d(0, 0, 0);
     -moz-transform: translate3d(0, 0, 0);
     -webkit-mask-image: -webkit-radial-gradient(white, black);
     mask-image: -webkit-radial-gradient(white, black);
-    
   }
 
   .cam_mask.square {
@@ -353,10 +352,9 @@
     font-family: "gangwonedu";
     font-size: 35px;
     position: absolute;
-
   }
 
-  .animation.counting{
+  .animation.counting {
     color: black;
     grid-area: img;
     align-self: center;

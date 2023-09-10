@@ -1,9 +1,4 @@
-import React, {
-  useState,
-  useRef,
-  useEffect,
-  useCallback,
-} from "react";
+import React, { useState, useRef, useEffect, useCallback } from "react";
 import ReactDOM from "react-dom";
 import styles from "./PhotoModal.module.css";
 import Webcam from "react-webcam";
@@ -51,8 +46,7 @@ const Modal = ({ onCloseModal, version }) => {
         containerRef.current.style.bottom = "0%";
       }, 100);
       return () => clearTimeout(popup);
-    }
-    else if(containerRef) {
+    } else if (containerRef) {
       const popup = setTimeout(() => {
         containerRef.current.style.bottom = "-100%";
       }, 100);
@@ -252,21 +246,30 @@ const Modal = ({ onCloseModal, version }) => {
         <div className={`${styles.cam_mask} ${classNameByConfig}`}>
           {imgpreview}
           {imgfile && <div className={styles.shutter}></div>}
-          
-          <Webcam
-            className={styles.webcam}
-            audio={false}
-            height={"100%"}
-            ref={webcamRef}
-            screenshotFormat="image/jpeg"
-            mirrored={true}
-            imageSmoothing={true}
-            style={
-              {
-                'position':'absolute',
-              }
-            }
-          />
+          {version === "mobile" ? (
+            <Webcam
+              className={styles.webcam}
+              audio={false}
+              width={"100%"}
+              ref={webcamRef}
+              screenshotFormat="image/jpeg"
+              mirrored={true}
+              imageSmoothing={true}
+              style={{
+                position: "absolute",
+              }}
+            />
+          ) : (
+            <Webcam
+              className={styles.webcam}
+              audio={false}
+              height={"100%"}
+              ref={webcamRef}
+              screenshotFormat="image/jpeg"
+              mirrored={true}
+              imageSmoothing={true}
+            />
+          )}
         </div>
       </div>
 
