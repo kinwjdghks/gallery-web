@@ -82,7 +82,7 @@ const FrameButtons = ({
             <img src={camera_btn} alt="camera" style={{ height: '75%' }} />
           </div>
           <Button
-            children="뒤로가기"
+            children="안찍을랭"
             width="60%"
             height="60px"
             onClick={() => {
@@ -209,45 +209,50 @@ const FrameButtons = ({
             className={`${styles.skinbtn} ${styles.skin1}`}
             onClick={() => onSkinSelect(1)}
           >
-            {/* <img
+            <img
               className={`${styles.btndesign} ${styles.skin1}`}
-              width="287" //PC
-              src={building}
+              style={{position:'absolute',bottom:0,right:0}}
+              height={version==='mobile' ? '200%' : "130%"}
+              src={design1_vertical}
               alt="btndesign"
-            /> */}
+            />
           </button>
 
           <button
             className={`${styles.skinbtn} ${styles.skin2}`}
             onClick={() => onSkinSelect(2)}
           >
-            {/* <img
-              className={`${styles.btndesign} ${styles.skin2}`}
-              width="300"
-              src={temple}
+            <img
+              className={`${styles.btndesign} ${styles.skin1}`}
+              style={{position:'absolute',bottom:0,right:0}}
+              height={version==='mobile' ? '180%' : "250%"}
+              src={design2_vertical}
               alt="btndesign"
-            /> */}
+            />
           </button>
           <button
             className={`${styles.skinbtn} ${styles.skin3}`}
             onClick={() => onSkinSelect(3)}
           >
-            {/* <img
-              className={`${styles.btndesign} ${styles.skin3} ${styles.leaves}`}
-              width="60"
-              src={leaves}
-              alt="btndesign"/>
             <img
-              className={`${styles.btndesign} ${styles.skin3} ${styles.sungkyuni}`}
-              width="250"
-              src={sungkyuni}
-              alt="btndesign"/> */}
+              className={`${styles.btndesign} ${styles.skin1}`}
+              style={{position:'absolute',bottom:0,right:0}}
+              height="200%"
+              src={design3_vertical}
+              alt="btndesign"
+            />
           </button>
           <button
             className={`${styles.skinbtn} ${styles.skin4}`}
             onClick={() => onSkinSelect(4)}
           >
-
+            <img
+              className={`${styles.btndesign} ${styles.skin1}`}
+              style={{position:'absolute',top:0,right:0}}
+              height={version === 'mobile' ? '210%': "200%"}
+              src={design4_vertical}
+              alt="btndesign"
+            />
           </button>
           <Button
             children="뒤로가기"
