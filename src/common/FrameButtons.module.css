@@ -6,7 +6,7 @@
   color: white;
   display: grid;
 
-  background-color: white;
+  /* background-color: white; */
   /* row-gap: 0px; */
   /* column-gap: 30px; */
 
@@ -146,24 +146,6 @@
   position: absolute;
   /* z-index: 10; */
 }
-.btndesign.skin1 {
-}
-
-.btndesign.skin2 {
-}
-
-.btndesign.skin3 {
-}
-
-.btndesign.skin4 {
-}
-
-.comitfilm1 {
-  margin-left: 70px;
-}
-.comitfilm3 {
-  margin-left: -70px;
-}
 
 .close {
   position: absolute;
@@ -214,7 +196,7 @@
     grid-template-areas:
       "header"
       "img"
-      "move";
+      "next";
     padding: 0;
   }
   .container.afterPhoto {
@@ -263,11 +245,11 @@
     grid-area: header;
     font-weight: 900;
     position: relative;
-    top: 20%;
+    top: 15%;
   }
   .text p {
     text-align: center;
-    margin: 0;
+    /* margin: 0; */
   }
   .comit {
     font-size: 90px;
@@ -278,7 +260,7 @@
   .photobooth {
     position: relative;
     color: black;
-    top: 0;
+    top: -25px;
   }
 
   .close {
@@ -298,7 +280,8 @@
     justify-self: center;
     align-self: center;
     margin: 5%;
-    transform: translate(0, 10%);
+    /* transform: translate(0, 10%); */
+    transform-origin: center center;
     font-size: 3rem;
     border-radius: 30px;
     overflow: hidden;

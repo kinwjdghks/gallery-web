@@ -79,15 +79,14 @@ const FrameButtons = ({
               <Button
                 children="안찍을랭"
                 width="60%"
-                height="60px"
                 onClick={() => {
                   onCloseModal();
                 }}
-                classes="cancel"
+                classes="mobile cancel"
               />
             </>
           )}
-          {version !== "mobile" && !animationStarted && (
+          {!mobile && !animationStarted && (
             <>
               {/* PC */}
               <img
@@ -112,7 +111,7 @@ const FrameButtons = ({
                   onTakePhoto();
                   setPhase((prev) => prev + 1);
                 }}
-                classes="popup movebtn takePhoto"
+                classes="popup takePhoto"
               />
             </>
           )}
@@ -150,22 +149,21 @@ const FrameButtons = ({
             }}
           />
           <Button
-            children="다시 찍기"
+            children="이게뭐야 다시찍어"
             width={mobile ? "60%" : "95%"}
             height={mobile ? "60px" : "100px"}
             onClick={() => {
               againHandler();
               setPhase(2);
             }}
-            classes={mobile ? "again" : "popup again"}
+            classes={mobile ? "mobile again" : "popup again"}
           />
           <Button
             children="다음"
             width={mobile ? "60%" : "95%"}
             height={mobile ? "60px" : "100px"}
             onClick={() => setPhase((prev) => prev + 1)}
-            classes="popup next"
-            // classes="movebtn nextbtn"
+            classes={mobile ? "mobile next" : "popup next"}
           />
         </>
       )}

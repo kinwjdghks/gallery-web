@@ -1,5 +1,5 @@
 .header {
-  height: 10vh;
+  height: 22vw;
   width: 100vw;
   z-index: 2;
   background-color: #e0e0e0;
@@ -38,17 +38,28 @@
   margin-top: -10px;
   margin-bottom: 0px;
   font-size: 7vw;
-  transition: all 0.5s;
+  transition: color 0.5s;
 }
 .photobooth.darkmode {
   color: white;
 }
 .logo {
   position: absolute;
-  top: 5vh;
-  left: 10vw;
-  transform: translate(0%, -50%);
+  top: 5vw;
+  left: 8vw;
   width: 12vw;
+}
+.togglebtn{
+  position: absolute;
+  right: 5vw;
+  top: 5vw;
+}
+
+.disappear{
+  animation: disappear 0.5s ease forwards;
+}
+.appear{
+  animation: appear 0.5s ease forwards;
 }
 @media (min-width: 1024px) {
   .header {
@@ -61,7 +72,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    transition: all 0.5s;
+    transition: color 0.5s;
   }
   .comitPhoto {
     font-family: "cocogoose";
@@ -77,20 +88,45 @@
     margin-top: -10px;
     margin-bottom: 0px;
     font-size: 60px;
-    transition: all 0.5s;
+    transition: color 0.5s;
   }
   .logo {
     width: 110px;
     position: absolute;
     left: calc(50% - 767.5px - 20px);
-    top: 10px;
+    top: 2vh;
     transform: translate(-100%, 0%);
   }
+  .togglebtn{
+    width: 30px;
+  }
 }
+
+
 .logo:hover {
   cursor: url("../assets/Images/mouse-pointer-white.png") 25 25, auto;
 }
 
 .comitPhoto p {
   height: min-content;
+}
+@keyframes disappear {
+  from{
+    transform: rotate(0deg);
+    opacity: 1;
+  }
+  to{
+    transform: rotate(270deg);
+    opacity: 0;
+  }
+}
+@keyframes appear {
+  from{
+    transform: rotate(270deg);
+    opacity: 0;
+  }
+  to{
+    transform: rotate(0deg);
+    opacity: 1;
+  }
 }

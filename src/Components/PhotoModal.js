@@ -1,4 +1,6 @@
 import React, { useState, useRef, useEffect, useCallback } from "react";
+import { useContext } from "react";
+import DisplayContext from "../Context/context/Display";
 import ReactDOM from "react-dom";
 import styles from "./PhotoModal.module.css";
 import Webcam from "react-webcam";
@@ -37,6 +39,7 @@ const BackDrop = () => {
 };
 
 const Modal = ({ onCloseModal, version }) => {
+  const darkmode = useContext(DisplayContext).darkmode;
   const mobile = version === 'mobile';
   //등장 animation
   const containerRef = useRef(null);
@@ -54,11 +57,19 @@ const Modal = ({ onCloseModal, version }) => {
     }
   }, []);
   const closeModalHandler = () => {
+    if(mobile){
     containerRef.current.style.bottom = "-100%";
     const close = setTimeout(() => {
       onCloseModal();
     }, 600);
     return () => clearTimeout(close);
+  }
+    else{
+      containerRef.current.style.top = "100vh";
+      const close = setTimeout(() => {
+        onCloseModal();
+      }, 600);
+    }
   };
   const [isLoading, setIsLoading] = useState(false);
   const [imgfile, setImgfile] = useState(null);
@@ -262,7 +273,7 @@ const Modal = ({ onCloseModal, version }) => {
         </div>
       </div>
 
-      <div className={styles.actions}>
+      <div className={styles.actions} style={{backgroundColor: darkmode ? "#464646" : 'white'}}>
         <FrameButtons
           isLoading={isLoading}
           imgfile={imgfile}

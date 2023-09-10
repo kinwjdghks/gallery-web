@@ -12,6 +12,8 @@
   background-color: #603ebb;
   z-index: 0;
   border-radius: 0.35em;
+  word-break: keep-all;
+  line-height:120%;
 }
 
 .btn:active {
@@ -58,13 +60,14 @@
   margin-top: 5vh;
 }
 /* Next */
-.movebtn {
-  grid-area: move;
+.takePhoto {
+  grid-area: next;
   justify-self: center;
   align-self: self-start;
   font-weight: 600;
-  /* font-size: 60pt; */
-}
+  font-size: 60pt;
+} 
+
 
 /* Frame */
 .framebtn {
@@ -95,17 +98,7 @@
   /* border-radius: 30px; */
   position: relative;
 }
-.lastbtn.again {
-  grid-area: again;
-  justify-self: end;
-  right: 10px;
-  background: rgb(182, 162, 241);
-  color: rgba(255, 255, 255, 0.5);
-}
-.lastbtn.again:hover {
-  background: white;
-  color: #603ebb;
-}
+
 .lastbtn.again::before {
   background: rgb(68, 34, 161);
 }
@@ -116,8 +109,7 @@
 
 .mobile {
   height: 60px;
-  width: 40vw;
-  border-radius: 3vw;
+  font-weight: 500;
 }
 @media (min-width: 1024px) {
   /* normal button design */

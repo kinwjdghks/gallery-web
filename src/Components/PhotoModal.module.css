@@ -95,7 +95,7 @@
   justify-content: center;
   align-items: center;
   position: absolute;
-  left: 7.14%;
+  left: 7.14%;  
   top: 7.14%;
 }
 
@@ -110,7 +110,7 @@
   width: unset;
 }
 .cam_mask.horizontal {
-  aspect-ratio: 3 / 4;
+  aspect-ratio: 4 / 3;
   width: 85.71%;
   height: unset;
 }
@@ -120,7 +120,6 @@
   height: 280px;
   position: absolute;
   bottom: 0px;
-  background-color: white;
 }
 
 .imgpreview {

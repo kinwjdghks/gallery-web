@@ -22,7 +22,7 @@ import githubIcon from "../assets/Images/github-icon.png";
 
 const Gallery = ({ version }) => {
   const darkmode = useContext(DisplayContext).darkmode;
-  const [photos, setPhotos] = useState([<Album data={{vidConfig:1, skin:1}}/>]);
+  const [photos, setPhotos] = useState([]);
 
   let timeStamp = useRef(null);
 
@@ -111,14 +111,14 @@ const Gallery = ({ version }) => {
     setIsLoading(false);
   };
 
-  // useEffect(() => {
-  //   window.scroll({
-  //     top: 0,
-  //     behavior: "instant",
-  //   });
-  //   getMorePhotos();
-  //   console.log("initial data request");
-  // }, []);
+  useEffect(() => {
+    window.scroll({
+      top: 0,
+      behavior: "instant",
+    });
+    getMorePhotos();
+    console.log("initial data request");
+  }, []);
 
   return (
     <>
@@ -130,20 +130,19 @@ const Gallery = ({ version }) => {
         {!photos.length && <div className={styles.noPic}>사진찍기 ㄱㄱ</div>}
         {photos.length > 0 && (
           <div className={styles.albumContainer}>
-            {/* {photos.map((data, index) => {
-                // if (data.type ==="blank" ||data.url === "blank") {
+            {photos.map((data, index) => {
+                if (data.type ==="blank") {
                   
-              if (data.url === "blank") {
+              // if (data.url === "blank") {
                 return <BlankAlbum key={index} />;
               }
-              else if(data.url==="photo"){
+              else if(data.type==="photo"){
                 return <Album key={index} data={data} />;
               }
               else{ //data.type === 'note'
                 return <Note key ={index} data={data} />;
               }
-            })} */}
-            {photos}
+            })}
           </div>
         )}
         {isLoading && <div className={styles.loadingDiv}>Loading...</div>}
