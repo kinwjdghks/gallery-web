@@ -22,18 +22,19 @@ import FrameButtons from "../common/FrameButtons";
 import EffectSound from "../common/EffectSound";
 import effect from "../assets/sounds/camera-shutter.wav";
 //images
-import { ReactComponent as Design1_square}  from "../assets/skins/design1_square.svg";
-import { ReactComponent as Design1_horizontal} from "../assets/skins/design1_horizontal.svg";
-import { ReactComponent as Design1_vertical} from "../assets/skins/design1_vertical.svg";
-import { ReactComponent as Design2_square} from "../assets/skins/design2_square.svg";
-import { ReactComponent as Design2_horizontal} from "../assets/skins/design2_horizontal.svg";
-import { ReactComponent as Design2_vertical} from "../assets/skins/design2_vertical.svg";
-import { ReactComponent as Design3_square} from "../assets/skins/design3_square.svg";
-import { ReactComponent as Design3_horizontal} from "../assets/skins/design3_horizontal.svg";
-import { ReactComponent as Design3_vertical} from "../assets/skins/design3_vertical.svg";
-import { ReactComponent as Design4_square} from "../assets/skins/design4_square.svg";
-import { ReactComponent as Design4_horizontal} from "../assets/skins/design4_horizontal.svg";
-import { ReactComponent as Design4_vertical} from "../assets/skins/design4_vertical.svg";
+import { ReactComponent as Design1_square } from "../assets/skins/design1_square.svg";
+import { ReactComponent as Design1_horizontal } from "../assets/skins/design1_horizontal.svg";
+import { ReactComponent as Design1_vertical } from "../assets/skins/design1_vertical.svg";
+import { ReactComponent as Design2_square } from "../assets/skins/design2_square.svg";
+import { ReactComponent as Design2_horizontal } from "../assets/skins/design2_horizontal.svg";
+import { ReactComponent as Design2_vertical } from "../assets/skins/design2_vertical.svg";
+import { ReactComponent as Design3_square } from "../assets/skins/design3_square.svg";
+import { ReactComponent as Design3_horizontal } from "../assets/skins/design3_horizontal.svg";
+import { ReactComponent as Design3_vertical } from "../assets/skins/design3_vertical.svg";
+import { ReactComponent as Design4_square } from "../assets/skins/design4_square.svg";
+import { ReactComponent as Design4_horizontal } from "../assets/skins/design4_horizontal.svg";
+import { ReactComponent as Design4_vertical } from "../assets/skins/design4_vertical.svg";
+import ConvertCamera from "../assets/Images/convertCamera.png";
 
 const BackDrop = () => {
   return <div className={styles.backdrop}></div>;
@@ -197,11 +198,27 @@ const Modal = ({ onCloseModal, version }) => {
   };
 
   const skinList = [
-    [<Design1_square className={styles.skinElement}/>, <Design1_vertical className={styles.skinElement}/>, <Design1_horizontal className={styles.skinElement}/>],
-    [<Design2_square className={styles.skinElement}/>, <Design2_vertical className={styles.skinElement}/>, <Design2_horizontal className={styles.skinElement}/>],
-    [<Design3_square className={styles.skinElement}/>, <Design3_vertical className={styles.skinElement}/>, <Design3_horizontal className={styles.skinElement}/>],
-    [<Design4_square className={styles.skinElement}/>, <Design4_vertical className={styles.skinElement}/>, <Design4_horizontal className={styles.skinElement}/>],
-    ];
+    [
+      <Design1_square className={styles.skinElement} />,
+      <Design1_vertical className={styles.skinElement} />,
+      <Design1_horizontal className={styles.skinElement} />,
+    ],
+    [
+      <Design2_square className={styles.skinElement} />,
+      <Design2_vertical className={styles.skinElement} />,
+      <Design2_horizontal className={styles.skinElement} />,
+    ],
+    [
+      <Design3_square className={styles.skinElement} />,
+      <Design3_vertical className={styles.skinElement} />,
+      <Design3_horizontal className={styles.skinElement} />,
+    ],
+    [
+      <Design4_square className={styles.skinElement} />,
+      <Design4_vertical className={styles.skinElement} />,
+      <Design4_horizontal className={styles.skinElement} />,
+    ],
+  ];
   const skinElement = skinIdx ? skinList[skinIdx - 1][vidConfigIdx] : null;
 
   const classNameByConfig =
@@ -238,13 +255,10 @@ const Modal = ({ onCloseModal, version }) => {
         clearInterval(timer);
       }
     }, 1000);
-
   });
   const FACING_MODE_USER = "user";
   const FACING_MODE_ENVIRONMENT = "environment";
-
   const [faceMode, setFaceMode] = useState(FACING_MODE_USER);
-
   const handleFacingMode = useCallback(() => {
     setFaceMode((prevState) =>
       prevState === FACING_MODE_USER
@@ -252,23 +266,22 @@ const Modal = ({ onCloseModal, version }) => {
         : FACING_MODE_USER
     );
   }, []);
-  useEffect(() => {
-    console.log(faceMode);
-  }, [faceMode]);
-
   return (
     <div className={styles.container} ref={containerRef}>
       <div className={`${styles.cam_container} ${classNameBySkin}`}>
         {mobile && photoAnimation}
         {skinElement}
+        {version === "mobile" && !imgfile && !photoAnimation && (
+          <img
+            src={ConvertCamera}
+            alt="convertcamera"
+            className={styles.convertCamera}
+            onClick={handleFacingMode}
+          />
+        )}
         <div className={`${styles.cam_mask} ${classNameByConfig}`}>
           {imgpreview}
           {imgfile && <div className={styles.shutter}></div>}
-          {version === "mobile" && (
-            <div className={styles.backCamera} onClick={handleFacingMode}>
-              Back
-            </div>
-          )}
           {!imgfile && (
             <Webcam
               className={styles.webcam}
@@ -284,7 +297,10 @@ const Modal = ({ onCloseModal, version }) => {
         </div>
       </div>
 
-      <div className={styles.actions} style={{backgroundColor: darkmode ? "#C9B3EF" : "#C9B3EF"}}>
+      <div
+        className={styles.actions}
+        style={{ backgroundColor: darkmode ? "#C9B3EF" : "#C9B3EF" }}
+      >
         <FrameButtons
           isLoading={isLoading}
           imgfile={imgfile}

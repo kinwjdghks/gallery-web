@@ -1,16 +1,16 @@
 //css
 import styles from "./Header.module.css";
 //images
-import {ReactComponent as Logo} from "../assets/Images/Logo.svg";
-import {ReactComponent as DarkIcon} from "../assets/Images/dark_mode.svg";
-import {ReactComponent as LightIcon} from "../assets/Images/light_mode.svg";
+import { ReactComponent as Logo } from "../assets/Images/Logo.svg";
+import { ReactComponent as DarkIcon } from "../assets/Images/dark_mode.svg";
+import { ReactComponent as LightIcon } from "../assets/Images/light_mode.svg";
 //imports
 import { useState } from "react";
 import { useContext } from "react";
 import DisplayContext from "../Context/context/Display";
 import Button from "../common/Button";
 const Header = ({ onModalHandler, version }) => {
-  const mobile = version === 'mobile';
+  const mobile = version === "mobile";
   const darkmode = useContext(DisplayContext).darkmode;
   const toggleDarkmode = useContext(DisplayContext).displayToggle;
   const [isBtnHovered, setIsBtnHovered] = useState(false);
@@ -45,11 +45,19 @@ const Header = ({ onModalHandler, version }) => {
           // onMouseHover={hoverHandler}
         />
       )}
-      <DarkIcon  className={`${styles.togglebtn} ${darkmode ? styles.appear : styles.disappear}`} onClick={toggleDarkmode}/>
-      <LightIcon  className={`${styles.togglebtn} ${darkmode ? styles.disappear : styles.appear}`} onClick={toggleDarkmode}/>
-
-
-      </div>
+      <DarkIcon
+        className={`${styles.togglebtn} ${
+          darkmode ? styles.appear : styles.disappear
+        }`}
+        onClick={toggleDarkmode}
+      />
+      <LightIcon
+        className={`${styles.togglebtn} ${
+          darkmode ? styles.disappear : styles.appear
+        }`}
+        onClick={toggleDarkmode}
+      />
+    </div>
   );
 };
 export default Header;

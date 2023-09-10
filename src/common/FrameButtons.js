@@ -36,7 +36,7 @@ const FrameButtons = ({
   }, [phase]);
   //phase 1: frame select / 2: take photo / 3: after photo / 4: skin select
   const [animationStarted, setAnimationStarted] = useState(false);
-  const random = useMemo(()=>Math.floor(Math.random()*2),[]);
+  const random = useMemo(() => Math.floor(Math.random() * 2), []);
   const againHandler = () => {
     onDeletePhoto();
   };
@@ -62,22 +62,22 @@ const FrameButtons = ({
         <>
           <Button
             children="정방형"
-            width={mobile?"30vw":"100%"}
-            height={mobile?"10vh":"50%"}
+            width={mobile ? "30vw" : "100%"}
+            height={mobile ? "10vh" : "50%"}
             onClick={() => onFrameSelect(0)}
             classes={mobile ? "framebtn square" : "popup square"}
           />
           <Button
             children="세로"
-            width={mobile?"30vw":"100%"}
-            height={mobile?"10vh":"50%"}
+            width={mobile ? "30vw" : "100%"}
+            height={mobile ? "10vh" : "50%"}
             onClick={() => onFrameSelect(1)}
             classes={mobile ? "framebtn vertical" : "popup vertical"}
           />
           <Button
             children="가로"
-            width={mobile?"30vw":"100%"}
-            height={mobile?"10vh":"50%"}
+            width={mobile ? "30vw" : "100%"}
+            height={mobile ? "10vh" : "50%"}
             onClick={() => onFrameSelect(2)}
             classes={mobile ? "framebtn horizontal" : "popup horizontal"}
           />
@@ -122,13 +122,13 @@ const FrameButtons = ({
                 children="뒤로가기"
                 width="60%"
                 onClick={() => {
-                  setPhase((prev)=>prev-1);
+                  setPhase((prev) => prev - 1);
                 }}
                 classes="mobile cancel"
               />
             </>
           )}
-          {!mobile && !animationStarted && ( 
+          {!mobile && !animationStarted && (
             <>
               {/* PC */}
               <img
@@ -162,7 +162,7 @@ const FrameButtons = ({
 
       {/* PHASE 3: after photo */}
 
-      {phase === 3 && mobile && !animationStarted && !imgfile && ( 
+      {phase === 3 && mobile && !animationStarted && !imgfile && (
         <>
           <img
             src={smile명륜}
@@ -174,17 +174,21 @@ const FrameButtons = ({
               width: "70%",
             }}
           />
-          <div style={{
-            gridArea: "1/1/2/2",
-            justifySelf: "flex-start",
-            alignSelf: "flex-start",
-            fontSize: '8vw',
-            fontFamily: random ? 'gangwonedu': 'cocogoose ',
-            color:'#603EBB',
-            padding: '2vw',
-            lineHeight:'100%',
-            wordBreak:'keep-all'  
-          }} >{random ? "코밋에서 놀자!" : "LET'S COMIT!"}</div>
+          <div
+            style={{
+              gridArea: "1/1/2/2",
+              justifySelf: "flex-start",
+              alignSelf: "flex-start",
+              fontSize: "8vw",
+              fontFamily: random ? "gangwonedu" : "cocogoose ",
+              color: "#603EBB",
+              padding: "2vw",
+              lineHeight: "100%",
+              wordBreak: "keep-all",
+            }}
+          >
+            {random ? "코밋에서 놀자!" : "LET'S COMIT!"}
+          </div>
         </>
       )}
       {phase === 3 && version !== "mobile" && !imgfile && photoAnimation}
