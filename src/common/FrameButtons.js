@@ -1,4 +1,4 @@
-import { React, useState, useCallback, useEffect } from "react";
+import { React, useState, useMemo, useEffect } from "react";
 //imports
 import Button from "./Button";
 //css
@@ -7,11 +7,12 @@ import styles from "./FrameButtons.module.css";
 import SmileImage from "../assets/Images/smile.svg";
 import ThumbImage from "../assets/Images/thumb.png";
 import loading from "../assets/Images/loading.svg";
-import camera_btn from "../assets/Images/camera_btn_black.svg";
+import camera_btn from "../assets/Images/camera_btn.svg";
 import design1_vertical from "../assets/skins/design1_vertical.svg";
 import design2_vertical from "../assets/skins/design2_vertical.svg";
 import design3_vertical from "../assets/skins/design3_vertical.svg";
 import design4_vertical from "../assets/skins/design4_vertical.svg";
+import smile명륜 from "../assets/Images/smile명륜.svg";
 
 const FrameButtons = ({
   isLoading,
@@ -30,13 +31,12 @@ const FrameButtons = ({
 }) => {
   const mobile = version === "mobile";
   const [phase, setPhase] = useState(1);
-  // const [skinHovered, setSkinHovered] = useState(1);
   useEffect(() => {
     console.log(phase);
   }, [phase]);
   //phase 1: frame select / 2: take photo / 3: after photo / 4: skin select
   const [animationStarted, setAnimationStarted] = useState(false);
-
+  const random = useMemo(()=>Math.floor(Math.random()*2),[]);
   const againHandler = () => {
     onDeletePhoto();
   };
@@ -116,19 +116,19 @@ const FrameButtons = ({
                   onTakePhoto();
                 }}
               >
-                <img src={camera_btn} alt="camera" style={{ height: "75%" }} />
+                <img src={camera_btn} alt="camera" style={{ height: "65%" }} />
               </div>
               <Button
-                children="안찍을랭"
+                children="뒤로가기"
                 width="60%"
                 onClick={() => {
-                  onCloseModal();
+                  setPhase((prev)=>prev-1);
                 }}
                 classes="mobile cancel"
               />
             </>
           )}
-          {!mobile && !animationStarted && (
+          {!mobile && !animationStarted && ( 
             <>
               {/* PC */}
               <img
@@ -162,19 +162,29 @@ const FrameButtons = ({
 
       {/* PHASE 3: after photo */}
 
-      {phase === 3 && mobile && !animationStarted && !imgfile && (
+      {phase === 3 && mobile && !animationStarted && !imgfile && ( 
         <>
           <img
-            src={SmileImage}
+            src={smile명륜}
             alt="SmileImage"
             style={{
-              gridArea: "img",
-              justifySelf: "center",
-              alignSelf: "center",
-              width: "30%",
+              gridArea: "1/1/3/3",
+              justifySelf: "flex-end",
+              alignSelf: "flex-end",
+              width: "70%",
             }}
           />
-          <div className={styles.smileText}>Smile!</div>
+          <div style={{
+            gridArea: "1/1/2/2",
+            justifySelf: "flex-start",
+            alignSelf: "flex-start",
+            fontSize: '8vw',
+            fontFamily: random ? 'gangwonedu': 'cocogoose ',
+            color:'#603EBB',
+            padding: '2vw',
+            lineHeight:'100%',
+            wordBreak:'keep-all'  
+          }} >{random ? "코밋에서 놀자!" : "LET'S COMIT!"}</div>
         </>
       )}
       {phase === 3 && version !== "mobile" && !imgfile && photoAnimation}
@@ -296,8 +306,8 @@ const FrameButtons = ({
             width={mobile ? "60%" : "95%"}
             height={mobile ? "60px" : "100px"}
             onClick={() => {
+              setPhase(2);
               onDeletePhoto();
-              onCloseModal();
             }}
             classes="popup cancel"
           />
