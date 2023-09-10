@@ -35,6 +35,7 @@ import { ReactComponent as Design4_square } from "../assets/skins/design4_square
 import { ReactComponent as Design4_horizontal } from "../assets/skins/design4_horizontal.svg";
 import { ReactComponent as Design4_vertical } from "../assets/skins/design4_vertical.svg";
 import ConvertCamera from "../assets/Images/convertCamera.png";
+
 const BackDrop = () => {
   return <div className={styles.backdrop}></div>;
 };
@@ -255,12 +256,10 @@ const Modal = ({ onCloseModal, version }) => {
       }
     }, 1000);
   });
-
   const [faceMode, setFaceMode] = useState("user");
   const handleFacingMode = useCallback(() => {
     setFaceMode((prevState) => (prevState === "user" ? "environment" : "user"));
   }, []);
-
   return (
     <div className={styles.container} ref={containerRef}>
       <div className={`${styles.cam_container} ${classNameBySkin}`}>
@@ -277,7 +276,11 @@ const Modal = ({ onCloseModal, version }) => {
         <div className={`${styles.cam_mask} ${classNameByConfig}`}>
           {imgpreview}
           {imgfile && <div className={styles.shutter}></div>}
-
+          {version === "mobile" && (
+            <div className={styles.backCamera} onClick={handleFacingMode}>
+              Back
+            </div>
+          )}
           {!imgfile && (
             <Webcam
               className={styles.webcam}
@@ -297,7 +300,7 @@ const Modal = ({ onCloseModal, version }) => {
 
       <div
         className={styles.actions}
-        style={{ backgroundColor: darkmode ? "#464646" : "white" }}
+        style={{ backgroundColor: darkmode ? "#C9B3EF" : "#C9B3EF" }}
       >
         <FrameButtons
           isLoading={isLoading}

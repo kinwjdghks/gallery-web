@@ -2,7 +2,7 @@
   position: fixed;
   width: 100vw;
   height: 100vh;
-  z-index: -31;
+  z-index: 31;
   background: rgba(0, 0, 0, 0.75);
   cursor: url("../assets/Images/mouse-pointer-white.png") 25 25, auto;
 }
@@ -208,7 +208,7 @@
 .convertCamera {
   position: absolute;
   z-index: 10;
-  bottom: 13%;
+  bottom: 4%;
   right: 3%;
   width: 20%;
   aspect-ratio: 1/1;
