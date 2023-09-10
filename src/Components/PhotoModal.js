@@ -256,15 +256,20 @@ const Modal = ({ onCloseModal, version }) => {
       }
     }, 1000);
   });
-  const [facingMode, setFacingMode] = useState("user");
+  const FACING_MODE_USER = "user";
+  const FACING_MODE_ENVIRONMENT = "environment";
+
+  const [faceMode, setFaceMode] = useState(FACING_MODE_USER);
   const handleFacingMode = useCallback(() => {
-    setFacingMode((prevState) =>
-      prevState === "user" ? "environment" : "user"
+    setFaceMode((prevState) =>
+      prevState === FACING_MODE_USER
+        ? FACING_MODE_ENVIRONMENT
+        : FACING_MODE_USER
     );
   }, []);
   useEffect(() => {
-    console.log(facingMode);
-  }, [facingMode]);
+    console.log(faceMode);
+  }, [faceMode]);
 
   return (
     <div className={styles.container} ref={containerRef}>
@@ -282,15 +287,15 @@ const Modal = ({ onCloseModal, version }) => {
           {!imgfile && (
             <Webcam
               className={styles.webcam}
-              audio={false}
               ref={webcamRef}
               screenshotFormat="image/jpeg"
+              audio={false}
               mirrored={true}
               // imageSmoothing={true}
               width={mobile ? "100%" : ""}
               height={mobile ? "" : "100%"}
               style={{ position: "absolute" }}
-              facingmode={facingMode}
+              facingMode={faceMode}
             />
           )}
         </div>

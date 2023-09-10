@@ -17,7 +17,7 @@ const Modal = ({ onCloseModal }) => {
   useEffect(() => {
     if (containerRef) {
       setTimeout(() => {
-        containerRef.current.style.bottom = '0%';
+        containerRef.current.style.bottom = "0%";
       }, 100);
     }
   }, []);
