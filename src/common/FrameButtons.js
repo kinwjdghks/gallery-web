@@ -8,18 +8,11 @@ import SmileImage from "../assets/Images/smile.svg";
 import ThumbImage from "../assets/Images/thumb.png";
 import loading from "../assets/Images/loading.svg";
 import camera_btn from "../assets/Images/camera_btn_black.svg";
-import design1_square from "../assets/skins/design1_square.svg";
-import design1_horizontal from "../assets/skins/design1_horizontal.svg";
 import design1_vertical from "../assets/skins/design1_vertical.svg";
-import design2_square from "../assets/skins/design2_square.svg";
-import design2_horizontal from "../assets/skins/design2_horizontal.svg";
 import design2_vertical from "../assets/skins/design2_vertical.svg";
-import design3_square from "../assets/skins/design3_square.svg";
-import design3_horizontal from "../assets/skins/design3_horizontal.svg";
 import design3_vertical from "../assets/skins/design3_vertical.svg";
-import design4_square from "../assets/skins/design4_square.svg";
-import design4_horizontal from "../assets/skins/design4_horizontal.svg";
 import design4_vertical from "../assets/skins/design4_vertical.svg";
+
 const FrameButtons = ({
   isLoading,
   imgfile,
@@ -35,8 +28,9 @@ const FrameButtons = ({
   onSkinSelect,
   version,
 }) => {
+  const mobile = version === 'mobile';
   const [phase, setPhase] = useState(2);
-  const [skinHovered, setSkinHovered] = useState(1);
+  // const [skinHovered, setSkinHovered] = useState(1);
   useEffect(() => {
     console.log(phase);
   }, [phase]);
@@ -68,7 +62,7 @@ const FrameButtons = ({
       {/* PHASE 2: before photo */}
       {phase === 2 && (
         <>
-          {version === "mobile" && (
+          {mobile && (
             <>
               {/* mobile */}
               <div
@@ -127,7 +121,7 @@ const FrameButtons = ({
 
       {/* PHASE 3: after photo */}
 
-      {phase === 3 && version === "mobile" && !animationStarted && !imgfile && (
+      {phase === 3 && mobile && !animationStarted && !imgfile && (
         <>
           <img
             src={SmileImage}
@@ -149,7 +143,7 @@ const FrameButtons = ({
             src={ThumbImage}
             alt="ThumbImage"
             style={{
-              width: version === "mobile" ? "30%" : "50%",
+              width: mobile ? "30%" : "50%",
               gridArea: "img",
               justifySelf: "center",
               alignSelf: "center",
@@ -157,18 +151,18 @@ const FrameButtons = ({
           />
           <Button
             children="다시 찍기"
-            width={version === "mobile" ? "60%" : "95%"}
-            height={version === "mobile" ? "60px" : "100px"}
+            width={mobile ? "60%" : "95%"}
+            height={mobile ? "60px" : "100px"}
             onClick={() => {
               againHandler();
               setPhase(2);
             }}
-            classes={version === "mobile" ? "again" : "popup again"}
+            classes={mobile ? "again" : "popup again"}
           />
           <Button
             children="다음"
-            width={version === "mobile" ? "60%" : "95%"}
-            height={version === "mobile" ? "60px" : "100px"}
+            width={mobile ? "60%" : "95%"}
+            height={mobile ? "60px" : "100px"}
             onClick={() => setPhase((prev) => prev + 1)}
             classes="popup next"
             // classes="movebtn nextbtn"
@@ -215,7 +209,7 @@ const FrameButtons = ({
             <img
               className={`${styles.btndesign} ${styles.skin1}`}
               style={{ position: "absolute", bottom: 0, right: 0 }}
-              height={version === "mobile" ? "200%" : "130%"}
+              height={mobile ? "200%" : "130%"}
               src={design1_vertical}
               alt="btndesign"
             />
@@ -228,7 +222,7 @@ const FrameButtons = ({
             <img
               className={`${styles.btndesign} ${styles.skin1}`}
               style={{ position: "absolute", bottom: 0, right: 0 }}
-              height={version === "mobile" ? "180%" : "250%"}
+              height={mobile ? "180%" : "250%"}
               src={design2_vertical}
               alt="btndesign"
             />
@@ -252,15 +246,15 @@ const FrameButtons = ({
             <img
               className={`${styles.btndesign} ${styles.skin1}`}
               style={{ position: "absolute", top: 0, right: 0 }}
-              height={version === "mobile" ? "210%" : "200%"}
+              height={mobile ? "210%" : "200%"}
               src={design4_vertical}
               alt="btndesign"
             />
           </button>
           <Button
             children="뒤로가기"
-            width={version === "mobile" ? "60%" : "95%"}
-            height={version === "mobile" ? "60px" : "100px"}
+            width={mobile ? "60%" : "95%"}
+            height={mobile ? "60px" : "100px"}
             onClick={() => {
               onDeletePhoto();
               setPhase((prev) => prev - 2);
@@ -269,8 +263,8 @@ const FrameButtons = ({
           />
           <Button
             children="저장하기"
-            width={version === "mobile" ? "60%" : "95%"}
-            height={version === "mobile" ? "60px" : "100px"}
+            width={mobile ? "60%" : "95%"}
+            height={mobile ? "60px" : "100px"}
             onClick={onSavePhoto}
             classes="popup save"
           >

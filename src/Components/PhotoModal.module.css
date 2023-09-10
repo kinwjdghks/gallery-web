@@ -11,8 +11,7 @@
   width: 100vw;
   height: 100vh;
   position: fixed;
-  top: 100vh;
-  /* activated-> top: 3vh; */
+  bottom: -100%;
   z-index: 32;
 
   display: flex;
@@ -20,7 +19,7 @@
   justify-content: end;
   align-items: center;
   cursor: url("../assets/Images/mouse-pointer-white.png") 25 25, auto;
-  transition: top 0.7s ease;
+  transition: bottom 0.7s ease;
 }
 
 .cam_container {

@@ -42,18 +42,19 @@ const BackDrop = () => {
 };
 
 const Modal = ({ onCloseModal, version }) => {
+  const mobile = version === 'mobile';
   //등장 animation
   const containerRef = useRef(null);
   useEffect(() => {
-    if (containerRef && version==='mobile') {
+    if (containerRef && mobile) {
       const popup = setTimeout(() => {
-        containerRef.current.style.top = "0";
+        containerRef.current.style.bottom = "0%";
       }, 100);
       return () => clearTimeout(popup);
     }
     else if(containerRef) {
       const popup = setTimeout(() => {
-        containerRef.current.style.top = "5vh";
+        containerRef.current.style.bottom = "-100%";
       }, 100);
       return () => clearTimeout(popup);
     }
@@ -182,7 +183,7 @@ const Modal = ({ onCloseModal, version }) => {
 
   const savePhoto = async () => {
     await saveToFirebaseStorage(imgfile, saveToFireStore);
-    if (version === "mobile") closeModalHandler();
+    if (mobile) closeModalHandler();
     else onCloseModal();
     window.location.reload();
   };
@@ -246,7 +247,7 @@ const Modal = ({ onCloseModal, version }) => {
   return (
     <div className={styles.container} ref={containerRef}>
       <div className={`${styles.cam_container} ${classNameBySkin}`}>
-        {version === "mobile" && photoAnimation}
+        {mobile && photoAnimation}
         {skinElement}
         <div className={`${styles.cam_mask} ${classNameByConfig}`}>
           {imgpreview}
