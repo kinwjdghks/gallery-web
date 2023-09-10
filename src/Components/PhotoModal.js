@@ -260,9 +260,6 @@ const Modal = ({ onCloseModal, version }) => {
   const FACING_MODE_ENVIRONMENT = "environment";
 
   const [faceMode, setFaceMode] = useState(FACING_MODE_USER);
-  const videoConstraints = {
-    facingMode: faceMode,
-  };
 
   const handleFacingMode = useCallback(() => {
     setFaceMode((prevState) =>
@@ -299,7 +296,7 @@ const Modal = ({ onCloseModal, version }) => {
               width={mobile ? "100%" : ""}
               height={mobile ? "" : "100%"}
               style={{ position: "absolute" }}
-              videoConstraints={videoConstraints}
+              facingMode={faceMode}
             />
           )}
         </div>
