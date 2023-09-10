@@ -102,11 +102,9 @@ const Modal = ({ onCloseModal, version }) => {
       setImgpreview(
         <img
           className={styles.imgpreview}
-          style={{
-            height: "100%",
-            // height: vidConfigList[vidConfigIdx].height,
-            apsectRatio: 3 / 4,
-          }}
+          width={mobile ? "100%" : ""}
+          height = {mobile ? "":"100%"}
+          style={{apsectRatio: 3 / 4}}
           src={imgfile}
           alt="preview"
         />
