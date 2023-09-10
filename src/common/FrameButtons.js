@@ -286,8 +286,7 @@ const FrameButtons = ({
   {/* PC exit button */}
       {version!=='mobile' && !whileTimer && (
         <button className={styles.close} onClick={onCloseModal}>
-          X
-        </button>
+          </button>
       )}
     </div>
   );
