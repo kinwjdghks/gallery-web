@@ -36,7 +36,7 @@ const FrameButtons = ({
   version,
 }) => {
   const [phase, setPhase] = useState(2);
-  const [skinHovered,setSkinHovered] = useState(1);
+  const [skinHovered, setSkinHovered] = useState(1);
   useEffect(() => {
     console.log(phase);
   }, [phase]);
@@ -66,79 +66,83 @@ const FrameButtons = ({
       {/* PHASE 1:  frame selection */}
 
       {/* PHASE 2: before photo */}
-      {phase === 2 && <>
-        
-        {version ==='mobile' &&
+      {phase === 2 && (
         <>
-        {/* mobile */}
-          <div
-            className={styles.takePhoto_mobile}
-            onClick={() => {
-              onStartTimer();
-              onStartAnimation(5);
-              setPhase((prev) => prev + 1);
-              onTakePhoto();
-            }}>
-            <img src={camera_btn} alt="camera" style={{ height: '75%' }} />
-          </div>
-          <Button
-            children="안찍을랭"
-            width="60%"
-            height="60px"
-            onClick={() => {
-              onCloseModal();
-            }}
-            classes="cancel"
-          />
-          </>
-         }
-         {version !== "mobile" && !animationStarted && (
-          <> 
-          {/* PC */}
-            <img
-              src={SmileImage}
-              alt="SmileImage"
-              style={{
-                gridArea: "img",
-                justifySelf: "center",
-                alignSelf: "center",
-                width: "55%",
-              }}
-            />
-            <div className={styles.smileText}>Smile!</div>
-  
-            <Button
-              children="사진 찍기!"
-              width="80%"
-              height="100px"
-              onClick={() => {
-                onStartTimer(); //5초 
-                onStartAnimation(5);
-                onTakePhoto();
-                setPhase((prev)=>prev+1);
-              }}
-              classes="popup movebtn takePhoto"
-            />
-          </>)}
-        </>}
- 
+          {version === "mobile" && (
+            <>
+              {/* mobile */}
+              <div
+                className={styles.takePhoto_mobile}
+                onClick={() => {
+                  onStartTimer();
+                  onStartAnimation(5);
+                  setPhase((prev) => prev + 1);
+                  onTakePhoto();
+                }}
+              >
+                <img src={camera_btn} alt="camera" style={{ height: "75%" }} />
+              </div>
+              <Button
+                children="안찍을랭"
+                width="60%"
+                height="60px"
+                onClick={() => {
+                  onCloseModal();
+                }}
+                classes="cancel"
+              />
+            </>
+          )}
+          {version !== "mobile" && !animationStarted && (
+            <>
+              {/* PC */}
+              <img
+                src={SmileImage}
+                alt="SmileImage"
+                style={{
+                  gridArea: "img",
+                  justifySelf: "center",
+                  alignSelf: "center",
+                  width: "55%",
+                }}
+              />
+              <div className={styles.smileText}>Smile!</div>
+
+              <Button
+                children="사진 찍기!"
+                width="80%"
+                height="100px"
+                onClick={() => {
+                  onStartTimer(); //5초
+                  onStartAnimation(5);
+                  onTakePhoto();
+                  setPhase((prev) => prev + 1);
+                }}
+                classes="popup movebtn takePhoto"
+              />
+            </>
+          )}
+        </>
+      )}
 
       {/* PHASE 3: after photo */}
 
-      {phase === 3 && version==='mobile' && !animationStarted && !imgfile &&  <>
-      <img
-              src={SmileImage}
-              alt="SmileImage"
-              style={{
-                gridArea: "img",
-                justifySelf: "center",
-                alignSelf: "center",
-                width: "30%",
-              }}
-            />
-            <div className={styles.smileText}>Smile!</div>
-      </>}
-      {phase === 3 && version !== 'mobile' && !imgfile && photoAnimation}
+      {phase === 3 && version === "mobile" && !animationStarted && !imgfile && (
+        <>
+          <img
+            src={SmileImage}
+            alt="SmileImage"
+            style={{
+              gridArea: "img",
+              justifySelf: "center",
+              alignSelf: "center",
+              width: "30%",
+            }}
+          />
+          <div className={styles.smileText}>Smile!</div>
+        </>
+      )}
+      {phase === 3 && version !== "mobile" && !imgfile && photoAnimation}
       {phase === 3 && imgfile && (
         <>
           <img
@@ -171,7 +175,6 @@ const FrameButtons = ({
           />
         </>
       )}
-
 
       {/* {phase === 4 && imgfile && ( */}
       {/* {version !== "mobile" && phase === 3 && (
@@ -211,8 +214,8 @@ const FrameButtons = ({
           >
             <img
               className={`${styles.btndesign} ${styles.skin1}`}
-              style={{position:'absolute',bottom:0,right:0}}
-              height={version==='mobile' ? '200%' : "130%"}
+              style={{ position: "absolute", bottom: 0, right: 0 }}
+              height={version === "mobile" ? "200%" : "130%"}
               src={design1_vertical}
               alt="btndesign"
             />
@@ -224,8 +227,8 @@ const FrameButtons = ({
           >
             <img
               className={`${styles.btndesign} ${styles.skin1}`}
-              style={{position:'absolute',bottom:0,right:0}}
-              height={version==='mobile' ? '180%' : "250%"}
+              style={{ position: "absolute", bottom: 0, right: 0 }}
+              height={version === "mobile" ? "180%" : "250%"}
               src={design2_vertical}
               alt="btndesign"
             />
@@ -236,7 +239,7 @@ const FrameButtons = ({
           >
             <img
               className={`${styles.btndesign} ${styles.skin1}`}
-              style={{position:'absolute',bottom:0,right:0}}
+              style={{ position: "absolute", bottom: 0, right: 0 }}
               height="200%"
               src={design3_vertical}
               alt="btndesign"
@@ -248,8 +251,8 @@ const FrameButtons = ({
           >
             <img
               className={`${styles.btndesign} ${styles.skin1}`}
-              style={{position:'absolute',top:0,right:0}}
-              height={version === 'mobile' ? '210%': "200%"}
+              style={{ position: "absolute", top: 0, right: 0 }}
+              height={version === "mobile" ? "210%" : "200%"}
               src={design4_vertical}
               alt="btndesign"
             />
@@ -258,10 +261,9 @@ const FrameButtons = ({
             children="뒤로가기"
             width={version === "mobile" ? "60%" : "95%"}
             height={version === "mobile" ? "60px" : "100px"}
-            onClick={()=>{
+            onClick={() => {
               onDeletePhoto();
-              setPhase((prev)=>prev-2);
-
+              setPhase((prev) => prev - 2);
             }}
             classes="popup cancel"
           />
@@ -278,13 +280,11 @@ const FrameButtons = ({
               "저장하기"
             )}
           </Button>
-          
         </>
       )}
 
-
-  {/* PC exit button */}
-      {version!=='mobile' && !whileTimer && (
+      {/* PC exit button */}
+      {version !== "mobile" && !whileTimer && (
         <button className={styles.close} onClick={onCloseModal}>
           </button>
       )}

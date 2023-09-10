@@ -143,9 +143,7 @@
 }
 
 .btndesign {
-  
 }
-
 
 .comitfilm1 {
   margin-left: 70px;
@@ -287,7 +285,7 @@
     justify-self: center;
     align-self: center;
     margin: 5%;
-    transform: translate(0,10%);
+    transform: translate(0, 10%);
     font-size: 3rem;
     border-radius: 30px;
     overflow: hidden;
@@ -295,7 +293,7 @@
 
     transition: transform 150ms ease-in;
     position: relative;
-    border: none
+    border: none;
   }
   .skinbtn.skin1 {
     grid-area: skin1;
