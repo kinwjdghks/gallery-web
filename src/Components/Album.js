@@ -13,6 +13,7 @@ import design3_horizontal from "../assets/skins/design3_horizontal.svg";
 import design4_square from "../assets/skins/design4_square.svg";
 import design4_vertical from "../assets/skins/design4_vertical.svg";
 import design4_horizontal from "../assets/skins/design4_horizontal.svg";
+import { useEffect, useRef,useState } from "react";
 
 
 const Album = ({ data }) => {
@@ -25,7 +26,7 @@ const Album = ({ data }) => {
   const imageurl = data.url;
   const vidConfig = data.vidConfig;
   const skinNum = data.skin;
-  // console.log(vidConfig + " " + skinNum);
+
   const classNameBySkin =
     skinNum === 0
       ? styles.default
@@ -36,8 +37,7 @@ const Album = ({ data }) => {
       : skinNum === 3
       ? styles.opt3
       : styles.opt4;
-  // console.log("ClassNameBySkin :");
-  // console.log(classNameBySkin);
+ 
   const classNameByConfig =
     vidConfig === 0
       ? styles.square
@@ -46,17 +46,42 @@ const Album = ({ data }) => {
       : styles.horizontal;
 
     const image = skinList[skinNum-1][vidConfig];
+    const imageRef = useRef(null);
+    const [imgConfig,setImgConfig] = useState(null); //가로가 긴지 세로가 긴지
+    const [made,setMade] = useState(false);
+    useEffect(()=>{
+      const temp_img = imageRef.current;
+      if(temp_img){
+        const {naturalWidth, naturalHeight} = temp_img;
+        if(naturalWidth < naturalHeight){
+          setImgConfig('vertical');
+        }
+        else{
+          setImgConfig('horizontal');
+        }
+      }
+      setMade(true);
+
+    },[]);
+    // useEffect(()=>{
+    //   if(imgConfig!==null) setMade(true);
+    // },[imgConfig]);
+
+
     const skinElement = (
       <img className={styles.skinElement} src={image} />
     );
   
   return (
-    <div className={`${styles.container} ${classNameBySkin}`}>
+    <>
+    {made && <div className={`${styles.container} ${classNameBySkin}`}>
       {skinElement}
       <div className={`${styles.mask} ${classNameByConfig}`}>
-        <img src={imageurl} alt="img"/>
+        <img src={imageurl} alt="img" ref={imageRef} className={`${styles.img} ${imgConfig==='vertical' && styles.vertical} ${imgConfig==='horizontal' && styles.horizontal}`}/>
       </div>
-    </div>
+
+    </div>}
+    </>
   );
 };
 

@@ -27,7 +27,7 @@ const Button = ({
       // console.log("버튼 세로");
       // console.log(buttonHeight);
       // fontsize를 변경합니다.
-      const FontSize = buttonHeight * 0.35;
+      const FontSize = buttonHeight * 0.38;
 
       // 스타일을 적용합니다.
       buttonRef.current.style.fontSize = `${FontSize}px`;
@@ -50,9 +50,7 @@ const Button = ({
         style={{
           width: width,
           height: height,
-          //   width: currentWidth,
-          //   height: currentHeight,
-          //   fontSize: fontSize,
+
         }}
         onClick={onClick}
         ref={buttonRef}

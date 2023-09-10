@@ -4,10 +4,10 @@ import Button from "../common/Button";
 const ActionBar = ({ onTakePhoto, onWriteNote }) => {
   return (
     <div className={styles.actionbar}>
-      <Button width="45vw" height="60px" onClick={onTakePhoto} classes="">
+      <Button width="45vw" onClick={onTakePhoto} classes="mobile">
         사진찍기 ㄱㄱ
       </Button>
-      <Button width="45vw" height="60px" onClick={onWriteNote} classes="">
+      <Button width="45vw" onClick={onWriteNote} classes="mobile">
         방명록쓰기 ㄱㄱ
       </Button>
     </div>

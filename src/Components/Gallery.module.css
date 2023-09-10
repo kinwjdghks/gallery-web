@@ -22,10 +22,10 @@
   grid-template-columns: 1fr 1fr;
   grid-auto-rows: 42vw;
   grid-auto-columns: 42vw;
-  /* row-gap: 2vw;
-  column-gap: 2vw; */
+  row-gap: 2vw;
+  column-gap: 2vw;
   width: 84vw;
-  margin-top: 14vh;
+  margin-top: calc(22vw + 20px);
   border-radius: 30px;
   padding: 5vw 3vw;
   background-color: #d6d6d6;
