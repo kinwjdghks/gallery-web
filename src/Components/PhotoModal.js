@@ -245,19 +245,30 @@ const Modal = ({ onCloseModal, version }) => {
         <div className={`${styles.cam_mask} ${classNameByConfig}`}>
           {imgpreview}
           {imgfile && <div className={styles.shutter}></div>}
-
-          <Webcam
-            className={styles.webcam}
-            audio={false}
-            width={"100%"}
-            ref={webcamRef}
-            screenshotFormat="image/jpeg"
-            mirrored={true}
-            imageSmoothing={true}
-            style={{
-              position: "absolute",
-            }}
-          />
+          {version === "mobile" ? (
+            <Webcam
+              className={styles.webcam}
+              audio={false}
+              width={"100%"}
+              ref={webcamRef}
+              screenshotFormat="image/jpeg"
+              mirrored={true}
+              imageSmoothing={true}
+              style={{
+                position: "absolute",
+              }}
+            />
+          ) : (
+            <Webcam
+              className={styles.webcam}
+              audio={false}
+              height={"100%"}
+              ref={webcamRef}
+              screenshotFormat="image/jpeg"
+              mirrored={true}
+              imageSmoothing={true}
+            />
+          )}
         </div>
       </div>
 
