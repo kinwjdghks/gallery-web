@@ -267,6 +267,10 @@ const Modal = ({ onCloseModal, version }) => {
         : FACING_MODE_USER
     );
   }, []);
+
+  useEffect(() => {
+    console.log(faceMode);
+  }, [faceMode]);
   return (
     <div className={styles.container} ref={containerRef}>
       <div className={`${styles.cam_container} ${classNameBySkin}`}>
