@@ -1,9 +1,4 @@
-import React, {
-  useState,
-  useRef,
-  useEffect,
-  useCallback,
-} from "react";
+import React, { useState, useRef, useEffect, useCallback } from "react";
 import ReactDOM from "react-dom";
 import styles from "./PhotoModal.module.css";
 import Webcam from "react-webcam";
@@ -45,13 +40,12 @@ const Modal = ({ onCloseModal, version }) => {
   //등장 animation
   const containerRef = useRef(null);
   useEffect(() => {
-    if (containerRef && version==='mobile') {
+    if (containerRef && version === "mobile") {
       const popup = setTimeout(() => {
         containerRef.current.style.top = "0";
       }, 100);
       return () => clearTimeout(popup);
-    }
-    else if(containerRef) {
+    } else if (containerRef) {
       const popup = setTimeout(() => {
         containerRef.current.style.top = "5vh";
       }, 100);
@@ -251,16 +245,27 @@ const Modal = ({ onCloseModal, version }) => {
         <div className={`${styles.cam_mask} ${classNameByConfig}`}>
           {imgpreview}
           {imgfile && <div className={styles.shutter}></div>}
-          
-          <Webcam
-            className={styles.webcam}
-            audio={false}
-            height={"100%"}
-            ref={webcamRef}
-            screenshotFormat="image/jpeg"
-            mirrored={true}
-            imageSmoothing={true}
-          />
+          {version === "mobile" ? (
+            <Webcam
+              className={styles.webcam}
+              audio={false}
+              width={"100%"}
+              ref={webcamRef}
+              screenshotFormat="image/jpeg"
+              mirrored={true}
+              imageSmoothing={true}
+            />
+          ) : (
+            <Webcam
+              className={styles.webcam}
+              audio={false}
+              height={"100%"}
+              ref={webcamRef}
+              screenshotFormat="image/jpeg"
+              mirrored={true}
+              imageSmoothing={true}
+            />
+          )}
         </div>
       </div>
 

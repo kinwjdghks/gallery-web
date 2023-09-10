@@ -143,6 +143,19 @@
 }
 
 .btndesign {
+  position: absolute;
+  /* z-index: 10; */
+}
+.btndesign.skin1 {
+}
+
+.btndesign.skin2 {
+}
+
+.btndesign.skin3 {
+}
+
+.btndesign.skin4 {
 }
 
 .comitfilm1 {
