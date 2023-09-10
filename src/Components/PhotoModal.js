@@ -259,6 +259,7 @@ const Modal = ({ onCloseModal, version }) => {
   const FACING_MODE_USER = "user";
   const FACING_MODE_ENVIRONMENT = "environment";
   const [faceMode, setFaceMode] = useState(FACING_MODE_USER);
+
   const handleFacingMode = useCallback(() => {
     setFaceMode((prevState) =>
       prevState === FACING_MODE_USER
@@ -266,6 +267,10 @@ const Modal = ({ onCloseModal, version }) => {
         : FACING_MODE_USER
     );
   }, []);
+
+  useEffect(() => {
+    console.log(faceMode);
+  }, [faceMode]);
   return (
     <div className={styles.container} ref={containerRef}>
       <div className={`${styles.cam_container} ${classNameBySkin}`}>
@@ -289,11 +294,13 @@ const Modal = ({ onCloseModal, version }) => {
               screenshotFormat="image/jpeg"
               audio={false}
               mirrored={true}
-              imageSmoothing={true}
+              // imageSmoothing={true}
               width={mobile ? "100%" : ""}
-              height = {mobile ? "":"100%"}
-              style={{position: "absolute"}}
-            />)}
+              height={mobile ? "" : "100%"}
+              style={{ position: "absolute" }}
+              facingMode={faceMode}
+            />
+          )}
         </div>
       </div>
 
