@@ -22,7 +22,7 @@ import githubIcon from "../assets/Images/github-icon.png";
 
 const Gallery = ({ version }) => {
   const darkmode = useContext(DisplayContext).darkmode;
-  const [photos, setPhotos] = useState([<Album data={{vidConfig:1, skin:3}}/>]);
+  const [photos, setPhotos] = useState([<Album data={{vidConfig:1, skin:1}}/>]);
 
   let timeStamp = useRef(null);
 

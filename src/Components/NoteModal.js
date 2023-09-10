@@ -58,7 +58,7 @@ const Modal = ({ onCloseModal }) => {
   };
   return (
     <div className={styles.container} ref={containerRef}>
-      <div className={styles.title}>기깔나는 방명록을 작성해보아요</div>
+      <div className={styles.title}>기깔나는 방명록을 남겨보아요</div>
 
       <textarea
         onFocus={() => setMessage(null)}
@@ -70,16 +70,16 @@ const Modal = ({ onCloseModal }) => {
 
       {/* <div className={styles.actions}> */}
       <Button
-        width="32vw"
-        height="11vh"
+        width="60%"
+        height="60px"
         onClick={closeModalHandler}
         classes="cancel note"
       >
         취소하기
       </Button>
       <Button
-        width="32vw"
-        height="11vh"
+        width="60%"
+        height="60px"
         onClick={submitNote}
         classes="save note"
       >

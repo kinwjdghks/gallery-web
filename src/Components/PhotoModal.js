@@ -264,6 +264,9 @@ const Modal = ({ onCloseModal, version }) => {
               screenshotFormat="image/jpeg"
               mirrored={true}
               imageSmoothing={true}
+              style={{
+                position: "absolute",
+              }}
             />
           )}
         </div>

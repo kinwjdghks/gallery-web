@@ -24,13 +24,13 @@
 }
 
 .cam_container {
+  position: absolute;
   width: min(100vw, calc(97vh - 280px));
   height: min(100vw, calc(97vh - 280px));
   bottom: 280px;
   background-color: #c9b3ef;
   border-radius: 10%;
 
-  position: absolute;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -297,6 +297,7 @@
     justify-content: center;
     align-items: center;
     align-content: center;
+    text-align: center;
     position: absolute;
     left: 7.14%;
     top: 7.14%;

@@ -11,8 +11,8 @@
   box-sizing: border-box;
   width: 100vw;
   height: 90vh;
-  border-top: 5px solid black;
-  border-radius: 10% 10% 0% 0%;
+  top: 100vh;
+  border-radius: 10vw 10vw 0 0;
   background-color: white;
 
   position: fixed;
@@ -48,7 +48,7 @@
   border: 2px solid black;
   font-size: 6vw;
   padding: 2vw 4vw;
-  /* font-family: ; */
+  margin-bottom: 20px;
 }
 .noteinput.error {
   grid-area: textarea;
@@ -89,8 +89,9 @@
 .message {
   grid-area: textarea;
   justify-self: center;
-  align-self: flex-end;
+  align-self: flex-start;
   font-size: 5vw;
   font-family: "gangwonedu";
-  margin-bottom: 0.5vh;
+  margin-top: 90%;
+  /* margin-top: 2vh; */
 }
