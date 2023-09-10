@@ -2,14 +2,14 @@
   position: fixed;
   width: 100vw;
   height: 100vh;
-  z-index: 31;
+  z-index: -31;
   background: rgba(0, 0, 0, 0.75);
   cursor: url("../assets/Images/mouse-pointer-white.png") 25 25, auto;
 }
 /*container*/
 .container {
   width: 100vw;
-  height: 100vh;
+  height: calc(250px + min(100vw, calc(100vh - 250px)));
   position: fixed;
   bottom: -100%;
   z-index: 32;
@@ -24,9 +24,9 @@
 
 .cam_container {
   position: absolute;
-  width: min(100vw, calc(97vh - 280px));
-  height: min(100vw, calc(97vh - 280px));
-  bottom: 280px;
+  aspect-ratio: 1 / 1;
+  width: min(100vw, calc(100vh - 250px));
+  bottom: 250px;
   background-color: #c9b3ef;
   border-radius: 10%;
 
@@ -116,8 +116,7 @@
 }
 .actions {
   width: 100%;
-  /* height: calc(97vh - 100vw - 85px); */
-  height: 280px;
+  height: 250px;
   position: absolute;
   bottom: 0px;
 }
@@ -244,9 +243,8 @@
   }
 
   .cam_container {
-    aspect-ratio: 1 / 1;
-    height: 90%;
-    width: unset;
+    aspect-ratio: 1;
+    width: 50%;
     background-color: #c9b3ef;
     border-radius: 10%;
     position: relative;
@@ -255,12 +253,12 @@
     align-items: center;
     overflow: hidden;
     bottom: 0;
-    margin-left: 5%;
+    /* margin-left: 0%; */
   }
   .cam_container.default {
     box-shadow: inset -10px -8px 1px #9d83ca;
   }
-  /* .cam_container.default::after {
+  .cam_container.default::after {
     content: "";
     width: 300px;
     height: 10px;
@@ -269,7 +267,7 @@
     position: absolute;
     top: 10px;
     left: 90px;
-  } */
+  }
   .cam_container.opt1 {
     background: linear-gradient(#1f1f61 0%, #755d98 60%, #e0a6b2 100%);
   }
@@ -323,7 +321,7 @@
     width: unset;
   }
   .cam_mask.horizontal {
-    aspect-ratio: 3 / 4;
+    aspect-ratio: 4 / 3;
     width: 85.71%;
     height: unset;
   }

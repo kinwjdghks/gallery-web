@@ -1,8 +1,8 @@
 import styles from "./Gallery.module.css";
 import BlankAlbum from "./BlankAlbum";
 import Album from "./Album";
-import Note from "./Note";
 import scrollDown from "../assets/Images/scrollDown.svg";
+import scrollDown_white from "../assets/Images/scrollDown_white.svg";
 import { useState, useEffect, useRef, useContext } from "react";
 import DisplayContext from "../Context/context/Display";
 
@@ -31,7 +31,7 @@ const Gallery = ({ version }) => {
 
   // scrolldown 배치 코드
   const [backgroundHeight, setBackgroundHeight] = useState(0);
-  const [arrows, setArrows] = useState([<img src ={scrollDown} key={0} style={{position:'absolute', top:700, left:110}} />]);
+  const [arrows, setArrows] = useState([<img src = {darkmode ? scrollDown_white : scrollDown} key={0} style={{position:'absolute', top:700, left:110}} />]);
   const background = useRef(null);
   useEffect(() => {
     if (background.current) {
@@ -45,7 +45,7 @@ const Gallery = ({ version }) => {
       if ((cnt + 1) * 1000 < backgroundHeight) {
         const newArr = [
           ...arrows,
-          <img src ={scrollDown} key={cnt + 1} style={{position:'absolute', top:cnt * 1000 + 700, left:110}} />,
+          <img src ={darkmode ? scrollDown_white : scrollDown} key={cnt + 1} style={{position:'absolute', top:cnt * 1000 + 700, left:110}} />,
         ];
         setArrows(newArr);
       }
@@ -62,7 +62,7 @@ const Gallery = ({ version }) => {
     if (entry.isIntersecting) {
       console.log("intersect");
       observer.unobserve(entry.target);
-      // await getMorePhotos();
+      await getMorePhotos();
       setTimeout(() => {
         observer.observe(entry.target);
       }, 800);
@@ -139,9 +139,7 @@ const Gallery = ({ version }) => {
               else if(data.type==="photo"){
                 return <Album key={index} data={data} />;
               }
-              else{ //data.type === 'note'
-                return <Note key ={index} data={data} />;
-              }
+              else{}
             })}
           </div>
         )}

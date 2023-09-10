@@ -22,18 +22,19 @@ import FrameButtons from "../common/FrameButtons";
 import EffectSound from "../common/EffectSound";
 import effect from "../assets/sounds/camera-shutter.wav";
 //images
-import {ReactComponent as Design1_square}  from "../assets/skins/design1_square.svg";
-import {ReactComponent as Design1_horizontal} from "../assets/skins/design1_horizontal.svg";
-import {ReactComponent as Design1_vertical} from "../assets/skins/design1_vertical.svg";
-import {ReactComponent as Design2_square} from "../assets/skins/design2_square.svg";
-import {ReactComponent as Design2_horizontal} from "../assets/skins/design2_horizontal.svg";
-import {ReactComponent as Design2_vertical} from "../assets/skins/design2_vertical.svg";
-import {ReactComponent as Design3_square} from "../assets/skins/design3_square.svg";
-import {ReactComponent as Design3_horizontal} from "../assets/skins/design3_horizontal.svg";
-import {ReactComponent as Design3_vertical} from "../assets/skins/design3_vertical.svg";
-import {ReactComponent as Design4_square} from "../assets/skins/design4_square.svg";
-import {ReactComponent as Design4_horizontal} from "../assets/skins/design4_horizontal.svg";
-import {ReactComponent as Design4_vertical} from "../assets/skins/design4_vertical.svg";
+import { ReactComponent as Design1_square}  from "../assets/skins/design1_square.svg";
+import { ReactComponent as Design1_horizontal} from "../assets/skins/design1_horizontal.svg";
+import { ReactComponent as Design1_vertical} from "../assets/skins/design1_vertical.svg";
+import { ReactComponent as Design2_square} from "../assets/skins/design2_square.svg";
+import { ReactComponent as Design2_horizontal} from "../assets/skins/design2_horizontal.svg";
+import { ReactComponent as Design2_vertical} from "../assets/skins/design2_vertical.svg";
+import { ReactComponent as Design3_square} from "../assets/skins/design3_square.svg";
+import { ReactComponent as Design3_horizontal} from "../assets/skins/design3_horizontal.svg";
+import { ReactComponent as Design3_vertical} from "../assets/skins/design3_vertical.svg";
+import { ReactComponent as Design4_square} from "../assets/skins/design4_square.svg";
+import { ReactComponent as Design4_horizontal} from "../assets/skins/design4_horizontal.svg";
+import { ReactComponent as Design4_vertical} from "../assets/skins/design4_vertical.svg";
+
 const BackDrop = () => {
   return <div className={styles.backdrop}></div>;
 };
@@ -56,6 +57,7 @@ const Modal = ({ onCloseModal, version }) => {
       return () => clearTimeout(popup);
     }
   }, []);
+
   const closeModalHandler = () => {
     if(mobile){
     containerRef.current.style.bottom = "-100%";
@@ -102,7 +104,7 @@ const Modal = ({ onCloseModal, version }) => {
   }, []);
 
   // useEffect(() => {
-  //   const random = Math.floor(Math.random() * 3);
+  //   const random = Math.floor(Math.random() * 4);
   //   if (!random) {
   //     createBlankAlbum();
   //   }
@@ -128,13 +130,13 @@ const Modal = ({ onCloseModal, version }) => {
   const webcamRef = useRef(null);
 
   const [vidConfigIdx, setVidConfigIdx] = useState(0);
-  const [skinIdx, setSkinIdx] = useState(1);
+  const [skinIdx, setSkinIdx] = useState(0);
 
   const selectVidConfigHandler = (idx) => setVidConfigIdx(idx);
   const selectSkinHandler = (idx) => setSkinIdx(idx);
 
+  /*firebase function*/
   const storage = getStorage();
-
   const saveToFirebaseStorage = async (file, saveToFireStore) => {
     const id = new Date().getTime();
     const storageRef = sRef(storage, "Images/" + id);
@@ -201,6 +203,7 @@ const Modal = ({ onCloseModal, version }) => {
     [<Design3_square className={styles.skinElement}/>, <Design3_vertical className={styles.skinElement}/>, <Design3_horizontal className={styles.skinElement}/>],
     [<Design4_square className={styles.skinElement}/>, <Design4_vertical className={styles.skinElement}/>, <Design4_horizontal className={styles.skinElement}/>],
     ];
+  const skinElement = skinIdx ? skinList[skinIdx - 1][vidConfigIdx] : null;
 
   const classNameByConfig =
     vidConfigIdx === 0
@@ -220,14 +223,8 @@ const Modal = ({ onCloseModal, version }) => {
       ? styles.opt3
       : styles.opt4;
 
-  // const image = skinList[skinIdx - 1][vidConfigIdx];
-  // const skinElement = <img className={styles.skinElement} src={image} />;
-  const skinElement = skinList[skinIdx - 1][vidConfigIdx];
-  
-
   const [photoAnimation, setPhotoAnimation] = useState();
   const animation = useCallback((time) => {
-    // setAnimationStarted(true);
     let cnt = time;
     const timer = setInterval(() => {
       if (cnt > 0) {
@@ -242,12 +239,7 @@ const Modal = ({ onCloseModal, version }) => {
         clearInterval(timer);
       }
     }, 1000);
-    // const setTimer = setTimeout(() => {
-    //   setPhase((prev) => prev + 1);
-    //   setAnimationStarted(false);
-    // }, 6000);
 
-    // return () => clearTimeout(setTimer);
   });
   return (
     <div className={styles.container} ref={containerRef}>
@@ -264,16 +256,15 @@ const Modal = ({ onCloseModal, version }) => {
               ref={webcamRef}
               screenshotFormat="image/jpeg"
               mirrored={true}
-              // imageSmoothing={true}
+              imageSmoothing={true}
               width={mobile ? "100%" : ""}
               height = {mobile ? "":"100%"}
               style={{position: "absolute"}}
             />}
-          
         </div>
       </div>
 
-      <div className={styles.actions} style={{backgroundColor: darkmode ? "#464646" : 'white'}}>
+      <div className={styles.actions} style={{backgroundColor: darkmode ? "#C9B3EF" : "#C9B3EF"}}>
         <FrameButtons
           isLoading={isLoading}
           imgfile={imgfile}
