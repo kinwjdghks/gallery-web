@@ -23,7 +23,7 @@ const FrameButtons = ({
   onSkinSelect,
   version,
 }) => {
-  const [phase, setPhase] = useState(2);
+  const [phase, setPhase] = useState(1);
   useEffect(() => {
     console.log(phase);
   }, [phase]);
