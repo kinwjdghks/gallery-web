@@ -262,6 +262,10 @@ const Modal = ({ onCloseModal, version }) => {
       prevState === "user" ? "environment" : "user"
     );
   }, []);
+  useEffect(() => {
+    console.log(facingMode);
+  }, [facingMode]);
+
   return (
     <div className={styles.container} ref={containerRef}>
       <div className={`${styles.cam_container} ${classNameBySkin}`}>
@@ -286,7 +290,7 @@ const Modal = ({ onCloseModal, version }) => {
               width={mobile ? "100%" : ""}
               height={mobile ? "" : "100%"}
               style={{ position: "absolute" }}
-              facingMode={facingMode}
+              facingmode={facingMode}
             />
           )}
         </div>
