@@ -57,6 +57,7 @@ const Modal = ({ onCloseModal, version }) => {
       return () => clearTimeout(popup);
     }
   }, []);
+
   const closeModalHandler = () => {
     if (mobile) {
       containerRef.current.style.bottom = "-100%";
@@ -102,7 +103,7 @@ const Modal = ({ onCloseModal, version }) => {
   }, []);
 
   // useEffect(() => {
-  //   const random = Math.floor(Math.random() * 3);
+  //   const random = Math.floor(Math.random() * 4);
   //   if (!random) {
   //     createBlankAlbum();
   //   }
@@ -128,13 +129,13 @@ const Modal = ({ onCloseModal, version }) => {
   const webcamRef = useRef(null);
 
   const [vidConfigIdx, setVidConfigIdx] = useState(0);
-  const [skinIdx, setSkinIdx] = useState(1);
+  const [skinIdx, setSkinIdx] = useState(0);
 
   const selectVidConfigHandler = (idx) => setVidConfigIdx(idx);
   const selectSkinHandler = (idx) => setSkinIdx(idx);
 
+  /*firebase function*/
   const storage = getStorage();
-
   const saveToFirebaseStorage = async (file, saveToFireStore) => {
     const id = new Date().getTime();
     const storageRef = sRef(storage, "Images/" + id);
@@ -217,6 +218,7 @@ const Modal = ({ onCloseModal, version }) => {
       <Design4_horizontal className={styles.skinElement} />,
     ],
   ];
+  const skinElement = skinIdx ? skinList[skinIdx - 1][vidConfigIdx] : null;
 
   const classNameByConfig =
     vidConfigIdx === 0
@@ -235,10 +237,6 @@ const Modal = ({ onCloseModal, version }) => {
       : skinIdx === 3
       ? styles.opt3
       : styles.opt4;
-
-  // const image = skinList[skinIdx - 1][vidConfigIdx];
-  // const skinElement = <img className={styles.skinElement} src={image} />;
-  const skinElement = skinList[skinIdx - 1][vidConfigIdx];
 
   const [photoAnimation, setPhotoAnimation] = useState();
   const animation = useCallback((time) => {
@@ -262,9 +260,6 @@ const Modal = ({ onCloseModal, version }) => {
   const handleFacingMode = useCallback(() => {
     setFaceMode((prevState) => (prevState === "user" ? "environment" : "user"));
   }, []);
-  useEffect(() => {
-    console.log(faceMode);
-  }, [faceMode]);
 
   return (
     <div className={styles.container} ref={containerRef}>
@@ -290,7 +285,7 @@ const Modal = ({ onCloseModal, version }) => {
               screenshotFormat="image/jpeg"
               audio={false}
               mirrored={true}
-              // imageSmoothing={true}
+              imageSmoothing={true}
               width={mobile ? "100%" : ""}
               height={mobile ? "" : "100%"}
               style={{ position: "absolute" }}
@@ -302,7 +297,7 @@ const Modal = ({ onCloseModal, version }) => {
 
       <div
         className={styles.actions}
-        style={{ backgroundColor: darkmode ? "#464646" : "white" }}
+        style={{ backgroundColor: darkmode ? "#C9B3EF" : "#C9B3EF" }}
       >
         <FrameButtons
           isLoading={isLoading}
