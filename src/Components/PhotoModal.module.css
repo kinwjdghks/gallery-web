@@ -241,6 +241,7 @@
     justify-content: space-evenly;
     overflow: hidden;
     border-radius: 60px;
+    transition: top 0.7s ease;
   }
 
   .cam_container {

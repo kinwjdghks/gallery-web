@@ -43,18 +43,18 @@ const Modal = ({ onCloseModal, version }) => {
   useEffect(() => {
     if (containerRef && mobile) {
       const popup = setTimeout(() => {
-        containerRef.current.style.bottom = "0%";
+        containerRef.current.style.bottom = "0";
       }, 100);
       return () => clearTimeout(popup);
     } else if (containerRef) {
       const popup = setTimeout(() => {
-        containerRef.current.style.bottom = "-100%";
+        containerRef.current.style.top = "2.5vh";
       }, 100);
       return () => clearTimeout(popup);
     }
   }, []);
   const closeModalHandler = () => {
-    containerRef.current.style.top = "100vh";
+    containerRef.current.style.bottom = "-100%";
     const close = setTimeout(() => {
       onCloseModal();
     }, 600);
@@ -246,30 +246,23 @@ const Modal = ({ onCloseModal, version }) => {
         <div className={`${styles.cam_mask} ${classNameByConfig}`}>
           {imgpreview}
           {imgfile && <div className={styles.shutter}></div>}
-          {version === "mobile" ? (
+
             <Webcam
               className={styles.webcam}
               audio={false}
-              width={"100%"}
+              
               ref={webcamRef}
               screenshotFormat="image/jpeg"
               mirrored={true}
               imageSmoothing={true}
+              width={mobile ? "100%" : ""}
+              height = {mobile ? "":"100%"}
               style={{
                 position: "absolute",
+                
               }}
             />
-          ) : (
-            <Webcam
-              className={styles.webcam}
-              audio={false}
-              height={"100%"}
-              ref={webcamRef}
-              screenshotFormat="image/jpeg"
-              mirrored={true}
-              imageSmoothing={true}
-            />
-          )}
+          
         </div>
       </div>
 
