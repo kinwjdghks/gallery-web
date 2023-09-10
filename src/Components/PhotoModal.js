@@ -20,16 +20,16 @@ import FrameButtons from "../common/FrameButtons";
 import EffectSound from "../common/EffectSound";
 import effect from "../assets/sounds/camera-shutter.wav";
 //images
-import design1_square from "../assets/skins/design1_square.svg";
+import {ReactComponent as Design1_square}  from "../assets/skins/design1_square.svg";
 import design1_horizontal from "../assets/skins/design1_horizontal.svg";
 import design1_vertical from "../assets/skins/design1_vertical.svg";
-import design2_square from "../assets/skins/design2_square.svg";
+import {ReactComponent as Design2_square} from "../assets/skins/design2_square.svg";
 import design2_horizontal from "../assets/skins/design2_horizontal.svg";
 import design2_vertical from "../assets/skins/design2_vertical.svg";
-import design3_square from "../assets/skins/design3_square.svg";
+import {ReactComponent as Design3_square} from "../assets/skins/design3_square.svg";
 import design3_horizontal from "../assets/skins/design3_horizontal.svg";
 import design3_vertical from "../assets/skins/design3_vertical.svg";
-import design4_square from "../assets/skins/design4_square.svg";
+import {ReactComponent as Design4_square} from "../assets/skins/design4_square.svg";
 import design4_horizontal from "../assets/skins/design4_horizontal.svg";
 import design4_vertical from "../assets/skins/design4_vertical.svg";
 const BackDrop = () => {
@@ -185,10 +185,10 @@ const Modal = ({ onCloseModal, version }) => {
   };
 
   const skinList = [
-    [design1_square, design1_vertical, design1_horizontal],
-    [design2_square, design2_vertical, design2_horizontal],
-    [design3_square, design3_vertical, design3_horizontal],
-    [design4_square, design4_vertical, design4_horizontal],
+    [<Design1_square className={styles.skinElement}/>, design1_vertical, design1_horizontal],
+    [<Design2_square className={styles.skinElement}/>, design2_vertical, design2_horizontal],
+    [<Design3_square className={styles.skinElement}/>, design3_vertical, design3_horizontal],
+    [<Design4_square className={styles.skinElement}/>, design4_vertical, design4_horizontal],
   ];
 
   const classNameByConfig =
@@ -209,8 +209,10 @@ const Modal = ({ onCloseModal, version }) => {
       ? styles.opt3
       : styles.opt4;
 
-  const image = skinList[skinIdx - 1][vidConfigIdx];
-  const skinElement = <img className={styles.skinElement} src={image} />;
+  // const image = skinList[skinIdx - 1][vidConfigIdx];
+  // const skinElement = <img className={styles.skinElement} src={image} />;
+  const skinElement = skinList[skinIdx - 1][vidConfigIdx];
+  
 
   const [photoAnimation, setPhotoAnimation] = useState();
   const animation = useCallback((time) => {
@@ -244,22 +246,18 @@ const Modal = ({ onCloseModal, version }) => {
         <div className={`${styles.cam_mask} ${classNameByConfig}`}>
           {imgpreview}
           {imgfile && <div className={styles.shutter}></div>}
-
+          {!imgfile &&
             <Webcam
               className={styles.webcam}
               audio={false}
-              
               ref={webcamRef}
               screenshotFormat="image/jpeg"
               mirrored={true}
               imageSmoothing={true}
               width={mobile ? "100%" : ""}
               height = {mobile ? "":"100%"}
-              style={{
-                position: "absolute",
-                
-              }}
-            />
+              style={{position: "absolute"}}
+            />}
           
         </div>
       </div>
