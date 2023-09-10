@@ -1,7 +1,7 @@
 .container {
   width: 94%;
   height: 96%;
-  padding: 2% 3%;
+  padding: 2% 3% 2% 3%;
   font-family: "cocogoose";
   color: white;
   display: grid;
@@ -65,8 +65,9 @@
   align-self: center;
   width: 100px;
   height: 100px;
-  background-color: rgb(187, 187, 187);
+  background-color: white;
   border-radius: 50%;
+  border: 2px solid black;
 }
 /* .container.frame {
   grid-template-rows: 15vh 24vh 24vh 15vh;

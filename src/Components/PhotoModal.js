@@ -289,7 +289,6 @@ const Modal = ({ onCloseModal, version }) => {
               width={mobile ? "100%" : ""}
               height={mobile ? "" : "100%"}
               style={{ position: "absolute" }}
-              facingMode={faceMode}
             />
           )}
         </div>
@@ -297,7 +296,7 @@ const Modal = ({ onCloseModal, version }) => {
 
       <div
         className={styles.actions}
-        style={{ backgroundColor: darkmode ? "#C9B3EF" : "#C9B3EF" }}
+        style={{ backgroundColor: darkmode ? "#464646" : "white" }}
       >
         <FrameButtons
           isLoading={isLoading}
