@@ -52,6 +52,7 @@
   right: 10%;
 }
 .cancel.note {
+  grid-area: cancel;
   margin-top: 5vh;
 }
 .save {
@@ -63,6 +64,7 @@
   left: 10%;
 }
 .save.note {
+  grid-area: save;
   margin-top: 5vh;
 }
 /* Next */
