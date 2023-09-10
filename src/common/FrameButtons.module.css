@@ -14,20 +14,27 @@
 }
 
 /* Phase에 따른 grid */
-.container.frame {
+/* .container.frame {
   column-gap: 1%;
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: 9fr 5fr;
   grid-template-areas:
     "square vertical horizontal"
     "cancel .  save";
+} */
+.container.frame {
+  grid-template-columns: repeat(6, 1fr);
+  grid-template-rows: 9fr 5fr;
+  column-gap: 2vw;
+  grid-template-areas:
+    "square square vertical vertical horizontal horizontal"
+    "cancel cancel cancel save save save";
 }
 
 .container.beforePhoto {
   grid-template-columns: repeat(2, 1fr);
   grid-template-rows: 9fr 5fr;
   column-gap: 2vw;
-  /* padding: 4vw; */
   grid-template-areas:
     "img img"
     "cancel .";
@@ -35,6 +42,7 @@
 .container.afterPhoto {
   grid-template-rows: 9fr 5fr;
   grid-template-columns: repeat(2, 1fr);
+  column-gap: 2vw;
   grid-template-areas:
     "img img"
     "again next";
@@ -43,7 +51,6 @@
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: 9fr 5fr;
   column-gap: 2vw;
-  /* padding: 4vw; */
   grid-template-areas:
     "skin1 skin2 skin3 skin4"
     "cancel cancel save save";
@@ -197,6 +204,16 @@
 
     position: relative;
   }
+  .container.frame {
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-rows: 20% 30% 30% 20%;
+    column-gap: 1vw;
+    grid-template-areas:
+      "header header header header header header"
+      ". . square square . ."
+      ".  vertical vertical horizontal horizontal ."
+      "cancel cancel cancel save save save";
+  }
   .container.beforePhoto {
     display: grid;
     grid-template-rows: 20% 60% 20%;
@@ -210,6 +227,7 @@
   }
   .container.afterPhoto {
     display: grid;
+    column-gap: 0;
     grid-template-rows: 20% 60% 20%;
     grid-template-columns: 1fr 1fr;
     grid-template-areas:
@@ -229,15 +247,7 @@
     column-gap: 0;
     padding: 0;
   }
-  .container.frame {
-    display: grid;
-    grid-template-rows: 20% 30% 30% 20%;
-    grid-template-areas:
-      "header header"
-      "square square"
-      "vertical horizontal"
-      "move move";
-  }
+
   .smileText {
     font-family: josefin;
     font-weight: 400;

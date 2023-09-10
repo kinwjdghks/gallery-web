@@ -45,26 +45,26 @@
 
 /* 저장하기 */
 .cancel {
-  grid-area: 2/1/3/3;
+  grid-area: cancel;
   justify-self: center;
   align-self: flex-start;
 }
-.cancel.frame {
+/* .cancel.frame {
   position: relative;
   right: 10%;
-}
+} */
 .cancel.note {
   grid-area: cancel;
   margin-top: 5vh;
 }
 .save {
-  grid-area: 2/-3/3/-1;
+  grid-area: save;
   justify-self: center;
 }
-.save.frame {
+/* .save.frame {
   position: relative;
   left: 10%;
-}
+} */
 .save.note {
   grid-area: save;
   margin-top: 5vh;
@@ -83,14 +83,19 @@
 .framebtn {
   justify-self: center;
   align-self: center;
+  /* font-size: 70%; */
 }
-.framebtn.square {
+.square {
   grid-area: square;
 }
-.framebtn.vertical {
+.popup.square{
+  align-self: flex-end;
+  margin-bottom: 2vw;
+}
+.vertical {
   grid-area: vertical;
 }
-.framebtn.horizontal {
+.horizontal {
   grid-area: horizontal;
 }
 

@@ -26,6 +26,7 @@ const Album = ({ data }) => {
   const imageurl = data.url;
   const vidConfig = data.vidConfig;
   const skinNum = data.skin;
+  const mobile = data.mobile;
 
   const classNameBySkin =
     skinNum === 0
@@ -48,21 +49,21 @@ const Album = ({ data }) => {
     const image = skinList[skinNum-1][vidConfig];
     const imageRef = useRef(null);
     const [imgConfig,setImgConfig] = useState(null); //가로가 긴지 세로가 긴지
-    const [made,setMade] = useState(false);
-    useEffect(()=>{
-      const temp_img = imageRef.current;
-      if(temp_img){
-        const {naturalWidth, naturalHeight} = temp_img;
-        if(naturalWidth < naturalHeight){
-          setImgConfig('vertical');
-        }
-        else{
-          setImgConfig('horizontal');
-        }
-      }
-      setMade(true);
+    // const [made,setMade] = useState(false);
+    // useEffect(()=>{
+    //   const temp_img = imageRef.current;
+    //   if(temp_img){
+    //     const {naturalWidth, naturalHeight} = temp_img;
+    //     if(naturalWidth < naturalHeight){
+    //       setImgConfig('vertical');
+    //     }
+    //     else{
+    //       setImgConfig('horizontal');
+    //     }
+    //   }
+    //   setMade(true);
 
-    },[]);
+    // },[]);
     // useEffect(()=>{
     //   if(imgConfig!==null) setMade(true);
     // },[imgConfig]);
@@ -73,15 +74,13 @@ const Album = ({ data }) => {
     );
   
   return (
-    <>
-    {made && <div className={`${styles.container} ${classNameBySkin}`}>
+    <div className={`${styles.container} ${classNameBySkin}`}>
       {skinElement}
       <div className={`${styles.mask} ${classNameByConfig}`}>
-        <img src={imageurl} alt="img" ref={imageRef} className={`${styles.img} ${imgConfig==='vertical' && styles.vertical} ${imgConfig==='horizontal' && styles.horizontal}`}/>
+        <img src={imageurl} alt="img" ref={imageRef} className={`${styles.img} ${mobile && styles.vertical}`}/>
       </div>
 
-    </div>}
-    </>
+    </div>
   );
 };
 

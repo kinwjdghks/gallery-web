@@ -17,12 +17,12 @@ const Modal = ({ onCloseModal }) => {
   useEffect(() => {
     if (containerRef) {
       setTimeout(() => {
-        containerRef.current.style.top = "15vh";
+        containerRef.current.style.bottom = '0%';
       }, 100);
     }
   }, []);
   const closeModalHandler = () => {
-    containerRef.current.style.top = "100vh";
+    containerRef.current.style.bottom = "-100%";
     setTimeout(() => {
       onCloseModal();
     }, 500);

@@ -92,11 +92,12 @@
   height: 100%;
   z-index: 10;
 }
+
+.img{
+  height: 100%;
+}
 .img.vertical{
   width: 100%;
-}
-.img.horizontal{
-  height: 100%;
 }
 
 

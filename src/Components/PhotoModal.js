@@ -115,7 +115,6 @@ const Modal = ({ onCloseModal, version }) => {
           className={styles.imgpreview}
           width={mobile ? "100%" : ""}
           height = {mobile ? "":"100%"}
-          style={{apsectRatio: 3 / 4}}
           src={imgfile}
           alt="preview"
         />
@@ -163,6 +162,7 @@ const Modal = ({ onCloseModal, version }) => {
       vidConfig: vidConfigIdx,
       skin: skinIdx,
       timestamp: timestamp,
+      mobile: mobile
     };
     try {
       const photos = collection(db, "Photos");

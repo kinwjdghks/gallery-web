@@ -11,7 +11,7 @@
   box-sizing: border-box;
   width: 100vw;
   height: 90vh;
-  top: 100vh;
+  bottom: -100%;
   border-radius: 10vw 10vw 0 0;
   background-color: white;
 
@@ -25,7 +25,7 @@
     "textarea textarea"
     "cancel save";
   cursor: url("../assets/Images/mouse-pointer-white.png") 25 25, auto;
-  transition: top 0.6s ease;
+  transition: bottom 0.6s ease;
 }
 
 .title {

@@ -62,41 +62,41 @@ const FrameButtons = ({
         <>
           <Button
             children="정방형"
-            width="30vw"
-            height="10vh"
+            width={mobile?"30vw":"100%"}
+            height={mobile?"10vh":"50%"}
             onClick={() => onFrameSelect(0)}
-            classes="framebtn square"
+            classes={mobile ? "framebtn square" : "popup square"}
           />
           <Button
             children="세로"
-            width="30vw"
-            height="10vh"
+            width={mobile?"30vw":"100%"}
+            height={mobile?"10vh":"50%"}
             onClick={() => onFrameSelect(1)}
-            classes="framebtn vertical"
+            classes={mobile ? "framebtn vertical" : "popup vertical"}
           />
           <Button
             children="가로"
-            width="30vw"
-            height="10vh"
+            width={mobile?"30vw":"100%"}
+            height={mobile?"10vh":"50%"}
             onClick={() => onFrameSelect(2)}
-            classes="framebtn horizontal"
+            classes={mobile ? "framebtn horizontal" : "popup horizontal"}
           />
           <Button
             children="취소"
-            width={mobile ? "50%" : "95%"}
+            width={mobile ? "60%" : "100%"}
             height={mobile ? "60px" : "100px"}
             onClick={() => {
               setPhase(0);
               onCloseModal();
             }}
-            classes={mobile ? "cancel frame" : "popup cancel"}
+            classes={mobile ? "mobile cancel" : "popup cancel"}
           />
           <Button
             children="다음"
-            width={mobile ? "50%" : "95%"}
+            width={mobile ? "60%" : "100%"}
             height={mobile ? "60px" : "100px"}
             onClick={() => setPhase((prev) => prev + 1)}
-            classes={mobile ? "save frame" : "popup save"}
+            classes={mobile ? "mobile save" : "popup save"}
           />
           ``
         </>

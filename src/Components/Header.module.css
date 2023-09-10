@@ -72,7 +72,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    transition: color 0.5s;
+    transition: background-color 0.5s;
   }
   .comitPhoto {
     font-family: "cocogoose";
@@ -91,14 +91,19 @@
     transition: color 0.5s;
   }
   .logo {
-    width: 110px;
     position: absolute;
-    left: calc(50% - 767.5px - 20px);
-    top: 2vh;
+    left: calc(50% - 767.5px - 10px);
+    top: 4vh;
     transform: translate(-100%, 0%);
+    width: 5vw;
+    height: 5vw;
   }
   .togglebtn{
-    width: 30px;
+    width:3.5vw;
+    height:3.5vw;
+    position: absolute;
+    top: 20vh;
+    right: 55px;
   }
 }
 

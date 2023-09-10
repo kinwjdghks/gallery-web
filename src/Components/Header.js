@@ -40,8 +40,8 @@ const Header = ({ onModalHandler, version }) => {
           // onMouseHover={hoverHandler}
         />
       )}
-      <DarkIcon width='10vw' height="10vw" className={`${styles.togglebtn} ${darkmode ? styles.appear : styles.disappear}`} onClick={toggleDarkmode}/>
-      <LightIcon width='10vw' height="10vw" className={`${styles.togglebtn} ${darkmode ? styles.disappear : styles.appear}`} onClick={toggleDarkmode}/>
+      <DarkIcon  className={`${styles.togglebtn} ${darkmode ? styles.appear : styles.disappear}`} onClick={toggleDarkmode}/>
+      <LightIcon  className={`${styles.togglebtn} ${darkmode ? styles.disappear : styles.appear}`} onClick={toggleDarkmode}/>
 
 
       </div>
