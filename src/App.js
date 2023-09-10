@@ -6,6 +6,7 @@ import "./App.css";
 import { useCallback, useEffect, useState } from "react";
 import { useMediaQuery } from "react-responsive";
 import ActionBar from "./Components/ActionBar";
+import NoteDisplayPanel from "./Components/NoteDisplayPanel";
 
 const App = () => {
   const PC = useMediaQuery({
@@ -37,6 +38,7 @@ const App = () => {
         onModalHandler={(which) => modalHandler(which)}
         version={version}
       />
+      <NoteDisplayPanel/>
       <Gallery modal={modal} modalHandler={modalHandler} version={version} />
       {MOBILE && (
         <ActionBar
