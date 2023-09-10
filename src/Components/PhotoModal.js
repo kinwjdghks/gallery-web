@@ -21,17 +21,17 @@ import EffectSound from "../common/EffectSound";
 import effect from "../assets/sounds/camera-shutter.wav";
 //images
 import {ReactComponent as Design1_square}  from "../assets/skins/design1_square.svg";
-import design1_horizontal from "../assets/skins/design1_horizontal.svg";
-import design1_vertical from "../assets/skins/design1_vertical.svg";
+import {ReactComponent as Design1_horizontal} from "../assets/skins/design1_horizontal.svg";
+import {ReactComponent as Design1_vertical} from "../assets/skins/design1_vertical.svg";
 import {ReactComponent as Design2_square} from "../assets/skins/design2_square.svg";
-import design2_horizontal from "../assets/skins/design2_horizontal.svg";
-import design2_vertical from "../assets/skins/design2_vertical.svg";
+import {ReactComponent as Design2_horizontal} from "../assets/skins/design2_horizontal.svg";
+import {ReactComponent as Design2_vertical} from "../assets/skins/design2_vertical.svg";
 import {ReactComponent as Design3_square} from "../assets/skins/design3_square.svg";
-import design3_horizontal from "../assets/skins/design3_horizontal.svg";
-import design3_vertical from "../assets/skins/design3_vertical.svg";
+import {ReactComponent as Design3_horizontal} from "../assets/skins/design3_horizontal.svg";
+import {ReactComponent as Design3_vertical} from "../assets/skins/design3_vertical.svg";
 import {ReactComponent as Design4_square} from "../assets/skins/design4_square.svg";
-import design4_horizontal from "../assets/skins/design4_horizontal.svg";
-import design4_vertical from "../assets/skins/design4_vertical.svg";
+import {ReactComponent as Design4_horizontal} from "../assets/skins/design4_horizontal.svg";
+import {ReactComponent as Design4_vertical} from "../assets/skins/design4_vertical.svg";
 const BackDrop = () => {
   return <div className={styles.backdrop}></div>;
 };
@@ -185,11 +185,11 @@ const Modal = ({ onCloseModal, version }) => {
   };
 
   const skinList = [
-    [<Design1_square className={styles.skinElement}/>, design1_vertical, design1_horizontal],
-    [<Design2_square className={styles.skinElement}/>, design2_vertical, design2_horizontal],
-    [<Design3_square className={styles.skinElement}/>, design3_vertical, design3_horizontal],
-    [<Design4_square className={styles.skinElement}/>, design4_vertical, design4_horizontal],
-  ];
+    [<Design1_square className={styles.skinElement}/>, <Design1_vertical className={styles.skinElement}/>, <Design1_horizontal className={styles.skinElement}/>],
+    [<Design2_square className={styles.skinElement}/>, <Design2_vertical className={styles.skinElement}/>, <Design2_horizontal className={styles.skinElement}/>],
+    [<Design3_square className={styles.skinElement}/>, <Design3_vertical className={styles.skinElement}/>, <Design3_horizontal className={styles.skinElement}/>],
+    [<Design4_square className={styles.skinElement}/>, <Design4_vertical className={styles.skinElement}/>, <Design4_horizontal className={styles.skinElement}/>],
+    ];
 
   const classNameByConfig =
     vidConfigIdx === 0
@@ -253,7 +253,7 @@ const Modal = ({ onCloseModal, version }) => {
               ref={webcamRef}
               screenshotFormat="image/jpeg"
               mirrored={true}
-              imageSmoothing={true}
+              // imageSmoothing={true}
               width={mobile ? "100%" : ""}
               height = {mobile ? "":"100%"}
               style={{position: "absolute"}}
