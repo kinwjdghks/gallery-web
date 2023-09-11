@@ -16,7 +16,8 @@ import {
   startAfter,
 } from "firebase/firestore/lite";
 //images
-import githubIcon from "../assets/Images/github-icon.png";
+import githubIconBlack from "../assets/Images/github-icon-black.png";
+import githubIconWhite from "../assets/Images/github-icon-white.png";
 
 const Gallery = ({ version }) => {
   const darkmode = useContext(DisplayContext).darkmode;
@@ -159,7 +160,21 @@ const Gallery = ({ version }) => {
             href="https://github.com/skku-comit/gallery-web"
             className={styles.githubLink}
           >
-            <img src={githubIcon} alt="github-icon" rel="external" width="75" />
+            {darkmode ? (
+              <img
+                src={githubIconWhite}
+                alt="github-icon"
+                rel="external"
+                width="75"
+              />
+            ) : (
+              <img
+                src={githubIconBlack}
+                alt="github-icon"
+                rel="external"
+                width="75"
+              />
+            )}
           </a>
           <div className={styles.text}>
             <p>Made by Jung Jung Hwan & Kim Ji Ho & Hong Min Jae</p>
