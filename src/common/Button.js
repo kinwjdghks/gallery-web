@@ -9,7 +9,6 @@ const Button = ({
   height,
   onClick,
   classes,
-  onMouseHover,
 }) => {
   const getStyleByClassName = (className) => {
     return styles[className + ""];

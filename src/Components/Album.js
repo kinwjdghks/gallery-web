@@ -48,27 +48,7 @@ const Album = ({ data }) => {
 
     const image = skinList[skinNum-1][vidConfig];
     const imageRef = useRef(null);
-    const [imgConfig,setImgConfig] = useState(null); //가로가 긴지 세로가 긴지
-    // const [made,setMade] = useState(false);
-    // useEffect(()=>{
-    //   const temp_img = imageRef.current;
-    //   if(temp_img){
-    //     const {naturalWidth, naturalHeight} = temp_img;
-    //     if(naturalWidth < naturalHeight){
-    //       setImgConfig('vertical');
-    //     }
-    //     else{
-    //       setImgConfig('horizontal');
-    //     }
-    //   }
-    //   setMade(true);
-
-    // },[]);
-    // useEffect(()=>{
-    //   if(imgConfig!==null) setMade(true);
-    // },[imgConfig]);
-
-
+   
     const skinElement = (
       <img className={styles.skinElement} src={image} />
     );

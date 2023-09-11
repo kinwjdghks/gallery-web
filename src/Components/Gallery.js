@@ -23,7 +23,7 @@ const Gallery = ({ version }) => {
   const mobile = version==='mobile';
   const darkmode = useContext(DisplayContext).darkmode;
   const [photos, setPhotos] = useState([]);
-
+  useEffect(()=>{console.log(photos)},[photos]);
   let timeStamp = useRef(null);
 
   const [endOfData, setEndOfData] = useState(false);
@@ -72,9 +72,6 @@ const Gallery = ({ version }) => {
 
   const pageEnd = useRef(null);
 
-  useEffect(() => {
-    if (pageEnd.current) observer.observe(pageEnd.current);
-  }, []);
 
   const onIntersect = async ([entry], observer) => {
     if (entry.isIntersecting) {
@@ -100,7 +97,7 @@ const Gallery = ({ version }) => {
         limit(10)
       );
     } else {
-      //first query
+      //after first query
       queryTemp = query(
         collection(db, "Photos"),
         orderBy("timestamp", "desc"),
@@ -130,6 +127,7 @@ const Gallery = ({ version }) => {
   };
 
   useEffect(() => {
+    if (pageEnd.current) observer.observe(pageEnd.current);
     window.scroll({
       top: 0,
       behavior: "instant",
