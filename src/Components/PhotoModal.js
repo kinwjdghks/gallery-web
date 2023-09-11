@@ -287,7 +287,7 @@ const Modal = ({ onCloseModal, version }) => {
         <div className={`${styles.cam_mask} ${classNameByConfig}`}>
           {imgpreview}
           {imgfile && <div className={styles.shutter}></div>}
-          {/* {!imgfile && (
+          {!imgfile && (
             <Webcam
               className={styles.webcam}
               ref={webcamRef}
@@ -300,13 +300,19 @@ const Modal = ({ onCloseModal, version }) => {
               style={{ position: "absolute" }}
               facingMode={faceMode}
             />
-          )} */}
+          )}
         </div>
       </div>
 
       <div
         className={styles.actions}
-        style={{ backgroundColor: mobile ? (darkmode ? "#C9B3EF" : "#C9B3EF") : "white" }}
+        style={{
+          backgroundColor: mobile
+            ? darkmode
+              ? "#C9B3EF"
+              : "#C9B3EF"
+            : "white",
+        }}
       >
         <FrameButtons
           isLoading={isLoading}

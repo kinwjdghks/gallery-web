@@ -153,7 +153,7 @@ const Gallery = ({ version }) => {
         {version !== "mobile" && arrows}
       </div>
       {!endOfData && <div className={styles.pageEnd} ref={pageEnd} />}
-      {endOfData && (
+      {version !== "mobile" && endOfData && (
         <div className={`${styles.footer} ${darkmode && styles.darkmode}`}>
           <a
             href="https://github.com/skku-comit/gallery-web"
