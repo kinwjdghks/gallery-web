@@ -91,7 +91,7 @@ const Modal = ({ onCloseModal, version }) => {
     const blankPhoto = {
       id: +id,
       type: "blank",
-      timestamp: timestamp
+      timestamp: timestamp,
     };
     try {
       const photos = collection(db, "Photos");
@@ -266,10 +266,6 @@ const Modal = ({ onCloseModal, version }) => {
         : FACING_MODE_USER
     );
   }, []);
-
-  useEffect(() => {
-    console.log(faceMode);
-  }, [faceMode]);
   return (
     <div className={styles.container} ref={containerRef}>
       <div className={`${styles.cam_container} ${classNameBySkin}`}>
@@ -294,8 +290,17 @@ const Modal = ({ onCloseModal, version }) => {
               audio={false}
               mirrored={true}
               // imageSmoothing={true}
-              width={mobile ? "100%" : ""}
-              height={mobile ? "" : "100%"}
+              width={
+                mobile
+                  ? vidConfigIdx === 1
+                    ? (100 * 4) / 3 + "%"
+                    : "100%"
+                  : ""
+              }
+              height={
+                mobile ? "" : vidConfigIdx === 2 ? (100 * 4) / 3 + "%" : "100%"
+              }
+              // height={mobile ? "" : "100%"}
               style={{ position: "absolute" }}
               facingMode={faceMode}
             />
