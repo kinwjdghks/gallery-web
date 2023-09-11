@@ -272,9 +272,9 @@ const Modal = ({ onCloseModal, version }) => {
         {mobile && photoAnimation}
         {skinElement}
         {mobile && !imgfile && !photoAnimation && (
-          <div
-            // src={ConvertCamera}
-            // alt="convertcamera"
+          <img
+            src={ConvertCamera}
+            alt="convertcamera"
             className={styles.convertCamera}
             onClick={handleFacingMode}
           />
