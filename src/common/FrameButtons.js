@@ -67,21 +67,27 @@ const FrameButtons = ({
             height={mobile ? "10vh" : "50%"}
             onClick={() => onFrameSelect(0)}
             classes={mobile ? "framebtn square" : "popup square"}
-          >{"정방형"}</Button>
+          >
+            정방형
+          </Button>
           <Button
-            children="세로"
+            // children="세로"
             width={mobile ? "30vw" : "100%"}
             height={mobile ? "10vh" : "50%"}
             onClick={() => onFrameSelect(1)}
             classes={mobile ? "framebtn vertical" : "popup vertical"}
-          >{"세로"}</Button>
+          >
+            세로
+          </Button>
           <Button
             children="가로"
             width={mobile ? "30vw" : "100%"}
             height={mobile ? "10vh" : "50%"}
             onClick={() => onFrameSelect(2)}
             classes={mobile ? "framebtn horizontal" : "popup horizontal"}
-          >{"가로"}</Button>
+          >
+            가로
+          </Button>
           <Button
             children="취소"
             width={mobile ? "80%" : "100%"}
@@ -91,15 +97,18 @@ const FrameButtons = ({
               onCloseModal();
             }}
             classes={mobile ? "mobile cancel" : "popup cancel"}
-          >{"취소"}</Button>
+          >
+            취소
+          </Button>
           <Button
           children="다음"
             width={mobile ? "80%" : "100%"}
             height={mobile ? "60px" : "100px"}
             onClick={() => setPhase((prev) => prev + 1)}
             classes={mobile ? "mobile save" : "popup save"}
-          >{"다음"}</Button>
-          
+          >
+            다음
+          </Button>
         </>
       )}
       {/* PHASE 2: before photo */}
@@ -125,7 +134,9 @@ const FrameButtons = ({
                   setPhase((prev) => prev - 1);
                 }}
                 classes="mobile cancel"
-              >{"뒤로가기"}</Button>
+              >
+                뒤로가기
+              </Button>
             </>
           )}
           {!mobile && !animationStarted && (
@@ -142,7 +153,6 @@ const FrameButtons = ({
                 }}
               />
               <div className={styles.smileText}>Smile!</div>
-
               <Button
                 width="80%"
                 height="100px"
@@ -153,7 +163,9 @@ const FrameButtons = ({
                   setPhase((prev) => prev + 1);
                 }}
                 classes="popup takePhoto"
-              >{"사진 찍기!"}</Button>
+              >
+                사진 찍기!
+              </Button>
             </>
           )}
         </>
@@ -212,13 +224,17 @@ const FrameButtons = ({
               setPhase(2);
             }}
             classes={mobile ? "mobile again" : "popup again"}
-          >{"이게뭐야 다시찍어"}</Button>
+          >
+            이게뭐야 다시찍어
+          </Button>
           <Button
             width={mobile ? "80%" : "95%"}
             height={mobile ? "60px" : "100px"}
             onClick={() => setPhase((prev) => prev + 1)}
             classes={mobile ? "mobile next" : "popup next"}
-          >{"다음"}</Button>
+          >
+            다음
+          </Button>
         </>
       )}
 
@@ -236,7 +252,6 @@ const FrameButtons = ({
               alt="btndesign"
             />
           </button>
-
           <button
             className={`${styles.skinbtn} ${styles.skin2}`}
             onClick={() => onSkinSelect(2)}
@@ -282,18 +297,23 @@ const FrameButtons = ({
               onSkinSelect(0);
             }}
             classes={mobile ? "mobile cancel" : "popup cancel"}
-          >{"취소하기"}</Button>
-          {skinIdx ? <Button
-            width={mobile ? "80%" : "95%"}
-            height={mobile ? "60px" : "100px"}
-            onClick={onSavePhoto}
-            classes={mobile ? "mobile save" : "popup save"}
           >
-            {isLoading ? (
-              <img width="50" src={loading} className={styles.loading} />
-            ) : 
-              "저장하기"}
-          </Button> : null}
+            취소하기
+          </Button>
+          {skinIdx ? (
+            <Button
+              width={mobile ? "80%" : "95%"}
+              height={mobile ? "60px" : "100px"}
+              onClick={onSavePhoto}
+              classes={mobile ? "mobile save" : "popup save"}
+            >
+              {isLoading ? (
+                <img width="50" src={loading} className={styles.loading} />
+              ) : (
+                "저장하기"
+              )}
+            </Button>
+          ) : null}
         </>
       )}
 
