@@ -293,14 +293,6 @@ const Modal = ({ onCloseModal, version }) => {
               mirrored={facingMode === FACING_MODE_USER && true}
               // imageSmoothing={true}
               width={mobile ? "100%" : ""}
-              // width={
-              //   mobile
-              //     ? vidConfigIdx === 1
-              //       ? (100 * 4) / 3 + "%"
-              //       : "100%"
-              //     : ""
-              // }
-              height={mobile ? "" : "100%"}
               // height={
               //   mobile ? "" : vidConfigIdx === 2 ? (100 * 4) / 3 + "%" : "100%"
               // }
