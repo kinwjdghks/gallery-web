@@ -137,64 +137,7 @@
   font-size: 35px;
   position: absolute;
 }
-.up {
-  top: -18px;
-  left: calc(933.33px / 2 - 207px / 2);
-}
-.right.square {
-  transform: rotate(90deg);
-  top: 400px;
-  left: 705px;
-  width: max-content;
-}
-.left {
-  display: flex;
-  position: absolute;
-  top: 80px;
-  left: 25px;
-}
-.left p {
-  display: inline-block;
-  transform: rotate(-90deg);
-}
-.down.square {
-  top: 850px;
-  left: 450px;
-  transform: rotate(180deg);
-}
 
-.right.vertical {
-  transform: rotate(-90deg);
-  width: 200px;
-  top: 630px;
-  left: 630px;
-}
-.down.vertical {
-  top: 840px;
-  transform: rotate(180deg);
-}
-.right.horizontal {
-  top: 650px;
-  left: 80px;
-  width: 200px;
-}
-.down.horizontal {
-  top: 540px;
-  left: 14px;
-  transform: rotate(-90deg);
-}
-.camera {
-  position: absolute;
-}
-.camera.vertical {
-  top: 140px;
-  left: 710px;
-  transform: rotate(-90deg);
-}
-.camera.horizontal {
-  top: 725px;
-  left: 630px;
-}
 .shutter {
   position: absolute;
   z-index: 100;
