@@ -11,6 +11,7 @@
     background-color: #C9B3EF;
     border-top-right-radius: 20px;
     border-top-left-radius: 20px;
+    z-index: 18;
 }
 
 .btn{

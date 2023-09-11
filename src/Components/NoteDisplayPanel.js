@@ -1,13 +1,12 @@
 import styles from "./NoteDisplayPanel.module.css";
-import { useState,useEffect,useRef } from "react";
+import { useState,useEffect } from "react";
 import { db } from "../Utility/firebase";
 import {
     collection,
     getDocs,
     query,
     limit,
-    orderBy,
-    startAfter,
+    orderBy
   } from "firebase/firestore/lite";
 import note_red from "../assets/Images/말풍선1.svg";
 import note_green from "../assets/Images/말풍선2.svg";
@@ -31,10 +30,9 @@ export const Note = ({content}) =>{
 const NoteDisplayPanel = () =>{
     
 
-    let timeStamp = useRef(null);
-    const [curNoteIdx,setCurNoteIdx] = useState(0); //마지막 읽은 노트 인덱스
+    // let timeStamp = useRef(null);
+    // const [curNoteIdx,setCurNoteIdx] = useState(0); //마지막 읽은 노트 인덱스
     const [noteStack,setNoteStack] = useState([]);
-    const [endOfData,setEndOfData] = useState(false);
     const [notes,setNotes] = useState([
         {
             id: 1,
@@ -53,28 +51,31 @@ const NoteDisplayPanel = () =>{
         type: "note",
         timestamp: "3",
         content: "잘가세요",
-        }
+        },
+        {
+          content: "정정환 천재",
+          }
+          ,
+        {
+          content: "김지호 바보",
+          }
+          ,
+        {
+          content: "홍민재 잼민이",
+          }
+
     ]);
 
-    const getMoreNotes = async () => {
+    const getNotes = async () => {
     
         let queryTemp;
-        if (!timeStamp) {
-          //first query
-          queryTemp = query(
-            collection(db, "Notes"),
-            orderBy("timestamp", "desc"),
-            limit(10)
-          );
-        } else {
-          //first query
-          queryTemp = query(
-            collection(db, "Notes"),
-            orderBy("timestamp", "desc"),
-            startAfter(timeStamp),
-            limit(10)
-          );
-        }
+        
+        queryTemp = query(
+          collection(db, "Notes"),
+          orderBy("timestamp", "desc"),
+          limit(10)
+        );
+        
     
         // setIsLoading(true);
         let dataSnapShot;
@@ -85,30 +86,39 @@ const NoteDisplayPanel = () =>{
         }
     
         const dataList = dataSnapShot.docs.map((doc) => doc.data());
-    
-        const length = dataList.length;
-        if (length) {
-          timeStamp = dataSnapShot.docs[length - 1];
-          setNotes((prev) => [...prev, ...dataList]);
-        } else {
-          setEndOfData(true);
-        }
+        setNotes(dataList);
+        
         // setIsLoading(false);
       };
     
-    // const pushNote = () =>{
-        
+    const pushNote = ({content}) =>{
+        const newNote = <Note content={content}/>
+        const newNoteStack = [...noteStack,newNote];
+        setNoteStack(newNoteStack);
+        return;
+    }
+    // useEffect(async ()=>{
+    //     // await getNotes();
+    //     let idx = 0;
+    //     while(idx<notes.length){
+    //       console.log('idx: '+idx);
+    //       const randomInterval = 2000+ Math.random()*3000; //2초 ~ 5초 
+    //       const data = notes[idx].content;
+    //       if(idx===0){
+    //         pushNote(data);
+    //         idx++;
+    //         continue;
+    //       }
+    //       const timer = setTimeout(()=>{
+    //         pushNote(data);
+    //         idx++;
+    //       },randomInterval);
+    //     }
 
-    //     const data = notes[curNoteIdx];
-    //     setCurNote();
-
-    // }
-    // useEffect(()=>{
-    //     showNote();
     // },[]);
 
     return <div className={styles.screen}>
-        {<Note content="아아 마이크테스트"/>}
+        {noteStack}
     </div>
 }
 
