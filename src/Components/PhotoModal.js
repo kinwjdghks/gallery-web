@@ -257,10 +257,12 @@ const Modal = ({ onCloseModal, version }) => {
   });
   const FACING_MODE_USER = "user";
   const FACING_MODE_ENVIRONMENT = "environment";
-  const [faceMode, setFaceMode] = useState(FACING_MODE_ENVIRONMENT);
-
+  const [facingMode, setFacingMode] = useState(FACING_MODE_ENVIRONMENT);
+  const videoConstraints = {
+    facingMode: FACING_MODE_ENVIRONMENT,
+  };
   const handleFacingMode = useCallback(() => {
-    setFaceMode((prevState) =>
+    setFacingMode((prevState) =>
       prevState === FACING_MODE_USER
         ? FACING_MODE_ENVIRONMENT
         : FACING_MODE_USER
@@ -302,7 +304,10 @@ const Modal = ({ onCloseModal, version }) => {
               }
               // height={mobile ? "" : "100%"}
               style={{ position: "absolute" }}
-              facingMode={faceMode}
+              videoConstraints={{
+                ...videoConstraints,
+                facingMode,
+              }}
             />
           )}
         </div>
