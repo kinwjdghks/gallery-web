@@ -15,12 +15,12 @@ import note_red2 from "../assets/Images/말풍선4.svg";
 import note_green2 from "../assets/Images/말풍선5.svg";
 import note_yellow2 from "../assets/Images/말풍선6.svg";
 
-const backgrounds = [note_red, note_green, note_yellow,note_red2, note_green2, note_yellow2];
+const backgrounds = [note_red, note_green, note_yellow];
 
 export const Note = ({ content }) => {
   //랜덤 좌표
   const randomCoor = 3 + Math.random() * 50 + "vw";
-  const randomBackground = backgrounds[Math.floor(Math.random() * 6)];
+  const randomBackground = backgrounds[Math.floor(Math.random() * 3)];
   return (
     <>
       <div
@@ -44,7 +44,7 @@ const NoteDisplayPanel = () => {
 
     queryTemp = query(
       collection(db, "Notes"),
-      orderBy("timestamp",'desc'),
+      orderBy("timestamp", "desc"),
       limit(10)
     );
 
@@ -69,21 +69,21 @@ const NoteDisplayPanel = () => {
       clearTimeout(interval);
     }, [randomInterval]);
   };
-  const showNotes = () =>{
+  const showNotes = () => {
     for (let i = 0; i < notes.length; i++) {
       const randomInterval = 1000 + Math.random() * 2000;
-      if( i===0 ) setDelay(0,0);
-      else setDelay(i, randomInterval + (i-1)*2500);
+      if (i === 0) setDelay(0, 0);
+      else setDelay(i, randomInterval + (i - 1) * 2500);
     }
-  }
+  };
 
   useEffect(() => {
     getNotes();
   }, []);
-  useEffect(()=>{
+  useEffect(() => {
     showNotes();
-  },[notes]);
-  
+  }, [notes]);
+
   return <div className={styles.screen}>{noteStack}</div>;
 };
 

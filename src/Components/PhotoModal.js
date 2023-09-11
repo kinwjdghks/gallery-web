@@ -91,7 +91,7 @@ const Modal = ({ onCloseModal, version }) => {
     const blankPhoto = {
       id: +id,
       type: "blank",
-      timestamp: timestamp
+      timestamp: timestamp,
     };
     try {
       const photos = collection(db, "Photos");
@@ -257,28 +257,26 @@ const Modal = ({ onCloseModal, version }) => {
   });
   const FACING_MODE_USER = "user";
   const FACING_MODE_ENVIRONMENT = "environment";
-  const [faceMode, setFaceMode] = useState(FACING_MODE_USER);
-
+  const [facingMode, setFacingMode] = useState(FACING_MODE_USER);
+  const videoConstraints = {
+    facingMode: FACING_MODE_ENVIRONMENT,
+  };
   const handleFacingMode = useCallback(() => {
-    setFaceMode((prevState) =>
+    setFacingMode((prevState) =>
       prevState === FACING_MODE_USER
         ? FACING_MODE_ENVIRONMENT
         : FACING_MODE_USER
     );
   }, []);
-
-  useEffect(() => {
-    console.log(faceMode);
-  }, [faceMode]);
   return (
     <div className={styles.container} ref={containerRef}>
       <div className={`${styles.cam_container} ${classNameBySkin}`}>
         {mobile && photoAnimation}
         {skinElement}
         {mobile && !imgfile && !photoAnimation && (
-          <div
-            // src={ConvertCamera}
-            // alt="convertcamera"
+          <img
+            src={ConvertCamera}
+            alt="convertcamera"
             className={styles.convertCamera}
             onClick={handleFacingMode}
           />
@@ -292,12 +290,23 @@ const Modal = ({ onCloseModal, version }) => {
               ref={webcamRef}
               screenshotFormat="image/jpeg"
               audio={false}
-              mirrored={true}
+              mirrored={facingMode === FACING_MODE_USER && true}
               // imageSmoothing={true}
-              width={mobile ? "100%" : ""}
-              height={mobile ? "" : "100%"}
+              width={
+                mobile
+                  ? vidConfigIdx === 1
+                    ? (100 * 4) / 3 + "%"
+                    : "100%"
+                  : ""
+              }
+              height={
+                mobile ? "" : vidConfigIdx === 2 ? (100 * 4) / 3 + "%" : "100%"
+              }
               style={{ position: "absolute" }}
-              facingMode={faceMode}
+              videoConstraints={{
+                ...videoConstraints,
+                facingMode,
+              }}
             />
           )}
         </div>
