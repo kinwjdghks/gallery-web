@@ -1,64 +1,61 @@
-.screen{
-    width: 100vw;
-    height: 100vh;
-    position: fixed;
-    top:0;
-    left: 0;
-    z-index: 15;
+.screen {
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 15;
 }
-.text{
-    font-family: 'kotrahope';
-    font-size : 4.5vw;
-    position: absolute;
-    top:0;
-    left: 0;
-    padding: 0.7vh;
-    padding-left: 1vh;
+.text {
+  font-family: "kotrahope";
+  font-size: 4.5vw;
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 0.7vh;
+  padding-left: 1vh;
 }
-.noteImg{
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    top:0;
-    left: 0;
-    z-index: -1;
+.noteImg {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
 }
-.note{
-    width: 40vw;
-    height: 16.3vw;
-    word-break: keep-all;
-    position:absolute;
-    top: 100vh;
-    /* top: 50vh; */
-    animation: float 8s linear;
+.note {
+  width: 40vw;
+  height: 16.3vw;
+  word-break: keep-all;
+  position: absolute;
+  top: 100vh;
+  /* top: 50vh; */
+  animation: float 8s linear;
 }
 
 @keyframes float {
-    0%{
-        top:100vh;
-        opacity:0;
-    }
-    25%{
-        opacity: 0;
-        top: 75vh;
-
-    }
-    30%{
-        opacity: 1;
-        top: 70vh;
-
-    }
-    85%{
-        opacity: 1;
-        top: 15vh;
-    }
-    95%{
-        opacity: 0;
-        top:5vh;
-    }
-    100%{
-        opacity: 0;
-        top:0vh;
-    }
-    
+  0% {
+    top: 100vh;
+    opacity: 0;
+  }
+  25% {
+    top: 75vh;
+    opacity: 0;
+  }
+  30% {
+    top: 70vh;
+    opacity: 1;
+  }
+  85% {
+    top: 15vh;
+    opacity: 1;
+  }
+  95% {
+    top: 5vh;
+    opacity: 0;
+  }
+  100% {
+    top: 0vh;
+    opacity: 0;
+  }
 }

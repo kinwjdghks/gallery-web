@@ -120,14 +120,14 @@ const Gallery = ({ version }) => {
     setIsLoading(false);
   };
 
-  // useEffect(() => {
-  //   window.scroll({
-  //     top: 0,
-  //     behavior: "instant",
-  //   });
-  //   getMorePhotos();
-  //   console.log("initial data request");
-  // }, []);
+  useEffect(() => {
+    window.scroll({
+      top: 0,
+      behavior: "instant",
+    });
+    getMorePhotos();
+    console.log("initial data request");
+  }, []);
 
   return (
     <>
