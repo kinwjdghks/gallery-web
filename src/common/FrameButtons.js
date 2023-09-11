@@ -62,6 +62,7 @@ const FrameButtons = ({
       {phase === 1 && (
         <>
           <Button
+            children="정방형"
             width={mobile ? "30vw" : "100%"}
             height={mobile ? "10vh" : "50%"}
             onClick={() => onFrameSelect(0)}
@@ -79,6 +80,7 @@ const FrameButtons = ({
             세로
           </Button>
           <Button
+            children="가로"
             width={mobile ? "30vw" : "100%"}
             height={mobile ? "10vh" : "50%"}
             onClick={() => onFrameSelect(2)}
@@ -87,6 +89,7 @@ const FrameButtons = ({
             가로
           </Button>
           <Button
+            children="취소"
             width={mobile ? "80%" : "100%"}
             height={mobile ? "60px" : "100px"}
             onClick={() => {
@@ -98,6 +101,7 @@ const FrameButtons = ({
             취소
           </Button>
           <Button
+          children="다음"
             width={mobile ? "80%" : "100%"}
             height={mobile ? "60px" : "100px"}
             onClick={() => setPhase((prev) => prev + 1)}

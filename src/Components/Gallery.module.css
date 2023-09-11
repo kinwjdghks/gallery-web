@@ -1,7 +1,7 @@
 .background {
   width: 100vw;
   height: auto;
-  min-height: 100vh;
+  min-height: 120vh;
   position: relative;
   display: flex;
   flex-direction: column;
@@ -39,6 +39,7 @@
 .pageEnd {
   width: 100vw;
   height: 5px;
+  background-color: red;
 }
 .loadingDiv {
   width: 100vw;
@@ -86,8 +87,7 @@
 }
 
 @media (min-width: 1024px) {
-  /* .background{
-  } */
+
   .albumContainer {
     display: grid;
     margin-top: 240px;

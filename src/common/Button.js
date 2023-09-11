@@ -9,12 +9,10 @@ const Button = ({
   height,
   onClick,
   classes,
-  onMouseHover,
 }) => {
   const getStyleByClassName = (className) => {
     return styles[className + ""];
   };
-  console.log(classes);
   let styleNames = classes.split(" ");
   let combinedStyles = "";
   styleNames.forEach((className) => {

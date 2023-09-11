@@ -23,7 +23,9 @@ const Gallery = ({ version }) => {
   const mobile = version === "mobile";
   const darkmode = useContext(DisplayContext).darkmode;
   const [photos, setPhotos] = useState([]);
-
+  useEffect(() => {
+    console.log(photos);
+  }, [photos]);
   let timeStamp = useRef(null);
 
   const [endOfData, setEndOfData] = useState(false);
@@ -78,10 +80,6 @@ const Gallery = ({ version }) => {
 
   const pageEnd = useRef(null);
 
-  useEffect(() => {
-    if (pageEnd.current) observer.observe(pageEnd.current);
-  }, []);
-
   const onIntersect = async ([entry], observer) => {
     if (entry.isIntersecting) {
       console.log("intersect");
@@ -135,6 +133,7 @@ const Gallery = ({ version }) => {
   };
 
   useEffect(() => {
+    if (pageEnd.current) observer.observe(pageEnd.current);
     window.scroll({
       top: 0,
       behavior: "instant",
@@ -142,6 +141,7 @@ const Gallery = ({ version }) => {
     getMorePhotos();
     console.log("initial data request");
   }, []);
+
   return (
     <>
       <div
