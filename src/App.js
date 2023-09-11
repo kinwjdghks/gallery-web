@@ -22,9 +22,6 @@ const App = () => {
   const [modal, setModal] = useState("noModal"); //modal: 'noModal', 'photo', 'note'
   const modalHandler = useCallback((which) => setModal(which), []);
 
-  useEffect(() => {
-    console.log(modal);
-  }, [modal]);
   return (
     <div className="App">
       {modal === "photo" && (

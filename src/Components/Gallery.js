@@ -135,6 +135,7 @@ const Gallery = ({ version }) => {
     getMorePhotos();
     console.log("initial data request");
   }, []);
+
   return (
     <>
       <div
