@@ -29,17 +29,16 @@
   padding: 5vw 3vw;
   background-color: #d6d6d6;
 }
-.footer{
+.footer {
   padding: 15px 0;
 }
-.footer img{
+.footer img {
   margin-right: -10px;
 }
 
 .pageEnd {
   width: 100vw;
   height: 5px;
-  background-color: red;
 }
 .loadingDiv {
   width: 100vw;
@@ -83,16 +82,15 @@
   margin: 0.1rem;
 }
 .githubLink:hover {
-  cursor: url("../assets/Images/mouse-pointer-white.png") 25 25, auto;
+  cursor: url("../assets/Images/mouse-pointer-white.png") 10 5, auto;
 }
 
 @media (min-width: 1024px) {
-
   .albumContainer {
     display: grid;
     margin-top: 240px;
-    margin-left:0;
-    margin-right:0;
+    margin-left: 0;
+    margin-right: 0;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     grid-auto-rows: 350px;
     row-gap: 30px;
@@ -103,7 +101,7 @@
     padding-bottom: 40px;
     margin-bottom: 200px;
   }
-  .loadingDiv{
+  .loadingDiv {
     margin-bottom: 0;
   }
   .noPic {
@@ -115,7 +113,7 @@
     font-weight: 900;
     margin-top: 500px;
   }
-  .footer{
+  .footer {
     padding-bottom: 10px;
   }
 }

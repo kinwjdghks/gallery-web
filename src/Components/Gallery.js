@@ -182,17 +182,21 @@ const Gallery = ({ version }) => {
           className={styles.footer}
           style={{ backgroundColor: darkmode ? "rgb(72, 72, 72)" : "#e0e0e0" }}
         >
-          <a
-            href="https://github.com/skku-comit/gallery-web"
-            className={styles.githubLink}
-          >
-            <img
-              src={darkmode ? githubIconWhite : githubIconBlack}
-              alt="github-icon"
-              rel="external"
-              style={{ width: mobile ? "40px" : "75px" }}
-            />
-          </a>
+          {!mobile && (
+            <a
+              href="https://github.com/skku-comit/gallery-web"
+              className={styles.githubLink}
+              target="_blank"
+            >
+              <img
+                src={darkmode ? githubIconWhite : githubIconBlack}
+                alt="github-icon"
+                rel="external"
+                style={{ width: mobile ? "40px" : "75px" }}
+              />
+            </a>
+          )}
+
           <div
             className={styles.footertext}
             style={{

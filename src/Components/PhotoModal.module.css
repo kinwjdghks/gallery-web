@@ -4,7 +4,7 @@
   height: 100vh;
   z-index: 31;
   background: rgba(0, 0, 0, 0.75);
-  cursor: url("../assets/Images/mouse-pointer-white.png") 25 25, auto;
+  cursor: url("../assets/Images/mouse-pointer-white.png") 10 5, auto;
 }
 /*container*/
 .container {
@@ -18,7 +18,7 @@
   flex-direction: column;
   justify-content: end;
   align-items: center;
-  cursor: url("../assets/Images/mouse-pointer-white.png") 25 25, auto;
+  cursor: url("../assets/Images/mouse-pointer-white.png") 10 5, auto;
   transition: bottom 0.7s ease;
 }
 
@@ -230,7 +230,7 @@
     height: 100vh;
     z-index: 31;
     background: rgba(0, 0, 0, 0.75);
-    cursor: url("../assets/Images/mouse-pointer-white.png") 25 25, auto;
+    cursor: url("../assets/Images/mouse-pointer-white.png") 10 5, auto;
   }
   /*container*/
   .container {

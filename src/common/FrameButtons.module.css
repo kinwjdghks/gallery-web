@@ -147,7 +147,7 @@
   font-size: 3rem;
   border-radius: 3vw;
   overflow: hidden;
-  cursor: url("../assets/Images/mouse-pointer-white.png") 25 25, auto;
+  cursor: url("../assets/Images/mouse-pointer-white.png") 10 5, auto;
 
   transition: transform 150ms ease-in;
   position: relative;
@@ -156,7 +156,7 @@
 .skinbtn:hover {
   transform: scale(1.15);
   transition: transform 150ms linear;
-  cursor: url("../assets/Images/mouse-pointer-black.png") 25 25, auto;
+  cursor: url("../assets/Images/mouse-pointer-black.png") 10 5, auto;
 }
 .skinbtn.skin1 {
   grid-area: skin1;
@@ -191,17 +191,17 @@
   right: -35px;
   top: -60px;
   border: none;
-  cursor: url("../assets/Images/mouse-pointer-white.png") 25 25, auto;
+  cursor: url("../assets/Images/mouse-pointer-white.png") 10 5, auto;
   background: url("../assets/Images/close-modal.png") center center/contain
     no-repeat;
 }
 .close:hover {
-  cursor: url("../assets/Images/mouse-pointer-black.png") 25 25, auto;
+  cursor: url("../assets/Images/mouse-pointer-black.png") 10 5, auto;
 }
 .loading {
   animation: rotate 1s ease-out infinite;
 }
-.ThumbImage{
+.ThumbImage {
   animation: wiggle2 3s infinite;
 }
 
@@ -214,7 +214,6 @@
     transform: rotate(360deg);
   }
 }
-
 
 @media (min-width: 1024px) {
   .container {
@@ -315,7 +314,7 @@
     right: 0vw;
     top: 1vw;
     border: none;
-    cursor: url("../assets/Images/mouse-pointer-white.png") 25 25, auto;
+    cursor: url("../assets/Images/mouse-pointer-white.png") 10 5, auto;
     background: url("../assets/Images/close-modal.png") center center/contain
       no-repeat;
   }
@@ -330,7 +329,7 @@
     font-size: 3rem;
     border-radius: 30px;
     overflow: hidden;
-    cursor: url("../assets/Images/mouse-pointer-white.png") 25 25, auto;
+    cursor: url("../assets/Images/mouse-pointer-white.png") 10 5, auto;
 
     transition: transform 150ms ease-in;
     position: relative;

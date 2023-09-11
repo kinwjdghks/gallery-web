@@ -26,7 +26,6 @@
   /* transform: translate(-50%, 0%); */
 }
 .comit {
-
   margin: 0;
 }
 
@@ -43,12 +42,12 @@
   /* top: 5vw;
   left: 8vw; */
   /* margin-top: -2vw; */
-  margin:0;
+  margin: 0;
   width: 7vw;
   height: 7vw;
   margin-left: 15px;
 }
-.togglebtn{
+.togglebtn {
   position: absolute;
   right: 5vw;
   top: 10vw;
@@ -56,11 +55,10 @@
   width: 10vw;
 }
 
-.disappear{
+.disappear {
   animation: disappear 0.5s ease forwards;
-
 }
-.appear{
+.appear {
   animation: appear 0.5s ease forwards;
 }
 @media (min-width: 1024px) {
@@ -87,7 +85,7 @@
   }
 
   .photobooth {
-    margin : 0;
+    margin: 0;
     margin-top: -20px;
     font-size: 60px;
     transition: color 0.5s;
@@ -99,39 +97,38 @@
     margin-top: 0;
     margin-left: 20px;
   }
-  .togglebtn{
-    width:3.5vw;
-    height:3.5vw;
+  .togglebtn {
+    width: 3.5vw;
+    height: 3.5vw;
     position: absolute;
     top: 20vh;
     right: 55px;
   }
 }
 
-
 .logo:hover {
-  cursor: url("../assets/Images/mouse-pointer-white.png") 25 25, auto;
+  cursor: url("../assets/Images/mouse-pointer-white.png") 10 5, auto;
 }
 
 .comitPhoto p {
   height: min-content;
 }
 @keyframes disappear {
-  from{
+  from {
     transform: rotate(0deg);
     opacity: 1;
   }
-  to{
+  to {
     transform: rotate(270deg);
     opacity: 0;
   }
 }
 @keyframes appear {
-  from{
+  from {
     transform: rotate(270deg);
     opacity: 0;
   }
-  to{
+  to {
     transform: rotate(0deg);
     opacity: 1;
   }

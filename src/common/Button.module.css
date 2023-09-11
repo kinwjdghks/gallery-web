@@ -28,7 +28,7 @@
 
 /* Header */
 .header {
-  cursor: url("../assets/Images/mouse-pointer-black.png") 0 0, auto;
+  cursor: url("../assets/Images/mouse-pointer-black.png") 10 5, auto;
   right: 80px;
 }
 
@@ -99,7 +99,7 @@
 /* RE? Save */
 .lastbtn {
   align-self: center;
-  cursor: url("../assets/Images/mouse-pointer-white.png") 25 25, auto;
+  cursor: url("../assets/Images/mouse-pointer-white.png") 10 5, auto;
   font-family: "cocogoose";
   /* font-weight: 550; */
   /* border-radius: 30px; */
@@ -142,7 +142,7 @@
     background-color: white;
     transform: translate(0, 0.15em);
     color: #603ebb;
-    cursor: url("../assets/Images/mouse-pointer-black.png") 25 25, auto;
+    cursor: url("../assets/Images/mouse-pointer-black.png") 10 5, auto;
   }
   /* pop animation */
   .btn.popup {
@@ -172,7 +172,7 @@
     background: white;
     color: #603ebb;
     transform: translate(0, 0.2em);
-    cursor: url("../assets/Images/mouse-pointer-black.png") 0 0, auto;
+    cursor: url("../assets/Images/mouse-pointer-black.png") 10 5, auto;
   }
   .btn.popup:hover::before {
     box-shadow: 0 0 0 2px black, 0 0.2em 0 0 rgb(173, 173, 173);
@@ -188,7 +188,7 @@
   }
   /* Header */
   .header {
-    cursor: url("../assets/Images/mouse-pointer-black.png") 25 25, auto;
+    cursor: url("../assets/Images/mouse-pointer-black.png") 10 5, auto;
     right: 80px;
   }
   /* cancel */
@@ -232,7 +232,7 @@
   /* after photo(RE? Save) */
   .lastbtn {
     align-self: center;
-    cursor: url("../assets/Images/mouse-pointer-white.png") 25 25, auto;
+    cursor: url("../assets/Images/mouse-pointer-white.png") 10 5, auto;
     font-family: "cocogoose";
     /* font-weight: 550; */
     /* border-radius: 30px; */
