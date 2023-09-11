@@ -1,7 +1,7 @@
 .background {
   width: 100vw;
   height: auto;
-  min-height: 120vh;
+  min-height: 100vh;
   position: relative;
   display: flex;
   flex-direction: column;
@@ -54,9 +54,9 @@
   height: 80px;
   text-align: center;
   font-family: "gangwonedu";
-  font-size: 50px;
+  font-size: 40px;
   font-weight: 500;
-  margin-top: 500px;
+  margin-top: 40vh;
 }
 
 .footer {
@@ -86,6 +86,8 @@
 }
 
 @media (min-width: 1024px) {
+  /* .background{
+  } */
   .albumContainer {
     display: grid;
     margin-top: 240px;

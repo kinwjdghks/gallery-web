@@ -13,7 +13,10 @@
   top: 0;
   left: 0;
   padding: 1vh;
-  padding-left: 1vh;
+  padding-left: 0.5vh;
+  width: 100%;
+  text-align: left;
+  word-break: keep-all;
 }
 .noteImg {
   width: 100%;
@@ -38,22 +41,23 @@
     top: 100vh;
     opacity: 0;
   }
-  25% {
-    top: 75vh;
+  10% {
+    top: 80vh;
     opacity: 0;
   }
-  30% {
+  20% {
     top: 70vh;
     opacity: 1;
   }
-  85% {
-    top: 15vh;
+  80% {
+    top: 20vh;
     opacity: 1;
   }
-  95% {
-    top: 5vh;
+  90% {
+    top: 10vh;
     opacity: 0;
   }
+
   100% {
     top: 0vh;
     opacity: 0;

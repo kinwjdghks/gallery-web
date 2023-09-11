@@ -69,6 +69,21 @@
   animation: shake 0.2s;
   
 }
+.loading {
+  animation: rotate 1s ease-out infinite;
+}
+
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
 @keyframes shake {
   0% {
     transform: translate(0%, 0%);

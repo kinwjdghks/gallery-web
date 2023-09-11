@@ -17,7 +17,7 @@
 <rect x="-21" y="219" width="522" height="141" fill="url(#design2_square_2)"/>
 </g>
 <defs>
-<pattern id="design1_square" patternContentUnits="objectBoundingBox" width="1" height="1">
+<pattern id="design1_square_1" patternContentUnits="objectBoundingBox" width="1" height="1">
 <use xlink:href="#image0_199_218" transform="matrix(0.000872499 0 0 0.00510204 -0.00343183 0)"/>
 </pattern>
 <pattern id="design2_square_2" patternContentUnits="objectBoundingBox" width="1" height="1">

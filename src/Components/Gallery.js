@@ -137,7 +137,6 @@ const Gallery = ({ version }) => {
     getMorePhotos();
     console.log("initial data request");
   }, []);
-
   return (
     <>
       <div
@@ -145,7 +144,7 @@ const Gallery = ({ version }) => {
         style={{ backgroundColor: darkmode ? "#484848" : "#e0e0e0" }}
         ref={background}
       >
-        {!photos.length && !isLoading && <div className={styles.noPic}>사진이 없습니다!</div>}
+        {!photos.length && !isLoading && <div className={styles.noPic} style={{color: darkmode ? "white" : "black", transition: "all 0.5s"}}>사진이 없습니다!</div>}
 
         {photos.length > 0 && (
           <div className={styles.albumContainer}>

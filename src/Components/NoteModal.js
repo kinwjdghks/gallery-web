@@ -8,12 +8,15 @@ import { collection, doc, setDoc } from "firebase/firestore/lite";
 import { serverTimestamp } from "firebase/firestore/lite";
 import logo from "../assets/Images/Logo.svg";
 import smile명륜 from "../assets/Images/smile명륜.svg";
+import loading from "../assets/Images/loading.svg";
 
 const BackDrop = () => {
   return <div className={styles.backdrop}></div>;
 };
 
 const Modal = ({ onCloseModal }) => {
+  const [isLoading, setIsLoading] = useState(false);
+
   const containerRef = useRef(null);
   useEffect(() => {
     if (containerRef) {
@@ -32,7 +35,8 @@ const Modal = ({ onCloseModal }) => {
   const contentRef = useRef(null);
   const [message, setMessage] = useState("");
 
-  const submitNote = async () => {
+  const saveToFireStore = async () => {
+    setIsLoading(true);
     if (!contentRef) return;
 
     const content = contentRef.current.value.toString().trim();
@@ -52,10 +56,17 @@ const Modal = ({ onCloseModal }) => {
     try {
       const notes = collection(db, "Notes");
       await setDoc(doc(notes, `${id}`), newNote);
+      setIsLoading(false);
     } catch (error) {
       console.log(error);
       return;
     }
+    
+  };
+  const saveNote = async () => {
+    await saveToFireStore();
+    closeModalHandler();
+    window.location.reload();
   };
   return (
     <div className={styles.container} ref={containerRef}>
@@ -89,11 +100,14 @@ const Modal = ({ onCloseModal }) => {
       <Button
         width="80%"
         height="60px"
-        onClick={submitNote}
+        onClick={saveNote}
         classes="save note"
       >
-        저장하기
-      </Button>
+        {isLoading ? (
+              <img width="50" src={loading} className={styles.loading} />
+            ) : 
+              "저장하기"}
+          </Button>
       </div>
       {/* </div> */}
       {/* <img

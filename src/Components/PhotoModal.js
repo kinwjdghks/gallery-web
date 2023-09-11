@@ -88,15 +88,14 @@ const Modal = ({ onCloseModal, version }) => {
   const createBlankAlbum = useCallback(async () => {
     const id = new Date().getTime() % 100000000;
     const timestamp = serverTimestamp();
-    const newPhoto = {
+    const blankPhoto = {
       id: +id,
       type: "blank",
-      timestamp: timestamp,
-      vidConfig: vidConfigIdx,
+      timestamp: timestamp
     };
     try {
       const photos = collection(db, "Photos");
-      await setDoc(doc(photos, `${id}`), newPhoto);
+      await setDoc(doc(photos, `${id}`), blankPhoto);
     } catch (error) {
       console.log(error);
       return;
@@ -104,7 +103,7 @@ const Modal = ({ onCloseModal, version }) => {
   }, []);
 
   // useEffect(() => {
-  //   const random = Math.floor(Math.random() * 4);
+  //   const random = Math.floor(Math.random() * 8);
   //   if (!random) {
   //     createBlankAlbum();
   //   }
@@ -276,7 +275,7 @@ const Modal = ({ onCloseModal, version }) => {
       <div className={`${styles.cam_container} ${classNameBySkin}`}>
         {mobile && photoAnimation}
         {skinElement}
-        {version === "mobile" && !imgfile && !photoAnimation && (
+        {mobile && !imgfile && !photoAnimation && (
           <div
             // src={ConvertCamera}
             // alt="convertcamera"
