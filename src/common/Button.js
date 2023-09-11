@@ -14,6 +14,7 @@ const Button = ({
   const getStyleByClassName = (className) => {
     return styles[className + ""];
   };
+  console.log(classes);
   let styleNames = classes.split(" ");
   let combinedStyles = "";
   styleNames.forEach((className) => {
@@ -50,7 +51,6 @@ const Button = ({
         style={{
           width: width,
           height: height,
-
         }}
         onClick={onClick}
         ref={buttonRef}
