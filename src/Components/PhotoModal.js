@@ -257,7 +257,7 @@ const Modal = ({ onCloseModal, version }) => {
   });
   const FACING_MODE_USER = "user";
   const FACING_MODE_ENVIRONMENT = "environment";
-  const [facingMode, setFacingMode] = useState(FACING_MODE_ENVIRONMENT);
+  const [facingMode, setFacingMode] = useState(FACING_MODE_USER);
   const videoConstraints = {
     facingMode: FACING_MODE_ENVIRONMENT,
   };
@@ -290,7 +290,7 @@ const Modal = ({ onCloseModal, version }) => {
               ref={webcamRef}
               screenshotFormat="image/jpeg"
               audio={false}
-              mirrored={true}
+              mirrored={facingMode === FACING_MODE_USER && true}
               // imageSmoothing={true}
               width={
                 mobile
@@ -302,7 +302,6 @@ const Modal = ({ onCloseModal, version }) => {
               height={
                 mobile ? "" : vidConfigIdx === 2 ? (100 * 4) / 3 + "%" : "100%"
               }
-              // height={mobile ? "" : "100%"}
               style={{ position: "absolute" }}
               videoConstraints={{
                 ...videoConstraints,
