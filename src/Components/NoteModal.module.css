@@ -56,12 +56,12 @@
   justify-self: center;
   align-self: flex-start;
   width: 78vw;
-  height: 13vh;
+  height: 10vh;
   border: 2px solid black;
   font-family: "kotrahope";
   font-size: 4vh;
   font-weight: 1300;
-  padding: 1vh 4vw;
+  padding: 1.5vh 4vw;
 }
 .noteinput.error {
   grid-area: textarea;

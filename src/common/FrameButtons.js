@@ -314,6 +314,7 @@ const FrameButtons = ({
             onClick={() => {
               setPhase(2);
               onDeletePhoto();
+              onSkinSelect(0);
             }}
             classes={mobile ? "mobile cancel" : "popup cancel"}
           />

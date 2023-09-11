@@ -12,7 +12,7 @@
   position: absolute;
   top: 0;
   left: 0;
-  padding: 0.7vh;
+  padding: 1vh;
   padding-left: 1vh;
 }
 .noteImg {
@@ -24,8 +24,8 @@
   z-index: -1;
 }
 .note {
-  width: 40vw;
-  height: 16.3vw;
+  width: 50vw;
+  height: 21vw;
   word-break: keep-all;
   position: absolute;
   top: 100vh;

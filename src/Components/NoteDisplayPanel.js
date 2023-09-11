@@ -41,7 +41,7 @@ const NoteDisplayPanel = () => {
       id: 1,
       type: "note",
       timestamp: "1",
-      content: "안녕하세요 이건 좀 긴 텍스트입니다.",
+      content: "방명록인데 근데 말이 존나 길면 어떡하지 이만큼 쓸수있음.",
     },
     {
       id: 2,
@@ -63,6 +63,12 @@ const NoteDisplayPanel = () => {
     },
     {
       content: "홍민재 잼민이",
+    },
+    {
+      content: "정정환 짱짱맨",
+    },
+    {
+      content: "거의다 만들었다!!!",
     },
   ]);
 
@@ -90,94 +96,12 @@ const NoteDisplayPanel = () => {
     // setIsLoading(false);
   };
 
-  // const pushNote = (idx, content) => {
-  //   const newNote = <Note key={idx} content={content} />;
-  //   const newNoteStack = [...noteStack, newNote];
-  //   setNoteStack(newNoteStack);
-  //   return;
-  // };
 
-  // await getNotes();
-  // useEffect(async () => {
-  //   let idx = 0;
-  //   while (idx < notes.length) {
-  //     console.log("idx: " + idx);
-  //     const randomInterval = 2000 + Math.random() * 3000; //2초 ~ 5초
-  //     const data = notes[idx].content;
-  //     if (idx === 0) {
-  //       pushNote(data);
-  //       idx++;
-  //       continue;
-  //     }
-  //     const timer = setTimeout(() => {
-  //       pushNote(data);
-  //       idx++;
-  //     }, randomInterval);
-  //   }
-  // }, []);
-
-  // useEffect(async() => {
-  //   let idx = 0;
-  //   while (idx < notes.length) {
-  //     console.log("idx: " + idx);
-  //     const data = notes[idx].content;
-  //     if (idx === 0) {
-  //       pushNote(idx, data);
-  //       idx++;
-  //       continue;
-  //     }
-  //     const randomInterval = 2000 + Math.random() * 3000; //2초 ~ 5초
-  //     const delay = setInterval(() => {
-  //       pushNote(idx, data);
-  //       idx++;
-  //     }, randomInterval);
-  //     return () => clearInterval(delay);
-  //   }
-  // }, []);
-
-  // const [randomInterval, setRandomInterval] = useState(0.1);
-  // useEffect(() => {
-  //   let idx = 0;
-  //   const interval = setInterval(() => {
-  //     if (idx < notes.length) {
-  //       console.log(idx);
-  //       const data = notes[idx].content;
-  //       setNoteStack((prevStack) => [
-  //         ...prevStack,
-  //         <Note key={idx} content={data} />,
-  //       ]);
-  //       idx++;
-  //     } else {
-  //       clearInterval(interval);
-  //     }
-  //   }, [randomInterval]);
-
-  //   return () => clearInterval(interval);
-  // }, []);
-
-  // useEffect(() => {
-  //   let idx = 0;
-  //   let randomInterval = 0.1;
-  //   while (idx < notes.length) {
-  //     console.log(idx);
-  //     const data = notes[idx].content;
-  //     setNoteStack((prevStack) => [
-  //       ...prevStack,
-  //       <Note key={idx} content={data} />,
-  //     ]);
-
-  //     const interval = setTimeout(() => {
-  //       if (idx !== 0) randomInterval = 2000 + Math.random() * 3000;
-  //       clearTimeout(interval);
-  //     }, [5000]);
-  //     idx++;
-  //   }
-  // }, []);
   useEffect(() => {
     for (let i = 0; i < notes.length; i++) {
-      const randomInterval = 2000 + Math.random() * 3000;
-      console.log(randomInterval / 1000);
-      setDelay(i, randomInterval);
+      const randomInterval = 1000 + Math.random() * 4000;
+      if(i===0 ) setDelay(0,0);
+      else setDelay(i, randomInterval + i*3000);
     }
   }, []);
   const setDelay = (idx, randomInterval) => {

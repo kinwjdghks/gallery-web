@@ -72,6 +72,7 @@ const Modal = ({ onCloseModal }) => {
         onFocus={() => setMessage(null)}
         className={`${styles.noteinput} ${message && styles.error}`}
         ref={contentRef}
+        placeholder="타인에게 불편을 주는 말은 삼가주세요."
       />
 
       {message}
