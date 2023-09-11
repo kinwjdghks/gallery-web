@@ -79,7 +79,7 @@ const Modal = ({ onCloseModal }) => {
         justifySelf: "flex-end"
          }}/>
       <textarea
-        autoFocus
+        // autoFocus
         onFocus={() => setMessage(null)}
         className={`${styles.noteinput} ${message && styles.error}`}
         ref={contentRef}
