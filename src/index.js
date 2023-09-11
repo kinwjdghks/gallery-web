@@ -9,9 +9,9 @@ import DisplayProvider from "./Context/provider/DisplayContextProvider";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   // <React.StrictMode>
-    <DisplayProvider>
+  <DisplayProvider>
     <App />
-    </DisplayProvider>
+  </DisplayProvider>
   // </React.StrictMode>
 );
 

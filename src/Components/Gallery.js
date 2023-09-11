@@ -20,7 +20,7 @@ import githubIconBlack from "../assets/Images/github-icon-black.png";
 import githubIconWhite from "../assets/Images/github-icon-white.png";
 
 const Gallery = ({ version }) => {
-  const mobile = version==='mobile';
+  const mobile = version === "mobile";
   const darkmode = useContext(DisplayContext).darkmode;
   const [photos, setPhotos] = useState([]);
 
@@ -35,11 +35,12 @@ const Gallery = ({ version }) => {
     <img
       src={darkmode ? scrollDown_white : scrollDown}
       key={0}
-      style={{ 
-        position: "absolute", 
-        top: mobile ? 200 : 700, 
-        left: mobile ? 5 :110, 
-        width: mobile ? "7vw" : '57px' }}
+      style={{
+        position: "absolute",
+        top: mobile ? 200 : 700,
+        left: mobile ? 5 : 110,
+        width: mobile ? "7vw" : "57px",
+      }}
     />,
   ]);
   const background = useRef(null);
@@ -52,17 +53,22 @@ const Gallery = ({ version }) => {
   useEffect(() => {
     if (background.current) {
       const cnt = arrows.length;
-      
-      if (mobile && ((cnt + 1) * 450 < backgroundHeight) || !mobile && ((cnt + 1) * 1000 < backgroundHeight)) {
+
+      if (
+        (mobile && (cnt + 1) * 450 < backgroundHeight) ||
+        (!mobile && (cnt + 1) * 1000 < backgroundHeight)
+      ) {
         const newArr = [
           ...arrows,
           <img
             src={darkmode ? scrollDown_white : scrollDown}
             key={cnt + 1}
-            style={{ position: "absolute",
-             top: mobile? (cnt * 450 + 200):(cnt * 1000 + 700),
-             left: mobile ? 5 :110,
-             width: mobile ? "7vw" : '57px'  }}
+            style={{
+              position: "absolute",
+              top: mobile ? cnt * 450 + 200 : cnt * 1000 + 700,
+              left: mobile ? 5 : 110,
+              width: mobile ? "7vw" : "57px",
+            }}
           />,
         ];
         setArrows(newArr);
@@ -100,7 +106,6 @@ const Gallery = ({ version }) => {
         limit(10)
       );
     } else {
-      //first query
       queryTemp = query(
         collection(db, "Photos"),
         orderBy("timestamp", "desc"),
@@ -144,7 +149,17 @@ const Gallery = ({ version }) => {
         style={{ backgroundColor: darkmode ? "#484848" : "#e0e0e0" }}
         ref={background}
       >
-        {!photos.length && !isLoading && <div className={styles.noPic} style={{color: darkmode ? "white" : "black", transition: "all 0.5s"}}>사진이 없습니다!</div>}
+        {!photos.length && !isLoading && (
+          <div
+            className={styles.noPic}
+            style={{
+              color: darkmode ? "white" : "black",
+              transition: "all 0.5s",
+            }}
+          >
+            사진이 없습니다!
+          </div>
+        )}
 
         {photos.length > 0 && (
           <div className={styles.albumContainer}>
@@ -163,8 +178,10 @@ const Gallery = ({ version }) => {
       </div>
       {!endOfData && <div className={styles.pageEnd} ref={pageEnd} />}
       {endOfData && (
-        <div className={styles.footer}
-          style={{backgroundColor: darkmode ? "rgb(72, 72, 72)":"#e0e0e0"}}>
+        <div
+          className={styles.footer}
+          style={{ backgroundColor: darkmode ? "rgb(72, 72, 72)" : "#e0e0e0" }}
+        >
           <a
             href="https://github.com/skku-comit/gallery-web"
             className={styles.githubLink}
@@ -173,12 +190,17 @@ const Gallery = ({ version }) => {
               src={darkmode ? githubIconWhite : githubIconBlack}
               alt="github-icon"
               rel="external"
-              style={{width: mobile ? "40px" : "75px"}}
+              style={{ width: mobile ? "40px" : "75px" }}
             />
           </a>
-          <div className={styles.footertext} style={{color:darkmode ? "rgb(255, 255, 255, 0.8)":'#767676',
-        fontSize: mobile ? "0.9rem": "1.4rem",
-        transition: "all 0.5s"}}>
+          <div
+            className={styles.footertext}
+            style={{
+              color: darkmode ? "rgb(255, 255, 255, 0.8)" : "#767676",
+              fontSize: mobile ? "0.9rem" : "1.4rem",
+              transition: "all 0.5s",
+            }}
+          >
             <p>Made by Jung Jung Hwan & Kim Ji Ho & Hong Min Jae</p>
             <p>https://comit.skku.io/</p>
             <p>2023. Copyright © COMIT All rights reserved</p>
