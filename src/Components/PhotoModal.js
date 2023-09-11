@@ -295,9 +295,9 @@ const Modal = ({ onCloseModal, version }) => {
               width={
                 mobile ? "100%" : ""
               }
-              // height={
-              //   mobile ? "" : vidConfigIdx === 2 ? (100 * 4) / 3 + "%" : "100%"
-              // }
+              height={
+                !mobile ? "100%" : ""
+              }
               style={{ position: "absolute" }}
               videoConstraints={{
                 ...videoConstraints,
