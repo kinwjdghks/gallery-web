@@ -277,9 +277,9 @@ const Modal = ({ onCloseModal, version }) => {
         {mobile && photoAnimation}
         {skinElement}
         {version === "mobile" && !imgfile && !photoAnimation && (
-          <img
-            src={ConvertCamera}
-            alt="convertcamera"
+          <div
+            // src={ConvertCamera}
+            // alt="convertcamera"
             className={styles.convertCamera}
             onClick={handleFacingMode}
           />
@@ -306,7 +306,13 @@ const Modal = ({ onCloseModal, version }) => {
 
       <div
         className={styles.actions}
-        style={{ backgroundColor: mobile ? (darkmode ? "#C9B3EF" : "#C9B3EF") : "white" }}
+        style={{
+          backgroundColor: mobile
+            ? darkmode
+              ? "#C9B3EF"
+              : "#C9B3EF"
+            : "white",
+        }}
       >
         <FrameButtons
           isLoading={isLoading}

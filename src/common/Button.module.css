@@ -13,7 +13,7 @@
   z-index: 0;
   border-radius: 0.35em;
   word-break: keep-all;
-  line-height:120%;
+  line-height: 120%;
 }
 
 .btn:active {
@@ -55,7 +55,7 @@
 } */
 .cancel.note {
   grid-area: cancel;
-  margin-top: 5vh;
+  margin-top: 2vh;
 }
 .save {
   grid-area: save;
@@ -67,7 +67,7 @@
 } */
 .save.note {
   grid-area: save;
-  margin-top: 5vh;
+  margin-top: 2vh;
 }
 /* Next */
 .takePhoto {
@@ -76,8 +76,7 @@
   align-self: self-start;
   font-weight: 600;
   font-size: 60pt;
-} 
-
+}
 
 /* Frame */
 .framebtn {
@@ -88,7 +87,7 @@
 .square {
   grid-area: square;
 }
-.popup.square{
+.popup.square {
   align-self: flex-end;
   margin-bottom: 2vw;
 }

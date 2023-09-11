@@ -16,9 +16,8 @@ import {
   startAfter,
 } from "firebase/firestore/lite";
 //images
-import githubIcon from "../assets/Images/github-icon.png";
-
-
+import githubIconBlack from "../assets/Images/github-icon-black.png";
+import githubIconWhite from "../assets/Images/github-icon-white.png";
 
 const Gallery = ({ version }) => {
   const darkmode = useContext(DisplayContext).darkmode;
@@ -31,7 +30,13 @@ const Gallery = ({ version }) => {
 
   // scrolldown 배치 코드
   const [backgroundHeight, setBackgroundHeight] = useState(0);
-  const [arrows, setArrows] = useState([<img src = {darkmode ? scrollDown_white : scrollDown} key={0} style={{position:'absolute', top:700, left:110}} />]);
+  const [arrows, setArrows] = useState([
+    <img
+      src={darkmode ? scrollDown_white : scrollDown}
+      key={0}
+      style={{ position: "absolute", top: 700, left: 110 }}
+    />,
+  ]);
   const background = useRef(null);
   useEffect(() => {
     if (background.current) {
@@ -45,7 +50,11 @@ const Gallery = ({ version }) => {
       if ((cnt + 1) * 1000 < backgroundHeight) {
         const newArr = [
           ...arrows,
-          <img src ={darkmode ? scrollDown_white : scrollDown} key={cnt + 1} style={{position:'absolute', top:cnt * 1000 + 700, left:110}} />,
+          <img
+            src={darkmode ? scrollDown_white : scrollDown}
+            key={cnt + 1}
+            style={{ position: "absolute", top: cnt * 1000 + 700, left: 110 }}
+          />,
         ];
         setArrows(newArr);
       }
@@ -122,39 +131,50 @@ const Gallery = ({ version }) => {
 
   return (
     <>
-      
       <div
         className={styles.background}
-        style={{backgroundColor: darkmode?"#484848":'#e0e0e0'}}
+        style={{ backgroundColor: darkmode ? "#484848" : "#e0e0e0" }}
         ref={background}
       >
         {!photos.length && <div className={styles.noPic}>사진찍기 ㄱㄱ</div>}
         {photos.length > 0 && (
           <div className={styles.albumContainer}>
             {photos.map((data, index) => {
-                if (data.type ==="blank") {
-                  
-              // if (data.url === "blank") {
+              if (data.type === "blank") {
+                // if (data.url === "blank") {
                 return <BlankAlbum key={index} />;
-              }
-              else if(data.type==="photo"){
+              } else if (data.type === "photo") {
                 return <Album key={index} data={data} />;
+              } else {
               }
-              else{}
             })}
           </div>
         )}
         {isLoading && <div className={styles.loadingDiv}>Loading...</div>}
-        {version!== 'mobile' && arrows}
+        {version !== "mobile" && arrows}
       </div>
       {!endOfData && <div className={styles.pageEnd} ref={pageEnd} />}
-      {endOfData && (
+      {version !== "mobile" && endOfData && (
         <div className={`${styles.footer} ${darkmode && styles.darkmode}`}>
           <a
             href="https://github.com/skku-comit/gallery-web"
             className={styles.githubLink}
           >
-            <img src={githubIcon} alt="github-icon" rel="external" width="75" />
+            {darkmode ? (
+              <img
+                src={githubIconWhite}
+                alt="github-icon"
+                rel="external"
+                width="75"
+              />
+            ) : (
+              <img
+                src={githubIconBlack}
+                alt="github-icon"
+                rel="external"
+                width="75"
+              />
+            )}
           </a>
           <div className={styles.text}>
             <p>Made by Jung Jung Hwan & Kim Ji Ho & Hong Min Jae</p>
