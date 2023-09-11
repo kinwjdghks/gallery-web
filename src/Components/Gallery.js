@@ -18,8 +18,6 @@ import {
 //images
 import githubIcon from "../assets/Images/github-icon.png";
 
-
-
 const Gallery = ({ version }) => {
   const darkmode = useContext(DisplayContext).darkmode;
   const [photos, setPhotos] = useState([]);
@@ -31,7 +29,13 @@ const Gallery = ({ version }) => {
 
   // scrolldown 배치 코드
   const [backgroundHeight, setBackgroundHeight] = useState(0);
-  const [arrows, setArrows] = useState([<img src = {darkmode ? scrollDown_white : scrollDown} key={0} style={{position:'absolute', top:700, left:110}} />]);
+  const [arrows, setArrows] = useState([
+    <img
+      src={darkmode ? scrollDown_white : scrollDown}
+      key={0}
+      style={{ position: "absolute", top: 700, left: 110 }}
+    />,
+  ]);
   const background = useRef(null);
   useEffect(() => {
     if (background.current) {
@@ -45,7 +49,11 @@ const Gallery = ({ version }) => {
       if ((cnt + 1) * 1000 < backgroundHeight) {
         const newArr = [
           ...arrows,
-          <img src ={darkmode ? scrollDown_white : scrollDown} key={cnt + 1} style={{position:'absolute', top:cnt * 1000 + 700, left:110}} />,
+          <img
+            src={darkmode ? scrollDown_white : scrollDown}
+            key={cnt + 1}
+            style={{ position: "absolute", top: cnt * 1000 + 700, left: 110 }}
+          />,
         ];
         setArrows(newArr);
       }
@@ -111,41 +119,38 @@ const Gallery = ({ version }) => {
     setIsLoading(false);
   };
 
-  useEffect(() => {
-    window.scroll({
-      top: 0,
-      behavior: "instant",
-    });
-    getMorePhotos();
-    console.log("initial data request");
-  }, []);
+  // useEffect(() => {
+  //   window.scroll({
+  //     top: 0,
+  //     behavior: "instant",
+  //   });
+  //   getMorePhotos();
+  //   console.log("initial data request");
+  // }, []);
 
   return (
     <>
-      
       <div
         className={styles.background}
-        style={{backgroundColor: darkmode?"#484848":'#e0e0e0'}}
+        style={{ backgroundColor: darkmode ? "#484848" : "#e0e0e0" }}
         ref={background}
       >
         {!photos.length && <div className={styles.noPic}>사진찍기 ㄱㄱ</div>}
         {photos.length > 0 && (
           <div className={styles.albumContainer}>
             {photos.map((data, index) => {
-                if (data.type ==="blank") {
-                  
-              // if (data.url === "blank") {
+              if (data.type === "blank") {
+                // if (data.url === "blank") {
                 return <BlankAlbum key={index} />;
-              }
-              else if(data.type==="photo"){
+              } else if (data.type === "photo") {
                 return <Album key={index} data={data} />;
+              } else {
               }
-              else{}
             })}
           </div>
         )}
         {isLoading && <div className={styles.loadingDiv}>Loading...</div>}
-        {version!== 'mobile' && arrows}
+        {version !== "mobile" && arrows}
       </div>
       {!endOfData && <div className={styles.pageEnd} ref={pageEnd} />}
       {endOfData && (

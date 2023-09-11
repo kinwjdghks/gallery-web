@@ -277,9 +277,9 @@ const Modal = ({ onCloseModal, version }) => {
         {mobile && photoAnimation}
         {skinElement}
         {version === "mobile" && !imgfile && !photoAnimation && (
-          <img
-            src={ConvertCamera}
-            alt="convertcamera"
+          <div
+            // src={ConvertCamera}
+            // alt="convertcamera"
             className={styles.convertCamera}
             onClick={handleFacingMode}
           />
@@ -287,7 +287,7 @@ const Modal = ({ onCloseModal, version }) => {
         <div className={`${styles.cam_mask} ${classNameByConfig}`}>
           {imgpreview}
           {imgfile && <div className={styles.shutter}></div>}
-          {!imgfile && (
+          {/* {!imgfile && (
             <Webcam
               className={styles.webcam}
               ref={webcamRef}
@@ -300,7 +300,7 @@ const Modal = ({ onCloseModal, version }) => {
               style={{ position: "absolute" }}
               facingMode={faceMode}
             />
-          )}
+          )} */}
         </div>
       </div>
 
