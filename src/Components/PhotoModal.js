@@ -145,7 +145,7 @@ const Modal = ({ onCloseModal, version }) => {
       await uploadString(storageRef, file, "data_url");
       const geturl = await getDownloadURL(sRef(storage, storageRef));
       await saveToFireStore(geturl);
-      console.log("Image url: " + geturl);
+      // console.log("Image url: " + geturl);
     } catch (error) {
       console.log(error);
     }
