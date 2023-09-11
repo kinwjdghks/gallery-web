@@ -257,7 +257,7 @@ const Modal = ({ onCloseModal, version }) => {
   });
   const FACING_MODE_USER = "user";
   const FACING_MODE_ENVIRONMENT = "environment";
-  const [faceMode, setFaceMode] = useState(FACING_MODE_USER);
+  const [faceMode, setFaceMode] = useState(FACING_MODE_ENVIRONMENT);
 
   const handleFacingMode = useCallback(() => {
     setFaceMode((prevState) =>
