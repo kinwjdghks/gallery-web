@@ -35,10 +35,10 @@ const Modal = ({ onCloseModal }) => {
     if (!contentRef) return;
 
     const content = contentRef.current.value.toString().trim();
-    // if (content.length < 10) {
-    //   setMessage(<div className={styles.message}>10글자는 써죠잉 ㅜㅜ</div>);
-    //   return;
-    // }
+    if (content.length <1) {
+      setMessage(<div className={styles.message}>뭐라도 써죠잉 ㅜㅜ</div>);
+      return;
+    }
     let id = new Date().getTime() % 100000000;
     const timestamp = serverTimestamp();
 
@@ -58,11 +58,12 @@ const Modal = ({ onCloseModal }) => {
   };
   return (
     <div className={styles.container} ref={containerRef}>
+      <div className={styles.grid}>
       <div className={styles.title}>기깔나는 방명록을 남겨보아요</div>
 
       <textarea
         autoFocus
-        // onFocus={() => setMessage(null)}
+        onFocus={() => setMessage(null)}
         className={`${styles.noteinput} ${message && styles.error}`}
         ref={contentRef}
       />
@@ -86,6 +87,7 @@ const Modal = ({ onCloseModal }) => {
       >
         저장하기
       </Button>
+      </div>
       {/* </div> */}
       {/* <img
         style={{ position: "absolute", bottom: "15vw" }}

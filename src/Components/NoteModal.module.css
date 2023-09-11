@@ -11,13 +11,19 @@
   box-sizing: border-box;
   width: 100vw;
   height: 50vh;
-  padding-bottom: 15vh;
   bottom: -100%;
   border-radius: 10vw 10vw 0 0;
   background-color: white;
-
   position: fixed;
   z-index: 32;
+  cursor: url("../assets/Images/mouse-pointer-white.png") 25 25, auto;
+  transition: bottom 0.6s ease;
+}
+.grid{
+  width:90%;
+  height: 85%;
+  padding: 5% 5% 10% 5%;
+
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr 4fr 2fr;
@@ -25,16 +31,15 @@
     "title title"
     "textarea textarea"
     "cancel save";
-  cursor: url("../assets/Images/mouse-pointer-white.png") 25 25, auto;
-  transition: bottom 0.6s ease;
+
 }
 
 .title {
   grid-area: title;
   justify-self: center;
   align-self: center;
-  font-size: 7vw;
-  width: min(450px, 70vw);
+  font-size: 8vw;
+  width: min(350px, 60vw);
   font-family: "gangwonedu";
   padding: 8vw 12vw;
   text-align: center;
@@ -86,7 +91,7 @@
   justify-content: space-between;
   margin: 5vw;
   position: absolute;
-  top: 60vh;
+  bottom: 5vh;
 }
 
 /* .message {

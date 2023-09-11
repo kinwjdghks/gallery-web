@@ -212,7 +212,7 @@
   right: 3%;
   width: 20%;
   aspect-ratio: 1/1;
-  background-color: #ed743f;
+  /* background-color: #ed743f; */
 }
 @keyframes shutter {
   from {
