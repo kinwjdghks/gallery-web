@@ -21,7 +21,7 @@ const Modal = ({ onCloseModal }) => {
   useEffect(() => {
     if (containerRef) {
       setTimeout(() => {
-        containerRef.current.style.bottom = "0%";
+        containerRef.current.style.bottom = "0";
       }, 100);
     }
   }, []);
@@ -35,15 +35,9 @@ const Modal = ({ onCloseModal }) => {
   const contentRef = useRef(null);
   const [message, setMessage] = useState("");
 
-  const saveToFireStore = async () => {
+  const saveToFireStore = async (content) => {
     setIsLoading(true);
-    if (!contentRef) return;
-
-    const content = contentRef.current.value.toString().trim();
-    if (content.length <1) {
-      setMessage(<div className={styles.message}>뭐라도 써죠잉 ㅜㅜ</div>);
-      return;
-    }
+    
     let id = new Date().getTime() % 100000000;
     const timestamp = serverTimestamp();
 
@@ -64,7 +58,14 @@ const Modal = ({ onCloseModal }) => {
     
   };
   const saveNote = async () => {
-    await saveToFireStore();
+    if (!contentRef) return;
+
+    const content = contentRef.current.value.toString().trim();
+    if (content.length <1) {
+      setMessage(<div className={styles.message}>뭐라도 써죠잉 ㅜㅜ</div>);
+      return;
+    }
+    await saveToFireStore(content);
     closeModalHandler();
     window.location.reload();
   };
@@ -79,7 +80,7 @@ const Modal = ({ onCloseModal }) => {
         justifySelf: "flex-end"
          }}/>
       <textarea
-        autoFocus
+        // autoFocus
         onFocus={() => setMessage(null)}
         className={`${styles.noteinput} ${message && styles.error}`}
         ref={contentRef}

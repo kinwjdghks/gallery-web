@@ -21,7 +21,13 @@ const App = () => {
   const version = PC ? "pc" : TABLET ? "tablet" : "mobile";
   const [modal, setModal] = useState("noModal"); //modal: 'noModal', 'photo', 'note'
   const modalHandler = useCallback((which) => setModal(which), []);
-
+  useEffect(()=>{
+    window.scroll({
+      top: 0,
+      behavior: "instant",
+    });
+  },[modal]);
+  
   return (
     <div className="App">
       {modal === "photo" && (
