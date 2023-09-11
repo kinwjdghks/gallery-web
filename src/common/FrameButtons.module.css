@@ -113,6 +113,26 @@
     transform: rotate(0deg);
   }
 }
+@keyframes wiggle2 {
+  0% {
+    transform: rotate(0deg);
+  }
+  80% {
+    transform: rotate(0deg);
+  }
+  85% {
+    transform: rotate(25deg);
+  }
+  90% {
+    transform: rotate(-20deg);
+  }
+  95% {
+    transform: rotate(15deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
 .photobooth {
   position: relative;
   color: black;
@@ -181,6 +201,10 @@
 .loading {
   animation: rotate 1s ease-out infinite;
 }
+.ThumbImage{
+  animation: wiggle2 3s infinite;
+}
+
 @keyframes rotate {
   0% {
     transform: rotate(0deg);
@@ -190,6 +214,7 @@
     transform: rotate(360deg);
   }
 }
+
 
 @media (min-width: 1024px) {
   .container {

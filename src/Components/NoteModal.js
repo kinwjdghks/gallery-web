@@ -7,6 +7,7 @@ import { db } from "../Utility/firebase";
 import { collection, doc, setDoc } from "firebase/firestore/lite";
 import { serverTimestamp } from "firebase/firestore/lite";
 import logo from "../assets/Images/Logo.svg";
+import smile명륜 from "../assets/Images/smile명륜.svg";
 
 const BackDrop = () => {
   return <div className={styles.backdrop}></div>;
@@ -59,8 +60,13 @@ const Modal = ({ onCloseModal }) => {
   return (
     <div className={styles.container} ref={containerRef}>
       <div className={styles.grid}>
-      <div className={styles.title}>기깔나는 방명록을 남겨보아요</div>
-
+      <div className={styles.title}>기깔나는 방명록을 남겨보아요!</div>
+      <img src={smile명륜} style={{
+        width: "50%",
+        gridArea: "title",
+        alignSelf:"flex-end",
+        justifySelf: "flex-end"
+         }}/>
       <textarea
         autoFocus
         onFocus={() => setMessage(null)}

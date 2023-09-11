@@ -22,18 +22,21 @@ const Header = ({ onModalHandler, version }) => {
     <div className={styles.header}
     style={{backgroundColor: darkmode?"#484848":'#e0e0e0'}}>
       <div className={styles.comitPhoto}>
+        <div style={{display:'flex', alignItems:'center'}}>
         <p className={styles.comit}
         style={{
-          color: darkmode?"#997aec":'#7556cb',
-          transition:'color 0.6s',
-          textShadow: darkmode?"3px 5px 1px black":"3px 5px 1px black"}}>
+          color: darkmode?"#C9B3EF":'#603ebb',
+          transition:'all 0.6s',
+          textShadow: darkmode?"3px 5px 1px black":"none"}}>
           COMIT
         </p>
-        <p className={`${styles.photobooth} ${darkmode && styles.darkmode}`}>
+        <Logo className={styles.logo} />
+        </div>
+        <p className={styles.photobooth} style={{color: darkmode? "white" : "black"}}>
           Photo Booth
         </p>
       </div>
-      <Logo className={styles.logo} />
+      
 
       {!mobile && (
         <Button

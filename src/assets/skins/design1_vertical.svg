@@ -8,10 +8,10 @@
 </g>
 </mask>
 <g mask="url(#mask0_199_254)">
-<rect x="-37" y="193" width="625" height="168" fill="url(#pattern0)"/>
+<rect x="-37" y="193" width="625" height="168" fill="url(#design1_vertical)"/>
 </g>
 <defs>
-<pattern id="pattern0" patternContentUnits="objectBoundingBox" width="1" height="1">
+<pattern id="design1_vertical" patternContentUnits="objectBoundingBox" width="1" height="1">
 <use xlink:href="#image0_199_254" transform="matrix(0.00029753 0 0 0.00110688 0 -0.000865141)"/>
 </pattern>
 <linearGradient id="paint0_linear_199_254" x1="160.493" y1="-279.965" x2="160.493" y2="326.272" gradientUnits="userSpaceOnUse">

@@ -21,25 +21,19 @@
   row-gap: 2vw;
   column-gap: 2vw;
   width: 84vw;
-  margin-top: calc(22vw + 20px);
+  margin-top: calc(22vw + 10px);
+  margin-bottom: 10px;
+  margin-left: 3vw;
+  margin-right: -3vw;
   border-radius: 30px;
   padding: 5vw 3vw;
   background-color: #d6d6d6;
 }
-@media (min-width: 1024px) {
-  .albumContainer {
-    display: grid;
-    margin-top: 240px;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    grid-auto-rows: 350px;
-    row-gap: 30px;
-    column-gap: 25px;
-    width: 1475px;
-    border-radius: 30px;
-    padding: 30px;
-    padding-bottom: 40px;
-    margin-bottom: 200px;
-  }
+.footer{
+  padding: 15px 0;
+}
+.footer img{
+  margin-right: -10px;
 }
 
 .pageEnd {
@@ -51,16 +45,17 @@
   height: 80px;
   text-align: center;
   font-family: "cocogoose";
-  font-size: 40px;
+  font-size: 35px;
   font-weight: 900;
+  margin-bottom: 110px;
 }
 .noPic {
   width: 100vw;
   height: 80px;
   text-align: center;
   font-family: "gangwonedu";
-  font-size: 100px;
-  font-weight: 900;
+  font-size: 50px;
+  font-weight: 500;
   margin-top: 500px;
 }
 
@@ -68,27 +63,57 @@
   background-color: #e0e0e0;
   color: #767676;
   margin: 0;
-  padding-bottom: 15px;
+  padding-bottom: 110px;
   display: flex;
   justify-content: center;
   align-items: center;
+  transition: all 0.6s;
 }
-.footer.darkmode {
-  transition: all 0.5s;
-  background-color: rgb(72, 72, 72);
-  color: rgb(255, 255, 255, 0.8);
-}
+
 .footer img {
   position: relative;
   right: 20px;
 }
-.text p {
+.footertext p {
   font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
 
-  font-size: 1.4rem;
+  /* font-size: 1.4rem; */
 
   margin: 0.1rem;
 }
 .githubLink:hover {
   cursor: url("../assets/Images/mouse-pointer-white.png") 25 25, auto;
+}
+
+@media (min-width: 1024px) {
+  .albumContainer {
+    display: grid;
+    margin-top: 240px;
+    margin-left:0;
+    margin-right:0;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-auto-rows: 350px;
+    row-gap: 30px;
+    column-gap: 25px;
+    width: 1475px;
+    border-radius: 30px;
+    padding: 30px;
+    padding-bottom: 40px;
+    margin-bottom: 200px;
+  }
+  .loadingDiv{
+    margin-bottom: 0;
+  }
+  .noPic {
+    width: 100vw;
+    height: 80px;
+    text-align: center;
+    font-family: "gangwonedu";
+    font-size: 100px;
+    font-weight: 900;
+    margin-top: 500px;
+  }
+  .footer{
+    padding-bottom: 10px;
+  }
 }

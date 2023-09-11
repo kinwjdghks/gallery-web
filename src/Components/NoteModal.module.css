@@ -10,10 +10,10 @@
 .container {
   box-sizing: border-box;
   width: 100vw;
-  height: 50vh;
+  height: 55vh;
   bottom: -100%;
   border-radius: 10vw 10vw 0 0;
-  background-color: white;
+  background-color: #C9B3EF;
   position: fixed;
   z-index: 32;
   cursor: url("../assets/Images/mouse-pointer-white.png") 25 25, auto;
@@ -21,12 +21,12 @@
 }
 .grid{
   width:90%;
-  height: 85%;
-  padding: 5% 5% 10% 5%;
+  height: 90%;
+  padding: 5% 5% 5% 5%;
 
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr 4fr 2fr;
+  grid-template-rows: 1fr 1.5fr 60px;
   grid-template-areas:
     "title title"
     "textarea textarea"
@@ -36,13 +36,19 @@
 
 .title {
   grid-area: title;
-  justify-self: center;
-  align-self: center;
-  font-size: 8vw;
-  width: min(350px, 60vw);
+  justify-self: flex-start;
+  align-self: flex-start;
+  font-size: 9vw;
+  /* width: min(76% , 60vw); */
+  width: 75%;
   font-family: "gangwonedu";
-  padding: 8vw 12vw;
-  text-align: center;
+  /* padding: 3vh 12vw; */
+  /* padding-bottom: 8vh; */
+  padding: 1vh 0 7vh 3vw;
+
+  
+  color: white;
+  text-shadow: 3px 4px 6px rgb(102, 102, 102);
 }
 
 .noteinput {
@@ -50,18 +56,18 @@
   justify-self: center;
   align-self: flex-start;
   width: 78vw;
-  height: 25vw;
+  height: 13vh;
   border: 2px solid black;
   font-family: "kotrahope";
-  font-size: 10vw;
+  font-size: 4vh;
   font-weight: 1300;
-  padding: 2vw 4vw;
-  margin-bottom: 20px;
+  padding: 1vh 4vw;
 }
 .noteinput.error {
   grid-area: textarea;
   border: 2px solid red;
   animation: shake 0.2s;
+  
 }
 @keyframes shake {
   0% {
@@ -94,11 +100,11 @@
   bottom: 5vh;
 }
 
-/* .message {
+.message {
   grid-area: textarea;
   justify-self: center;
   align-self: flex-start;
-  font-size: 5vw;
+  font-size: 1.5rem;
   font-family: "gangwonedu";
-
-} */
+  margin-top: calc(13vh + 1.5rem + 10px);
+}

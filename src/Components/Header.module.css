@@ -14,34 +14,39 @@
 .comitPhoto {
   font-family: "cocogoose";
   font-weight: 900;
-  font-size: 10vw;
+  font-size: 9vw;
   line-height: normal;
 
+  width: 50%;
   position: absolute;
   top: 0;
-  left: 50vw;
-  transform: translate(-50%, 0%);
+  left: 5vw;
+  display: flex;
+  flex-direction: column;
+  /* transform: translate(-50%, 0%); */
 }
 .comit {
-  position: relative;
-  top: 0;
+
   margin: 0;
 }
 
 .photobooth {
+  margin: 0px;
   margin-top: -10px;
-  margin-bottom: 0px;
   font-size: 7vw;
   transition: color 0.5s;
+  width: fit-content;
 }
-.photobooth.darkmode {
-  color: white;
-}
+
 .logo {
-  position: absolute;
-  top: 5vw;
-  left: 8vw;
-  width: 12vw;
+  /* position: absolute; */
+  /* top: 5vw;
+  left: 8vw; */
+  /* margin-top: -2vw; */
+  margin:0;
+  width: 7vw;
+  height: 7vw;
+  margin-left: 15px;
 }
 .togglebtn{
   position: absolute;
@@ -76,24 +81,23 @@
     font-weight: 900;
     font-size: 80px;
     line-height: normal;
-
     position: relative;
     left: calc(50% - 767.5px);
     transform: translate(0%, 0%);
   }
+
   .photobooth {
-    margin-top: -10px;
-    margin-bottom: 0px;
+    margin : 0;
+    margin-top: -20px;
     font-size: 60px;
     transition: color 0.5s;
+    width: fit-content;
   }
   .logo {
-    position: absolute;
-    left: calc(50% - 767.5px - 10px);
-    top: 4vh;
-    transform: translate(-100%, 0%);
-    width: 5vw;
-    height: 5vw;
+    width: 60px;
+    height: 60px;
+    margin-top: 0;
+    margin-left: 20px;
   }
   .togglebtn{
     width:3.5vw;

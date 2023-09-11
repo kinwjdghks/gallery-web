@@ -327,6 +327,7 @@ const Modal = ({ onCloseModal, version }) => {
           onCloseModal={closeModalHandler}
           onFrameSelect={selectVidConfigHandler}
           onSkinSelect={selectSkinHandler}
+          skinIdx={skinIdx}
           version={version}
         />
       </div>

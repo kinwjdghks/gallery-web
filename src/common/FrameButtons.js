@@ -27,6 +27,7 @@ const FrameButtons = ({
   onCloseModal,
   onFrameSelect,
   onSkinSelect,
+  skinIdx,
   version,
 }) => {
   const mobile = version === "mobile";
@@ -83,7 +84,7 @@ const FrameButtons = ({
           />
           <Button
             children="취소"
-            width={mobile ? "60%" : "100%"}
+            width={mobile ? "80%" : "100%"}
             height={mobile ? "60px" : "100px"}
             onClick={() => {
               setPhase(0);
@@ -93,7 +94,7 @@ const FrameButtons = ({
           />
           <Button
             children="다음"
-            width={mobile ? "60%" : "100%"}
+            width={mobile ? "80%" : "100%"}
             height={mobile ? "60px" : "100px"}
             onClick={() => setPhase((prev) => prev + 1)}
             classes={mobile ? "mobile save" : "popup save"}
@@ -120,7 +121,7 @@ const FrameButtons = ({
               </div>
               <Button
                 children="뒤로가기"
-                width="60%"
+                width="80%"
                 onClick={() => {
                   setPhase((prev) => prev - 1);
                 }}
@@ -197,6 +198,7 @@ const FrameButtons = ({
           <img
             src={ThumbImage}
             alt="ThumbImage"
+            className={styles.ThumbImage}
             style={{
               width: mobile ? "30%" : "50%",
               gridArea: "img",
@@ -206,7 +208,7 @@ const FrameButtons = ({
           />
           <Button
             children="이게뭐야 다시찍어"
-            width={mobile ? "60%" : "95%"}
+            width={mobile ? "80%" : "95%"}
             height={mobile ? "60px" : "100px"}
             onClick={() => {
               againHandler();
@@ -216,7 +218,7 @@ const FrameButtons = ({
           />
           <Button
             children="다음"
-            width={mobile ? "60%" : "95%"}
+            width={mobile ? "80%" : "95%"}
             height={mobile ? "60px" : "100px"}
             onClick={() => setPhase((prev) => prev + 1)}
             classes={mobile ? "mobile next" : "popup next"}
@@ -306,28 +308,28 @@ const FrameButtons = ({
             />
           </button>
           <Button
-            children="취소"
-            width={mobile ? "60%" : "95%"}
+            children="취소하기"
+            width={mobile ? "80%" : "95%"}
             height={mobile ? "60px" : "100px"}
             onClick={() => {
               setPhase(2);
               onDeletePhoto();
             }}
-            classes="popup cancel"
+            classes={mobile ? "mobile cancel" : "popup cancel"}
           />
-          <Button
+          {skinIdx ? <Button
             children="저장하기"
-            width={mobile ? "60%" : "95%"}
+            width={mobile ? "80%" : "95%"}
             height={mobile ? "60px" : "100px"}
             onClick={onSavePhoto}
-            classes="popup save"
+            classes={mobile ? "mobile save" : "popup save"}
           >
             {isLoading ? (
               <img width="50" src={loading} className={styles.loading} />
             ) : (
               "저장하기"
             )}
-          </Button>
+          </Button> : null}
         </>
       )}
 

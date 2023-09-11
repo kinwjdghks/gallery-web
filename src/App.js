@@ -38,7 +38,7 @@ const App = () => {
         onModalHandler={(which) => modalHandler(which)}
         version={version}
       />
-      {MOBILE && <NoteDisplayPanel/>}
+      {/* {MOBILE && <NoteDisplayPanel/>} */}
       <Gallery modal={modal} modalHandler={modalHandler} version={version} />
       {MOBILE && (
         <ActionBar
