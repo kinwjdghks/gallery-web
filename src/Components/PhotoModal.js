@@ -306,7 +306,7 @@ const Modal = ({ onCloseModal, version }) => {
 
       <div
         className={styles.actions}
-        style={{ backgroundColor: darkmode ? "#C9B3EF" : "#C9B3EF" }}
+        style={{ backgroundColor: mobile ? (darkmode ? "#C9B3EF" : "#C9B3EF") : "white" }}
       >
         <FrameButtons
           isLoading={isLoading}
