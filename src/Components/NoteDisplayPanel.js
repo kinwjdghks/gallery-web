@@ -97,6 +97,14 @@ const NoteDisplayPanel = () =>{
         setNoteStack(newNoteStack);
         return;
     }
+    useEffect(()=>{
+      console.log(notes.length);
+      let i=0;
+      while(i<notes.length){
+        i++;
+        console.log(i);
+      }
+    },[]);
     // useEffect(async ()=>{
     //     // await getNotes();
     //     let idx = 0;
