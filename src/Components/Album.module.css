@@ -10,14 +10,6 @@
   box-shadow: 5px 6px 1px rgb(168, 168, 168);
 }
 
-@media (min-width: 1024px) {
-  .container {
-    width: 350px;
-    height: 350px;
-    border-radius: 30px;
-  }
-}
-
 .container.opt1 {
   background: linear-gradient(#1f1f61 0%, #755d98 60%, #e0a6b2 100%);
 }
@@ -61,7 +53,8 @@
 .mask {
   left: 7.14%;
   top: 7.14%;
-  border-radius: 10%;
+  /* border-radius: 10%; */
+  border-radius: 2.2vw;
   position: relative;
   display: flex;
   justify-content: center;
@@ -99,4 +92,15 @@
   height: unset;
   width: 100%;
   height: unset;
+}
+@media (min-width: 1024px) {
+  .container {
+    width: 350px;
+    height: 350px;
+    border-radius: 2vw;
+  }
+  .mask {
+    border-radius: 1.2vw;
+    /* border-radius: 30px; */
+  }
 }

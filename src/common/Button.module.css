@@ -80,7 +80,7 @@
 .framebtn {
   justify-self: center;
   align-self: center;
-  /* font-size: 70%; */
+  font-size: 9vw;
 }
 .square {
   grid-area: square;
@@ -117,6 +117,7 @@
 .mobile {
   height: 60px;
   font-weight: 500;
+  font-size: 6.6vw;
 }
 @media (min-width: 1024px) {
   /* normal button design */

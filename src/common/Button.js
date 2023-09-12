@@ -13,20 +13,20 @@ const Button = ({ children, width, height, onClick, classes }) => {
     const style = getStyleByClassName(className) + " ";
     combinedStyles += style;
   });
-  const buttonRef = useRef(null);
-  useEffect(() => {
-    if (buttonRef) {
-      const buttonHeight = buttonRef.current.offsetHeight;
-      // console.log("버튼 세로");
-      // console.log(buttonHeight);
-      // fontsize를 변경합니다.
-      const FontSize = buttonHeight * 0.38;
+  // const buttonRef = useRef(null);
+  // useEffect(() => {
+  //   if (buttonRef) {
+  //     const buttonHeight = buttonRef.current.offsetHeight;
+  //     // console.log("버튼 세로");
+  //     // console.log(buttonHeight);
+  //     // fontsize를 변경합니다.
+  //     const FontSize = buttonHeight * 0.38;
 
-      // 스타일을 적용합니다.
-      buttonRef.current.style.fontSize = `${FontSize}px`;
-      // console.log(buttonRef.current.style.fontSize);
-    }
-  }, []);
+  //     // 스타일을 적용합니다.
+  //     buttonRef.current.style.fontSize = `${FontSize}px`;
+  //     // console.log(buttonRef.current.style.fontSize);
+  //   }
+  // }, []);
 
   //   if (height.indexOf("px") !== -1) {
   //     fontSize = parseInt(height) * 0.35;
@@ -45,7 +45,7 @@ const Button = ({ children, width, height, onClick, classes }) => {
           height: height,
         }}
         onClick={onClick}
-        ref={buttonRef}
+        // ref={buttonRef}
         // onMouseEnter={() => onMouseHover(true)}
         // onMouseLeave={() => onMouseHover(false)}
       >
