@@ -304,7 +304,7 @@
   .photobooth {
     position: relative;
     color: black;
-    top: -25px;
+    top: 15px;
   }
 
   .close {

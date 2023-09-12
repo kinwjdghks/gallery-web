@@ -7,7 +7,7 @@ import { useCallback, useEffect, useState } from "react";
 import { useMediaQuery } from "react-responsive";
 import ActionBar from "./Components/ActionBar";
 import NoteDisplayPanel from "./Components/NoteDisplayPanel";
-
+import {Reset} from "styled-reset";
 const App = () => {
   const PC = useMediaQuery({
     query: "(min-width:1024px)",
@@ -29,6 +29,8 @@ const App = () => {
   },[modal]);
   
   return (
+    <>
+    <Reset/>
     <div className="App">
       {modal === "photo" && (
         <PhotoModal onCloseModal={() => setModal("noModal")} version={version}/>
@@ -50,6 +52,7 @@ const App = () => {
         />
       )}
     </div>
+    </>
   );
 };
 

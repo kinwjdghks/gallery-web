@@ -16,7 +16,7 @@
   padding-left: 0.5vh;
   width: 100%;
   text-align: left;
-  word-break: keep-all;
+  word-break:break-all;
 }
 .noteImg {
   width: 100%;
@@ -29,7 +29,7 @@
 .note {
   width: 50vw;
   height: 21vw;
-  word-break: keep-all;
+  word-break:break-all;
   position: absolute;
   top: 100vh;
   /* top: 50vh; */
