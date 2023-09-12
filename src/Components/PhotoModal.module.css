@@ -89,7 +89,7 @@
   }
 }
 .cam_mask {
-  border-radius: 5px;
+  border-radius: 2.5vw;
   overflow: hidden;
   display: flex;
   justify-content: center;
@@ -236,7 +236,7 @@
   }
 
   .cam_mask {
-    border-radius: 50px;
+    border-radius: 2.5vw;
     overflow: hidden;
     z-index: 0;
 

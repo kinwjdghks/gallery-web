@@ -15,12 +15,19 @@ import note_red2 from "../assets/Images/말풍선4.svg";
 import note_green2 from "../assets/Images/말풍선5.svg";
 import note_yellow2 from "../assets/Images/말풍선6.svg";
 
-const backgrounds = [note_red, note_green, note_yellow];
+const backgrounds = [
+  note_red,
+  note_red2,
+  note_green,
+  note_green2,
+  note_yellow,
+  note_yellow2,
+];
 
 export const Note = ({ content }) => {
   //랜덤 좌표
   const randomCoor = 3 + Math.random() * 50 + "vw";
-  const randomBackground = backgrounds[Math.floor(Math.random() * 3)];
+  const randomBackground = backgrounds[Math.floor(Math.random() * 6)];
   return (
     <>
       <div

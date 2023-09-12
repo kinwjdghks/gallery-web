@@ -66,7 +66,7 @@ const FrameButtons = ({
             width={mobile ? "30vw" : "100%"}
             height={mobile ? "10vh" : "50%"}
             onClick={() => onFrameSelect(0)}
-            classes={mobile ? "framebtn square" : "popup square"}
+            classes={mobile ? "framebtn square" : "framebtn popup square"}
           >
             정방형
           </Button>
@@ -75,7 +75,7 @@ const FrameButtons = ({
             width={mobile ? "30vw" : "100%"}
             height={mobile ? "10vh" : "50%"}
             onClick={() => onFrameSelect(1)}
-            classes={mobile ? "framebtn vertical" : "popup vertical"}
+            classes={mobile ? "framebtn vertical" : "framebtn popup vertical"}
           >
             세로
           </Button>
@@ -84,7 +84,9 @@ const FrameButtons = ({
             width={mobile ? "30vw" : "100%"}
             height={mobile ? "10vh" : "50%"}
             onClick={() => onFrameSelect(2)}
-            classes={mobile ? "framebtn horizontal" : "popup horizontal"}
+            classes={
+              mobile ? "framebtn horizontal" : "framebtn popup horizontal"
+            }
           >
             가로
           </Button>
@@ -101,7 +103,7 @@ const FrameButtons = ({
             취소
           </Button>
           <Button
-          children="다음"
+            children="다음"
             width={mobile ? "80%" : "100%"}
             height={mobile ? "60px" : "100px"}
             onClick={() => setPhase((prev) => prev + 1)}
@@ -121,7 +123,7 @@ const FrameButtons = ({
                 className={styles.takePhoto_mobile}
                 onClick={() => {
                   onStartTimer();
-                  onStartAnimation(5);
+                  onStartAnimation(3);
                   setPhase((prev) => prev + 1);
                   onTakePhoto();
                 }}
@@ -158,7 +160,7 @@ const FrameButtons = ({
                 height="100px"
                 onClick={() => {
                   onStartTimer(); //5초
-                  onStartAnimation(5);
+                  onStartAnimation(3);
                   onTakePhoto();
                   setPhase((prev) => prev + 1);
                 }}
