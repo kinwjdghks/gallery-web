@@ -101,7 +101,7 @@ const FrameButtons = ({
             취소
           </Button>
           <Button
-          children="다음"
+            children="다음"
             width={mobile ? "80%" : "100%"}
             height={mobile ? "60px" : "100px"}
             onClick={() => setPhase((prev) => prev + 1)}
@@ -121,7 +121,7 @@ const FrameButtons = ({
                 className={styles.takePhoto_mobile}
                 onClick={() => {
                   onStartTimer();
-                  onStartAnimation(5);
+                  onStartAnimation(3);
                   setPhase((prev) => prev + 1);
                   onTakePhoto();
                 }}
@@ -158,7 +158,7 @@ const FrameButtons = ({
                 height="100px"
                 onClick={() => {
                   onStartTimer(); //5초
-                  onStartAnimation(5);
+                  onStartAnimation(3);
                   onTakePhoto();
                   setPhase((prev) => prev + 1);
                 }}

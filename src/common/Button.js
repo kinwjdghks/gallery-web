@@ -3,13 +3,7 @@ import { useEffect, useRef } from "react";
 import styles from "./Button.module.css";
 //imports
 
-const Button = ({
-  children,
-  width,
-  height,
-  onClick,
-  classes,
-}) => {
+const Button = ({ children, width, height, onClick, classes }) => {
   const getStyleByClassName = (className) => {
     return styles[className + ""];
   };

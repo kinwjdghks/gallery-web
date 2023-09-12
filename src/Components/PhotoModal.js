@@ -181,7 +181,7 @@ const Modal = ({ onCloseModal, version }) => {
 
       playES();
       setWhileTimer(false);
-    }, 6000);
+    }, 4000);
     return () => clearTimeout(timer);
   }, [webcamRef]);
 
