@@ -98,7 +98,7 @@ const Modal = ({ onCloseModal }) => {
         width="80%"
         height="60px"
         onClick={closeModalHandler}
-        classes="cancel note"
+        classes="mobile cancel note"
       >
         취소하기
       </Button>
@@ -106,7 +106,7 @@ const Modal = ({ onCloseModal }) => {
         width="80%"
         height="60px"
         onClick={saveNote}
-        classes="save note"
+        classes="mobile save note"
       >
         {isLoading ? (
               <img width="50" src={loading} className={styles.loading} />
