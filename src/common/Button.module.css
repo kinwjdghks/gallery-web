@@ -30,6 +30,7 @@
 .header {
   cursor: url("../assets/Images/mouse-pointer-black.png") 10 5, auto;
   right: 80px;
+  font-size: 2.4vw;
 }
 
 /* 다시찍기 */
@@ -150,6 +151,7 @@
     transform-style: preserve-3d;
     transition: transform 150ms cubic-bezier(0, 0, 0.58, 1);
     position: absolute;
+    font-size: 2.5vw;
   }
   .btn.popup::before {
     position: absolute;
@@ -192,6 +194,9 @@
     cursor: url("../assets/Images/mouse-pointer-black.png") 10 5, auto;
     right: 80px;
   }
+  .popup.header {
+    font-size: 2vw;
+  }
   /* cancel */
   .cancel {
     grid-area: cancel;
@@ -201,9 +206,15 @@
     grid-area: again;
     justify-self: center;
   }
+  .popup.again {
+    font-size: 2.2vw;
+  }
   .save {
     grid-area: save;
     justify-self: center;
+  }
+  .popup.next {
+    font-size: 2.2vw;
   }
   .next {
     grid-area: next;
@@ -212,21 +223,25 @@
   /* Frame select*/
   .framebtn {
     justify-self: center;
-    align-self: flex-start;
+    align-self: center;
+    font-size: 3.5vw;
   }
   .framebtn.square {
     grid-area: square;
-    top: 25px;
+    align-self: flex-end;
+    /* top: 25px; */
   }
   .framebtn.vertical {
     grid-area: vertical;
     justify-self: end;
-    bottom: 10px;
+    align-self: flex-start;
+    /* bottom: 10px; */
   }
   .framebtn.horizontal {
     grid-area: horizontal;
     justify-self: start;
-    bottom: 10px;
+    align-self: flex-start;
+    /* bottom: 10px; */
   }
   /* before photo */
 

@@ -66,7 +66,7 @@ const FrameButtons = ({
             width={mobile ? "30vw" : "100%"}
             height={mobile ? "10vh" : "50%"}
             onClick={() => onFrameSelect(0)}
-            classes={mobile ? "framebtn square" : "popup square"}
+            classes={mobile ? "framebtn square" : "framebtn popup square"}
           >
             정방형
           </Button>
@@ -75,7 +75,7 @@ const FrameButtons = ({
             width={mobile ? "30vw" : "100%"}
             height={mobile ? "10vh" : "50%"}
             onClick={() => onFrameSelect(1)}
-            classes={mobile ? "framebtn vertical" : "popup vertical"}
+            classes={mobile ? "framebtn vertical" : "framebtn popup vertical"}
           >
             세로
           </Button>
@@ -84,7 +84,9 @@ const FrameButtons = ({
             width={mobile ? "30vw" : "100%"}
             height={mobile ? "10vh" : "50%"}
             onClick={() => onFrameSelect(2)}
-            classes={mobile ? "framebtn horizontal" : "popup horizontal"}
+            classes={
+              mobile ? "framebtn horizontal" : "framebtn popup horizontal"
+            }
           >
             가로
           </Button>
