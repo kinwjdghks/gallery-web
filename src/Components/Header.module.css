@@ -38,14 +38,14 @@
 }
 
 .logo {
-  /* position: absolute; */
-  /* top: 5vw;
+  /* position: relative;
+  top: 5vw;
   left: 8vw; */
-  /* margin-top: -2vw; */
   margin: 0;
+  margin-left: 15px;
+  margin-bottom: 1.5vw;
   width: 7vw;
   height: 7vw;
-  margin-left: 15px;
 }
 .togglebtn {
   position: absolute;
