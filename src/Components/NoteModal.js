@@ -16,7 +16,10 @@ const BackDrop = () => {
 
 const Modal = ({ onCloseModal }) => {
   const [isLoading, setIsLoading] = useState(false);
-
+  const [userInput, setUserInput] = useState("");
+  const userInputHandler = (e) =>{
+    
+  }
   const containerRef = useRef(null);
   useEffect(() => {
     if (containerRef) {
@@ -37,7 +40,7 @@ const Modal = ({ onCloseModal }) => {
 
   const saveToFireStore = async (content) => {
     setIsLoading(true);
-
+    
     let id = new Date().getTime() % 100000000;
     const timestamp = serverTimestamp();
 
@@ -55,12 +58,13 @@ const Modal = ({ onCloseModal }) => {
       console.log(error);
       return;
     }
+    
   };
   const saveNote = async () => {
     if (!contentRef) return;
 
     const content = contentRef.current.value.toString().trim();
-    if (content.length < 1) {
+    if (content.length <1) {
       setMessage(<div className={styles.message}>뭐라도 써죠잉 ㅜㅜ</div>);
       return;
     }
@@ -71,47 +75,44 @@ const Modal = ({ onCloseModal }) => {
   return (
     <div className={styles.container} ref={containerRef}>
       <div className={styles.grid}>
-        <div className={styles.title}>기깔나는 방명록을 남겨보아요!</div>
-        <img
-          src={smile명륜}
-          style={{
-            width: "50%",
-            gridArea: "title",
-            alignSelf: "flex-end",
-            justifySelf: "flex-end",
-          }}
-        />
-        <textarea
-          // autoFocus
-          onFocus={() => setMessage(null)}
-          className={`${styles.noteinput} ${message && styles.error}`}
-          ref={contentRef}
-          placeholder="타인에게 불편을 주는 말은 삼가주세요."
-        />
+      <div className={styles.title}>기깔나는 방명록을 남겨보아요!</div>
+      <img src={smile명륜} style={{
+        width: "40%",
+        gridArea: "title",
+        alignSelf:"flex-end",
+        justifySelf: "flex-end"
+         }}/>
+      <textarea
+        // autoFocus
+        onFocus={() => setMessage(null)}
+        className={`${styles.noteinput} ${message && styles.error}`}
+        value = {userInput}
+        onChange = {userInputHandler}
+        placeholder="타인에게 불편을 주는 말은 삼가주세요."
+      />
 
-        {message}
+      {message}
 
-        {/* <div className={styles.actions}> */}
-        <Button
-          width="80%"
-          height="60px"
-          onClick={closeModalHandler}
-          classes="mobile cancel note"
-        >
-          취소하기
-        </Button>
-        <Button
-          width="80%"
-          height="60px"
-          onClick={saveNote}
-          classes="mobile save note"
-        >
-          {isLoading ? (
-            <img width="50" src={loading} className={styles.loading} />
-          ) : (
-            "저장하기"
-          )}
-        </Button>
+      {/* <div className={styles.actions}> */}
+      <Button
+        width="80%"
+        height="60px"
+        onClick={closeModalHandler}
+        classes="cancel note"
+      >
+        취소하기
+      </Button>
+      <Button
+        width="80%"
+        height="60px"
+        onClick={saveNote}
+        classes="save note"
+      >
+        {isLoading ? (
+              <img width="50" src={loading} className={styles.loading} />
+            ) : 
+              "저장하기"}
+          </Button>
       </div>
       {/* </div> */}
       {/* <img
@@ -128,7 +129,7 @@ const NoteModal = ({ onCloseModal }) => {
   return (
     <>
       {ReactDOM.createPortal(
-        <BackDrop />,
+        <BackDrop/>,
         document.getElementById("backdrop-root")
       )}
       {ReactDOM.createPortal(
