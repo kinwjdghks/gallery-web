@@ -6,7 +6,6 @@ import { useRef, useState, useEffect } from "react";
 import { db } from "../Utility/firebase";
 import { collection, doc, setDoc } from "firebase/firestore/lite";
 import { serverTimestamp } from "firebase/firestore/lite";
-import logo from "../assets/Images/Logo.svg";
 import smile명륜 from "../assets/Images/smile명륜.svg";
 import loading from "../assets/Images/loading.svg";
 
@@ -16,10 +15,6 @@ const BackDrop = () => {
 
 const Modal = ({ onCloseModal }) => {
   const [isLoading, setIsLoading] = useState(false);
-  const [userInput, setUserInput] = useState("");
-  const userInputHandler = (e) =>{
-    
-  }
   const containerRef = useRef(null);
   useEffect(() => {
     if (containerRef) {
@@ -86,8 +81,7 @@ const Modal = ({ onCloseModal }) => {
         // autoFocus
         onFocus={() => setMessage(null)}
         className={`${styles.noteinput} ${message && styles.error}`}
-        value = {userInput}
-        onChange = {userInputHandler}
+        ref={contentRef}
         placeholder="타인에게 불편을 주는 말은 삼가주세요."
       />
 
