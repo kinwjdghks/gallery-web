@@ -13,10 +13,10 @@ import design3_horizontal from "../assets/skins/design3_horizontal.svg";
 import design4_square from "../assets/skins/design4_square.svg";
 import design4_vertical from "../assets/skins/design4_vertical.svg";
 import design4_horizontal from "../assets/skins/design4_horizontal.svg";
-import { useEffect, useRef,useState } from "react";
+import { useRef } from "react";
 
 
-const Album = ({ data }) => {
+const Album = ({ data, setIdForDelete }) => {
 
   const skinList = [
     [design1_square, design1_vertical,design1_horizontal],
@@ -27,6 +27,7 @@ const Album = ({ data }) => {
   const vidConfig = data.vidConfig;
   const skinNum = data.skin;
   const mobile = data.mobile;
+  const id = data.id;
 
   const classNameBySkin =
     skinNum === 0
@@ -54,7 +55,7 @@ const Album = ({ data }) => {
     );
   
   return (
-    <div className={`${styles.container} ${classNameBySkin}`}>
+    <div className={`${styles.container} ${classNameBySkin}`} onClick ={(id)=>setIdForDelete(id)}>
       {skinElement}
       <div className={`${styles.mask} ${classNameByConfig}`}>
         <img src={imageurl} alt="img" ref={imageRef} className={`${styles.img} ${mobile && styles.vertical}`}/>

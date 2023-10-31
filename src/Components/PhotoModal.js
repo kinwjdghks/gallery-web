@@ -22,18 +22,18 @@ import FrameButtons from "../common/FrameButtons";
 import EffectSound from "../common/EffectSound";
 import effect from "../assets/sounds/camera-shutter.wav";
 //images
-import { ReactComponent as Design1_square } from "../assets/skins/design1_square.svg";
-import { ReactComponent as Design1_horizontal } from "../assets/skins/design1_horizontal.svg";
-import { ReactComponent as Design1_vertical } from "../assets/skins/design1_vertical.svg";
-import { ReactComponent as Design2_square } from "../assets/skins/design2_square.svg";
-import { ReactComponent as Design2_horizontal } from "../assets/skins/design2_horizontal.svg";
-import { ReactComponent as Design2_vertical } from "../assets/skins/design2_vertical.svg";
-import { ReactComponent as Design3_square } from "../assets/skins/design3_square.svg";
-import { ReactComponent as Design3_horizontal } from "../assets/skins/design3_horizontal.svg";
-import { ReactComponent as Design3_vertical } from "../assets/skins/design3_vertical.svg";
-import { ReactComponent as Design4_square } from "../assets/skins/design4_square.svg";
-import { ReactComponent as Design4_horizontal } from "../assets/skins/design4_horizontal.svg";
-import { ReactComponent as Design4_vertical } from "../assets/skins/design4_vertical.svg";
+import { ReactComponent as Design1Square } from "../assets/skins/design1_square.svg";
+import { ReactComponent as Design1Horizontal } from "../assets/skins/design1_horizontal.svg";
+import { ReactComponent as Design1Vertical } from "../assets/skins/design1_vertical.svg";
+import { ReactComponent as Design2Square } from "../assets/skins/design2_square.svg";
+import { ReactComponent as Design2Horizontal } from "../assets/skins/design2_horizontal.svg";
+import { ReactComponent as Design2Vertical } from "../assets/skins/design2_vertical.svg";
+import { ReactComponent as Design3Square } from "../assets/skins/design3_square.svg";
+import { ReactComponent as Design3Horizontal } from "../assets/skins/design3_horizontal.svg";
+import { ReactComponent as Design3Vertical } from "../assets/skins/design3_vertical.svg";
+import { ReactComponent as Design4Square } from "../assets/skins/design4_square.svg";
+import { ReactComponent as Design4Horizontal } from "../assets/skins/design4_horizontal.svg";
+import { ReactComponent as Design4Vertical } from "../assets/skins/design4_vertical.svg";
 import ConvertCamera from "../assets/Images/convertCamera.png";
 
 const BackDrop = () => {
@@ -70,6 +70,7 @@ const Modal = ({ onCloseModal, version }) => {
       containerRef.current.style.top = "100vh";
       const close = setTimeout(() => {
         onCloseModal();
+      return () => clearTimeout(close);
       }, 600);
     }
   };
@@ -167,7 +168,15 @@ const Modal = ({ onCloseModal, version }) => {
     };
     try {
       const photos = collection(db, "Photos");
-      await setDoc(doc(photos, `${id}`), newPhoto);
+      const save = await setDoc(doc(photos, `${id}`), newPhoto);
+      save.then(()=>{
+        const random = Math.floor(Math.random() * 3);
+        if (!random) 
+          createBlankAlbum();
+      });
+      save.catch(()=>{
+        console.log("Photo save failed!");
+      });
     } catch (error) {
       console.log(error);
       return;
@@ -198,24 +207,24 @@ const Modal = ({ onCloseModal, version }) => {
 
   const skinList = [
     [
-      <Design1_square className={styles.skinElement} />,
-      <Design1_vertical className={styles.skinElement} />,
-      <Design1_horizontal className={styles.skinElement} />,
+      <Design1Square className={styles.skinElement} />,
+      <Design1Vertical className={styles.skinElement} />,
+      <Design1Horizontal className={styles.skinElement} />,
     ],
     [
-      <Design2_square className={styles.skinElement} />,
-      <Design2_vertical className={styles.skinElement} />,
-      <Design2_horizontal className={styles.skinElement} />,
+      <Design2Square className={styles.skinElement} />,
+      <Design2Vertical className={styles.skinElement} />,
+      <Design2Horizontal className={styles.skinElement} />,
     ],
     [
-      <Design3_square className={styles.skinElement} />,
-      <Design3_vertical className={styles.skinElement} />,
-      <Design3_horizontal className={styles.skinElement} />,
+      <Design3Square className={styles.skinElement} />,
+      <Design3Vertical className={styles.skinElement} />,
+      <Design3Horizontal className={styles.skinElement} />,
     ],
     [
-      <Design4_square className={styles.skinElement} />,
-      <Design4_vertical className={styles.skinElement} />,
-      <Design4_horizontal className={styles.skinElement} />,
+      <Design4Square className={styles.skinElement} />,
+      <Design4Vertical className={styles.skinElement} />,
+      <Design4Horizontal className={styles.skinElement} />,
     ],
   ];
   const skinElement = skinIdx ? skinList[skinIdx - 1][vidConfigIdx] : null;

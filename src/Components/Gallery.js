@@ -37,6 +37,7 @@ const Gallery = ({ version }) => {
     <img
       src={darkmode ? scrollDown_white : scrollDown}
       key={0}
+      alt= "scrolldown"
       style={{
         position: "absolute",
         top: mobile ? 200 : 700,
@@ -65,6 +66,7 @@ const Gallery = ({ version }) => {
           <img
             src={darkmode ? scrollDown_white : scrollDown}
             key={cnt + 1}
+            alt="scrolldown"
             style={{
               position: "absolute",
               top: mobile ? cnt * 450 + 200 : cnt * 1000 + 700,
@@ -187,6 +189,7 @@ const Gallery = ({ version }) => {
               href="https://github.com/skku-comit/gallery-web"
               className={styles.githubLink}
               target="_blank"
+              rel="noreferrer"
             >
               <img
                 src={darkmode ? githubIconWhite : githubIconBlack}
