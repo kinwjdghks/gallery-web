@@ -1,70 +1,50 @@
-# Getting Started with Create React App
+## 0. 실행 예시
+![image](https://github.com/skku-comit/gallery-web/assets/110150963/dba0c76c-fd4f-4aaf-914a-878b0727d35c) <br />
+![image](https://github.com/skku-comit/gallery-web/assets/110150963/2601519c-34d8-4779-901d-e675134ab5bb)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+## 1. 구현 목표
+성균관대학교 개발 동아리 COMIT 포토 부스 웹 </br>
+COMIT 포토부스를 만들어 이미지를 전시하여 이벤트를 참여시키기 위함에 있음. </br>
 
-In the project directory, you can run:
+## 2. 핵심 기능
+- Firebase를 통한 서버 및 데이터 관리 <br />
+- react-webcam을 이용한 기기 내 카메라 접근 및 촬영 <br/>
+- 댓글 애니메이션 (Off)
+- 무한 스크롤을 이용한 효율적 이미지 전시 <br/>
+- 다양한 카드 프레임 제공 <br />
+- 반응형 디자인  <br/>
+- 다크 모드 지원
 
-### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## 3. Tech Stack
+- React.js (18.2.0)
+- firebase 
+- Firebase
+- react-responsive
+- react-webcam (v7.1.1)
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## 4. Contribute
+### 4.1 How to Contribute
+1. Fork it!
+2. Create your feature branch: `git checkout -b feature/my-new-feature`
+3. Make Changes on created feature branch
+4. Commit your changes: `git commit -m 'Add some feature'` 
+   (Recommend to use gitmoji for commits)
+5. Push to the branch: `git push origin feature/my-new-feature`
+6. Submit a pull request merging into the `main` branch.
 
-### `npm test`
+### 4.2 :wave: Contributors
+<a href="https://github.com/skku-comit/gallery-web/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=skku-comit/gallery-web" />
+</a>
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## 5. Reference
+[React.js](https://react.dev/) <br/>
+[Firebase](https://firebase.google.com/?_gl=1*1r8nsd9*_up*MQ..*_ga*MjQ4MTY1NTM1LjE3MTc1NzUxMjM.*_ga_CW55HF8NVT*MTcxNzU3NTEyMy4xLjAuMTcxNzU3NTEzNS4wLjAuMA..&hl=ko)
+[react-responsive](https://www.npmjs.com/package/react-responsive) </br>
+[react-webcam](https://www.npmjs.com/package/react-webcam) </br>
 
-### `npm run build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+  
